@@ -1,5 +1,9 @@
 # Procedencia y publicación
 
+## CV público
+
+El titular proporcionó y autorizó revisar su CV para enlazarlo desde GitHub. La versión pública en [Markdown](docs/cv/CV.md) y [PDF](docs/cv/Juan-Serena-CV.pdf) conserva la formación y experiencia declaradas, enfoca los proyectos de datos y mantiene el estado de título en trámite. El PDF se revisó visualmente en una página y se comprobaron sus enlaces. El Word original no se incorpora. La adaptación y el diseño tuvieron asistencia de Codex.
+
 ## Datos públicos de DARWIN
 
 El experimento `proyectos/darwin/retail_publico.py` utiliza Online Retail II, Chen, D. (2012), UCI, DOI [10.24432/C5CG6D](https://doi.org/10.24432/C5CG6D), licencia CC BY 4.0. Descarga: 19 de octubre de 2026. Se documentan transformaciones y hash del archivo en el [caso público](proyectos/darwin/datos-publicos/README.md). Se publican resultados agregados; el archivo original y los identificadores no se incluyen. La nueva implementación y documentación tuvieron asistencia de Codex.
