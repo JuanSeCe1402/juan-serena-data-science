@@ -1,0 +1,97 @@
+{
+  "source": "https://archive.ics.uci.edu/static/public/502/online%2Bretail%2Bii.zip",
+  "doi": "10.24432/C5CG6D",
+  "license": "CC BY 4.0",
+  "archive_sha256": "572e36277c2390fbfde10664750731e0a86f55e33470d91919085f0408e67bfb",
+  "versions": {
+    "python": "3.12.14",
+    "pandas": "2.3.3",
+    "numpy": "2.5.4",
+    "sklearn": "1.9.1",
+    "openpyxl": "3.1.5"
+  },
+  "seed": 42,
+  "lookback_days": 180,
+  "horizon_days": 30,
+  "features": [
+    "orders",
+    "spend_gbp",
+    "units",
+    "products",
+    "active_days",
+    "recency_days",
+    "ticket_gbp"
+  ],
+  "cleaning": {
+    "input_rows": 1067371,
+    "missing_or_invalid_removed": 243007,
+    "cancellations_nonpositive_removed": 18815,
+    "duplicate_lines_removed": 26126,
+    "outside_complete_observation_removed": 611,
+    "retained_rows": 778812
+  },
+  "partitions": {
+    "train": {
+      "cutoff": "2010-09-01",
+      "customers": 2831,
+      "positives": 843,
+      "prevalence": 0.29777463793712466
+    },
+    "validation": {
+      "cutoff": "2011-03-01",
+      "customers": 3349,
+      "positives": 700,
+      "prevalence": 0.20901761719916392
+    },
+    "test": {
+      "cutoff": "2011-09-01",
+      "customers": 2772,
+      "positives": 908,
+      "prevalence": 0.32756132756132755
+    }
+  },
+  "customer_overlap_train_test": 1553,
+  "validation": {
+    "logistic": {
+      "roc_auc": 0.7473197432993582,
+      "average_precision": 0.5079757397272519,
+      "brier": 0.1441936996937548,
+      "top_20_count": 670,
+      "precision_top_20": 0.48656716417910445,
+      "lift_top_20": 2.3278763326226013
+    },
+    "forest": {
+      "roc_auc": 0.7492449981124953,
+      "average_precision": 0.5113304603630582,
+      "brier": 0.14610086351754212,
+      "top_20_count": 670,
+      "precision_top_20": 0.5,
+      "lift_top_20": 2.3921428571428573
+    }
+  },
+  "selection_rule": "maximum validation average_precision; no refit",
+  "selected": "forest",
+  "test": {
+    "roc_auc": 0.7153314127167192,
+    "average_precision": 0.6079467861483806,
+    "brier": 0.18640137074628657,
+    "top_20_count": 555,
+    "precision_top_20": 0.654054054054054,
+    "lift_top_20": 1.9967377068698655
+  },
+  "test_constant_train_prevalence": {
+    "roc_auc": 0.5,
+    "average_precision": 0.32756132756132755,
+    "brier": 0.2211521511263568,
+    "top_20_count": 555,
+    "precision_top_20": 0.34774774774774775,
+    "lift_top_20": 1.0616263840933444
+  },
+  "test_recency_ranking": {
+    "roc_auc": 0.6308640647747255,
+    "average_precision": 0.42787774650250365,
+    "top_20_count": 555,
+    "precision_top_20": 0.47387387387387386,
+    "lift_top_20": 1.4466722228836766
+  }
+}

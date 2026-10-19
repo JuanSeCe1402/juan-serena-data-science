@@ -1,5 +1,9 @@
 # Procedencia y publicación
 
+## Datos públicos de DARWIN
+
+El experimento `proyectos/darwin/retail_publico.py` utiliza Online Retail II, Chen, D. (2012), UCI, DOI [10.24432/C5CG6D](https://doi.org/10.24432/C5CG6D), licencia CC BY 4.0. Descarga: 19 de octubre de 2026. Se documentan transformaciones y hash del archivo en el [caso público](proyectos/darwin/datos-publicos/README.md). Se publican resultados agregados; el archivo original y los identificadores no se incluyen. La nueva implementación y documentación tuvieron asistencia de Codex.
+
 ## Material conservado
 
 Los prototipos se recuperaron del archivo personal del titular. Ese origen local no demuestra autoría exclusiva: comentarios, algoritmos académicos y bibliotecas conservan sus atribuciones originales cuando existen. Los modelos StatStar y el prototipo de audio requieren precisar sus fuentes antes de asignar una licencia de redistribución.

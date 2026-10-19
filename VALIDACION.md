@@ -2,6 +2,10 @@
 
 Revisión e incorporación: 19 de octubre de 2026. Las fechas históricas de archivos no se usan como prueba de ejecución o autoría.
 
+## Ampliación de DARWIN con datos públicos
+
+Se ejecutó la suite de DARWIN con **67 casos aprobados**: 63 existentes y cuatro casos nuevos de limpieza, límites de ventanas y exclusión de compras futuras. El [experimento Online Retail II](proyectos/darwin/datos-publicos/README.md) documenta fuente/licencia, protocolo temporal, ambiente, hash y métricas agregadas. Los nuevos tests no requieren descargar datos en CI. Las 375 pruebas de la tabla siguiente corresponden a la incorporación anterior; no se afirma haber reejecutado las otras suites en esta ampliación.
+
 ## Resultados locales de la incorporación
 
 | Suite | Casos aprobados | Alcance |

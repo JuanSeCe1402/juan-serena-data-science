@@ -17,7 +17,7 @@ Construyo aplicaciones en Python para preparar datos, evaluar modelos y organiza
 
 ### DARWIN · Del historial de compras a una señal de recompra
 
-Un experimento de clasificación que permite comparar modelos y revisar sus errores antes de interpretar una predicción. Incluye limpieza, variables, preprocesamiento ajustado solo con entrenamiento y evaluación sobre clientes reservados.
+Predicción de recompra con **transacciones reales de UCI Online Retail II**: historial de 180 días, horizonte de 30 días y evaluación temporal de entrenamiento, validación y prueba. Compara modelos con una referencia constante y un ranking por compra reciente. Incluye fuente, licencia, limpieza auditable y resultados reproducibles.
 
 **Python · pandas · scikit-learn · Flask**
 
@@ -25,7 +25,7 @@ Un experimento de clasificación que permite comparar modelos y revisar sus erro
 
 *Captura de una ejecución sintética. Sus métricas describen esa simulación, sin acreditar precisión sobre clientes reales.*
 
-**[Probar demo](https://wunsce-darwin-production.up.railway.app/app) · [Leer caso y código](proyectos/darwin/README.md)**
+**[Ver caso con datos reales](proyectos/darwin/datos-publicos/README.md) · [Probar demo sintética](https://wunsce-darwin-production.up.railway.app/app) · [Leer código](proyectos/darwin/README.md)**
 
 ### NANA · De un CSV desordenado a datos preparados para analizar
 
