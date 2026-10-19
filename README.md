@@ -4,6 +4,10 @@ Construyo aplicaciones en Python para preparar datos, evaluar modelos y organiza
 
 **Python · SQL · pandas · scikit-learn · Flask · FastAPI · PyTorch**
 
+**[Abrir el laboratorio interactivo en Railway ↗](https://juan-serena-data-lab-production.up.railway.app/)**
+
+[Cortex 3D](https://juan-serena-data-lab-production.up.railway.app/#cortex) · [Movilidad urbana](https://juan-serena-data-lab-production.up.railway.app/#movilidad) · [Espectros ópticos](https://juan-serena-data-lab-production.up.railway.app/#espectros) · [Indicadores STIX](https://juan-serena-data-lab-production.up.railway.app/#stix)
+
 [Explorar los proyectos](#proyectos-destacados) · [Catálogo completo](CATALOGO.md) · [Perfil de GitHub](https://github.com/JuanSeCe1402)
 
 [![Pruebas de aplicaciones](https://github.com/JuanSeCe1402/juan-serena-data-science/actions/workflows/aplicaciones.yml/badge.svg)](https://github.com/JuanSeCe1402/juan-serena-data-science/actions/workflows/aplicaciones.yml)
