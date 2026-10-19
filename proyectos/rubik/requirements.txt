@@ -1,0 +1,4 @@
+numpy
+kociemba
+PyOpenGL
+Pillow

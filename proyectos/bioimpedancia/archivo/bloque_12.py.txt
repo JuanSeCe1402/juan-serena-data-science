@@ -1,0 +1,22 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+corr_matrix = np.corrcoef(X_data.T, y_data.T)
+n_feat      = X_data.shape[1]
+corr_Xy     = corr_matrix[:n_feat, n_feat:]
+labels_y    = ['g_Na', 'g_K', 'sigma_base', 'tau', 'alpha']
+max_corr    = np.max(np.abs(corr_Xy), axis=0)
+
+print('Correlacion maxima |r|:')
+for name, c in zip(labels_y, max_corr):
+    print(f'  {name:12s}: {c:.3f}')
+
+fig, ax = plt.subplots(figsize=(10, 4))
+im = ax.imshow(np.abs(corr_Xy).T, aspect='auto', cmap='hot', vmin=0, vmax=1)
+ax.set_yticks(range(5));  ax.set_yticklabels(labels_y)
+ax.set_xlabel('Indice de feature (Re | Im)')
+ax.set_title('Correlacion |r| entre features del espectro y parametros')
+plt.colorbar(im, ax=ax, label='|r|')
+plt.tight_layout()
+plt.savefig('correlacion_features.pdf', dpi=150, bbox_inches='tight')
+plt.show()

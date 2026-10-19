@@ -1,0 +1,75 @@
+import numpy as np
+epsilon0 = 8.854e-12
+
+def simulate_HH(g_Na, g_K, T=50, dt=0.02):
+    t = np.arange(0, T, dt)
+    V = -65*np.ones_like(t);  m = np.zeros_like(t)
+    h = np.zeros_like(t);     n = np.zeros_like(t)
+    E_Na, E_K, E_L = 50, -77, -54.4
+    g_L = 0.3;  C_m = 1.0;  I_ext = 10.0
+    def alpha_m(V):       # [C7] singularidad V=-40
+        dV = V+40.0
+        if abs(dV)<1e-7: return 1.0
+        return 0.1*dV/(1.0-np.exp(-dV/10.0))
+    def beta_m(V):  return 4*np.exp(-(V+65)/18)
+    def alpha_h(V): return 0.07*np.exp(-(V+65)/20)
+    def beta_h(V):  return 1/(1+np.exp(-(V+35)/10))
+    def alpha_n(V):       # [C7] singularidad V=-55
+        dV = V+55.0
+        if abs(dV)<1e-7: return 0.1
+        return 0.01*dV/(1.0-np.exp(-dV/10.0))
+    def beta_n(V):  return 0.125*np.exp(-(V+65)/80)
+    for i in range(len(t)-1):
+        am,bm = alpha_m(V[i]),beta_m(V[i])
+        ah,bh = alpha_h(V[i]),beta_h(V[i])
+        an,bn = alpha_n(V[i]),beta_n(V[i])
+        m[i+1] = m[i] + dt*(am*(1-m[i]) - bm*m[i])
+        h[i+1] = h[i] + dt*(ah*(1-h[i]) - bh*h[i])
+        n[i+1] = n[i] + dt*(an*(1-n[i]) - bn*n[i])
+        I_Na = g_Na*(m[i]**3)*h[i]*(V[i]-E_Na)
+        I_K  = g_K*(n[i]**4)*(V[i]-E_K)
+        I_L  = g_L*(V[i]-E_L)
+        V[i+1] = V[i] + dt*(I_ext - I_Na - I_K - I_L)/C_m
+    return V
+
+def sigma_dynamic(V, sigma_base):
+    return sigma_base * (1 + 0.01*(V + 65))
+
+def cole_cole(omega, eps_inf, eps_s, tau, alpha):
+    return eps_inf + (eps_s-eps_inf)/(1+(1j*omega*tau)**(1-alpha))
+
+def compute_Z(V, sigma_base, tau, alpha):
+    f     = np.logspace(3, 7, 100)
+    omega = 2*np.pi*f + 1e-20    # [C1]
+    eps   = cole_cole(omega, 5*epsilon0, 80*epsilon0, tau, alpha)
+    Z_time = []
+    for v in V:
+        sigma = sigma_dynamic(v, sigma_base)
+        # eps = pure Cole-Cole (no conductivity term); sigma handled separately
+        Z_time.append(1 / (sigma + 1j*omega*eps))
+    return np.array(Z_time)
+
+def extract_features(Z):
+    # [C4] Re+Im solamente (no |Z|)
+    Z_mean = np.mean(Z, axis=0)
+    X = np.concatenate([np.real(Z_mean), np.imag(Z_mean)])
+    return (X - X.mean()) / (X.std() + 1e-30)
+
+def generate_physical_sample(noise_level=0.02):
+    g_Na       = np.random.uniform(80, 140)
+    g_K        = np.random.uniform(20, 50)
+    sigma_base = np.random.uniform(0.5, 2.0)
+    tau        = np.random.uniform(1e-6, 1e-4)
+    alpha      = np.random.uniform(0.05, 0.3)
+    V = simulate_HH(g_Na, g_K)
+    Z = compute_Z(V, sigma_base, tau, alpha)
+    Z = Z + noise_level * np.random.randn(*Z.shape)   # ruido 2%
+    X = extract_features(Z)
+    y = np.array([g_Na, g_K, sigma_base, tau, alpha])
+    return X, y
+
+X_data, y_data = [], []
+for _ in range(1000):
+    X, y = generate_physical_sample()
+    X_data.append(X);  y_data.append(y)
+X_data = np.array(X_data);  y_data = np.array(y_data)

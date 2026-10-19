@@ -1,0 +1,14 @@
+def generate_physical_sample(noise_level=0.02):
+    g_Na       = np.random.uniform(80, 140)
+    g_K        = np.random.uniform(20, 50)
+    sigma_base = np.random.uniform(0.5, 2.0)
+    tau        = np.random.uniform(1e-6, 1e-4)
+    alpha      = np.random.uniform(0.05, 0.3)
+    V     = simulate_HH(g_Na, g_K)
+    Z     = compute_Z(V, sigma_base, tau, alpha)
+    # Ruido gaussiano ~2% SNR (Sanchez et al. 2013)
+    noise = noise_level * np.random.randn(*Z.shape)
+    Z_noisy = Z + noise
+    X = extract_features(Z_noisy)
+    y = np.array([g_Na, g_K, sigma_base, tau, alpha])
+    return X, y

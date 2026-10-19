@@ -1,0 +1,194 @@
+<!-- HTML para la barra de promoción de envío gratuito - Estilo personalizado -->
+<div id="free-shipping-bar" class="announcement-bar">
+  <div class="announcement-bar__content">
+    <p class="announcement-bar__message" id="shipping-message">
+      <span class="message" id="progress-message">Agrega <span class="price">$4,999</span> y obtén <span class="highlight">envío gratis.</span></span>
+    </p>
+    <div class="progress-container" id="progress-container">
+      <div class="amount-left">$0</div>
+      <div class="progress-wrapper">
+        <div class="progress-bar" id="progress-bar"></div>
+        <div class="truck-icon" id="truck-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="#dd3333">
+            <path d="M19.15,8h-1.3V5a1,1,0,0,0-1-1H3.15a1,1,0,0,0-1,1v9a1,1,0,0,0,1,1h1a3,3,0,0,0,6,0h6a3,3,0,0,0,6,0h1a1,1,0,0,0,1-1V11.1A3.1,3.1,0,0,0,19.15,8ZM7.15,17a1,1,0,1,1,1-1A1,1,0,0,1,7.15,17Zm9-3h-9V5h9Zm3,3a1,1,0,1,1,1-1A1,1,0,0,1,19.15,17Zm1-3h-1V10h1a1.1,1.1,0,0,1,1,1.1V14Z"/>
+          </svg>
+        </div>
+      </div>
+      <div class="amount-right" id="amount-right">$4,999</div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Estilos para la barra de promoción personalizada */
+  .announcement-bar {
+    background-color: #f5f5f5;
+    color: #333333;
+    text-align: center;
+    padding: 15px 20px;
+    width: 100%;
+    font-family: Arial, sans-serif;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .announcement-bar__content {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .announcement-bar__message {
+    margin: 0 0 10px 0;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .price {
+    font-weight: 700;
+  }
+
+  .highlight {
+    font-weight: 700;
+    color: #dd3333;
+  }
+
+  .progress-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin: 5px 0;
+  }
+
+  .amount-left, .amount-right {
+    font-size: 16px;
+    font-weight: 700;
+    min-width: 80px;
+  }
+
+  .amount-left {
+    text-align: left;
+  }
+
+  .amount-right {
+    text-align: right;
+  }
+
+  .progress-wrapper {
+    position: relative;
+    flex-grow: 1;
+    height: 10px;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    margin: 0 15px;
+    overflow: visible;
+  }
+
+  .progress-bar {
+    height: 100%;
+    background-color: #dd3333;
+    border-radius: 10px;
+    width: 0%;
+    transition: width 0.5s ease-in-out;
+  }
+
+  .truck-icon {
+    position: absolute;
+    top: -7px;
+    left: 0%;
+    transition: left 0.5s ease-in-out;
+  }
+
+  .qualified .announcement-bar__message {
+    color: #2e8b57;
+  }
+
+  /* Estilos responsivos */
+  @media screen and (max-width: 768px) {
+    .announcement-bar__message {
+      font-size: 16px;
+    }
+
+    .amount-left, .amount-right {
+      font-size: 14px;
+      min-width: 60px;
+    }
+
+    .progress-wrapper {
+      margin: 0 10px;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Configuración
+    const FREE_SHIPPING_THRESHOLD = 4999; // El monto mínimo para envío gratuito actualizado a $4,999
+    const progressMessage = document.getElementById('progress-message');
+    const progressContainer = document.getElementById('progress-container');
+    const progressBar = document.getElementById('progress-bar');
+    const truckIcon = document.getElementById('truck-icon');
+    const amountRight = document.getElementById('amount-right');
+    const announcementBar = document.getElementById('free-shipping-bar');
+
+    // Función para actualizar la barra según el monto del carrito
+    function updateShippingBar(cartTotal) {
+      if (cartTotal >= FREE_SHIPPING_THRESHOLD) {
+        // Ya califica para envío gratuito
+        progressMessage.innerHTML = "¡FELICIDADES! Tu pedido califica para <span class='highlight'>envío gratis</span>";
+        progressBar.style.width = '100%';
+        truckIcon.style.left = '100%';
+        announcementBar.classList.add('qualified');
+      } else {
+        // Aún no califica, mostrar cuánto falta
+        const remaining = FREE_SHIPPING_THRESHOLD - cartTotal;
+        const percentage = (cartTotal / FREE_SHIPPING_THRESHOLD) * 100;
+
+        progressMessage.innerHTML = `Agrega <span class="price">$${remaining.toFixed(2)}</span> y obtén <span class="highlight">envío gratis.</span>`;
+        progressBar.style.width = `${percentage}%`;
+        truckIcon.style.left = `${percentage}%`;
+        announcementBar.classList.remove('qualified');
+      }
+    }
+
+    // Función para obtener los datos del carrito usando la API de Shopify
+    function getCartData() {
+      fetch('/cart.js')
+        .then(response => response.json())
+        .then(cart => {
+          const cartTotal = cart.total_price / 100; // Shopify almacena en centavos
+          updateShippingBar(cartTotal);
+        })
+        .catch(error => {
+          console.error('Error al obtener datos del carrito:', error);
+          updateShippingBar(0); // Muestra el estado predeterminado en caso de error
+        });
+    }
+
+    // Establecer el monto correcto en la etiqueta de precio
+    amountRight.textContent = `$${FREE_SHIPPING_THRESHOLD.toLocaleString()}`;
+
+    // Obtener los datos del carrito inicialmente
+    getCartData();
+
+    // Escuchar los cambios en el carrito
+    document.addEventListener('cart.requestComplete', function(event) {
+      getCartData();
+    });
+
+    // Actualizar cuando se añaden productos a través de AJAX
+    const originalFetch = window.fetch;
+    window.fetch = function() {
+      return originalFetch.apply(this, arguments).then(response => {
+        const url = arguments[0];
+        if (typeof url === 'string' &&
+            (url.includes('/cart/add') ||
+             url.includes('/cart/update') ||
+             url.includes('/cart/change') ||
+             url.includes('/cart/clear'))) {
+          setTimeout(getCartData, 500);
+        }
+        return response;
+      });
+    };
+  });
+</script>

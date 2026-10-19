@@ -1,0 +1,30 @@
+import numpy as np
+
+f     = np.logspace(2, 9, 500)
+omega = 2*np.pi*f + 1e-20       # [C1] regularizacion
+epsilon0 = 8.854e-12
+
+def cole_cole(eps_inf, eps_s, tau, alpha, omega):
+    return eps_inf + (eps_s - eps_inf)/(1 + (1j*omega*tau)**(1-alpha))
+
+def ionic_conductivity(c_na, c_k):
+    # sigma = F * sum_i z_i*mu_i*c_i  (Ec. sigma_ionica)
+    F           = 96485.0
+    z_na, z_k   = 1, 1
+    mu_na, mu_k = 5.2e-8, 7.6e-8
+    return F * (z_na*mu_na*c_na + z_k*mu_k*c_k)
+
+eps_inf = 5  * epsilon0
+eps_s   = 60 * epsilon0
+tau     = 1e-6
+alpha   = 0.1
+c_na    = 140.0;  c_k = 5.0
+sigma   = ionic_conductivity(c_na, c_k)
+eps_complex = cole_cole(eps_inf, eps_s, tau, alpha, omega) - 1j*sigma/omega
+
+A  = 1e-10;  d = 5e-9
+Cm = eps_complex * A / d
+g_Na = 1e-6;  g_K = 2e-6;  G = g_Na + g_K
+Z       = 1 / (G + 1j*omega*Cm)
+Z_mag   = np.abs(Z)
+Z_phase = np.angle(Z, deg=True)

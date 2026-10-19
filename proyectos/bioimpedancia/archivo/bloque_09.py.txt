@@ -1,0 +1,9 @@
+from sklearn.model_selection import train_test_split
+
+X_mean = X_data.mean(axis=0);  X_std = X_data.std(axis=0)
+y_mean = y_data.mean(axis=0);  y_std = y_data.std(axis=0)
+X_norm = (X_data - X_mean) / (X_std + 1e-30)
+y_norm = (y_data - y_mean) / (y_std + 1e-30)
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X_norm, y_norm, test_size=0.2, random_state=42)

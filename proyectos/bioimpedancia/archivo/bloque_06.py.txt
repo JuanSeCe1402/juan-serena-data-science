@@ -1,0 +1,43 @@
+import numpy as np, sqlite3, pickle
+epsilon0 = 8.854e-12
+f = np.logspace(3, 8, 100)
+
+def simular_celula(f, params):
+    e1, s1, e2, s2, e3, s3, d, a, phi = params
+    omega  = 2 * np.pi * f + 1e-20          # [C1]
+    eps1   = e1 - 1j*s1/omega
+    eps3   = e3 - 1j*s3/omega
+    eps2_c = e2 - 1j*s2/omega               # membrana compleja
+    # [C2] Pauly-Schwan con radio a (dimensionalmente correcto)
+    eps_int = eps1 / (1 + (d/a)*(eps1/eps2_c))
+    # [C3] Maxwell-Garnett completo
+    eps_ef = eps3 * (
+        (eps_int + 2*eps3 + 2*phi*(eps_int - eps3)) /
+        (eps_int + 2*eps3 - phi*(eps_int - eps3))
+    )
+    Z = 1 / (s3 + 1j * omega * eps_ef)
+    # [C4] Re+Im (no solo magnitud)
+    X = np.concatenate([np.real(Z), np.imag(Z)])
+    return (X - np.mean(X)) / (np.std(X) + 1e-30)
+
+conn = sqlite3.connect('bioimpedancia.db')
+c    = conn.cursor()
+c.execute("""CREATE TABLE IF NOT EXISTS simulaciones
+    (id INTEGER PRIMARY KEY, sigma1 REAL, sigma3 REAL,
+     phi REAL, d REAL, a REAL, espectro_z BLOB)""")
+conn.commit()
+
+N_MUESTRAS = 5000   # aumentar a 10000 para mayor precision
+for _ in range(N_MUESTRAS):
+    s1  = np.random.uniform(0.2, 1.0)
+    s3  = np.random.uniform(0.5, 2.0)
+    ph  = np.random.uniform(0.1, 0.6)
+    d_  = np.random.uniform(3e-9, 8e-9)
+    a_  = np.random.uniform(3e-6, 8e-6)
+    params = (60*epsilon0, s1, 5*epsilon0, 1e-7, 80*epsilon0, s3, d_, a_, ph)
+    X = simular_celula(f, params)
+    c.execute('INSERT INTO simulaciones (sigma1,sigma3,phi,d,a,espectro_z) '
+              'VALUES (?,?,?,?,?,?)', (s1, s3, ph, d_, a_, pickle.dumps(X)))
+    if (_ + 1) % 500 == 0:
+        conn.commit()   # commit cada 500 muestras
+conn.commit();  conn.close()

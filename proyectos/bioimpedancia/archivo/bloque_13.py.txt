@@ -1,0 +1,20 @@
+import numpy as np
+
+model.eval()
+with torch.no_grad():
+    preds_norm = model(X_test_t).numpy()
+
+preds_real = preds_norm * y_std + y_mean
+y_real     = y_test    * y_std + y_mean
+labels     = ['g_Na', 'g_K', 'sigma_base', 'tau', 'alpha']
+
+mae = np.mean(np.abs(preds_real - y_real), axis=0)
+print('MAE por parametro:')
+for name, err in zip(labels, mae):
+    print(f'  {name:12s}: {err:.4f}')
+
+relative_error = np.mean(
+    np.abs((preds_real - y_real) / (y_real + 1e-10)), axis=0)
+print('Error relativo (MAPE):')
+for name, err in zip(labels, relative_error):
+    print(f'  {name:12s}: {err*100:.2f}%')

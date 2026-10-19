@@ -1,0 +1,57 @@
+import numpy as np
+epsilon0 = 8.854e-12
+
+dt = 0.01;  t = np.arange(0, 50, dt)
+C_m = 1.0;  E_Na = 50;  E_K = -77;  E_L = -54.4
+g_Na = 120;  g_K = 36;  g_L = 0.3;  I_ext = 10.0
+
+# [C7] Funciones de compuerta con singularidades resueltas (L'Hopital)
+def alpha_m(V):
+    dV = V+40.0
+    if abs(dV)<1e-7: return 1.0
+    return 0.1*dV/(1.0-np.exp(-dV/10.0))
+def beta_m(V):  return 4*np.exp(-(V+65)/18)
+def alpha_h(V): return 0.07*np.exp(-(V+65)/20)
+def beta_h(V):  return 1/(1+np.exp(-(V+35)/10))
+def alpha_n(V):
+    dV = V+55.0
+    if abs(dV)<1e-7: return 0.1
+    return 0.01*dV/(1.0-np.exp(-dV/10.0))
+def beta_n(V):  return 0.125*np.exp(-(V+65)/80)
+
+V = -65*np.ones_like(t)
+m = np.zeros_like(t);  h = np.zeros_like(t);  n = np.zeros_like(t)
+
+for i in range(len(t)-1):
+    am,bm = alpha_m(V[i]),beta_m(V[i])
+    ah,bh = alpha_h(V[i]),beta_h(V[i])
+    an,bn = alpha_n(V[i]),beta_n(V[i])
+    m[i+1] = m[i] + dt*(am*(1-m[i]) - bm*m[i])
+    h[i+1] = h[i] + dt*(ah*(1-h[i]) - bh*h[i])
+    n[i+1] = n[i] + dt*(an*(1-n[i]) - bn*n[i])
+    I_Na = g_Na*(m[i]**3)*h[i]*(V[i]-E_Na)
+    I_K  = g_K*(n[i]**4)*(V[i]-E_K)
+    I_L  = g_L*(V[i]-E_L)
+    V[i+1] = V[i] + dt*(I_ext - I_Na - I_K - I_L)/C_m
+
+f     = np.logspace(3, 7, 200)
+omega = 2*np.pi*f + 1e-20        # [C1]
+
+def cole_cole(eps_inf, eps_s, tau, alpha, omega):
+    return eps_inf + (eps_s-eps_inf)/(1+(1j*omega*tau)**(1-alpha))
+
+# Cole-Cole calculado UNA VEZ fuera del loop (eficiencia)
+eps_cc = cole_cole(5*epsilon0, 80*epsilon0, 1e-5, 0.2, omega)
+
+def sigma_from_voltage(V_scalar, base=1.0):
+    return base + 0.02*(V_scalar + 65)
+
+Z_time = []
+for i in range(len(t)):
+    sigma    = sigma_from_voltage(V[i])
+    # eps_comp ya incluye conduccion: eps_cc - j*sigma/w
+    # Z = 1/(jw*eps_comp) evita contar sigma dos veces
+    eps_comp = eps_cc - 1j*sigma/omega
+    Z_time.append(1/(1j*omega*eps_comp))
+# [C8] Sin Z_time.append(Z) duplicado que causaba NameError
+Z_time = np.array(Z_time)

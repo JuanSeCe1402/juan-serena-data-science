@@ -1,0 +1,44 @@
+import torch
+import torch.nn as nn
+from torch.utils.data import DataLoader, TensorDataset
+
+class BioNet(nn.Module):
+    def __init__(self, input_size, n_params=5):  # [C9] 5 parametros fisicos
+        super().__init__()
+        self.model = nn.Sequential(
+            nn.Linear(input_size, 256),
+            nn.BatchNorm1d(256),   # [C6] BatchNorm ANTES de ReLU
+            nn.ReLU(),
+            nn.Dropout(0.1),
+            nn.Linear(256, 128),
+            nn.BatchNorm1d(128),
+            nn.ReLU(),
+            nn.Dropout(0.1),
+            nn.Linear(128, 64),
+            nn.ReLU(),
+            nn.Linear(64, n_params)  # [C9] 5 params fisicos: sigma1,sigma3,phi,d,a
+        )
+    def forward(self, x):  return self.model(x)
+
+X_train_t = torch.tensor(X_train, dtype=torch.float32)
+y_train_t = torch.tensor(y_train, dtype=torch.float32)
+X_test_t  = torch.tensor(X_test,  dtype=torch.float32)
+y_test_t  = torch.tensor(y_test,  dtype=torch.float32)
+
+train_loader = DataLoader(TensorDataset(X_train_t, y_train_t),
+                          batch_size=32, shuffle=True)
+model     = BioNet(input_size=X_train.shape[1])
+optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
+loss_fn   = nn.MSELoss()
+
+for epoch in range(30):
+    model.train();  total_loss = 0
+    for X_batch, y_batch in train_loader:
+        pred = model(X_batch)
+        loss = loss_fn(pred, y_batch)
+        optimizer.zero_grad();  loss.backward();  optimizer.step()
+        total_loss += loss.item()
+    model.eval()
+    with torch.no_grad():
+        val_loss = loss_fn(model(X_test_t), y_test_t).item()
+    print(f'Epoch {epoch+1:3d} | Train: {total_loss:.4f} | Val: {val_loss:.4f}')

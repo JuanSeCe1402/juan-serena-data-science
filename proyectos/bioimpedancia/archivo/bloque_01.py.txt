@@ -1,0 +1,57 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+f     = np.logspace(2, 9, 600)   # 100 Hz a 1 GHz
+omega = 2 * np.pi * f
+omega = omega + 1e-20            # [C1] evitar division por cero
+epsilon0 = 8.854e-12
+
+def cole_cole(eps_inf, eps_s, tau, alpha, omega):
+    return eps_inf + (eps_s - eps_inf) / (1 + (1j*omega*tau)**(1 - alpha))
+
+eps1_inf = 5*epsilon0;  eps1_s = 60*epsilon0
+tau1 = 1e-6;  alpha1 = 0.1;  sigma1 = 0.5       # Citoplasma
+eps2 = 5*epsilon0;  sigma2 = 1e-7;  d = 5e-9    # Membrana
+eps3_inf = 10*epsilon0; eps3_s = 80*epsilon0
+tau3 = 1e-8;  alpha3 = 0.05;  sigma3 = 1.2      # Plasma
+phi = 0.4                                         # Hematocrito
+
+eps1 = cole_cole(eps1_inf, eps1_s, tau1, alpha1, omega) - 1j*sigma1/omega
+eps3 = cole_cole(eps3_inf, eps3_s, tau3, alpha3, omega) - 1j*sigma3/omega
+eps2_complex = eps2 - 1j*sigma2/omega
+
+def simular_poblacion(n_celulas=100):
+    # [C5] Log-normal: radios siempre positivos
+    radios = np.random.lognormal(mean=np.log(5e-6), sigma=0.2, size=n_celulas)
+    Z_total = np.zeros_like(omega, dtype=complex)
+    for a in radios:
+        # [C2] Pauly-Schwan 1959 (usa radio a; dimensionalmente correcto)
+        eps_int = eps1 / (1 + (d/a)*(eps1/eps2_complex))
+        # [C3] Maxwell-Garnett completo (valido para phi=0.4)
+        eps_cell = eps3 * (
+            (eps_int + 2*eps3 + 2*phi*(eps_int - eps3)) /
+            (eps_int + 2*eps3 - phi*(eps_int - eps3))
+        )
+        # [C4] Promediar IMPEDANCIAS (preserva no linealidad)
+        Z_total += 1 / (sigma3 + 1j*omega*eps_cell)
+    return Z_total / n_celulas
+
+# [C6] CORRECCION BUG CRITICO:
+# simular_poblacion() ya devuelve la impedancia promediada.
+# Incorrecto (original): eps_ef = simular_poblacion(100)
+#                        Z = 1/(sigma3+jw*eps_ef)  <- formula aplicada 2 veces
+# Correcto:
+Z = simular_poblacion(100)
+
+fig, ejes = plt.subplots(1, 2, figsize=(13, 5))
+ejes[0].loglog(f, np.abs(Z))
+ejes[0].set(xlabel='Frecuencia (Hz)', ylabel=r'$|Z|$ ($\Omega$)',
+            title='Magnitud de Impedancia')
+ejes[0].grid(True, which='both', alpha=0.4)
+ejes[1].plot(np.real(Z), -np.imag(Z))
+ejes[1].set(xlabel=r'Re$(Z)$', ylabel=r'$-$Im$(Z)$',
+            title='Diagrama de Nyquist')
+ejes[1].grid(True, alpha=0.4)
+plt.tight_layout()
+plt.savefig('bioimpedancia_espectros.pdf', dpi=150, bbox_inches='tight')
+plt.show()

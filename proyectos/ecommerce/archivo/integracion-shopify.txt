@@ -1,0 +1,41 @@
+Accede al panel de administración de Shopify
+
+Inicia sesión en tu cuenta de Shopify
+
+
+Ve a la sección de temas
+
+En el menú lateral, haz clic en "Tienda online"
+Luego selecciona "Temas"
+
+
+Edita el código de tu tema actual
+
+Encuentra tu tema activo
+Haz clic en los tres puntos (⋮) o el botón "Acciones"
+Selecciona "Editar código"
+
+
+Ubica el archivo theme.liquid
+
+En el panel de navegación izquierdo, busca y selecciona el archivo "theme.liquid"
+Este archivo es la plantilla principal de tu tema
+
+
+Inserta el código
+
+Desplázate hacia abajo en el archivo hasta encontrar la etiqueta de cierre </body>
+Pega todo el código de la barra de promoción justo antes de esta etiqueta </body>
+Es importante colocarlo antes del cierre del body para que funcione correctamente
+
+
+Guarda los cambios
+
+Haz clic en el botón "Guardar" en la esquina superior derecha
+
+
+Verifica la implementación
+
+Visita tu tienda en modo incógnito o navegación privada
+Comprueba que la barra de promoción aparezca correctamente
+Añade productos al carrito para verificar que la barra se actualice dinámicamente

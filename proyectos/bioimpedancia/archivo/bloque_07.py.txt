@@ -1,0 +1,68 @@
+import torch, torch.nn as nn, numpy as np, sqlite3, pickle
+from torch.utils.data import Dataset, DataLoader, random_split
+
+class BioDataset(Dataset):
+    def __init__(self, db):
+        conn = sqlite3.connect(db)
+        filas = conn.execute(
+            'SELECT g_Na, g_K, sigma_base, tau, alpha_cc, espectro_z '
+            'FROM simulaciones').fetchall()
+        conn.close()
+        self.X = np.array([pickle.loads(f[5]) for f in filas], dtype=np.float32)
+        self.y = np.array([[f[0],f[1],f[2],f[3],f[4]] for f in filas],
+                          dtype=np.float32)
+        # Normalizacion z-score de etiquetas [critico: escalas muy diferentes]
+        self.y_mean = self.y.mean(axis=0)
+        self.y_std  = self.y.std(axis=0) + 1e-30
+        self.y = (self.y - self.y_mean) / self.y_std
+    def __len__(self):  return len(self.X)
+    def __getitem__(self, i):
+        return (torch.tensor(self.X[i], dtype=torch.float32),
+                torch.tensor(self.y[i], dtype=torch.float32))
+
+class BioNet(nn.Module):
+    """
+    200 -> 256 -> 128 -> 64 -> 5
+    BatchNorm antes de ReLU estabiliza el entrenamiento [C6].
+    """
+    def __init__(self, input_size=200, n_params=5):
+        super().__init__()
+        self.model = nn.Sequential(
+            nn.Linear(input_size, 256),
+            nn.BatchNorm1d(256), nn.ReLU(), nn.Dropout(0.1),
+            nn.Linear(256, 128),
+            nn.BatchNorm1d(128), nn.ReLU(), nn.Dropout(0.1),
+            nn.Linear(128, 64),  nn.ReLU(),
+            nn.Linear(64, n_params))
+    def forward(self, x):  return self.model(x)
+
+dataset = BioDataset('bioimpedancia.db')
+n_val   = int(len(dataset) * 0.20)
+train_ds, val_ds = random_split(dataset, [len(dataset)-n_val, n_val])
+train_loader = DataLoader(train_ds, batch_size=64, shuffle=True)
+val_loader   = DataLoader(val_ds,   batch_size=64)
+
+modelo   = BioNet(input_size=dataset.X.shape[1])
+optimiz  = torch.optim.Adam(modelo.parameters(), lr=1e-3, weight_decay=1e-4)
+planif   = torch.optim.lr_scheduler.StepLR(optimiz, step_size=15, gamma=0.5)
+perdida  = nn.MSELoss()
+
+for epoca in range(50):
+    modelo.train(); total = 0
+    for X, y in train_loader:
+        pred = modelo(X);  p = perdida(pred, y)
+        optimiz.zero_grad();  p.backward();  optimiz.step()
+        total += p.item()
+    modelo.eval()
+    with torch.no_grad():
+        val_loss = perdida(modelo(torch.tensor(
+            dataset.X[val_ds.indices], dtype=torch.float32)),
+            torch.tensor(dataset.y[val_ds.indices], dtype=torch.float32)).item()
+    planif.step()
+    if (epoca+1) % 10 == 0:
+        print(f'Epoca {epoca+1:3d} | Train: {total/len(train_loader):.6f} '
+              f'| Val: {val_loss:.6f}')
+
+torch.save({'model_state_dict': modelo.state_dict(),
+            'y_mean': dataset.y_mean, 'y_std': dataset.y_std},
+           'bionet_inverso.pt')

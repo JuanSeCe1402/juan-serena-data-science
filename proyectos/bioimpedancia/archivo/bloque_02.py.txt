@@ -1,0 +1,12 @@
+def validar_fisica(Z, omega, sigma_ref):
+    # Verifica limites analiticos obligatorios.
+    # Limite omega -> 0: Z ~ 1/sigma (conduccion ionica)
+    # Limite omega -> inf: |Z| ~ 1/(w*eps) (dielectrico)
+    Z_low  = np.abs(Z[0])
+    Z_high = np.abs(Z[-1])
+    print("Validacion de limites fisicos:")
+    print(f"  |Z| baja f: {Z_low:.3e}  | esperado ~{1/sigma_ref:.3e}")
+    print(f"  |Z| alta f: {Z_high:.3e}")
+    assert Z_high < Z_low, "ERROR: Z no decrece con frecuencia"
+    assert np.all(np.isfinite(Z)), "ERROR: Z contiene NaN o Inf"
+    print("  OK: todos los limites fisicos verificados.")

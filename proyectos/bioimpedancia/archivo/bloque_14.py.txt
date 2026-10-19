@@ -1,0 +1,52 @@
+import numpy as np, torch, torch.nn as nn, sqlite3, pickle, matplotlib.pyplot as plt
+
+LABELS = ['g_Na', 'g_K', 'sigma_base', 'tau', 'alpha_cc']
+COLORES = ['#2c7bb6','#d7191c','#1a9641','#f29000','#7b2d8b']
+
+# -- Cargar modelo guardado ---------------------------------------------------
+ckpt  = torch.load('bionet_inverso.pt', map_location='cpu')
+model = BioNet(input_size=200, n_params=5)
+model.load_state_dict(ckpt['model_state_dict'])
+model.eval()
+y_mean = ckpt['y_mean'];  y_std = ckpt['y_std']
+
+# -- Cargar 20% de test desde SQLite -----------------------------------------
+np.random.seed(42)
+conn  = sqlite3.connect('bioimpedancia.db')
+filas = conn.execute('SELECT g_Na,g_K,sigma_base,tau,alpha_cc,espectro_z '
+                     'FROM simulaciones').fetchall()
+conn.close()
+idx   = np.random.permutation(len(filas))[:int(len(filas)*0.2)]
+X_test = np.array([pickle.loads(filas[i][5]) for i in idx], dtype=np.float32)
+y_test = np.array([[filas[i][j] for j in range(5)] for i in idx], dtype=np.float32)
+
+# -- Prediccion y desnormalizacion -------------------------------------------
+with torch.no_grad():
+    y_pred = model(torch.tensor(X_test)).numpy() * y_std + y_mean
+
+# -- Metricas ----------------------------------------------------------------
+mae  = np.mean(np.abs(y_pred - y_test), axis=0)
+mape = np.mean(np.abs((y_pred-y_test)/(np.abs(y_test)+1e-10)),axis=0)*100
+r2   = np.array([1 - np.sum((y_test[:,i]-y_pred[:,i])**2) /
+                    np.sum((y_test[:,i]-y_test[:,i].mean())**2)
+                 for i in range(5)])
+print(f"{'Param':>10}  {'MAE':>10}  {'MAPE(%)':>8}  {'R2':>6}")
+for n,m,p,r in zip(LABELS,mae,mape,r2):
+    print(f"{n:>10}  {m:>10.4f}  {p:>8.2f}%  {r:>6.4f}")
+
+# -- Grafica predicho vs real ------------------------------------------------
+fig, axes = plt.subplots(1, 5, figsize=(22, 4))
+fig.suptitle('Modelo Inverso -- Predicho vs. Real', fontsize=13)
+for i, ax in enumerate(axes):
+    ax.scatter(y_test[:,i], y_pred[:,i], alpha=0.35, s=8,
+               color=COLORES[i], rasterized=True)
+    lims = [min(y_test[:,i].min(), y_pred[:,i].min()),
+            max(y_test[:,i].max(), y_pred[:,i].max())]
+    ax.plot(lims, lims, 'k--', linewidth=1.2)
+    ax.set_title(f'{LABELS[i]}\n$R^2$={r2[i]:.3f}, MAPE={mape[i]:.1f}\%',
+                 fontsize=9)
+    ax.set_xlabel('Real', fontsize=9);  ax.set_ylabel('Predicho', fontsize=9)
+    ax.grid(True, alpha=0.3)
+plt.tight_layout()
+plt.savefig('04a_predicho_vs_real.pdf', dpi=150, bbox_inches='tight')
+plt.show()

@@ -1,0 +1,11 @@
+CREATE TABLE bioimpedance (
+    id      INTEGER PRIMARY KEY,
+    g_Na    REAL,
+    g_K     REAL,
+    tau     REAL,
+    alpha   REAL,
+    sigma   REAL,
+    Cm      REAL,
+    Z_real  BLOB,
+    Z_imag  BLOB
+);

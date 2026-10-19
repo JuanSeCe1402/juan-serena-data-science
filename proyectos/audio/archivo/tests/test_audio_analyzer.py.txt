@@ -1,0 +1,51 @@
+import pytest
+import numpy as np
+from audio_analyzer.file_handler import AudioFileHandler
+from audio_analyzer.signal_processor import SignalProcessor
+from audio_analyzer.recommendation_engine import RecommendationEngine
+
+
+def test_file_handler():
+    handler = AudioFileHandler()
+
+    # Test file not found
+    with pytest.raises(FileNotFoundError):
+        handler.load_file("nonexistent.wav")
+
+    # Test unsupported format
+    with pytest.raises(AudioFileError):
+        handler.load_file("test.xyz")
+
+
+def test_signal_processor():
+    processor = SignalProcessor()
+
+    # Test with silence
+    audio_data = np.zeros(44100)  # 1 second of silence
+    results = processor.analyze_audio(audio_data)
+
+    assert 'spectral' in results
+    assert 'temporal' in results
+    assert 'harmonic' in results
+
+
+def test_recommendation_engine():
+    engine = RecommendationEngine()
+
+    # Test with empty analysis
+    empty_analysis = {
+        'spectral': {
+            'frequencies': np.array([]),
+            'magnitude_spectrum': np.array([])
+        },
+        'temporal': {
+            'dynamic_range': 0.0
+        }
+    }
+
+    recommendations = engine.generate_recommendations(empty_analysis)
+    assert isinstance(recommendations, dict)
+
+
+if __name__ == '__main__':
+    pytest.main([__file__])

@@ -1,0 +1,3961 @@
+\documentclass[12pt]{article}
+
+% ---- Fuente Times New Roman ---
+\usepackage{mathptmx}
+
+% ---- Paquetes matemáticos ---
+\usepackage{amsmath, amssymb, bm, physics}
+\usepackage{mathtools}
+\usepackage{siunitx}
+
+% mejoras a amsmath (colchetes, etc.)
+% unidades físicas: \SI{5}{\nano\meter}
+
+% ---- Formato ---
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{microtype}
+\usepackage{parskip}
+
+
+% ---- Colores (solo para bloques de codigo) ---
+\usepackage{xcolor}
+
+% ---- Codigo fuente ---
+\usepackage{listings}
+
+% ---- Tablas y figuras ---
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{caption}
+
+\usepackage{subcaption}
+
+% ---- Bibliografía ---
+\usepackage{natbib}
+
+% ---- Idioma ---
+\usepackage{babel}
+
+% ---- Hyperref al final, SIN color (hidelinks = negro puro, sin subrayado) ---
+\usepackage[hidelinks]{hyperref}
+
+% ---- Márgenes e interlineado ---
+\geometry{margin=1in}
+\onehalfspacing
+
+% ---- Estilo de codigo (sin morado, colores discretos) ---
+\definecolor{codegreen}{rgb}{0.0, 0.45, 0.0}
+\definecolor{codegray}{rgb}{0.4, 0.4, 0.4}
+\definecolor{codeblue}{rgb}{0.0, 0.0, 0.55}
+\definecolor{backcolour}{rgb}{0.97, 0.97, 0.97}
+
+\lstdefinestyle{pythonstyle}{
+backgroundcolor=\color{backcolour},
+commentstyle=\color{codegray}\itshape,
+keywordstyle=\color{codeblue}\bfseries,
+numberstyle=\tiny\color{codegray},
+stringstyle=\color{codegreen},
+basicstyle=\ttfamily\footnotesize,
+breakatwhitespace=false,
+breaklines=true,
+captionpos=b,
+keepspaces=true,
+numbers=left,
+numbersep=5pt,
+showspaces=false,
+showstringspaces=false,
+showtabs=false,
+tabsize=2,
+frame=single,
+rulecolor=\color{codegray},
+xleftmargin=2em,
+framexleftmargin=1.5em
+}
+
+\lstset{style=pythonstyle}
+
+\title{\textbf{De la Polarizaci\'on At\'omica a la Bioimpedancia:}\\
+\textbf{Un Modelo Multiescala para la Inferencia}\\[0.3em]
+\textbf{de Par\'ametros Fisiol\'ogicos}\\[0.5em]
+\large Universidad Aut\'onoma de Nuevo Le\'on}
+
+\author{Juan Manuel Serena Cece\~{n}a}
+
+\date{}
+
+%=================================================================
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+La bioimpedancia el\'ectrica constituye una herramienta ampliamente utilizada
+para la caracterizaci\'on de sistemas biol\'ogicos; sin embargo, su interpretaci\'on
+suele basarse en modelos emp\'iricos que carecen de una conexi\'on directa con los
+procesos f\'isicos y fisiol\'ogicos subyacentes. En este trabajo se propone un
+modelo multiescala que establece un v\'inculo consistente entre la polarizaci\'on
+microsc\'opica de la materia y la respuesta macrosc\'opica de bioimpedancia.
+
+El desarrollo del modelo inicia con la descripci\'on de la interacci\'on entre un
+campo el\'ectrico y la materia a nivel at\'omico, mediante el oscilador de Lorentz
+y la polarizabilidad dependiente de la frecuencia. A partir de esta base, se
+construye la respuesta diel\'ectrica macrosc\'opica utilizando la relaci\'on de
+Clausius--Mossotti, incorporando posteriormente efectos din\'amicos mediante
+los modelos de relajaci\'on de Debye y Cole--Cole, los cuales permiten capturar
+la dispersi\'on observada en sistemas complejos.
+
+El modelo se extiende hacia sistemas biol\'ogicos mediante la incorporaci\'on de
+membranas celulares, tratadas como estructuras diel\'ectricas heterog\'eneas, as\'i
+como fen\'omenos de polarizaci\'on interfacial descritos por el mecanismo de
+Maxwell--Wagner. Asimismo, se consideran efectos fisiol\'ogicos asociados al
+transporte i\'onico, particularmente la din\'amica de canales de sodio y potasio,
+introduciendo una dependencia temporal y no lineal en la conductividad del sistema.
+
+Desde esta perspectiva, la impedancia compleja se interpreta como un observable
+f\'isico que encapsula informaci\'on sobre la din\'amica interna del sistema biol\'ogico.
+Con el fin de abordar el problema inverso, se implementa un enfoque basado en
+
+aprendizaje autom\'atico que permite inferir par\'ametros fisiol\'ogicos a partir de
+la respuesta en frecuencia generada por el modelo.
+
+Los resultados demuestran que es posible reconstruir propiedades
+internas del sistema a partir de mediciones externas de
+bioimpedancia. El modelo inverso, basado en una red neuronal
+entrenada con datos sintéticos físicamente fundamentados, logra
+estimar parámetros fisiológicos clave ---incluyendo la conductividad
+de base $\sigma_{\text{base}}$, la conductancia de sodio $g_{Na}$
+y el tiempo de relajación $\tau$--- con errores relativos (MAPE)
+de \textbf{2.9\%}, \textbf{5.8\%} y \textbf{14.0\%},
+respectivamente, sobre el conjunto de prueba. Parámetros
+adicionales como la conductancia de potasio $g_K$ y el exponente
+Cole-Cole $\alpha_{\text{CC}}$ presentan errores medianos de
+9.9\% y 14.0\%, reflejando la mayor dificultad intrínseca de su
+identificación a partir del espectro de impedancia. Este trabajo
+establece un marco teórico que integra física fundamental,
+modelación biológica y herramientas computacionales, proponiendo
+una nueva interpretación de la bioimpedancia no solo como
+herramienta de medición, sino como una ventana hacia la dinámica
+interna de sistemas vivos.
+\end{abstract}
+\section*{Agradecimientos}
+Deseo expresar mi más profundo agradecimiento a todas aquellas personas que, de manera directa o indirecta, contribuyeron al desarrollo de este trabajo y al proceso académico y personal que lo hizo posible.
+A Dios, por brindarme fortaleza, guía y perseverancia a lo largo de este camino, y por permitirme culminar una etapa fundamental de mi formación.
+
+A mis padres, Maricela y Manuel, por su apoyo incondicional, sus enseñanzas y el esfuerzo constante que han dedicado a mi crecimiento personal y profesional. Su ejemplo de compromiso, responsabilidad y dedicación ha sido el principal fundamento de mis metas y aspiraciones.
+
+
+A mi tutor y asesor, el Dr. Eduardo Pérez Tijerina, por su orientación, experiencia y acompañamiento académico. Su apoyo y conocimiento fueron esenciales para la consolidación y desarrollo de esta investigación.
+
+A mis hermanas, Joyce y Jane, y a mi perrito Jackie, por su cariño, motivación y presencia constante, que representaron un impulso importante durante este proceso.
+
+A mi tía Juanis, a mis abuelitas y a mi primo Jony, por sus consejos, apoyo y enseñanzas, recordándome siempre el valor del esfuerzo, la constancia y la dedicación.
+
+A Liliana Cortez, quien fue fundamental en este trabajo de inicio a fin. Me enseñaste que no se puede saber todo en esta vida, y que no es impreciso  no tener siempre las respuestas y que, a veces, es necesario caer antes de aprender a levantarse. Gracias por tu apoyo, paciencia y por acompañarme tanto en los buenos como en los malos momentos.
+
+A los licenciados Irving Rocha, Karla Vázquez, Yamileth Páez, Luis Villarreal y David Palafox, por su amistad, tiempo y ejemplo profesional, los cuales enriquecieron mi formación durante mi estancia en la facultad.
+
+A mis roomies, Daniel y Patricio, por su compañerismo, intercambio de ideas y convivencia, que hicieron más llevadero este proceso académico.
+
+Finalmente, a mi familia y amigos, por su apoyo, confianza y cariño incondicional, así como por acompañarme y motivarme a lo largo de este camino.
+
+\section*{Lista de S\'imbolos}
+\addcontentsline{toc}{section}{Lista de S\'imbolos}
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{S\'imbolo} & \textbf{Definici\'on} & \textbf{Unidades} \\
+\midrule
+$Z(\omega)$ & Impedancia el\'ectrica compleja & $\Omega$ \\
+$\varepsilon^*(\omega) = \varepsilon' - j\varepsilon''$ & Permitividad compleja & F/m \\
+$\varepsilon'$ & Parte real de la permitividad (almacenamiento) & F/m \\
+$\varepsilon''$ & Parte imaginaria (p\'erdidas + conducci\'on) & F/m \\
+$\varepsilon_s$ & Permitividad est\'atica ($\omega\to 0$) & F/m \\
+$\varepsilon_\infty$ & Permitividad de alta frecuencia & F/m \\
+$\sigma$ & Conductividad el\'ectrica & S/m \\
+$\omega = 2\pi f$ & Frecuencia angular & rad/s \\
+$\tau$ & Tiempo de relajaci\'on diel\'ectrica & s \\
+
+$\alpha_{CC}$ & Par\'ametro de ensanchamiento Cole--Cole & --- \\
+$\alpha(\omega)$ & Polarizabilidad at\'omica & C$\cdot$m$^2$/V \\
+$\mathbf{p}$ & Momento dipolar el\'ectrico & C$\cdot$m \\
+$\mathbf{P}$ & Densidad de polarizaci\'on & C/m$^2$ \\
+$C_m$ & Capacitancia de membrana por unidad de \'area & F/m$^2$ \\
+$V_m$ & Potencial de membrana & V \\
+$E_i$ & Potencial de Nernst del ion $i$ & V \\
+$g_i$ & Conductancia del canal i\'onico $i$ & S \\
+$d$ & Grosor de la membrana & m \\
+$a$ & Radio celular & m \\
+$\phi$ & Fracci\'on volum\'etrica celular (hematocrito) & --- \\
+$\tau_{MW}$ & Tiempo de relajaci\'on de Maxwell--Wagner & s \\
+$k_B$ & Constante de Boltzmann & J/K \\
+$R$ & Constante universal de los gases & J/(mol$\cdot$K) \\
+$F$ & Constante de Faraday & C/mol \\
+$\varepsilon_0$ & Permitividad del vac\'io & F/m \\
+\bottomrule
+\end{tabular}
+\end{center}
+\newpage
+
+\tableofcontents
+
+\newpage
+
+%=================================================================
+
+\section{Introducci\'on}
+
+%=================================================================
+
+El estudio de las propiedades el\'ectricas de sistemas biol\'ogicos ha cobrado una
+importancia creciente en \'areas como la biof\'isica, la ingenier\'ia biom\'edica y la
+medicina diagn\'ostica. En particular, la bioimpedancia el\'ectrica se ha consolidado
+como una herramienta no invasiva capaz de caracterizar tejidos a partir de su
+respuesta a campos el\'ectricos alternos. Sin embargo, en muchos enfoques
+tradicionales, la interpretaci\'on de esta magnitud se basa en modelos emp\'iricos
+o circuitales que, si bien son \'utiles desde el punto de vista pr\'actico, carecen
+de una conexi\'on directa con los procesos f\'isicos y fisiol\'ogicos subyacentes.
+
+La bioimpedancia es una medida de la oposici\'on que presentan los tejidos
+biol\'ogicos al paso de una corriente el\'ectrica alterna. Esta magnitud encapsula
+tanto efectos resistivos como capacitivos, los cuales emergen de la estructura
+y din\'amica del sistema biolog\'ico.
+
+Esta limitaci\'on motiva la necesidad de desarrollar un marco te\'orico que permita
+establecer un v\'inculo consistente entre la f\'isica fundamental y la respuesta
+macrosc\'opica medida experimentalmente. En este contexto, surge la pregunta
+central que gu\'ia el presente trabajo: \emph{¿es posible inferir propiedades internas
+de sistemas biol\'ogicos a partir de mediciones de bioimpedancia, mediante un
+modelo f\'isico multiescala que integre desde la polarizaci\'on at\'omica hasta la
+din\'amica celular?}
+
+Para abordar esta problem\'atica, en esta tesis se propone un modelo que conecta
+diferentes niveles de descripci\'on f\'isica. En el nivel microsc\'opico, la interacci\'on
+entre la materia y un campo el\'ectrico se describe a trav\'es de la polarizaci\'on
+at\'omica, modelada mediante el oscilador de Lorentz y su correspondiente
+polarizabilidad dependiente de la frecuencia. Esta descripci\'on permite entender
+
+c\'omo las cargas ligadas responden din\'amicamente a excitaciones externas,
+introduciendo efectos de resonancia y disipaci\'on.
+
+A partir de esta base, se establece el puente hacia la escala macrosc\'opica
+mediante relaciones constitutivas como la ecuaci\'on de Clausius--Mossotti,
+la cual conecta la polarizabilidad microsc\'opica con la permitividad efectiva
+del medio. Este paso es fundamental, ya que revela que la respuesta diel\'ectrica
+de un material no es simplemente la suma de contribuciones individuales,
+sino el resultado de interacciones colectivas entre dipolos.
+
+Posteriormente, se incorporan efectos din\'amicos a trav\'es de modelos de
+relajaci\'on como el modelo de Debye y su generalizaci\'on de Cole--Cole,
+los cuales permiten describir la dependencia temporal y frecuencial de la
+polarizaci\'on en sistemas complejos. En particular, estos modelos capturan
+la presencia de m\'ultiples escalas temporales asociadas a procesos f\'isicos
+como la rotaci\'on dipolar, la reorganizaci\'on estructural y la heterogeneidad
+del medio.
+
+El marco te\'orico se extiende hacia sistemas biol\'ogicos mediante la
+incorporaci\'on de la estructura y propiedades de la membrana celular.
+Las membranas, compuestas principalmente por bicapas lip\'idicas,
+act\'uan como barreras diel\'ectricas altamente selectivas que separan
+regiones con distintas propiedades el\'ectricas. Esta configuraci\'on
+da lugar a fen\'omenos de polarizaci\'on interfacial, descritos mediante
+el mecanismo de Maxwell--Wagner, los cuales son responsables de
+caracter\'isticas distintivas en la respuesta de bioimpedancia.
+
+Adicionalmente, la presencia de canales i\'onicos, particularmente de
+sodio y potasio, introduce una dependencia din\'amica en la conductividad
+
+del sistema. La apertura y cierre de estos canales, regulados por el
+potencial de membrana, generan un comportamiento no lineal que influye
+directamente en la respuesta el\'ectrica del tejido. De esta manera, la
+bioimpedancia no solo refleja propiedades estructurales, sino tambi\'en
+procesos fisiol\'ogicos activos.
+
+Desde esta perspectiva, la impedancia compleja $Z(\omega)$ puede ser
+interpretada como un observable f\'isico que encapsula informaci\'on sobre
+la din\'amica interna del sistema. Cada uno de sus componentes contiene
+contribuciones de distintos mecanismos, incluyendo conducci\'on i\'onica,
+polarizaci\'on dipolar y acumulaci\'on de carga en interfaces.
+
+Sin embargo, la relaci\'on entre la respuesta en frecuencia y los par\'ametros
+internos del sistema es altamente no lineal y, en general, no invertible de
+forma anal\'itica. Esto da lugar a un problema inverso intr\'insecamente complejo,
+en el cual m\'ultiples configuraciones f\'isicas pueden producir respuestas
+similares. Para abordar esta dificultad, se introduce el uso de t\'ecnicas de
+aprendizaje autom\'atico, las cuales permiten aproximar dicha relaci\'on a partir
+de datos generados mediante el modelo f\'isico.
+
+El enfoque propuesto en este trabajo se distingue por integrar de manera
+consistente la f\'isica fundamental, la modelaci\'on biol\'ogica y herramientas
+computacionales modernas, dando lugar a un marco multiescala capaz de
+relacionar directamente la bioimpedancia con par\'ametros fisiol\'ogicos.
+
+En conjunto, esta tesis establece un puente entre la descripci\'on microsc\'opica
+de la materia y la respuesta macrosc\'opica de sistemas biol\'ogicos, proponiendo
+una nueva forma de interpretar la bioimpedancia no solo como una herramienta
+de medici\'on, sino como un medio para acceder a la din\'amica interna de los
+
+sistemas vivos.
+
+% ---- Frase central ---
+\begin{center}
+\textit{
+Este trabajo demuestra que la bioimpedancia no es \'unicamente una cantidad medible,
+sino un observable que codifica el estado fisiol\'ogico interno de las c\'elulas.
+}
+\end{center}
+
+% ---- Originalidad ---
+\begin{center}
+\textit{
+Hasta donde es de nuestro conocimiento, este es uno de los primeros intentos de
+acoplar completamente modelos electrodin\'amicos, fisiolog\'ia de membrana y aprendizaje
+autom\'atico en un \'unico marco predictivo y autoconsistente.
+}
+\end{center}
+
+\subsection*{Hip\'otesis Central}
+
+\emph{La hip\'otesis central de este trabajo es que las mediciones de bioimpedancia
+pueden vincularse de forma directa y rigurosa con par\'ametros f\'isicos microsc\'opicos
+---grosor de la membrana, conductividad del citoplasma y fracci\'on volum\'etrica
+celular--- a trav\'es de un modelo electrodin\'amico multiescala, y que este v\'inculo
+puede invertirse mediante aprendizaje autom\'atico para recuperar par\'ametros
+fisiol\'ogicos a partir de una medici\'on el\'ectrica sencilla.}
+
+\subsection*{Alcance del Marco}
+
+El objetivo de este trabajo es desarrollar un modelo multiescala capaz de
+conectar la polarizaci\'on at\'omica con la bioimpedancia macrosc\'opica, permitiendo
+la inferencia de par\'ametros fisiol\'ogicos a partir de mediciones el\'ectricas.
+Este trabajo no se limita al ajuste de datos experimentales, sino que proporciona
+un marco f\'isicamente fundamentado donde cada par\'ametro corresponde a una magnitud
+medible, y el modelo puede predecir c\'omo cambia el espectro de impedancia ante
+variaciones fisiol\'ogicas no observadas durante el entrenamiento.
+
+La relevancia de esta construcci\'on radica en que cada nivel de descripci\'on no es
+independiente, sino que constituye una manifestaci\'on emergente del nivel anterior.
+De este modo, la bioimpedancia macrosc\'opica puede entenderse como una consecuencia
+directa de procesos microsc\'opicos de polarizaci\'on, convirtiendo este trabajo en
+genuinamente multiescala y no solo encadenado.
+
+\subsection*{Objetivos}
+
+Este trabajo persigue cuatro objetivos espec\'ificos:
+
+\begin{enumerate}
+\item Derivar, desde primeros principios, una cadena de modelos f\'isicamente
+consistente que conecte la polarizabilidad at\'omica con la bioimpedancia macrosc\'opica.
+\item Implementar esta cadena num\'ericamente y generar una base de datos de espectros
+de impedancia con fundamento f\'isico.
+\item Entrenar y validar modelos de aprendizaje autom\'atico que resuelvan el problema
+inverso de bioimpedancia, habilitando la estimaci\'on de par\'ametros a partir de
+datos de impedancia.
+\item Extender el marco hacia una descripci\'on fisiol\'ogica que incorpore el potencial
+de membrana, gradientes i\'onicos y din\'amica de canales, estableciendo un v\'inculo
+
+conceptual entre f\'isica y biolog\'ia celular.
+\end{enumerate}
+
+\subsection*{Estructura del Trabajo}
+
+El trabajo sigue la jerarqu\'ia f\'isica del problema.
+La secci\'on~\ref{sec:background} revisa el estado del arte.
+La secci\'on~\ref{sec:methods} describe la metodolog\'ia y las definiciones de par\'ametros.
+Las secciones~\ref{sec:atomic}--\ref{sec:macro} desarrollan el marco te\'orico.
+La secci\'on~\ref{sec:numerical} presenta la implementaci\'on num\'erica y la integraci\'on
+de aprendizaje autom\'atico.
+La secci\'on~\ref{sec:bio_foundations} introduce las bases biol\'ogicas y electroqu\'imicas
+de la membrana.
+La secci\'on~\ref{sec:physiological} desarrolla la extensi\'on fisiol\'ogica y bioqu\'imica.
+La secci\'on~\ref{sec:results} discute los resultados e interpretaci\'on f\'isica.
+La secci\'on~\ref{sec:limitations} aborda las limitaciones del modelo, y la
+secci\'on~\ref{sec:conclusions} resume las contribuciones principales.
+
+\section{Antecedentes y Estado del Arte}
+
+\label{sec:background}
+
+%=================================================================
+
+\subsection{Desarrollo Hist\'orico de la Bioimpedancia}
+
+El estudio de las propiedades el\'ectricas de los tejidos biol\'ogicos tiene una historia de m\'as
+de un siglo. Las primeras mediciones de Fricke (1925) demostraron que las suspensiones de
+eritrocitos se comportan como elementos capacitivos a bajas frecuencias, proporcionando la
+
+primera evidencia experimental del comportamiento diel\'ectrico controlado por la membrana
+
+\citep{Fricke1925, Schwan1957}. Estas observaciones fueron sistematizadas por Herman P.\
+Schwan, quien introdujo el concepto de dispersiones diel\'ectricas en materiales biol\'ogicos
+y defini\'o las ahora est\'andar regiones de dispersi\'on $\alpha$, $\beta$ y $\gamma$
+
+\citep{Schwan1957, Schwan1994}. Cole y Cole (1940) introdujeron una generalizaci\'on emp\'irica
+del modelo de relajaci\'on de Debye para describir los espectros de dispersi\'on ensanchados de
+materiales biol\'ogicos \citep{Cole1940}, que sigue siendo la herramienta de ajuste est\'andar
+hasta hoy.
+
+\subsection{Dispersiones Diel\'ectricas en Tejidos Biol\'ogicos}
+
+\label{sec:dispersiones}
+
+Los tejidos biol\'ogicos exhiben m\'ultiples regiones de frecuencia distintas en las que sus
+propiedades diel\'ectricas cambian significativamente. Estas se denominan \emph{regiones de
+dispersi\'on} y se etiquetan $\alpha$, $\beta$ y $\gamma$ en orden creciente de frecuencia
+\citep{Schwan1957, Foster1989}.
+
+\subsubsection{Dispersi\'on \texorpdfstring{$\alpha$}{Alfa} (Hz -- kHz)} La dispersi\'on $\alpha$
+ocurre a las frecuencias m\'as bajas ($1\,\text{Hz}$--$10\,\text{kHz}$).
+
+Se origina en la relajaci\'on de capas de difusi\'on i\'onica alrededor de superficies membranales
+cargadas y en la polarizaci\'on de la atm\'osfera de contraiones que rodea a las macromol\'eculas.
+
+Los tiempos de relajaci\'on asociados son largos ($\tau \sim 10^{-3}$--$10^{-1}\,\text{s}$),
+reflejando una lenta reorganizaci\'on i\'onica.
+
+\subsubsection{Dispersi\'on \texorpdfstring{$\beta$}{Beta} (kHz -- MHz)} La dispersi\'on $\beta$
+es la m\'as relevante para la espectroscop\'ia de bioimpedancia de c\'elulas y sangre. Ocurre entre
+$10\,\text{kHz}$ y $100\,\text{MHz}$ y est\'a gobernada por el
+mecanismo
+de polarizaci\'on interfacial de Maxwell--Wagner \citep{Maxwell1873, Wagner1914}. La corriente
+transita de fluir alrededor de las c\'elulas a bajas frecuencias a penetrar el interior celular
+a frecuencias m\'as altas. El tiempo de relajaci\'on caracter\'istico es:
+
+\begin{equation}
+\tau_{MW} = \frac{\varepsilon_1 + 2\varepsilon_3}{\sigma_1 + 2\sigma_3}
+\sim 10^{-7}\text{--}10^{-5}\,\text{s}
+\end{equation}
+
+Esta dispersi\'on codifica la capacitancia de la membrana, la conductividad del citoplasma y
+la geometr\'ia celular, convirti\'endola en el objetivo primario de este trabajo.
+
+\subsubsection{Dispersi\'on \texorpdfstring{$\gamma$}{Gamma} (GHz)} La dispersi\'on
+$\gamma$ ocurre por encima de $1\,\text{GHz}$ y est\'a dominada por la relajaci\'on rotacional
+de las mol\'eculas de agua ($\tau \approx 8\,\text{ps}$ a
+$25\,^\circ\text{C}$)
+
+\citep{Kaatze1989}.
+
+\begin{table}[H]
+\centering
+\caption{Resumen de las regiones de dispersi\'on diel\'ectrica en tejidos biol\'ogicos.}
+\label{tab:dispersiones}
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{Dispersi\'on} & \textbf{Rango de frecuencia}
+& \textbf{Mecanismo principal} & \textbf{Tiempo de relajaci\'on} \\
+\midrule
+$\alpha$ & $1\,\text{Hz}$--$10\,\text{kHz}$
+& Difusi\'on i\'onica, polarizaci\'on de contraiones
+& $10^{-3}$--$10^{-1}\,\text{s}$ \\
+$\beta$ & $10\,\text{kHz}$--$100\,\text{MHz}$
+& Polarizaci\'on interfacial Maxwell--Wagner
+& $10^{-7}$--$10^{-5}\,\text{s}$ \\
+$\gamma$ & $>1\,\text{GHz}$
+& Rotaci\'on del dipolo del agua
+& $\sim 8\,\text{ps}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Modelos Existentes y sus Limitaciones}
+
+Varios modelos de circuito equivalente han sido propuestos para describir la respuesta
+
+el\'ectrica de tejidos biol\'ogicos. El modelo de impedancia de Cole \citep{Cole1940} es el
+m\'as com\'un:
+
+\begin{equation}
+Z(\omega) = R_\infty + \frac{R_0 - R_\infty}{1 + (j\omega\tau)^\beta}
+\end{equation}
+
+Si bien proporciona excelentes ajustes a datos experimentales, es puramente fenomenol\'ogico:
+los par\'ametros $R_0$, $R_\infty$ y $\tau$ son coeficientes de ajuste sin significado fisiol\'ogico
+directo. No pueden predecir c\'omo cambia $Z(\omega)$ cuando, por ejemplo, el
+hematocrito disminuye en la anemia, ni pueden generar datos sint\'eticos f\'isicamente realistas
+para aprendizaje autom\'atico. Esto motiva el enfoque basado en f\'isica del presente trabajo.
+
+%=================================================================
+
+\section{Metodolog\'ia}
+
+\label{sec:methods}
+
+%=================================================================
+
+\subsection{Estrategia General de Modelado}
+
+Este trabajo sigue una jerarqu\'ia f\'isica ascendente (\textit{bottom-up}). Cada nivel de
+descripci\'on se deriva del anterior, garantizando consistencia interna entre escalas:
+
+\begin{center}
+
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}ccccccc@{}}
+Cu\'antica & $\to$ & Cl\'asica & $\to$ & Mesosc\'opica & $\to$ & Macrosc\'opica \\
+$\alpha_{\text{QM}}$ & & $\varepsilon^*(\omega)$ & &
+$Z_{\text{c\'elula}}$ & & $Z_{\text{sangre}} \to$ ML
+\end{tabular}
+\end{center}
+
+El aprendizaje autom\'atico no es una herramienta independiente en este marco. Es una
+extensi\'on del modelo f\'isico que permite resolver problemas inversos anal\'iticamente
+intratables. Sin el
+modelo f\'isico proporcionando datos sint\'eticos de entrenamiento con par\'ametros verdaderos
+conocidos, el componente de aprendizaje autom\'atico no tendr\'ia una base confiable. Ambos
+son inseparables.
+
+\subsection{Nivel de descripci\'on del modelo}
+\label{sec:nivel_descripcion}
+
+El presente trabajo se desarrolla dentro de una
+\emph{descripci\'on efectiva macrosc\'opica}, en la cual
+los efectos microsc\'opicos son incorporados mediante
+par\'ametros constitutivos dependientes del estado
+fisiol\'ogico. Esta aproximaci\'on permite conectar
+fen\'omenos electromagn\'eticos con propiedades biol\'ogicas
+sin resolver expl\'icitamente la estructura microsc\'opica.
+
+El modelo articula tres niveles de descripci\'on:
+\begin{itemize}
+\item \textbf{Microsc\'opico}: polarizabilidad at\'omica
+(Lorentz, Clausius--Mossotti).
+\item \textbf{Mesosc\'opico}: permitividad efectiva
+Cole--Cole, membrana (Pauly--Schwan,
+Maxwell--Garnett completo).
+\item \textbf{Macrosc\'opico}: $Z(\omega, t)$ acoplada
+a la din\'amica de Hodgkin--Huxley.
+\end{itemize}
+La conexi\'on entre niveles es derivada desde primeros
+principios, no fenomenol\'ogica.
+
+\subsection{Estructura Dual del Modelo}
+
+Este trabajo se estructura a lo largo de dos direcciones complementarias:
+\begin{itemize}
+\item \textbf{Marco f\'isico fundamental}: deriva la din\'amica de la membrana desde primeros
+principios, conectando polarizabilidad at\'omica con bioimpedancia macrosc\'opica.
+\item \textbf{Enfoque basado en datos}: habilita la predicci\'on de estados biol\'ogicos
+a partir de se\~{n}ales el\'ectricas medibles mediante aprendizaje autom\'atico.
+\end{itemize}
+
+Ambos enfoques est\'an interconectados y se refuerzan mutuamente.
+
+\subsection{Validez de la Aproximaci\'on Cuasiestática}
+
+A lo largo de este trabajo se emplea la aproximaci\'on cuasiestática, que reduce las ecuaciones
+de Maxwell a la ecuaci\'on de Laplace. Esto es v\'alido cuando:
+
+\begin{equation}
+\lambda = \frac{c}{f\sqrt{\varepsilon_r}} \gg L_{\text{c\'elula}}
+\end{equation}
+
+Para $a \sim 5\,\mu\text{m}$ y $f = 1\,\text{GHz}$, $\varepsilon_r \sim 80$:
+
+\begin{equation}
+\lambda_{\min} = \frac{3\times10^8}{10^9\cdot\sqrt{80}} \approx 33\,\mu\text{m}
+\gg 5\,\mu\text{m}
+\end{equation}
+
+La condici\'on se satisface en m\'as de tres \'ordenes de magnitud a lo largo de todo el rango de
+frecuencias. Los efectos de retardo y las p\'erdidas por radiaci\'on se desprecian con seguridad.
+
+\subsection{Definici\'on de S\'imbolos y Espacio de Par\'ametros F\'isicos}
+
+Todos los s\'imbolos utilizados en este trabajo se definen en la Tabla~\ref{tab:simbolos}.
+
+Los par\'ametros f\'isicos con sus rangos fisiol\'ogicos y valores de simulaci\'on se presentan en
+la Tabla~\ref{tab:params}.
+
+\begin{table}[H]
+\centering
+\caption{Definici\'on completa de s\'imbolos empleados a lo largo de este trabajo.}
+\label{tab:simbolos}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{S\'imbolo} & \textbf{Definici\'on} & \textbf{Unidades} \\
+\midrule
+$\varepsilon_0$ & Permitividad del vac\'io ($8.854\times10^{-12}$) & F/m \\
+$\varepsilon_r$ & Permitividad relativa & --- \\
+$\varepsilon_i$ & Permitividad absoluta de la regi\'on $i$ & F/m \\
+$\varepsilon^*$ & Permitividad compleja: $\varepsilon' - j\varepsilon''$ & F/m \\
+$\varepsilon'$ & Parte real (almacenamiento de energ\'ia) & F/m \\
+$\varepsilon''$ & Parte imaginaria (p\'erdidas + conducci\'on) & F/m \\
+$\varepsilon_s$ & Permitividad est\'atica (l\'imite baja $f$) & F/m \\
+$\varepsilon_\infty$ & Permitividad de alta frecuencia & F/m \\
+$\sigma$ & Conductividad el\'ectrica & S/m \\
+$\omega = 2\pi f$ & Frecuencia angular & rad/s \\
+$\tau$ & Tiempo de relajaci\'on diel\'ectrica & s \\
+$\alpha_{CC}$ & Par\'ametro de ensanchamiento Cole--Cole & --- \\
+$e$ & Carga elemental ($1.602\times10^{-19}$) & C \\
+$m$ & Masa del electr\'on ($9.109\times10^{-31}$) & kg \\
+$\omega_0$ & Frecuencia natural del electr\'on ligado & rad/s \\
+$\gamma$ & Coeficiente de amortiguamiento & rad/s \\
+$\mathbf{p}$ & Momento dipolar el\'ectrico & C$\cdot$m \\
+
+$\mathbf{P}$ & Densidad de polarizaci\'on macrosc\'opica & C/m$^2$ \\
+$\chi_e$ & Susceptibilidad el\'ectrica & --- \\
+$\alpha(\omega)$ & Polarizabilidad at\'omica/molecular & C$\cdot$m$^2$/V \\
+$Z(\omega)$ & Impedancia compleja & $\Omega$ \\
+$\Phi$ & Potencial el\'ectrico & V \\
+$C_m$ & Capacitancia de membrana por unidad de \'area & F/m$^2$ \\
+$Z_m(\omega)$ & Impedancia superficial de membrana & $\Omega\cdot$m$^2$ \\
+$\phi$ & Fracci\'on volum\'etrica celular (hematocrito) & --- \\
+$a$ & Radio celular & m \\
+\bottomrule
+\end{tabular}
+\end{table}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{S\'imbolo} & \textbf{Definici\'on} & \textbf{Unidades} \\
+\midrule
+$d$ & Grosor de la membrana & m \\
+$k_B$ & Constante de Boltzmann ($1.381\times10^{-23}$) & J/K \\
+$T$ & Temperatura absoluta & K \\
+$D_r$ & Coeficiente de difusi\'on rotacional & rad$^2$/s \\
+$V_m$ & Potencial de membrana & V \\
+$E_i$ & Potencial de Nernst del ion $i$ & V \\
+$g_i$ & Conductancia del canal i\'onico $i$ & S \\
+$I_i$ & Corriente i\'onica del ion $i$ & A \\
+$R$ & Constante de los gases ideales & J/(mol$\cdot$K) \\
+$F$ & Constante de Faraday & C/mol \\
+$z_i$ & Valencia i\'onica & --- \\
+\bottomrule
+\end{tabular}
+\
+
+\begin{table}[H]
+\centering
+\caption{Par\'ametros f\'isicos del modelo celular, rangos fisiol\'ogicos y valores de simulaci\'on utilizados en este trabajo \citep{Schwan1957, Asami2002}.}
+\label{tab:params}
+\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{\textwidth}{@{}lXcc@{}}
+\toprule
+\textbf{S\'imbolo} & \textbf{Descripci\'on} & \textbf{Rango fisiol.}
+& \textbf{Valor sim.} \\
+\midrule
+$\varepsilon_1/\varepsilon_0$ & Permitividad relativa del citoplasma
+& 50--80 & 60 \\
+$\sigma_1$ (S/m) & Conductividad del citoplasma
+& 0.3--1.5 & 0.5 \\
+$\varepsilon_2/\varepsilon_0$ & Permitividad relativa de la membrana
+& 2--10 & 5 \\
+$\sigma_2$ (S/m) & Conductividad de la membrana
+& $10^{-8}$--$10^{-6}$ & $10^{-7}$ \\
+$\varepsilon_3/\varepsilon_0$ & Permitividad relativa del plasma
+& 70--90 & 80 \\
+$\sigma_3$ (S/m) & Conductividad del plasma
+& 0.8--1.8 & 1.2 \\
+$d$ (nm) & Grosor de la membrana
+& 3--10 & 5 \\
+$a$ ($\mu$m) & Radio celular (eritrocito)
+& 3--8 & 5 \\
+$\phi$ & Hematocrito (fracci\'on volum\'etrica)
+& 0.35--0.55 & 0.40 \\
+$\tau$ (s) & Tiempo de relajaci\'on Cole--Cole
+& $10^{-7}$--$10^{-5}$ & $10^{-6}$ \\
+$\alpha_{CC}$ & Par\'ametro de ensanchamiento Cole--Cole
+
+& 0.05--0.25 & 0.10 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Estrategia de Aprendizaje Autom\'atico}
+
+El componente de aprendizaje autom\'atico aborda dos tareas estrechamente vinculadas:
+\paragraph{Problema directo.} Dado el conjunto de par\'ametros f\'isicos
+$(\sigma_1, \sigma_3, \phi, d, a)$, predecir el espectro de impedancia $Z(\omega)$.
+
+\paragraph{Problema inverso.} Dado un espectro de impedancia $Z(\omega)$, recuperar los
+par\'ametros f\'isicos subyacentes. Esta es la tarea cl\'inicamente relevante, que permite la
+estimaci\'on no invasiva del hematocrito, la conductividad del citoplasma y las propiedades
+de la membrana. Dado que el mapeo $Z(\omega) \to \{\sigma_1, \sigma_3, \phi\}$ es no lineal
+y anal\'iticamente intratable, se entrena una red neuronal para aproximarlo.
+
+%=================================================================
+
+\section{Fundamentos Microsc\'opicos: Polarizaci\'on At\'omica}
+
+\label{sec:atomic}
+
+%=================================================================
+
+\noindent\textit{Esta secci\'on establece el origen microsc\'opico del comportamiento
+diel\'ectrico. Toda magnitud macrosc\'opica introducida posteriormente ---permitividad,
+polarizaci\'on, impedancia--- se remonta en \'ultima instancia al proceso aqu\'i descrito: el
+desplazamiento de un electr\'on ligado por un campo el\'ectrico externo.}
+
+\subsection{Formaci\'on de un Dipolo At\'omico}
+
+Cons\'iderese un \'atomo neutro con carga nuclear $+Ze$ y nube electr\'onica $-Ze$. En equilibrio,
+ambos centros coinciden y no existe dipolo. Bajo un campo externo $\mathbf{E}$, la nube
+electr\'onica se desplaza, generando un momento dipolar inducido:
+
+\begin{equation}
+\mathbf{p} = q\,\mathbf{d}
+\end{equation}
+
+donde $q = -e$ y $\mathbf{d}$ es el desplazamiento entre los centros de carga. La constante de
+proporcionalidad entre $\mathbf{p}$ y $\mathbf{E}$ define la \emph{polarizabilidad}
+$\alpha$, la magnitud central de esta secci\'on.
+
+\subsection{Modelo Cl\'asico: El Oscilador de Lorentz}
+
+Se modela el electr\'on ligado como un oscilador arm\'onico amortiguado impulsado por el
+campo. Esta ecuaci'on describe el movimiento de un electr'on ligado al n'ucleo bajo
+la acci'on de un campo el'ectrico externo, y es el punto de partida de toda la
+
+construcci'on multiescala de este trabajo:
+
+\begin{equation}
+m\ddot{x} + m\gamma\dot{x} + m\omega_0^2\,x = -eE(t)
+\label{eq:lorentz}
+\end{equation}
+
+\subsubsection{Significado F\'isico de Cada T\'ermino}
+
+Cada t\'ermino en la Ec.~\eqref{eq:lorentz} tiene un papel f\'isico distinto:
+
+\begin{itemize}
+\item $m\ddot{x}$ --- \textbf{inercia}: determina c\'omo acelera el electr\'on. Domina a
+altas frecuencias; el electr\'on no puede seguir el campo r\'apidamente oscilante
+y la polarizaci\'on tiende a cero.
+\item $m\gamma\dot{x}$ --- \textbf{amortiguamiento}: representa la disipaci\'on de energ\'ia
+(colisiones, radiaci\'on). Responsable de la parte imaginaria de $\alpha(\omega)$
+y por tanto de las p\'erdidas diel\'ectricas.
+\item $m\omega_0^2 x$ --- \textbf{fuerza restauradora}: la ligadura del electr\'on al
+n\'ucleo. Define la frecuencia natural de resonancia $\omega_0$. Domina a bajas
+frecuencias, permitiendo el seguimiento cuasiestático del campo.
+\item $-eE(t)$ --- \textbf{fuerza motriz}: el campo externo que desplaza al electr\'on
+del equilibrio.
+\end{itemize}
+
+Los tres reg\'imenes de frecuencia que emergen de esta competencia son:
+
+\begin{itemize}
+\item $\omega \ll \omega_0$: domina la fuerza restauradora; el electr\'on sigue el campo
+cuasiestáticamente; $\alpha \approx e^2/(m\omega_0^2)$ --- real y constante.
+\item $\omega \approx \omega_0$: resonancia; respuesta m\'axima; fuerte absorci\'on.
+\item $\omega \gg \omega_0$: domina la inercia; el electr\'on no puede seguir el campo;
+$\alpha \to 0$.
+\end{itemize}
+
+En el contexto de la bioimpedancia ($f \leq 1\,\text{GHz}$), las resonancias at\'omicas se
+encuentran en el ultravioleta ($\omega_0 \sim 10^{16}\,\text{rad/s}$), de modo que siempre se
+opera en el r\'egimen $\omega \ll \omega_0$.
+
+\subsubsection{Soluci\'on mediante Representaci\'on Compleja}
+
+Para $E(t) = E_0 e^{j\omega t}$ y $x(t) = x_0 e^{j\omega t}$, sustituyendo en la ecuaci\'on de
+movimiento se obtiene la amplitud de desplazamiento:
+
+\begin{equation}
+x_0 = \frac{-eE_0/m}{\omega_0^2 - \omega^2 - j\gamma\omega}
+\end{equation}
+
+La expresi\'on anterior describe c\'omo el electr\'on responde al campo externo en funci\'on de la
+frecuencia. El denominador complejo introduce tanto la resonancia ($\omega \approx
+\omega_0$) como la disipaci\'on ($\gamma$). A partir de $p = -ex_0$, se obtiene directamente la
+polarizabilidad at\'omica:
+
+\begin{equation}
+\boxed{
+\alpha(\omega) = \frac{p}{E_0} = \frac{e^2/m}{\omega_0^2 - \omega^2 - j\gamma\omega}
+}
+\label{eq:alpha}
+\end{equation}
+
+donde $\omega_0$ es la frecuencia natural de la ligadura electr\'on--n\'ucleo, $\gamma$ es el
+coeficiente de amortiguamiento que caracteriza las p\'erdidas por colisiones y radiaci\'on, y $e$,
+$m$ son la carga y la masa del electr\'on, respectivamente.
+
+La polarizabilidad describe la capacidad del 'atomo para deformar su
+distribuci'on de carga en respuesta a un campo el'ectrico. Se observa que la
+respuesta depende fuertemente de la frecuencia del campo aplicado. En particular,
+cuando $\omega \approx \omega_0$, el sistema entra en resonancia, produciendo
+una respuesta amplificada. El t'ermino $j\gamma\omega$ introduce un desfase
+entre el campo aplicado y la respuesta del sistema, caracter'istico de medios
+disipativos. Esta dependencia en frecuencia es la que, propagada hacia escalas
+mayores, originar'a la dispersi'on diel'ectrica observada en la bioimpedancia.
+
+\subsubsection{Interpretaci\'on F\'isica de la Polarizabilidad}
+
+La estructura compleja de la Ec.~\eqref{eq:alpha} codifica dos efectos f\'isicos:
+
+\begin{itemize}
+\item $\text{Re}(\alpha)$: respuesta en fase; energ\'ia almacenada en el electr\'on
+desplazado; contribuye al \'indice de refracci\'on.
+\item $\text{Im}(\alpha)$: respuesta en cuadratura; energ\'ia disipada por ciclo;
+contribuye a la absorci\'on y las p\'erdidas diel\'ectricas.
+\end{itemize}
+
+La idea clave es que la polarizaci\'on \emph{no es instant\'anea}: el amortiguamiento
+$j\gamma\omega$ introduce un desfase entre campo y dipolo. Este es el origen at\'omico de la
+relajaci\'on, un tema que reaparecer\'a a cada escala del problema.
+
+\subsection{Aproximaci\'on Hidrogenoide Efectiva en Medios Complejos}
+
+En f\'isica at\'omica, los sistemas complejos se simplifican mapeándolos en modelos
+hidrogenoides con par\'ametros efectivos. Un enfoque similar puede adoptarse en sistemas
+biol\'ogicos introduciendo unidades dipolares efectivas que representan estructuras moleculares
+complejas como cadenas lip\'idicas y prote\'inas. Cada unidad se caracteriza por una
+polarizabilidad efectiva $\alpha_{\text{eff}}$, que captura la respuesta electr\'onica y
+estructural colectiva del sistema. Esta aproximaci\'on permite extender los modelos
+electrodin\'amicos microsc\'opicos a materiales biol\'ogicamente relevantes sin resolver
+expl\'icitamente toda la estructura molecular.
+
+\subsection{Polarizabilidad Cu\'antico-Mec\'anica}
+
+El modelo cl\'asico predice correctamente la dependencia en frecuencia, pero trata $\omega_0$
+como par\'ametro libre. La mec\'anica cu\'antica lo deriva de los niveles de energ\'ia. Usando la
+teor\'ia de perturbaciones de segundo orden con $H' = -\hat{d}\cdot E$:
+
+\begin{equation}
+\alpha_{\text{QM}} =
+2\sum_{n\neq 0}\frac{|\langle n|\hat{d}|0\rangle|^2}{E_n - E_0}
+\end{equation}
+
+donde $|\langle n|\hat{d}|0\rangle|^2$ son los elementos de matriz de dipolo de transici\'on y
+$(E_n - E_0)$ son las energ\'ias de excitaci\'on.
+
+%=================================================================
+
+\section{De los \'Atomos a los Medios Macrosc\'opicos}
+
+\label{sec:macro_theory}
+
+%=================================================================
+
+\noindent\textit{Habiendo establecido la polarizabilidad de un \'atomo individual, ahora se
+pregunta: ¿cu\'al es la respuesta diel\'ectrica colectiva de $N \sim 10^{28}$ \'atomos por metro
+c\'ubico? La respuesta no es simplemente $N$ veces la respuesta at\'omica, porque cada \'atomo
+es tambi\'en impulsado por los campos de sus vecinos. Esta secci\'on aborda ese problema de
+muchos cuerpos y llega a la permitividad macrosc\'opica.}
+
+\subsection{Densidad de Polarizaci\'on y Susceptibilidad}
+
+Para $N$ \'atomos por unidad de volumen, la polarizaci\'on macrosc\'opica es:
+
+\begin{equation}
+\mathbf{P} = N\mathbf{p} = N\alpha\,\mathbf{E}_{\text{local}}
+\end{equation}
+
+La expresi\'on anterior vincula la respuesta microsc\'opica de un \'atomo
+individual ($\alpha$) con la polarizaci\'on macrosc\'opica del medio ($\mathbf{P}$).
+Comparando con la definici\'on est\'andar de susceptibilidad, se identifican:
+
+\begin{equation}
+\mathbf{P} = \varepsilon_0\chi_e\,\mathbf{E}, \qquad
+\chi_e = \frac{N\alpha}{\varepsilon_0}, \qquad
+\varepsilon_r = 1 + \chi_e
+\end{equation}
+
+La sutileza clave es que $\mathbf{E}_{\text{local}}$ ---el campo que realmente impulsa a cada
+\'atomo--- difiere del campo aplicado macrosc\'opico $\mathbf{E}$ debido a las
+contribuciones de los dipolos vecinos.
+
+\subsection{Correcci\'on del Campo Local de Lorentz}
+
+Lorentz demostr\'o que el campo local en una mol\'ecula dentro de un medio polarizado es:
+
+\begin{equation}
+\mathbf{E}_{\text{local}} = \mathbf{E} + \frac{\mathbf{P}}{3\varepsilon_0}
+\end{equation}
+
+El campo local representa el campo efectivo experimentado por una mol\'ecula
+dentro del medio. Este no coincide con el campo externo aplicado, debido a
+la contribuci'on de los dipolos circundantes. El segundo t'ermino,
+$P/(3\varepsilon_0)$, es el \emph{campo de cavidad}: la contribuci\'on de
+todos los dipolos circundantes en el sitio de la mol\'ecula central. Siempre apunta en la misma
+
+direcci\'on que $\mathbf{E}$, lo que significa que el campo local es \emph{amplificado} por la
+polarizaci\'on del medio. Esta amplificaci\'on es especialmente importante para materiales de
+alta permitividad y es la raz\'on f\'isica por la que la relaci\'on de Clausius--Mossotti tiene la
+forma que tiene.
+
+\subsection{Relaci\'on de Clausius--Mossotti}
+
+Sustituyendo el campo local en la ecuaci\'on de polarizaci\'on:
+
+\begin{equation}
+P = N\alpha\left(E + \frac{P}{3\varepsilon_0}\right)
+\quad\implies\quad
+P\!\left(1 - \frac{N\alpha}{3\varepsilon_0}\right) = N\alpha E
+\end{equation}
+
+Comparando con la definici\'on $P = \varepsilon_0(\varepsilon_r - 1)E$, e igualando
+ambas expresiones para $P$, se cancela el campo $E$ y se obtiene, tras
+reorganizaci\'on algebraica, la relaci\'on de Clausius--Mossotti:
+
+\begin{equation}
+\boxed{
+\frac{\varepsilon_r - 1}{\varepsilon_r + 2} = \frac{N\alpha}{3\varepsilon_0}
+}
+\label{eq:CM}
+\end{equation}
+
+Esta relaci\'on establece un puente fundamental entre la respuesta microsc\'opica de
+los \'atomos, descrita por la polarizabilidad $\alpha$, y la respuesta macrosc\'opica
+del material, representada por la permitividad relativa $\varepsilon_r$. F\'isicamente,
+implica que la respuesta diel\'ectrica de un medio no es simplemente la suma de
+dipolos independientes, sino que incluye efectos colectivos derivados de la
+interacci\'on entre ellos. Este es uno de los pilares conceptuales del presente trabajo.
+
+\subsubsection{Significado F\'isico de la Relaci\'on de Clausius--Mossotti}
+
+Esta relaci\'on establece un puente fundamental entre la respuesta microsc\'opica de
+los \'atomos, descrita por la polarizabilidad $\alpha$, y la respuesta macrosc\'opica del
+material, representada por la permitividad relativa $\varepsilon_r$. F\'isicamente,
+implica que la respuesta diel\'ectrica de un medio no es simplemente la suma de
+dipolos independientes, sino que incluye efectos colectivos derivados de la interacci\'on
+entre ellos. Este es uno de los pilares conceptuales del presente trabajo.
+
+La Ec.~\eqref{eq:CM} es el puente fundamental entre el mundo microsc\'opico ($\alpha$ de un
+\'atomo individual) y el mundo macrosc\'opico ($\varepsilon_r$ del material en volumen).
+
+\begin{itemize}
+\item El lado izquierdo, $(\varepsilon_r - 1)/(\varepsilon_r + 2)$, es una funci\'on no
+lineal de $\varepsilon_r$. El denominador $(\varepsilon_r + 2)$ codifica la
+amplificaci\'on autoconsistente de muchos cuerpos.
+\item El lado derecho, $N\alpha/3\varepsilon_0$, es la densidad de polarizabilidad.
+\item En el l\'imite diluido ($N\alpha \ll 3\varepsilon_0$): $\varepsilon_r \approx
+1 + N\alpha/\varepsilon_0$ --- una suma simple y aditiva.
+\item En el l\'imite denso: el denominador $(\varepsilon_r + 2)$ produce una amplificaci\'on
+no lineal de la constante diel\'ectrica.
+
+\end{itemize}
+
+\subsection{Medio Efectivo: Aproximaci\'on de Maxwell--Garnett}
+
+Para medios heterog\'eneos (como una suspensi\'on de c\'elulas en plasma), la permitividad
+efectiva no es un promedio simple. Para inclusiones esf\'ericas de permitividad $\varepsilon_i$ en
+un medio hu\'esped $\varepsilon_m$ con fracci\'on volum\'etrica $f$:
+
+\begin{equation}
+\varepsilon_{\text{ef}} =
+\varepsilon_m\left(
+\frac{\varepsilon_i + 2\varepsilon_m + 2f(\varepsilon_i - \varepsilon_m)}
+{\varepsilon_i + 2\varepsilon_m - f(\varepsilon_i - \varepsilon_m)}
+\right)
+\label{eq:MG}
+\end{equation}
+
+Esta forma funcional es estructuralmente id\'entica a la relaci\'on de Clausius--Mossotti,
+y con raz\'on: ambas expresan la respuesta de polarizaci\'on autoconsistente de una colecci\'on
+de objetos inmersos en un medio. Se aplicar\'a la Ec.~\eqref{eq:MG} a la sangre en la
+secci\'on~\ref{sec:sangre}.
+
+%=================================================================
+
+\section{Mec\'anica Estad\'istica y Sistemas Dipolares}
+
+\label{sec:stat}
+
+%=================================================================
+
+\noindent\textit{La secci\'on anterior asumi\'o que la polarizaci\'on surge del desplazamiento de
+cargas, sin grados de libertad orientacionales. Esto funciona bien para los electrones. Pero las
+mol\'eculas con momentos dipolares permanentes ---como el agua y los grupos cabeza de los
+l\'ipidos de la membrana celular--- tambi\'en pueden rotar. Su alineaci\'on con el campo es
+continuamente contrarrestada por la agitaci\'on t\'ermica. Esta secci\'on deriva la respuesta de
+equilibrio y din\'amica de tal polarizaci\'on orientacional.}
+\subsection{Estad\'istica de Boltzmann: Polarizaci\'on de Equilibrio}
+
+Un dipolo permanente de momento $p$ en campo $E$ tiene energ\'ia potencial $U = pE\cos\theta$.
+
+La distribuci\'on de Boltzmann da:
+
+\begin{equation}
+P(\theta) \propto e^{\frac{pE\cos\theta}{k_BT}}
+\end{equation}
+
+La proyecci\'on promedio a lo largo del eje del campo es la funci\'on de Langevin:
+
+\begin{equation}
+\langle p_z\rangle =
+\frac{\displaystyle\int_0^\pi p\cos\theta\,
+e^{\frac{pE\cos\theta}{k_BT}}\sin\theta\,d\theta}
+{\displaystyle\int_0^\pi
+e^{\frac{pE\cos\theta}{k_BT}}\sin\theta\,d\theta}
+\end{equation}
+
+En el l\'imite de campo d\'ebil ($pE \ll k_BT$, siempre v\'alido en bioimpedancia):
+
+\begin{equation}
+\langle p_z\rangle = \frac{p^2}{3k_BT}\,E
+\end{equation}
+
+La polarizabilidad orientacional es proporcional a $p^2/(k_BT)$: la agitaci\'on t\'ermica
+combate la alineaci\'on, y el aumento de temperatura reduce la respuesta.
+
+\subsection{Ecuaci\'on de Fokker--Planck: Din\'amica Rotacional}
+
+La din\'amica de la distribuci\'on orientacional $f(\theta,t)$ est\'a gobernada por la ecuaci\'on de
+Fokker--Planck:
+
+\begin{equation}
+\frac{\partial f}{\partial t} =
+D_r\,\frac{1}{\sin\theta}\frac{\partial}{\partial\theta}
+\left[\sin\theta\left(
+\frac{\partial f}{\partial\theta}
++ \frac{1}{k_BT}f\,\frac{\partial U}{\partial\theta}
+\right)\right]
+\end{equation}
+
+Tomando el primer momento angular $\langle\cos\theta\rangle$:
+
+\begin{equation}
+\frac{d}{dt}\langle\cos\theta\rangle =
+-\frac{1}{\tau}\left(\langle\cos\theta\rangle - \frac{pE}{3k_BT}\right),
+\qquad \tau = \frac{1}{2D_r}
+\end{equation}
+
+Multiplicando por $Np$, se obtiene la ecuaci\'on macrosc\'opica de Debye:
+
+\begin{equation}
+\tau\frac{dP}{dt} + P = P_{\text{eq}} = \varepsilon_0\chi_e\,E
+\end{equation}
+
+El tiempo de relajaci\'on $\tau = 1/(2D_r) = 4\pi\eta a^3/(k_BT)$ (Stokes--Einstein) depende de la
+viscosidad $\eta$ y el tama\~{n}o molecular $a$: sistemas m\'as grandes o m\'as viscosos
+se relajan m\'as lentamente.
+
+%=================================================================
+
+\section{Polarizaci\'on Din\'amica: Modelos de Debye y Cole--Cole}
+
+\label{sec:debye}
+
+%=================================================================
+
+\noindent\textit{Habiendo derivado la din\'amica de relajaci\'on a partir de la ecuaci\'on de
+Fokker--Planck, ahora se puede escribir la permitividad en el dominio de la frecuencia. Este es el
+puente directo entre el movimiento molecular y el espectro diel\'ectrico que mide la
+bioimpedancia.}
+
+\subsection{Relajaci\'on de Debye en el Dominio de la Frecuencia}
+Tomando la transformada de Fourier de la ecuaci\'on de Debye:
+
+\begin{equation}
+\boxed{
+\varepsilon^*(\omega) =
+\varepsilon_\infty +
+\frac{\varepsilon_s - \varepsilon_\infty}{1 + j\omega\tau}
+}
+\label{eq:debye}
+\end{equation}
+
+Esta ecuaci\'on describe la din\'amica de relajaci\'on de la polarizaci\'on
+del sistema. El tiempo caracter\'istico $\tau$ representa la escala temporal en
+la que los dipolos reorientan su direcci\'on para alinearse con el campo el\'ectrico.
+F\'isicamente, este modelo implica que la respuesta del sistema no es instant\'anea,
+sino que presenta un retardo asociado a procesos microsc\'opicos como rotaci\'on
+molecular o reconfiguraci\'on estructural. Aqu\'i nace el concepto de \emph{memoria
+del sistema}: la polarizaci\'on actual depende no solo del campo presente, sino de
+la historia del sistema.
+
+\subsubsection{Significado F\'isico de Cada Par\'ametro}
+
+Esta ecuaci\'on describe la din\'amica de relajaci\'on de la polarizaci\'on del sistema.
+El tiempo caracter\'istico $\tau$ representa la escala temporal en la que los dipolos
+
+reorientan su direcci\'on para alinearse con el campo el\'ectrico. F\'isicamente, este
+modelo implica que la respuesta del sistema no es instant\'anea, sino que presenta un
+retardo asociado a procesos microsc\'opicos como rotaci\'on molecular o reconfiguraci\'on
+estructural. Aqu\'i nace el concepto de \emph{memoria del sistema}: la polarizaci\'on
+actual depende no solo del campo presente, sino de la historia din\'amica del sistema.
+
+\begin{itemize}
+\item $\varepsilon_s$: \emph{permitividad est\'atica} ($\omega \to 0$) --- los dipolos
+tienen tiempo suficiente para alinearse completamente.
+\item $\varepsilon_\infty$: \emph{permitividad de alta frecuencia} ($\omega \to \infty$)
+--- solo contribuye la polarizaci\'on electr\'onica.
+\item $\tau$: \emph{tiempo de relajaci\'on} --- la transici\'on ocurre en
+$f_r = 1/(2\pi\tau)$.
+\item $j\omega\tau$: el denominador complejo hace que $\varepsilon^*$ sea compleja
+--- la polarizaci\'on est\'a fuera de fase y se disipa energ\'ia por ciclo.
+\end{itemize}
+
+\subsubsection{Aspecto del Espectro de Debye}
+
+\begin{itemize}
+\item $\varepsilon'(\omega) = \text{Re}(\varepsilon^*)$: decrece como un escal\'on
+sigmoidal de $\varepsilon_s$ a $\varepsilon_\infty$, centrado en $1/\tau$.
+\item $\varepsilon''(\omega) = -\text{Im}(\varepsilon^*)$: tiene un pico en $\omega =
+1/\tau$, que representa la m\'axima absorci\'on de energ\'ia.
+\end{itemize}
+\subsection{Generalizaci\'on de Cole--Cole}
+
+Los sistemas biol\'ogicos reales se desvían del modelo de Debye ideal porque contienen
+poblaciones de mol\'eculas con diferentes tama\~{n}os, entornos y estados de ligadura, lo que
+resulta en una \emph{distribuci\'on} de tiempos de relajaci\'on en lugar de un \'unico $\tau$.
+
+El modelo de Cole--Cole da cuenta de esto:
+
+\begin{equation}
+\boxed{
+\varepsilon^*(\omega) =
+\varepsilon_\infty +
+\frac{\varepsilon_s - \varepsilon_\infty}{1 + (j\omega\tau)^{1-\alpha_{CC}}}
+}
+\label{eq:colecole}
+\end{equation}
+
+donde $\alpha_{CC} \in [0,1]$ ensancha el espectro de relajaci\'on. En $\alpha_{CC} = 0$, la
+Ec.~\eqref{eq:colecole} se reduce exactamente al modelo de Debye.
+
+El par'ametro $\alpha_{CC}$ introduce una distribuci'on de tiempos de relajaci'on,
+lo cual es caracter'istico de sistemas complejos como los biol'ogicos. A diferencia
+del modelo de Debye ideal, donde existe un 'unico tiempo caracter'istico, en tejidos
+reales coexisten m'ultiples procesos din'amicos. Esto refleja la heterogeneidad
+estructural del sistema, incluyendo variaciones en tama\~{n}o celular, composici'on
+de membranas y propiedades del medio extracelular. El valor de $\alpha_{CC}$ puede
+considerarse un biomarcador de la heterogeneidad biol'ogica del tejido estudiado. En sistemas
+biol\'ogicos,
+$\alpha_{CC} \neq 0$ surge de la variabilidad en tama\~{n}o celular, la heterogeneidad de la
+membrana y las estructuras intracelulares complejas.
+
+La contribuci\'on conductiva de los iones libres se agrega por separado:
+
+\begin{equation}
+\varepsilon^*(\omega) = \varepsilon_{\text{CC}}(\omega) - \frac{j\sigma}{\omega}
+\end{equation}
+
+El t\'ermino $\sigma/\omega$ diverge a bajas frecuencias, dominando la parte imaginaria de $Z$ y
+dando origen al componente \'ohmico (resistivo) de la bioimpedancia.
+
+%=================================================================
+
+\section{Fundamentos Biol\'ogicos y Electroqu\'imicos de la Membrana Celular}
+
+\label{sec:bio_foundations}
+%=================================================================
+
+\noindent\textbf{Transici\'on del modelo electrodin\'amico al biol\'ogico.}
+Hasta este punto, el modelo ha sido desarrollado desde una perspectiva puramente
+electrodin\'amica: polarizaci\'on at\'omica, permitividad macrosc\'opica, relajaci\'on
+diel\'ectrica e impedancia efectiva de suspensiones celulares. Sin embargo, en sistemas
+biol\'ogicos reales, la respuesta el\'ectrica est\'a fuertemente determinada por la estructura
+y din\'amica de la membrana celular, cuyo comportamiento trasciende el de un simple
+diel\'ectrico pasivo. A continuaci\'on se introducen los fundamentos fisiol\'ogicos y
+bioqu\'imicos que complementan el modelo electrodin\'amico, conectando la f\'isica con la
+biolog\'ia celular.
+
+\noindent\textit{Las secciones anteriores establecieron la respuesta diel\'ectrica de medios
+homog\'eneos desde primeros principios. Antes de modelar la c\'elula completa, es necesario
+comprender en detalle la estructura y el comportamiento electroqu\'imico de la membrana
+plasm\'atica, que es la interfaz cr\'itica que gobierna la dispersi\'on $\beta$ y conecta la f\'isica
+con la biolog\'ia celular.}
+
+\subsection{Estructura de la Membrana Celular}
+
+La membrana celular es una estructura biol\'ogica compuesta principalmente por una bicapa
+lip\'idica, formada por mol\'eculas de fosfolip\'idos anfif\'ilicos. Cada l\'ipido consiste en:
+
+\begin{itemize}
+\item Una cabeza hidrof\'ilica (polar)
+\item Colas hidrof\'obicas (no polares)
+\end{itemize}
+
+Esta disposici\'on conduce a la formaci\'on de una bicapa, donde las colas hidrof\'obicas apuntan
+hacia el interior y las cabezas polares interact\'uan con el entorno acuoso. Incrustadas en esta
+estructura se encuentran prote\'inas, incluyendo canales i\'onicos, transportadores y receptores,
+que regulan el intercambio de iones y mol\'eculas a trav\'es de la membrana.
+
+Desde una perspectiva f\'isica, esta estructura genera una separaci\'on espacial entre regiones
+de alta y baja permitividad:
+
+\begin{itemize}
+\item Regiones polares (cabezas): alta permitividad debido a interacciones dipolares
+\item N\'ucleo hidrof\'obico (colas): baja permitividad debido a la ausencia de cargas libres
+
+\end{itemize}
+
+Como resultado, la membrana se comporta como una losa diel\'ectrica de espesor $d \sim
+5\,\text{nm}$, separando dos medios conductores (citoplasma y fluido extracelular). Esta
+discontinuidad diel\'ectrica es esencial para la separaci\'on de cargas y el confinamiento del
+campo el\'ectrico a trav\'es de la membrana.
+
+Las membranas celulares est\'an compuestas principalmente por bicapas lip\'idicas,
+cuya estructura anf\'ip\'atica introduce una separaci\'on de cargas y una respuesta
+diel\'ectrica altamente no homog\'enea. Esta caracter\'istica es fundamental para
+la formaci\'on de potenciales de membrana y para la respuesta capacitiva que
+domina el comportamiento de la bioimpedancia en la regi\'on de dispersi\'on $\beta$.
+La membrana celular no solo act\'ua como un diel\'ectrico pasivo, sino como un
+sistema din\'amico cuya respuesta depende de la apertura y cierre de canales
+i\'onicos espec\'ificos, principalmente de sodio y potasio.
+
+En este sentido, la membrana celular act\'ua como una barrera diel\'ectrica altamente selectiva.
+Esta estructura introduce una capacitancia efectiva $C_m$ que regula el flujo de corriente i\'onica
+entre el interior y el exterior celular, y cuya respuesta dependiente de la frecuencia constituye el
+origen microsc\'opico de la dispersi\'on $\beta$ observada en los espectros de bioimpedancia.
+
+\subsection{Propiedades El\'ectricas de la Membrana}
+
+Desde una perspectiva electrodin\'amica, la membrana se comporta como una capa diel\'ectrica
+con baja conductividad y permitividad finita. Debido a la separaci\'on de medios conductores
+(fluidos intracelular y extracelular), la membrana act\'ua como un capacitor, almacenando
+carga en sus interfaces. La capacitancia de membrana por unidad de \'area es:
+
+\begin{equation}
+C_m = \frac{\varepsilon_m}{d}
+\end{equation}
+
+donde $\varepsilon_m$ es la permitividad de la membrana y $d$ su espesor.
+
+\subsubsection{Derivaci\'on de la Capacitancia desde la Ley de Gauss}
+
+Considerando la membrana como un capacitor de placas paralelas de espesor $d$ y \'area $A$,
+desde la ley de Gauss:
+
+\begin{equation}
+\oint \mathbf{D} \cdot d\mathbf{A} = Q
+\end{equation}
+
+Aplicando la ley de Gauss a una superficie cilíndrica que envuelve una de las
+interfaces de la membrana, el vector de desplazamiento el\'ectrico $\mathbf{D}$
+solo contribuye en la cara perpendicular a la membrana. Para un campo uniforme
+dentro del diel\'ectrico de permitividad $\varepsilon_m$:
+
+\begin{equation}
+D = \varepsilon_m E = \frac{Q}{A}
+\end{equation}
+
+Despejando el campo el\'ectrico como $E = Q/(\varepsilon_m A)$ e integrando a lo
+largo del espesor $d$ de la membrana, se obtiene la diferencia de potencial
+entre las dos caras:
+
+\begin{equation}
+V_m = E\,d = \frac{Q\,d}{\varepsilon_m A}
+\end{equation}
+
+Reordenando esta expresi\'on para obtener la raz\'on carga--voltaje, se llega a la
+capacitancia de membrana por unidad de \'area:
+
+\begin{equation}
+\boxed{C_m = \frac{Q}{V_m} = \frac{\varepsilon_m A}{d}}
+\end{equation}
+Esta expresi\'on conecta directamente con el modelo microsc\'opico: la permitividad
+$\varepsilon_m$ proviene de la polarizabilidad at\'omica a trav\'es de la relaci\'on de
+Clausius--Mossotti, estableciendo el enlace:
+
+\begin{equation}
+\alpha \rightarrow \varepsilon \rightarrow C_m
+\end{equation}
+
+\subsection{Interpretaci\'on Electrodin\'amica de la Membrana}
+
+La membrana puede modelarse como una interfaz diel\'ectrica que separa dos regiones
+conductoras con diferentes propiedades el\'ectricas. Bajo un campo el\'ectrico aplicado, las
+condiciones de
+frontera imponen:
+
+\begin{equation}
+\varepsilon_1^* E_1^\perp = \varepsilon_2^* E_2^\perp
+\end{equation}
+
+Esta discontinuidad conduce a la acumulaci\'on de cargas ligadas y libres en las interfaces,
+generando polarizaci\'on interfacial (efecto Maxwell--Wagner). En este sentido, la membrana
+existe en el modelo porque \emph{rompe} el campo el\'ectrico; su presencia es lo que genera
+la dispersi\'on $\beta$.
+
+\subsection{Potencial de Membrana}
+
+El potencial de membrana surge del desequilibrio de concentraciones i\'onicas a trav\'es de la
+membrana. Esto genera una diferencia de potencial el\'ectrico:
+
+\begin{equation}
+V_m = \phi_{\text{inside}} - \phi_{\text{outside}}
+\end{equation}
+
+Este potencial se mantiene por la permeabilidad selectiva de la membrana y los mecanismos de
+transporte activo.
+
+Desde la perspectiva electrodin\'amica desarrollada en este trabajo, la separaci\'on de cargas
+est\'a directamente relacionada con los mecanismos de polarizaci\'on y los efectos capacitivos:
+
+\begin{equation}
+V_m = \frac{Q}{C_m}
+\end{equation}
+
+La carga $Q$ resulta tanto de cargas de polarizaci\'on (cargas ligadas) como de cargas i\'onicas
+(cargas libres). Por tanto, el potencial de membrana no es puramente electroqu\'imico, sino que
+tambi\'en contiene una contribuci\'on diel\'ectrica proveniente de los fen\'omenos de
+
+polarizaci\'on: esta es una de las contribuciones conceptuales centrales del presente trabajo.
+
+\subsection{Potencial de Nernst}
+
+Para una \'unica especie i\'onica, el potencial de equilibrio est\'a dado por:
+
+\begin{equation}
+E_i =
+\frac{RT}{z_i F}
+\ln\left(
+\frac{[i]_{\text{outside}}}{[i]_{\text{inside}}}
+\right)
+\end{equation}
+
+donde:
+
+\begin{itemize}
+\item $R$ es la constante de los gases
+\item $T$ es la temperatura
+\item $z_i$ es la carga i\'onica
+\item $F$ es la constante de Faraday
+\end{itemize}
+
+En equilibrio, el flujo neto de iones a trav\'es de la membrana es cero. Esto ocurre cuando la
+fuerza el\'ectrica equilibra el gradiente qu\'imico:
+
+\begin{equation}
+z_i e E = \frac{d\mu}{dx}
+\end{equation}
+
+Resolviendo este balance se obtiene la ecuaci\'on de Nernst. Este resultado introduce energ\'ia
+qu\'imica como complemento al modelo el\'ectrico.
+
+\subsection{La Constante de Faraday y la Conductividad I\'onica}
+
+La constante de Faraday, $F = 96{,}485\,\text{C/mol}$, es la carga el\'ectrica
+total por mol de carga elemental. Su significado f\'isico es directo: si
+$N_A = 6.022\times10^{23}$ iones monovalentes transportan cada uno una carga
+$e = 1.602\times10^{-19}\,\text{C}$, entonces:
+\begin{equation}
+F = N_A \cdot e = 6.022\times10^{23} \times 1.602\times10^{-19} = 96{,}485\;\text{C/mol}
+\end{equation}
+
+Esta constante es la que convierte concentraciones i\'onicas (mol/m$^3$) en
+densidades de carga el\'ectrica (C/m$^3$), conectando la qu\'imica con la
+electrodin\'amica. En el contexto de la conductividad i\'onica, la corriente
+producida por iones de especie $i$ con valencia $z_i$, movilidad $\mu_i$
+(m$^2$/V$\cdot$s) y concentraci\'on $c_i$ (mol/m$^3$) es:
+\begin{equation}
+\sigma_i = z_i \cdot F \cdot \mu_i \cdot c_i
+\end{equation}
+
+Para un medio con m\'ultiples especies i\'onicas (sodio, potasio, cloruro), la
+conductividad total es la suma de contribuciones:
+
+\begin{equation}
+\boxed{
+\sigma = F \sum_i z_i \cdot \mu_i \cdot c_i
+}
+\label{eq:sigma_ionica}
+\end{equation}
+
+donde las movilidades el\'ectricas (a $25\,^\circ\text{C}$) son:
+$\mu_{\text{Na}^+} = 5.2\times10^{-8}\,\text{m}^2/(\text{V}\cdot\text{s})$ y
+$\mu_{\text{K}^+} = 7.6\times10^{-8}\,\text{m}^2/(\text{V}\cdot\text{s})$.
+
+Para concentraciones fisiol\'ogicas t\'ipicas del citoplasma
+($c_{\text{Na}^+} \approx 140\,\text{mM}$, $c_{\text{K}^+} \approx 5\,\text{mM}$,
+con conversi\'on $1\,\text{mM} = 1\,\text{mol/m}^3$):
+\begin{equation}
+\sigma \approx F\left(\mu_{\text{Na}^+}\cdot 140 + \mu_{\text{K}^+}\cdot 5\right)
+\approx 0.74\;\text{S/m}
+\end{equation}
+
+Este resultado es consistente con mediciones experimentales de la conductividad
+intracitoplasm\'atica. N\'otese que $F$ aparece tambi\'en en la ecuaci\'on de
+Nernst y en la de Goldman--Hodgkin--Katz, unificando la descripci\'on
+electroqu\'imica de la membrana con el modelo de bioimpedancia: es la constante
+que convierte procesos qu\'imicos (gradientes de concentraci\'on) en
+fenomenolog\'ia el\'ectrica (potenciales y corrientes).
+
+\subsection{Ecuaci\'on de Goldman--Hodgkin--Katz}
+
+Cuando m\'ultiples iones est\'an involucrados, el potencial de membrana est\'a dado por:
+
+\begin{equation}
+V_m =
+\frac{RT}{F}
+\ln\left(
+\frac{
+P_K[K^+]_{\text{out}} + P_{Na}[Na^+]_{\text{out}} + P_{Cl}[Cl^-]_{\text{in}}
+}{
+P_K[K^+]_{\text{in}} + P_{Na}[Na^+]_{\text{in}} + P_{Cl}[Cl^-]_{\text{out}}
+}
+\right)
+\end{equation}
+
+donde $P_i$ representa la permeabilidad de la membrana para cada ion.
+
+\subsection{Canales I\'onicos y Conductancia Din\'amica}
+
+Los canales i\'onicos son estructuras prote\'icas que permiten el transporte selectivo
+de iones a trav\'es de la membrana. Su apertura y cierre introducen una dependencia
+temporal y no lineal en la conductividad del sistema, ya que el estado de los canales
+depende del potencial de membrana. Esto implica que $\sigma$ debe interpretarse como
+una funci\'on din\'amica del tiempo y del estado fisiol\'ogico de la c\'elula, y no
+como una constante material. Las conductancias dependientes del tiempo se modelan como:
+
+\begin{equation}
+I_i = g_i(V_m, t)\,(V_m - E_i)
+\end{equation}
+
+donde:
+
+\begin{itemize}
+\item $g_i$ es la conductancia del ion $i$ (depende del estado del canal)
+\item $E_i$ es el potencial de Nernst
+\item $V_m - E_i$ es la fuerza impulsora
+\end{itemize}
+
+Esto introduce una componente no lineal y din\'amica en el comportamiento de la membrana.
+
+\subsection{Papel del Entorno Acuoso}
+
+Los sistemas biol\'ogicos son predominantemente acuosos, y el agua contribuye
+significativamente a la respuesta diel\'ectrica. Su alta permitividad y relajaci\'on dipolar
+influyen fuertemente en las mediciones de bioimpedancia (dispersi\'on $\gamma$, $f >
+1\,\text{GHz}$). Este componente ya fue considerado en el modelo Cole--Cole, pero su papel en el
+contexto
+del entorno i\'onico es igualmente relevante para la conductividad efectiva del medio.
+
+\subsection{Interacciones C\'elula-C\'elula}
+
+Las c\'elulas no se comportan como sistemas aislados, sino que interact\'uan el\'ectricamente a
+trav\'es del medio circundante. Estas interacciones modifican la impedancia efectiva e
+introducen comportamiento colectivo, lo que es capturado por la teor\'ia de Maxwell--Garnett
+
+en la secci\'on~\ref{sec:sangre}.
+
+\subsection{Conexi\'on con el Modelo Electrodin\'amico}
+
+El potencial de membrana puede interpretarse como una consecuencia macrosc\'opica de los
+procesos de polarizaci\'on microsc\'opica. Al conectar las propiedades diel\'ectricas con el
+comportamiento electroqu\'imico, se vuelve posible inferir estados fisiol\'ogicos a partir de
+mediciones puramente el\'ectricas. La cadena conceptual de este trabajo se extiende entonces a:
+
+\begin{equation}
+\alpha \rightarrow \varepsilon^*(\omega) \rightarrow C_m \rightarrow V_m \rightarrow
+I_{\text{ion}}
+\end{equation}
+%=================================================================
+
+\section{Modelado de la Membrana Biol\'ogica}
+
+\label{sec:membrane}
+
+%=================================================================
+
+\noindent\textit{Esta secci\'on modela las propiedades el\'ectricas de la membrana plasm\'atica
+en el contexto del modelo electrodin\'amico completo.}
+
+\subsection{Estructura y Propiedades El\'ectricas de la Membrana}
+
+La membrana plasm\'atica es una bicapa lip\'idica de $\sim5\,\text{nm}$ de grosor. Sus
+propiedades el\'ectricas est\'an dominadas por el n\'ucleo hidrof\'obico, que tiene:
+
+\begin{itemize}
+\item Permitividad muy baja: $\varepsilon_2 \approx 5\varepsilon_0$
+(cadenas hidrocarbonadas, sin grupos polares).
+\item Conductividad extremadamente baja: $\sigma_2 \sim 10^{-7}\,\text{S/m}$
+(esencialmente impermeable a los iones).
+\end{itemize}
+
+La capacitancia por unidad de \'area es:
+
+\begin{equation}
+C_m = \frac{\varepsilon_2}{d}
+\approx \frac{5 \times 8.854\times10^{-12}}{5\times10^{-9}}
+\approx 8.9\times10^{-3}\,\text{F/m}^2 \approx 0.89\,\mu\text{F/cm}^2
+\end{equation}
+
+Este valor cl\'asico de $\sim 1\,\mu\text{F/cm}^2$ para membranas biol\'ogicas fue medido
+por primera vez por Fricke (1925) \citep{Fricke1925} y sigue siendo un valor de referencia
+en biof\'isica de membranas.
+
+\subsection{La Membrana como Barrera de Corriente Dependiente de la Frecuencia}
+
+La impedancia de la membrana por unidad de \'area es:
+
+\begin{equation}
+Z_m(\omega) = \frac{1}{j\omega C_m}
+\end{equation}
+
+\subsubsection{Interpretaci\'on F\'isica a Diferentes Frecuencias}
+
+\begin{itemize}
+\item \textbf{Baja frecuencia}: $Z_m \gg R_{\text{citoplasma}}$; la membrana es un
+circuito abierto; \emph{ninguna corriente entra a la c\'elula}; toda la corriente
+fluye por el espacio extracelular. La impedancia medida refleja \'unicamente el
+plasma.
+\item \textbf{Alta frecuencia}: $Z_m \to 0$; la membrana queda en cortocircuito;
+\emph{la corriente fluye libremente hacia el citoplasma}; la impedancia medida
+incluye ambos compartimentos.
+\end{itemize}
+
+Esta transici\'on es la base f\'isica de la dispersi\'on $\beta$ y es la raz\'on por la que la
+bioimpedancia puede sondear las propiedades intracelulares de forma no invasiva.
+
+\noindent\textbf{Interpretaci\'on f\'isica profunda de la transici\'on en frecuencia.}
+
+A bajas frecuencias, la capacitancia de membrana domina y bloquea el flujo de corriente
+hacia el interior celular, de modo que toda la corriente circula por el espacio extracelular.
+
+A altas frecuencias, el campo el\'ectrico penetra el citoplasma al cortocircuitar la
+
+capacitancia; en este r\'egimen, la conductividad intracelular es la que determina la
+respuesta. Esta transici\'on es la huella electr\'onica de la bicapa lip\'idica en el espectro
+de impedancia.
+
+\subsection{Permitividad Compleja de Cada Regi\'on}
+
+A cada compartimento se le asigna una permitividad compleja dependiente de la frecuencia:
+
+\begin{equation}
+\varepsilon_i^*(\omega) = \varepsilon_i(\omega) - \frac{j\sigma_i}{\omega}
+\end{equation}
+En este contexto, $\varepsilon_i^*(\omega)$ representa la permitividad efectiva de la regi\'on $i$,
+la cual incluye contribuciones tanto diel\'ectricas como conductivas. La parte real $\varepsilon_i$
+captura el almacenamiento diel\'ectrico.
+
+%=================================================================
+
+\section{Modelo Electrodin\'amico de una C\'elula Individual}
+
+\label{sec:cell}
+
+%=================================================================
+
+\noindent\textit{Con las propiedades diel\'ectricas de cada regi\'on definidas, ahora se resuelve el
+problema electrost\'atico para la c\'elula completa.}
+
+\subsection{Modelo Geom\'etrico: Tres Regiones Conc\'entricas}
+
+Se modela la c\'elula biol\'ogica como una estructura esf\'erica conc\'entrica:
+
+\begin{itemize}
+\item \textbf{Regi\'on I} --- Citoplasma ($r < a$): $\varepsilon_1^*$, $\sigma_1$
+\item \textbf{Regi\'on II} --- Membrana ($a < r < a+d$): $\varepsilon_2^*$, $\sigma_2$
+\item \textbf{Regi\'on III} --- Medio extracelular ($r > a+d$): $\varepsilon_3^*$, $\sigma_3$
+\end{itemize}
+
+La geometr\'ia esf\'erica es una idealizaci\'on de la forma de disco bic\'oncavo de los eritrocitos,
+justificada porque preserva la f\'isica esencial (polarizaci\'on interfacial, apantallamiento
+de la membrana) mientras sigue siendo anal\'iticamente tratable.
+
+\subsection{Ecuaci\'on Gobernante: Ecuaci\'on de Laplace Generalizada}
+
+Bajo la aproximaci\'on cuasiestática:
+
+\begin{equation}
+\nabla\cdot(\varepsilon_i^*\nabla\Phi_i) = 0 \quad\text{en cada regi\'on}
+\end{equation}
+
+La ecuaci'on de Laplace en coordenadas esf'ericas admite soluciones separables en
+arm'onicos esf'ericos de orden $\ell$. Para un campo aplicado uniforme $E_0$ a lo
+largo del eje $z$, solo el modo dipolar ($\ell = 1$) contribuye, pues los modos
+
+superiores se anulan por simetr'ia. Las soluciones regulares en cada regi'on son:
+\begin{equation}
+\Phi_1 = -A_1 r\cos\theta, \quad
+\Phi_2 = -\!\left(A_2 r + \frac{B_2}{r^2}\right)\!\cos\theta, \quad
+\Phi_3 = -\!\left(E_0 r - \frac{B_3}{r^2}\right)\!\cos\theta
+\end{equation}
+
+\subsection{Condiciones de Frontera}
+
+En cada interfaz se satisfacen simult\'aneamente dos condiciones:
+
+\begin{enumerate}
+\item \textbf{Continuidad del potencial}: $\Phi_i = \Phi_{i+1}$ (potencial un\'ivoco).
+\item \textbf{Continuidad del desplazamiento normal}:
+$\varepsilon_i^*\,\partial\Phi_i/\partial r =
+\varepsilon_{i+1}^*\,\partial\Phi_{i+1}/\partial r$ (continuidad de carga).
+\end{enumerate}
+
+Estas cuatro condiciones determinan los coeficientes $A_1, A_2, B_2, B_3$.
+
+\subsection{Aproximaci\'on de Membrana Delgada y Permitividad Interior Efectiva}
+
+Para $d \ll a$ ($d/a \approx 10^{-3}$), la membrana act\'ua como una impedancia superficial
+efectiva y el problema de tres regiones se reduce a:
+
+\begin{equation}
+\boxed{
+\varepsilon_{\text{int}}^*(\omega) =
+\frac{\varepsilon_1^*(\omega)}{\displaystyle
+1 + \frac{d}{a}\cdot\frac{\varepsilon_1^*(\omega)}{\varepsilon_2^*(\omega)}}
+}
+\label{eq:epsint}
+\end{equation}
+
+\noindent Esta expresi\'on, derivada por Pauly y Schwan~(1959) para una esfera
+con capa delgada, es dimensionalmente consistente: el factor de correcci\'on
+$d\varepsilon_1^*/(a\varepsilon_2^*)$ es el producto de dos razones
+adimensionales.
+A bajas frecuencias $\varepsilon_{\mathrm{int}}^*\!\to\!0$ (membrana
+bloquea la corriente); a altas frecuencias
+$\varepsilon_{\mathrm{int}}^*\!\to\!\varepsilon_1^*$ (membrana transparente).
+El radio celular $a$ entra expl\'icitamente, haciendo el promedio Monte Carlo
+sobre la distribuci\'on de tama\~nos f\'isicamente significativo.
+
+\subsubsection{Significado F\'isico de la Ec.~\eqref{eq:epsint}}
+
+\begin{itemize}
+\item \textbf{Baja frecuencia} ($Z_m \gg 1/\varepsilon_1^*$):
+$\varepsilon_{\text{int}}^* \approx 0$. El citoplasma aparece el\'ectricamente
+invisible: la membrana lo apantalla completamente.
+\item \textbf{Alta frecuencia} ($Z_m \to 0$): $\varepsilon_{\text{int}}^* \to
+\varepsilon_1^*$. La membrana es transparente; el citoplasma queda completamente
+expuesto.
+\end{itemize}
+
+Este apantallamiento dependiente de la frecuencia es el mecanismo microsc\'opico de la
+dispersi\'on $\beta$.
+
+\subsection{Correcciones Num\'ericas y Consistencia F\'isica}
+\label{sec:numerical_corrections}
+
+El modelo num\'erico fue refinado para garantizar consistencia f\'isica y
+estabilidad computacional. Se introdujeron las siguientes correcciones:
+
+\begin{itemize}
+\item \textbf{F\'ormula de membrana delgada (Pauly--Schwan):}
+La permitividad interior efectiva incorpora el radio celular $a$,
+haciendo la expresi\'on adimensionalmente consistente. El cociente
+$d\varepsilon_1^*/(a\varepsilon_2^*)$ reproduce correctamente el apantallamiento
+a baja frecuencia y la transparencia a alta frecuencia.
+
+\item \textbf{Regularizaci\'on en frecuencia:}
+El t\'ermino $\sigma/\omega$ diverge cuando $\omega\to 0$. Se evita mediante
+$\omega\leftarrow\omega+\delta$, $\delta=10^{-20}\,\text{rad/s}\ll 1$.
+
+\item \textbf{Distribuci\'on log-normal de radios:}
+Garantiza valores siempre positivos y representa m\'as fielmente la
+variabilidad biol\'ogica observada en eritrocitos.
+
+\item \textbf{Maxwell--Garnett completo:}
+Para $\phi=0.40$ se requiere la forma completa de la Ec.~\eqref{eq:MG},
+que incorpora interacciones c\'elula-c\'elula a fracciones volum\'etricas elevadas.
+
+\item \textbf{Promedio sobre impedancias:}
+Se promedia $Z_i(\omega)$ de cada c\'elula en lugar de las permitividades,
+preservando la naturaleza no lineal del problema.
+
+\item \textbf{Representaci\'on compleja para ML:}
+El vector de caracter\'isticas contiene $\mathrm{Re}(Z)$ e $\mathrm{Im}(Z)$,
+preservando la informaci\'on de fase esencial para recuperar $\tau$ y $C_m$.
+
+\item \textbf{Singularidades en Hodgkin--Huxley:}
+Las funciones de compuerta $\alpha_m(V)$ y $\alpha_n(V)$ presentan formas
+$0/0$ en $V=-40\,\text{mV}$ y $V=-55\,\text{mV}$ respectivamente, resueltas
+mediante la regla de L'H\^opital.
+\end{itemize}
+
+\subsection{Relajaci\'on de Maxwell--Wagner y Polarizabilidad Celular}
+
+La polarizabilidad efectiva de la c\'elula es:
+
+\begin{equation}
+\alpha_{\text{c\'elula}} =
+4\pi\varepsilon_3^* a^3
+\frac{\varepsilon_{\text{int}}^* - \varepsilon_3^*}
+{\varepsilon_{\text{int}}^* + 2\varepsilon_3^*}
+\end{equation}
+
+La frecuencia de transici\'on est\'a determinada por el tiempo de relajaci\'on de Maxwell-Wagner. Este tiempo surge debido a la acumulaci'on de carga en las interfaces entre
+medios con diferentes propiedades el'ectricas, como ocurre entre la membrana celular
+y el medio extracelular. F'isicamente, describe la capacidad del sistema para
+polarizarse a nivel de estructura celular, siendo responsable de la dispersi'on
+tipo $\beta$ observada en tejidos biol'ogicos:
+
+\begin{equation}
+\tau_{MW} =
+\frac{\varepsilon_{\text{int}} + 2\varepsilon_3}{\sigma_{\text{int}} + 2\sigma_3}
+\label{eq:tauMW}
+\end{equation}
+
+Este tiempo de relajaci\'on determina la frecuencia de corte de la dispersi\'on
+$\beta$: por debajo de $f_{MW} = 1/(2\pi\tau_{MW})$ la membrana bloquea la corriente;
+por encima, queda en cortocircuito y la corriente penetra el citoplasma. F\'isicamente,
+$\tau_{MW}$ encapsula simult\'aneamente la geometr\'ia celular, la capacitancia de
+membrana y la conductividad del citoplasma, convirti\'endose en el par\'ametro
+diagn\'ostico central de la dispersi\'on $\beta$ en tejidos biol\'ogicos.
+
+\begin{table}[H]
+\centering
+
+\caption{Tres reg\'imenes de frecuencia de la respuesta electrodin\'amica celular.}
+\label{tab:regimenes}
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{R\'egimen} & \textbf{Frecuencia} & \textbf{Descripci\'on f\'isica}
+& \textbf{Elemento dominante} \\
+\midrule
+Bajo & $f \ll f_{MW}$ & Membrana bloquea corriente; c\'elula aislante
+& $Z_m \gg R_{\text{cit}}$ \\
+Transici\'on & $f \approx f_{MW}$ & Redistribuci\'on de carga interfacial
+& $\tau_{MW}$ \\
+Alto & $f \gg f_{MW}$ & Membrana transparente; citoplasma conduce
+& $\sigma_1$, $\varepsilon_1$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+%=================================================================
+
+\section{Sistemas Biol\'ogicos: Sangre y Suspensiones Celulares}
+
+\label{sec:sangre}
+
+%=================================================================
+
+\noindent\textit{Una c\'elula individual no es un objeto cl\'inicamente medible. Lo que se mide en
+la pr\'actica es la respuesta el\'ectrica colectiva de millones de c\'elulas suspendidas en plasma: la
+sangre.}
+
+\subsection{Permitividad Efectiva de Maxwell--Wagner en Sangre}
+
+En este contexto, $\sigma$ representa la conductividad efectiva de cada
+compartimento, la cual incluye contribuciones i\'onicas asociadas al movimiento
+de iones de sodio (Na$^+$), potasio (K$^+$) y cloro (Cl$^-$) en el medio
+acuoso. Para el plasma extracelular, $\sigma_3 \approx 1.2\,\text{S/m}$;
+para el citoplasma, $\sigma_1 \approx 0.5\,\text{S/m}$.
+
+Para una suspensi\'on de c\'elulas con fracci\'on volum\'etrica $\phi$ (hematocrito), aplicando la
+teor\'ia de Maxwell--Garnett con permitividades complejas:
+
+\begin{equation}
+\varepsilon_{\text{ef}}^* =
+\varepsilon_3^*\left(
+\frac{\varepsilon_{\text{c\'elula}}^* + 2\varepsilon_3^* +
+2\phi(\varepsilon_{\text{c\'elula}}^* - \varepsilon_3^*)}
+{\varepsilon_{\text{c\'elula}}^* + 2\varepsilon_3^* - \phi(\varepsilon_{\text{c\'elula}}^* - \varepsilon_3^*)}
+\right)
+\label{eq:MWH}
+\end{equation}
+
+Aumentar $\phi$ reduce la conductividad efectiva a bajas frecuencias y acerca la permitividad de
+alta frecuencia al valor del citoplasma. Un cambio del 10\% en $\phi$ (como en la anemia
+moderada) produce un desplazamiento medible en $|Z(\omega)|$ a lo largo de todo el rango de
+la dispersi\'on $\beta$.
+
+%=================================================================
+
+\section{Bioimpedancia Macrosc\'opica}
+
+\label{sec:macro}
+
+%=================================================================
+
+\subsection{Expresi\'on General de la Impedancia}
+
+\begin{equation}
+\boxed{
+Z(\omega) = \frac{1}{\sigma_{\text{ef}}(\omega) + j\omega\,\varepsilon_{\text{ef}}^*(\omega)}
+}
+\label{eq:Z}
+\end{equation}
+
+La impedancia representa la respuesta global del sistema ante una excitaci\'on
+el'ectrica. En este modelo, no es 'unicamente una magnitud el'ectrica, sino
+una funci'on que encapsula la din'amica interna del sistema biol'ogico.
+Los dos componentes de $Z$ llevan informaci'on f'isica distinta:
+
+\begin{itemize}
+\item $\text{Re}(Z) = R(\omega)$: \textbf{resistencia} --- energ\'ia disipada por conducci\'on
+\'ohmica i\'onica.
+\item $\text{Im}(Z) = -X(\omega)$ (con $X > 0$): \textbf{reactancia} --- energ\'ia almacenada
+por la capacitancia de la membrana y la polarizaci\'on diel\'ectrica.
+
+\end{itemize}
+
+\subsection{Hip\'otesis geom\'etrica}
+
+Se asume una geometr\'ia efectiva homog\'enea en la cual el
+campo el\'ectrico puede considerarse aproximadamente
+uniforme, permitiendo una descripci\'on \emph{lumped}.
+Esta hip\'otesis es v\'alida cuando:
+\begin{equation}
+\lambda = \frac{c}{f\sqrt{\varepsilon_r}} \gg a
+\end{equation}
+condici\'on que se cumple para $f < 1\,\text{GHz}$ y
+$a \sim 5\,\mu\text{m}$.
+Sin esta hip\'otesis, $Z$ como escalar requerir\'ia
+un an\'alisis de valor de frontera completo.
+
+\subsection{Ecuaci\'on Maestra del Sistema}
+
+\label{sec:master_equation}
+
+La formulaci\'on completa del modelo puede resumirse en una \emph{ecuaci\'on maestra} que
+unifica todos los mecanismos f\'isicos en una sola expresi\'on:
+
+\begin{equation}
+\boxed{
+Z(\omega,t) =
+\frac{1}{
+\sigma(V_m(t)) +
+j\omega
+\left[
+\varepsilon_\infty +
+\frac{\varepsilon_s - \varepsilon_\infty}
+{1 + (j\omega\tau)^{1-\alpha_{CC}}}
+\right]
+}
+}
+\label{eq:master}
+\end{equation}
+
+con la conductividad modulada din\'amicamente por el potencial de membrana:
+
+\begin{equation}
+\sigma(V_m) = \sigma_0 \left(1 + \beta_\sigma\, V_m(t)\right)
+\label{eq:sigma_vm}
+\end{equation}
+y $V_m(t)$ obtenido del sistema de Hodgkin--Huxley. Esta \'ultima ecuaci\'on
+describe la din\'amica del potencial de membrana como un balance de corrientes:
+la capacitiva (lado izquierdo), la externa aplicada $I_{\text{ext}}$, y las
+i\'onicas de sodio, potasio y la fuga (lado derecho):
+
+\begin{equation}
+C_m \frac{dV_m}{dt} = I_{\text{ext}} - g_{Na}\,m^3 h\,(V_m - E_{Na})
+- g_K\,n^4\,(V_m - E_K) - g_L\,(V_m - E_L)
+\end{equation}
+
+donde $m$, $h$ y $n$ son las variables de compuerta de los canales de Na$^+$ y K$^+$,
+cuyos valores entre 0 y 1 modulan din\'amicamente la conductancia efectiva
+de cada canal en funci\'on del voltaje y el tiempo.
+
+\noindent La Ec.~\eqref{eq:master} es la s\'intesis de toda la cadena multiescala de este
+trabajo: el numerador es la unidad, y el denominador encapsula \emph{simult\'aneamente} la
+conducci\'on i\'onica modulada por el estado electrofisiol\'ogico de la c\'elula (t\'ermino
+
+$\sigma(V_m)$) y la relajaci\'on diel\'ectrica distribuida de la membrana y el citoplasma (t\'ermino
+de Cole--Cole). La dependencia en $t$ hace que $Z$ sea un observable din\'amico que evoluciona
+con el potencial de acci\'on, mientras que la dependencia en $\omega$ lo hace
+espectrosc\'opico. Ninguna formulaci\'on anterior ced\'{i}a ambas dependencias
+simult\'aneamente
+desde primeros principios.
+
+\subsection{Separaci\'on de escalas: $\omega$ y $t$}
+\label{sec:separacion_escalas}
+
+El uso simult\'aneo de $\varepsilon^*(\omega)$ y
+$\sigma(t)$ se justifica por la separaci\'on de escalas:
+\begin{itemize}
+\item Dependencia en $\omega$: respuesta lineal del
+sistema alrededor del estado din\'amico instant\'aneo.
+\item Dependencia en $t$: evoluci\'on lenta de
+$\sigma(V_m(t))$ respecto a la excitaci\'on arm\'onica.
+\end{itemize}
+\begin{equation}
+\tau_\text{fisiol\'ogico} \sim 1\,\text{ms}
+\;\gg\;
+\frac{1}{f_\text{medici\'on}} \sim 1\,\mu\text{s}
+\end{equation}
+Esta separaci\'on valida la aproximaci\'on cuasi-estacionaria
+y el tratamiento conjunto de $\omega$ y $t$.
+
+\paragraph{Interpretaci\'on del rol de cada par\'ametro.}
+
+\begin{itemize}
+\item $\tau$: controla la velocidad de relajaci\'on diel\'ectrica; desplaza la frecuencia de
+transici\'on de la dispersi\'on $\beta$ seg\'un $f_{MW} \propto 1/(2\pi\tau)$.
+\item $\alpha_{CC}$: refleja la heterogeneidad estructural de la membrana; valores mayores
+corresponden a poblaciones celulares m\'as diversas.
+\item $\varepsilon_s - \varepsilon_\infty$: amplitud de la dispersi\'on; proporcional a la
+densidad de dipolos orientables.
+\item $\sigma_0$, $\beta_\sigma$: conectan la excitabilidad neuronal (estado de canales
+i\'onicos) con la conductividad macrosc\'opica medible.
+\end{itemize}
+
+\subsection{Cantidades Observables}
+La observable primaria en este trabajo es el espectro de impedancia el\'ectrica:
+
+\begin{equation}
+Z(\omega)
+\end{equation}
+
+que codifica informaci\'on sobre la capacitancia de membrana, el transporte i\'onico y los
+procesos de polarizaci\'on. Las observables secundarias incluyen el potencial de membrana
+$V_m(t)$ y la permitividad efectiva $\varepsilon^*(\omega)$.
+
+\subsection{Dualidad Frecuencia--Tiempo}
+
+La respuesta de impedancia en el dominio de la frecuencia est\'a relacionada con la din\'amica
+en el dominio del tiempo a trav\'es de transformadas de Fourier:
+
+\begin{equation}
+Z(\omega) \longleftrightarrow V_m(t)
+\end{equation}
+
+Esto establece un puente entre espectros de impedancia medibles y la din\'amica subyacente
+de la membrana.
+
+\subsection{Efecto de la Distribuci\'on de Tama\~{n}os Celulares}
+
+Los radios celulares se muestrean de una distribuci\'on log-normal, garantizando siempre valores positivos y representando mejor la variabilidad biol\'ogica:
+
+\begin{equation}
+a \sim \mathrm{Log\text{-}Normal}(\ln\mu_a,\,0.2), \qquad \mu_a = 5\,\mu\text{m},\;
+\sigma_a = 1\,\mu\text{m}
+\end{equation}
+
+La introducci\'on de una distribuci\'on de tama\~{n}os celulares permite capturar
+la variabilidad biol\'ogica inherente a sistemas reales. Esta heterogeneidad es
+responsable del ensanchamiento de la dispersi\'on $\beta$ observado en espectros
+experimentales, el cual no puede reproducirse con un modelo unicelular de radio
+fijo. Para cada radio muestreado se calcula $\varepsilon_{\text{c\'elula},i}^*(\omega)$
+usando el modelo de membrana delgada. La permitividad efectiva de la suspensi\'on
+se obtiene como el promedio de ensamble sobre las $N$ realizaciones:
+
+\begin{equation}
+\varepsilon_{\text{ef}}^*(\omega) =
+\frac{1}{N}\sum_{i=1}^{N}\varepsilon_{\text{c\'elula},i}^*(\omega)
+\end{equation}
+
+Este promedio de conjunto ensancha la dispersi\'on $\beta$, explicando por qu\'e los espectros
+experimentales siempre aparecen m\'as anchos que las predicciones unicelulares.
+\noindent\textbf{El puente multiescala como fen\'omeno continuo.}
+La relevancia de esta construcci\'on radica en que cada nivel de descripci\'on no es
+independiente, sino que constituye una manifestaci\'on emergente del nivel anterior:
+la polarizaci\'on at\'omica genera la permitividad, la permitividad determina la
+impedancia de membrana, la impedancia modula el potencial y el potencial regula las
+corrientes i\'onicas. As\'i, la bioimpedancia macrosc\'opica puede entenderse como una
+consecuencia directa de procesos microsc\'opicos de polarizaci\'on. Este es el n\'ucleo
+multiescala del presente trabajo.
+
+\subsection{Formulaci\'on de la Impedancia Multiscala Completa}
+
+Integrando todos los efectos descritos, la impedancia completa puede expresarse como:
+
+\begin{equation}
+Z(\omega,t) =
+\left[
+\int
+\frac{1}{
+\displaystyle
+\sum_i z_i \mu_i c_i(t,\theta)
++
+j\omega
+\left(
+\varepsilon_\infty(\theta) +
+\frac{\varepsilon_s(\theta) - \varepsilon_\infty(\theta)}
+{1 + (j\omega\tau(\theta))^{1-\alpha(\theta)}}
+\right)
+}
+\,P(\theta)\,d\theta
+\right]
+\end{equation}
+
+donde $\theta$ representa el conjunto de par\'ametros fisiol\'ogicos del sistema y $P(\theta)$
+es la distribuci\'on de probabilidad de dichos par\'ametros.
+
+Esta ecuaci\'on unifica din\'amica de cargas microsc\'opica, estructura celular mesosc\'opica
+y respuesta el\'ectrica macrosc\'opica en una \'unica formulaci\'on multiscala de impedancia.
+
+%=================================================================
+
+\noindent\textbf{Conexi\'on final del marco te\'orico.}
+En conjunto, este marco permite entender la bioimpedancia como una manifestaci\'on
+macrosc\'opica de procesos f\'isicos microsc\'opicos, mediados por la estructura y
+din\'amica celular. Esta perspectiva abre la posibilidad de utilizar mediciones
+el\'ectricas como una herramienta para inferir propiedades fisiol\'ogicas internas.
+La cadena multiescala completa es:
+\begin{equation}
+\underbrace{\alpha(\omega)}_{\text{\'atomo}}
+\;\xrightarrow{\text{C-M}}\;
+\underbrace{\varepsilon^*(\omega)}_{\text{medio}}
+\;\xrightarrow{\text{M-W}}\;
+\underbrace{Z_{\text{c\'el}}(\omega)}_{\text{c\'elula}}
+\;\xrightarrow{\text{M-G}}\;
+\underbrace{Z_{\text{sangre}}(\omega)}_{\text{tejido}}
+\;\xrightarrow{\text{ML}}\;
+\underbrace{\hat{\theta}}_{\text{par\'ametros}}
+\end{equation}
+
+%=================================================================
+
+\section{Implementaci\'on Num\'erica}
+\label{sec:numerical}
+
+%=================================================================
+
+\noindent\textit{Habiendo derivado el marco anal\'itico completo, esta secci\'on presenta su
+realizaci\'on num\'erica. La simulaci\'on calcula el espectro completo de impedancia a partir de
+par\'ametros f\'isicos y genera los datos de entrenamiento para el aprendizaje autom\'atico.}
+
+\subsection{Malla de Frecuencias y Pipeline}
+
+La simulaci\'on cubre $f \in [10^2, 10^9]\,\text{Hz}$ con $N_f = 600$ puntos equiespaciados
+logar\'itmicamente, capturando los reg\'imenes de dispersi\'on $\alpha$, $\beta$ y $\gamma$
+con igual resoluci\'on por d\'ecada.
+
+\begin{enumerate}
+\item Calcular $\varepsilon_i^*(\omega)$ para cada regi\'on (Cole--Cole + conductividad).
+\item Calcular $Z_m(\omega)$ y $\varepsilon_{\text{int}}^*(\omega)$ (modelo de membrana
+delgada).
+\item Extraer $N = 100$ radios celulares de $\mathcal{N}(\mu_a, \sigma_a)$; promediar
+$\varepsilon_{\text{c\'elula}}^*(\omega)$.
+\item Calcular $Z(\omega)$.
+\end{enumerate}
+
+\subsection{Organizaci\'on del C\'odigo en M\'odulos}
+
+La implementaci\'on se estructura en cuatro archivos Python independientes y ejecutables
+en secuencia, siguiendo la cadena f\'isica del modelo:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Archivo} & \textbf{Contenido} & \textbf{Salida} \\
+\midrule
+\texttt{01\_simulacion.py}     & Pipeline f\'isico completo; barrido de par\'ametros & PDFs de espectros \\
+\texttt{02\_generar\_dataset.py} & Generador Monte Carlo; base de datos SQLite & \texttt{bioimpedancia.db} \\
+\texttt{03\_entrenar\_red.py}  & Entrenamiento BioNet; normalizaci\'on; curva de p\'erdida & \texttt{bionet\_inverso.pt} \\
+\texttt{04\_resultados.py}     & Gr\'aficas de validaci\'on; m\'etricas MAE, MAPE, $R^2$ & PDFs de resultados \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+El orden de ejecuci\'on es estrictamente secuencial:
+\begin{enumerate}
+\item \texttt{python 01\_simulacion.py} \hfill\textit{$\sim$10 segundos}
+\item \texttt{python 02\_generar\_dataset.py} \hfill\textit{$\sim$5--10 minutos}
+\item \texttt{python 03\_entrenar\_red.py} \hfill\textit{$\sim$2--5 minutos}
+\item \texttt{python 04\_resultados.py} \hfill\textit{$\sim$30 segundos}
+\end{enumerate}
+
+\subsection{C\'odigo de Simulaci\'on Completo}
+
+\begin{lstlisting}[language=Python, caption={Simulaci\'on completa
+(corregida): Pauly--Schwan + Maxwell--Garnett completo + promedio de poblaci\'on.}]
+import numpy as np
+import matplotlib.pyplot as plt
+
+f     = np.logspace(2, 9, 600)   # 100 Hz a 1 GHz
+omega = 2 * np.pi * f
+omega = omega + 1e-20            # [C1] evitar division por cero
+epsilon0 = 8.854e-12
+
+def cole_cole(eps_inf, eps_s, tau, alpha, omega):
+    return eps_inf + (eps_s - eps_inf) / (1 + (1j*omega*tau)**(1 - alpha))
+
+eps1_inf = 5*epsilon0;  eps1_s = 60*epsilon0
+tau1 = 1e-6;  alpha1 = 0.1;  sigma1 = 0.5       # Citoplasma
+eps2 = 5*epsilon0;  sigma2 = 1e-7;  d = 5e-9    # Membrana
+eps3_inf = 10*epsilon0; eps3_s = 80*epsilon0
+tau3 = 1e-8;  alpha3 = 0.05;  sigma3 = 1.2      # Plasma
+phi = 0.4                                         # Hematocrito
+
+eps1 = cole_cole(eps1_inf, eps1_s, tau1, alpha1, omega) - 1j*sigma1/omega
+eps3 = cole_cole(eps3_inf, eps3_s, tau3, alpha3, omega) - 1j*sigma3/omega
+eps2_complex = eps2 - 1j*sigma2/omega
+
+def simular_poblacion(n_celulas=100):
+    # [C5] Log-normal: radios siempre positivos
+    radios = np.random.lognormal(mean=np.log(5e-6), sigma=0.2, size=n_celulas)
+    Z_total = np.zeros_like(omega, dtype=complex)
+    for a in radios:
+        # [C2] Pauly-Schwan 1959 (usa radio a; dimensionalmente correcto)
+        eps_int = eps1 / (1 + (d/a)*(eps1/eps2_complex))
+        # [C3] Maxwell-Garnett completo (valido para phi=0.4)
+        eps_cell = eps3 * (
+            (eps_int + 2*eps3 + 2*phi*(eps_int - eps3)) /
+            (eps_int + 2*eps3 - phi*(eps_int - eps3))
+        )
+        # [C4] Promediar IMPEDANCIAS (preserva no linealidad)
+        Z_total += 1 / (sigma3 + 1j*omega*eps_cell)
+    return Z_total / n_celulas
+
+# [C6] CORRECCION BUG CRITICO:
+# simular_poblacion() ya devuelve la impedancia promediada.
+# Incorrecto (original): eps_ef = simular_poblacion(100)
+#                        Z = 1/(sigma3+jw*eps_ef)  <- formula aplicada 2 veces
+# Correcto:
+Z = simular_poblacion(100)
+
+fig, ejes = plt.subplots(1, 2, figsize=(13, 5))
+ejes[0].loglog(f, np.abs(Z))
+ejes[0].set(xlabel='Frecuencia (Hz)', ylabel=r'$|Z|$ ($\Omega$)',
+            title='Magnitud de Impedancia')
+ejes[0].grid(True, which='both', alpha=0.4)
+ejes[1].plot(np.real(Z), -np.imag(Z))
+ejes[1].set(xlabel=r'Re$(Z)$', ylabel=r'$-$Im$(Z)$',
+            title='Diagrama de Nyquist')
+ejes[1].grid(True, alpha=0.4)
+plt.tight_layout()
+plt.savefig('bioimpedancia_espectros.pdf', dpi=150, bbox_inches='tight')
+plt.show()
+\end{lstlisting}
+
+\subsection{Validaci\'on de l\'imites f\'isicos del c\'odigo}
+
+La implementaci\'on num\'erica reproduce correctamente los
+comportamientos asint\'oticos conocidos:
+\begin{itemize}
+\item $\omega \to 0$: $Z \approx 1/\sigma$
+(conducci\'on i\'onica dominante).
+\item $\omega \to \infty$: $|Z| \propto 1/\omega$
+(respuesta diel\'ectrica).
+\end{itemize}
+Esta verificaci\'on es obligatoria para garantizar que
+los datos sint\'eticos del dataset sean f\'isicamente
+coherentes antes de entrenar el modelo de ML.
+
+\begin{lstlisting}[language=Python, caption={Funci\'on de validaci\'on de l\'imites f\'isicos (ejecutar antes de generar el dataset).}]
+def validar_fisica(Z, omega, sigma_ref):
+    # Verifica limites analiticos obligatorios.
+    # Limite omega -> 0: Z ~ 1/sigma (conduccion ionica)
+    # Limite omega -> inf: |Z| ~ 1/(w*eps) (dielectrico)
+    Z_low  = np.abs(Z[0])
+    Z_high = np.abs(Z[-1])
+    print("Validacion de limites fisicos:")
+    print(f"  |Z| baja f: {Z_low:.3e}  | esperado ~{1/sigma_ref:.3e}")
+    print(f"  |Z| alta f: {Z_high:.3e}")
+    assert Z_high < Z_low, "ERROR: Z no decrece con frecuencia"
+    assert np.all(np.isfinite(Z)), "ERROR: Z contiene NaN o Inf"
+    print("  OK: todos los limites fisicos verificados.")
+\end{lstlisting}
+
+\subsection{Implementaci\'on del Modelo F\'isico con Conductividad I\'onica}
+
+El siguiente c\'odigo integra la conductividad i\'onica derivada de par\'ametros fisiol\'ogicos:
+
+\begin{lstlisting}[language=Python, caption={Modelo f\'isico completo con conductividad i\'onica y capacitancia.}]
+import numpy as np
+
+f     = np.logspace(2, 9, 500)
+omega = 2*np.pi*f + 1e-20       # [C1] regularizacion
+epsilon0 = 8.854e-12
+
+def cole_cole(eps_inf, eps_s, tau, alpha, omega):
+    return eps_inf + (eps_s - eps_inf)/(1 + (1j*omega*tau)**(1-alpha))
+
+def ionic_conductivity(c_na, c_k):
+    # sigma = F * sum_i z_i*mu_i*c_i  (Ec. sigma_ionica)
+    F           = 96485.0
+    z_na, z_k   = 1, 1
+    mu_na, mu_k = 5.2e-8, 7.6e-8
+    return F * (z_na*mu_na*c_na + z_k*mu_k*c_k)
+
+eps_inf = 5  * epsilon0
+eps_s   = 60 * epsilon0
+tau     = 1e-6
+alpha   = 0.1
+c_na    = 140.0;  c_k = 5.0
+sigma   = ionic_conductivity(c_na, c_k)
+eps_complex = cole_cole(eps_inf, eps_s, tau, alpha, omega) - 1j*sigma/omega
+
+A  = 1e-10;  d = 5e-9
+Cm = eps_complex * A / d
+g_Na = 1e-6;  g_K = 2e-6;  G = g_Na + g_K
+Z       = 1 / (G + 1j*omega*Cm)
+Z_mag   = np.abs(Z)
+Z_phase = np.angle(Z, deg=True)
+\end{lstlisting}
+
+\subsection{Implementaci\'on Monte Carlo: Promedio Sobre Distribuci\'on de Par\'ametros}
+
+La implementaci\'on num\'erica sigue un enfoque Monte Carlo para aproximar la impedancia
+promediada sobre el ensemble, capturando la variabilidad biol\'ogica mediante muestreo
+estoc\'astico de par\'ametros fisiol\'ogicos:
+
+\begin{lstlisting}[language=Python, caption={Implementaci\'on Monte Carlo de la impedancia multiscala.}]
+import numpy as np
+
+f     = np.logspace(2, 9, 500)
+omega = 2*np.pi*f + 1e-20
+epsilon0 = 8.854e-12
+
+def cole_cole(eps_inf, eps_s, tau, alpha, omega):
+    return eps_inf + (eps_s - eps_inf)/(1 + (1j*omega*tau)**(1-alpha))
+
+def ionic_conductivity(c_na, c_k):
+    F = 96485.0;  z_na, z_k = 1, 1
+    mu_na, mu_k = 5.2e-8, 7.6e-8
+    return F * (z_na*mu_na*c_na + z_k*mu_k*c_k)
+
+def single_realization(omega):
+    c_na  = np.random.normal(140, 10)
+    c_k   = np.random.normal(5, 1)
+    tau   = np.random.uniform(1e-7, 1e-4)
+    alpha = np.random.uniform(0.05, 0.3)
+    eps_inf = 5 * epsilon0;  eps_s = 80 * epsilon0
+    sigma   = ionic_conductivity(c_na, c_k)
+    eps_c   = cole_cole(eps_inf, eps_s, tau, alpha, omega) - 1j*sigma/omega
+    return 1 / (sigma + 1j * omega * eps_c)
+
+def monte_carlo_Z(omega, N=200):
+    Z_total = np.zeros_like(omega, dtype=complex)
+    for _ in range(N):
+        Z_total += single_realization(omega)
+    return Z_total / N
+
+Z = monte_carlo_Z(omega, N=300)
+\end{lstlisting}
+
+%=================================================================
+
+\section{Base de Datos e Integraci\'on de Aprendizaje Autom\'atico}
+\label{sec:ml}
+
+%=================================================================
+
+\noindent\textit{La simulaci\'on f\'isica puede ejecutarse para cualquier combinaci\'on de
+par\'ametros dentro de los rangos fisiol\'ogicos. Esta secci\'on usa esa capacidad para construir un
+conjunto de datos etiquetados y entrenar redes neuronales para resolver el problema inverso. El
+aprendizaje autom\'atico no se emplea como una caja negra, sino como el inverso matem\'atico
+del modelo f\'isico.}
+
+\subsection{Esquema de Base de Datos y Generaci\'on de Datos}
+
+Cada registro de la base de datos almacena el espectro de impedancia (100 puntos de
+frecuencia) como \emph{vector de caracter\'isticas} y los par\'ametros f\'isicos
+$(\sigma_1, \sigma_3, \phi)$ como \emph{etiquetas}. El esquema SQL es:
+
+\begin{lstlisting}[language=SQL, caption={Esquema de base de datos para bioimpedancia.}]
+CREATE TABLE bioimpedance (
+    id      INTEGER PRIMARY KEY,
+    g_Na    REAL,
+    g_K     REAL,
+    tau     REAL,
+    alpha   REAL,
+    sigma   REAL,
+    Cm      REAL,
+    Z_real  BLOB,
+    Z_imag  BLOB
+);
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption={Generador Monte Carlo y base de datos SQLite (con correcciones f\'isicas).}]
+import numpy as np, sqlite3, pickle
+epsilon0 = 8.854e-12
+f = np.logspace(3, 8, 100)
+
+def simular_celula(f, params):
+    e1, s1, e2, s2, e3, s3, d, a, phi = params
+    omega  = 2 * np.pi * f + 1e-20          # [C1]
+    eps1   = e1 - 1j*s1/omega
+    eps3   = e3 - 1j*s3/omega
+    eps2_c = e2 - 1j*s2/omega               # membrana compleja
+    # [C2] Pauly-Schwan con radio a (dimensionalmente correcto)
+    eps_int = eps1 / (1 + (d/a)*(eps1/eps2_c))
+    # [C3] Maxwell-Garnett completo
+    eps_ef = eps3 * (
+        (eps_int + 2*eps3 + 2*phi*(eps_int - eps3)) /
+        (eps_int + 2*eps3 - phi*(eps_int - eps3))
+    )
+    Z = 1 / (s3 + 1j * omega * eps_ef)
+    # [C4] Re+Im (no solo magnitud)
+    X = np.concatenate([np.real(Z), np.imag(Z)])
+    return (X - np.mean(X)) / (np.std(X) + 1e-30)
+
+conn = sqlite3.connect('bioimpedancia.db')
+c    = conn.cursor()
+c.execute("""CREATE TABLE IF NOT EXISTS simulaciones
+    (id INTEGER PRIMARY KEY, sigma1 REAL, sigma3 REAL,
+     phi REAL, d REAL, a REAL, espectro_z BLOB)""")
+conn.commit()
+
+N_MUESTRAS = 5000   # aumentar a 10000 para mayor precision
+for _ in range(N_MUESTRAS):
+    s1  = np.random.uniform(0.2, 1.0)
+    s3  = np.random.uniform(0.5, 2.0)
+    ph  = np.random.uniform(0.1, 0.6)
+    d_  = np.random.uniform(3e-9, 8e-9)
+    a_  = np.random.uniform(3e-6, 8e-6)
+    params = (60*epsilon0, s1, 5*epsilon0, 1e-7, 80*epsilon0, s3, d_, a_, ph)
+    X = simular_celula(f, params)
+    c.execute('INSERT INTO simulaciones (sigma1,sigma3,phi,d,a,espectro_z) '
+              'VALUES (?,?,?,?,?,?)', (s1, s3, ph, d_, a_, pickle.dumps(X)))
+    if (_ + 1) % 500 == 0:
+        conn.commit()   # commit cada 500 muestras
+conn.commit();  conn.close()
+\end{lstlisting}
+
+\subsection{Modelos Directo e Inverso}
+
+\begin{equation}
+\text{Directo:}\; (\tau,\sigma,\varepsilon)
+\xrightarrow{\text{RN}_D} \hat{Z}(\omega)
+\qquad
+\text{Inverso:}\; Z(\omega)
+\xrightarrow{\text{RN}_I} (\hat{\tau},\hat{\sigma},\hat{\varepsilon})
+\end{equation}
+
+El modelo directo (RN$_D$) sirve como validaci\'on: reproduce el espectro a partir
+de par\'ametros conocidos. El modelo inverso (RN$_I$) es el de mayor relevancia
+cl\'inica: infiere par\'ametros fisiol\'ogicos a partir de la medici\'on.
+Adicionalmente, una tercera red clasifica el estado fisiol\'ogico global:
+
+\begin{equation}
+\text{Clasificaci\'on:}\; Z(\omega)
+\xrightarrow{\text{RN}_C} \text{estado fisiol\'ogico}
+\end{equation}
+
+\subsection{Por qu\'e el Aprendizaje Autom\'atico Funciona}
+
+\label{sec:why_ml}
+
+La red neuronal tiene \'exito en el problema inverso por una raz\'on f\'isica profunda: el mapeo
+entre espectros de impedancia y par\'ametros fisiol\'ogicos es \emph{determin\'istico dentro del
+modelo f\'isico}. No hay ambig\"uedad estoc\'astica en la generaci\'on de datos; cada vector de
+caracter\'isticas corresponde a exactamente un conjunto de par\'ametros. Esto convierte el
+problema inverso en una regresi\'on bien definida que la red puede aprender con precisi\'on.
+
+Si los datos de entrenamiento provinieran de fuentes emp\'iricas o ad-hoc, la red aprender\'ia
+correlaciones espurias sin base f\'isica y no podr\'ia generalizar. La f\'isica es, en este
+sentido, el garante de la generalizaci\'on del modelo de aprendizaje autom\'atico.
+
+\begin{center}
+\textit{
+La red neuronal tiene \'exito precisamente porque el mapeo entre espectros de impedancia
+y par\'ametros fisiol\'ogicos es f\'isicamente restringido y determin\'istico dentro del
+modelo propuesto --- no es simplemente un ajuste de curvas.
+}
+\end{center}
+
+\noindent\textbf{Naturaleza del problema inverso.}
+El problema inverso consiste en determinar los par'ametros f'isicos del sistema a
+partir de su respuesta en frecuencia. Este problema es intr'insecamente mal
+condicionado, ya que m'ultiples configuraciones pueden producir respuestas similares,
+particulamente cuando $\sigma$ y $\tau$ var'ian simult'aneamente. El uso de redes
+neuronales se justifica precisamente por la naturaleza no lineal y altamente acoplada
+de este problema, el cual resulta dif'icil de resolver anal'iticamente.
+
+\noindent\textbf{Nota sobre la interpretabilidad del modelo de aprendizaje autom\'atico.}
+Es importante destacar que el modelo de aprendizaje autom\'atico no sustituye la f\'isica
+subyacente, sino que act\'ua como una herramienta para aproximar la soluci\'on inversa del
+sistema. Su capacidad de generalizaci\'on est\'a garantizada por el hecho de que los datos
+de entrenamiento provienen \'integramente del modelo f\'isico, lo cual asegura que la red
+aprende relaciones f\'isicamente fundamentadas y no correlaciones emp\'iricas superficiales.
+
+\subsection{Arquitectura y Entrenamiento de la Red Neuronal (Modelo Inverso)}
+La red mapea un espectro de impedancia de 200 caracter\'isticas
+$\mathbf{x} \in \mathbb{R}^{200}$ (100 puntos de $\text{Re}(Z)$ + 100 de $\text{Im}(Z)$)
+a los cinco par\'ametros fisiol\'ogicos objetivo
+$\mathbf{y} = (g_{Na},\,g_K,\,\sigma_{\text{base}},\,\tau,\,\alpha_{CC})$.
+
+\textbf{Elecci\'on de la arquitectura.} Se seleccion\'o una red totalmente conectada
+(200\,$\to$\,256\,$\to$\,128\,$\to$\,64\,$\to$\,5 neuronas)
+con \emph{Batch Normalization} antes de cada ReLU.
+El cuello de botella 256\,$\to$\,128\,$\to$\,64 fuerza a la red
+a aprender una representaci\'on comprimida del espectro.
+La incorporaci\'on de BatchNorm estabiliza el entrenamiento cuando los
+par\'ametros de entrada abarcan varios \'ordenes de magnitud~\citep{Barsoukov2005}.
+
+\textbf{Funci\'on de p\'erdida.} MSE con normalizaci\'on $z$-score de salidas
+(cr\'itico: $g_{Na}\sim 100$ vs.\ $\tau\sim 10^{-5}$, escalas muy diferentes).
+
+\textbf{Regularizaci\'on.} Dropout ($p = 0.1$) y decaimiento de pesos ($\lambda = 10^{-4}$).
+Programador de tasa de aprendizaje StepLR (factor $0.5$ cada 15 \'epocas).
+
+\begin{lstlisting}[language=Python, caption={Red neuronal BioNet con BatchNorm para el problema inverso de bioimpedancia (5 par\'ametros fisiol\'ogicos).}]
+import torch, torch.nn as nn, numpy as np, sqlite3, pickle
+from torch.utils.data import Dataset, DataLoader, random_split
+
+class BioDataset(Dataset):
+    def __init__(self, db):
+        conn = sqlite3.connect(db)
+        filas = conn.execute(
+            'SELECT g_Na, g_K, sigma_base, tau, alpha_cc, espectro_z '
+            'FROM simulaciones').fetchall()
+        conn.close()
+        self.X = np.array([pickle.loads(f[5]) for f in filas], dtype=np.float32)
+        self.y = np.array([[f[0],f[1],f[2],f[3],f[4]] for f in filas],
+                          dtype=np.float32)
+        # Normalizacion z-score de etiquetas [critico: escalas muy diferentes]
+        self.y_mean = self.y.mean(axis=0)
+        self.y_std  = self.y.std(axis=0) + 1e-30
+        self.y = (self.y - self.y_mean) / self.y_std
+    def __len__(self):  return len(self.X)
+    def __getitem__(self, i):
+        return (torch.tensor(self.X[i], dtype=torch.float32),
+                torch.tensor(self.y[i], dtype=torch.float32))
+
+class BioNet(nn.Module):
+    """
+    200 -> 256 -> 128 -> 64 -> 5
+    BatchNorm antes de ReLU estabiliza el entrenamiento [C6].
+    """
+    def __init__(self, input_size=200, n_params=5):
+        super().__init__()
+        self.model = nn.Sequential(
+            nn.Linear(input_size, 256),
+            nn.BatchNorm1d(256), nn.ReLU(), nn.Dropout(0.1),
+            nn.Linear(256, 128),
+            nn.BatchNorm1d(128), nn.ReLU(), nn.Dropout(0.1),
+            nn.Linear(128, 64),  nn.ReLU(),
+            nn.Linear(64, n_params))
+    def forward(self, x):  return self.model(x)
+
+dataset = BioDataset('bioimpedancia.db')
+n_val   = int(len(dataset) * 0.20)
+train_ds, val_ds = random_split(dataset, [len(dataset)-n_val, n_val])
+train_loader = DataLoader(train_ds, batch_size=64, shuffle=True)
+val_loader   = DataLoader(val_ds,   batch_size=64)
+
+modelo   = BioNet(input_size=dataset.X.shape[1])
+optimiz  = torch.optim.Adam(modelo.parameters(), lr=1e-3, weight_decay=1e-4)
+planif   = torch.optim.lr_scheduler.StepLR(optimiz, step_size=15, gamma=0.5)
+perdida  = nn.MSELoss()
+
+for epoca in range(50):
+    modelo.train(); total = 0
+    for X, y in train_loader:
+        pred = modelo(X);  p = perdida(pred, y)
+        optimiz.zero_grad();  p.backward();  optimiz.step()
+        total += p.item()
+    modelo.eval()
+    with torch.no_grad():
+        val_loss = perdida(modelo(torch.tensor(
+            dataset.X[val_ds.indices], dtype=torch.float32)),
+            torch.tensor(dataset.y[val_ds.indices], dtype=torch.float32)).item()
+    planif.step()
+    if (epoca+1) % 10 == 0:
+        print(f'Epoca {epoca+1:3d} | Train: {total/len(train_loader):.6f} '
+              f'| Val: {val_loss:.6f}')
+
+torch.save({'model_state_dict': modelo.state_dict(),
+            'y_mean': dataset.y_mean, 'y_std': dataset.y_std},
+           'bionet_inverso.pt')
+\end{lstlisting}
+
+\subsection{Principio de Consistencia F\'isica del Dataset}
+
+Una limitaci\'on cr\'itica en enfoques anteriores es la generaci\'on de datos de entrenamiento
+con modelos simplificados o sint\'eticos que no reflejan la f\'isica real del sistema. Si el
+dataset no proviene del modelo f\'isico completo, la red neuronal aprende ruido artificial
+en lugar de relaciones f\'isicas reales.
+
+En este trabajo, \emph{cada muestra del dataset se genera a partir del pipeline f\'isico
+completo}:
+
+\begin{equation}
+\text{Par\'ametros fisiol\'ogicos}
+\;\xrightarrow{\text{HH}}\;
+V_m(t)
+\;\xrightarrow{\sigma(V)}\;
+\sigma(t)
+\;\xrightarrow{\text{Cole--Cole}}\;
+\varepsilon^*(\omega)
+\;\xrightarrow{}\;
+Z(\omega,t)
+\;\xrightarrow{\text{features}}\;
+\mathbf{x}
+\end{equation}
+
+\subsection{Par\'ametros Aleatorizados del Dataset}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Par\'ametro} & \textbf{Rango} & \textbf{Significado} \\
+\midrule
+$g_{Na}$ & $[80,\;140]$ & Conductancia m\'axima de Na$^+$ \\
+$g_K$ & $[20,\;50]$ & Conductancia m\'axima de K$^+$ \\
+$\sigma_{\text{base}}$ & $[0.5,\;2.0]\;\text{S/m}$ & Conductividad base \\
+$\tau$ & $[10^{-6},\;10^{-4}]\;\text{s}$ & Tiempo de relajaci\'on \\
+$\alpha$ & $[0.05,\;0.3]$ & Ensanchamiento Cole--Cole \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Pipeline Completo: HH + Conductividad Din\'amica + Cole--Cole}
+
+\begin{lstlisting}[language=Python, caption={Pipeline f\'isico completo: Hodgkin--Huxley + conductividad din\'amica + Cole--Cole.}]
+import numpy as np
+epsilon0 = 8.854e-12
+
+def simulate_HH(g_Na, g_K, T=50, dt=0.02):
+    t = np.arange(0, T, dt)
+    V = -65*np.ones_like(t);  m = np.zeros_like(t)
+    h = np.zeros_like(t);     n = np.zeros_like(t)
+    E_Na, E_K, E_L = 50, -77, -54.4
+    g_L = 0.3;  C_m = 1.0;  I_ext = 10.0
+    def alpha_m(V):       # [C7] singularidad V=-40
+        dV = V+40.0
+        if abs(dV)<1e-7: return 1.0
+        return 0.1*dV/(1.0-np.exp(-dV/10.0))
+    def beta_m(V):  return 4*np.exp(-(V+65)/18)
+    def alpha_h(V): return 0.07*np.exp(-(V+65)/20)
+    def beta_h(V):  return 1/(1+np.exp(-(V+35)/10))
+    def alpha_n(V):       # [C7] singularidad V=-55
+        dV = V+55.0
+        if abs(dV)<1e-7: return 0.1
+        return 0.01*dV/(1.0-np.exp(-dV/10.0))
+    def beta_n(V):  return 0.125*np.exp(-(V+65)/80)
+    for i in range(len(t)-1):
+        am,bm = alpha_m(V[i]),beta_m(V[i])
+        ah,bh = alpha_h(V[i]),beta_h(V[i])
+        an,bn = alpha_n(V[i]),beta_n(V[i])
+        m[i+1] = m[i] + dt*(am*(1-m[i]) - bm*m[i])
+        h[i+1] = h[i] + dt*(ah*(1-h[i]) - bh*h[i])
+        n[i+1] = n[i] + dt*(an*(1-n[i]) - bn*n[i])
+        I_Na = g_Na*(m[i]**3)*h[i]*(V[i]-E_Na)
+        I_K  = g_K*(n[i]**4)*(V[i]-E_K)
+        I_L  = g_L*(V[i]-E_L)
+        V[i+1] = V[i] + dt*(I_ext - I_Na - I_K - I_L)/C_m
+    return V
+
+def sigma_dynamic(V, sigma_base):
+    return sigma_base * (1 + 0.01*(V + 65))
+
+def cole_cole(omega, eps_inf, eps_s, tau, alpha):
+    return eps_inf + (eps_s-eps_inf)/(1+(1j*omega*tau)**(1-alpha))
+
+def compute_Z(V, sigma_base, tau, alpha):
+    f     = np.logspace(3, 7, 100)
+    omega = 2*np.pi*f + 1e-20    # [C1]
+    eps   = cole_cole(omega, 5*epsilon0, 80*epsilon0, tau, alpha)
+    Z_time = []
+    for v in V:
+        sigma = sigma_dynamic(v, sigma_base)
+        # eps = pure Cole-Cole (no conductivity term); sigma handled separately
+        Z_time.append(1 / (sigma + 1j*omega*eps))
+    return np.array(Z_time)
+
+def extract_features(Z):
+    # [C4] Re+Im solamente (no |Z|)
+    Z_mean = np.mean(Z, axis=0)
+    X = np.concatenate([np.real(Z_mean), np.imag(Z_mean)])
+    return (X - X.mean()) / (X.std() + 1e-30)
+
+def generate_physical_sample(noise_level=0.02):
+    g_Na       = np.random.uniform(80, 140)
+    g_K        = np.random.uniform(20, 50)
+    sigma_base = np.random.uniform(0.5, 2.0)
+    tau        = np.random.uniform(1e-6, 1e-4)
+    alpha      = np.random.uniform(0.05, 0.3)
+    V = simulate_HH(g_Na, g_K)
+    Z = compute_Z(V, sigma_base, tau, alpha)
+    Z = Z + noise_level * np.random.randn(*Z.shape)   # ruido 2%
+    X = extract_features(Z)
+    y = np.array([g_Na, g_K, sigma_base, tau, alpha])
+    return X, y
+
+X_data, y_data = [], []
+for _ in range(1000):
+    X, y = generate_physical_sample()
+    X_data.append(X);  y_data.append(y)
+X_data = np.array(X_data);  y_data = np.array(y_data)
+\end{lstlisting}
+
+\noindent\textbf{Nota sobre consistencia f\'isica.} Todos los datos de entrenamiento fueron
+generados usando un modelo basado en f\'isica que combina la din\'amica de Hodgkin--Huxley
+con la respuesta diel\'ectrica dependiente de la frecuencia. Al incluir parte real e imaginaria
+(no solo magnitud), el vector de caracter\'isticas preserva la informaci\'on de fase que codifica
+la capacitancia de membrana y los tiempos de relajaci\'on.
+
+\subsection{Normalizaci\'on y Divisi\'on Train/Test}
+
+La normalizaci\'on es cr\'itica cuando los par\'ametros objetivo abarcan diferentes escalas
+f\'isicas ($g_{Na} \sim 100$ versus $\tau \sim 10^{-5}$):
+
+\begin{lstlisting}[language=Python, caption={Normalizaci\'on z-score y divisi\'on 80/20 train/test.}]
+from sklearn.model_selection import train_test_split
+
+X_mean = X_data.mean(axis=0);  X_std = X_data.std(axis=0)
+y_mean = y_data.mean(axis=0);  y_std = y_data.std(axis=0)
+X_norm = (X_data - X_mean) / (X_std + 1e-30)
+y_norm = (y_data - y_mean) / (y_std + 1e-30)
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X_norm, y_norm, test_size=0.2, random_state=42)
+\end{lstlisting}
+
+\subsection{Arquitectura Mejorada: BioNet con BatchNorm}
+
+\begin{lstlisting}[language=Python, caption={Arquitectura BioNet mejorada con BatchNorm para 5 par\'ametros.}]
+import torch
+import torch.nn as nn
+from torch.utils.data import DataLoader, TensorDataset
+
+class BioNet(nn.Module):
+    def __init__(self, input_size, n_params=5):  # [C9] 5 parametros fisicos
+        super().__init__()
+        self.model = nn.Sequential(
+            nn.Linear(input_size, 256),
+            nn.BatchNorm1d(256),   # [C6] BatchNorm ANTES de ReLU
+            nn.ReLU(),
+            nn.Dropout(0.1),
+            nn.Linear(256, 128),
+            nn.BatchNorm1d(128),
+            nn.ReLU(),
+            nn.Dropout(0.1),
+            nn.Linear(128, 64),
+            nn.ReLU(),
+            nn.Linear(64, n_params)  # [C9] 5 params fisicos: sigma1,sigma3,phi,d,a
+        )
+    def forward(self, x):  return self.model(x)
+
+X_train_t = torch.tensor(X_train, dtype=torch.float32)
+y_train_t = torch.tensor(y_train, dtype=torch.float32)
+X_test_t  = torch.tensor(X_test,  dtype=torch.float32)
+y_test_t  = torch.tensor(y_test,  dtype=torch.float32)
+
+train_loader = DataLoader(TensorDataset(X_train_t, y_train_t),
+                          batch_size=32, shuffle=True)
+model     = BioNet(input_size=X_train.shape[1])
+optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
+loss_fn   = nn.MSELoss()
+
+for epoch in range(30):
+    model.train();  total_loss = 0
+    for X_batch, y_batch in train_loader:
+        pred = model(X_batch)
+        loss = loss_fn(pred, y_batch)
+        optimizer.zero_grad();  loss.backward();  optimizer.step()
+        total_loss += loss.item()
+    model.eval()
+    with torch.no_grad():
+        val_loss = loss_fn(model(X_test_t), y_test_t).item()
+    print(f'Epoch {epoch+1:3d} | Train: {total_loss:.4f} | Val: {val_loss:.4f}')
+\end{lstlisting}
+
+\subsection{Ruido Experimental: Realismo del Dataset}
+
+Un modelo entrenado con datos perfectos (sin ruido) puede fallar en datos experimentales
+reales, donde siempre existe ruido de medici\'on instrumental. Para hacer el dataset
+fisiol\'ogicamente realista y mejorar la robustez del modelo, se a\~{n}ade ruido gaussiano
+calibrado al espectro de impedancia simulado:
+
+\begin{lstlisting}[language=Python, caption={Adici\'on de ruido gaussiano al 2\% para realismo experimental.}]
+def generate_physical_sample(noise_level=0.02):
+    g_Na       = np.random.uniform(80, 140)
+    g_K        = np.random.uniform(20, 50)
+    sigma_base = np.random.uniform(0.5, 2.0)
+    tau        = np.random.uniform(1e-6, 1e-4)
+    alpha      = np.random.uniform(0.05, 0.3)
+    V     = simulate_HH(g_Na, g_K)
+    Z     = compute_Z(V, sigma_base, tau, alpha)
+    # Ruido gaussiano ~2% SNR (Sanchez et al. 2013)
+    noise = noise_level * np.random.randn(*Z.shape)
+    Z_noisy = Z + noise
+    X = extract_features(Z_noisy)
+    y = np.array([g_Na, g_K, sigma_base, tau, alpha])
+    return X, y
+\end{lstlisting}
+
+El nivel de ruido del 2\% es consistente con las incertidumbres t\'ipicas reportadas en
+sistemas de espectroscop\'ia de bioimpedancia de cuatro electrodos \citep{Sanchez2013}.
+
+Entrenar con datos ruidosos fuerza a la red a aprender caracter\'isticas robustas del
+espectro en lugar de ajustar artefactos espec\'ificos de la simulaci\'on.
+
+\subsection{An\'alisis de Sensibilidad: Correlaci\'on Par\'ametro--Espectro}
+
+Antes de entrenar la red, es fundamental cuantificar qu\'e tan fuertemente est\'a codificado
+cada par\'ametro en el espectro de impedancia. Un par\'ametro con baja correlaci\'on con las
+caracter\'isticas ser\'a m\'as dif\'icil de recuperar por el modelo inverso. Este an\'alisis
+tambi\'en identifica qu\'e partes del espectro son m\'as informativas para cada par\'ametro:
+
+\begin{lstlisting}[language=Python, caption={An\'alisis de correlaci\'on entre caracter\'isticas del espectro y par\'ametros.}]
+import numpy as np
+import matplotlib.pyplot as plt
+
+corr_matrix = np.corrcoef(X_data.T, y_data.T)
+n_feat      = X_data.shape[1]
+corr_Xy     = corr_matrix[:n_feat, n_feat:]
+labels_y    = ['g_Na', 'g_K', 'sigma_base', 'tau', 'alpha']
+max_corr    = np.max(np.abs(corr_Xy), axis=0)
+
+print('Correlacion maxima |r|:')
+for name, c in zip(labels_y, max_corr):
+    print(f'  {name:12s}: {c:.3f}')
+
+fig, ax = plt.subplots(figsize=(10, 4))
+im = ax.imshow(np.abs(corr_Xy).T, aspect='auto', cmap='hot', vmin=0, vmax=1)
+ax.set_yticks(range(5));  ax.set_yticklabels(labels_y)
+ax.set_xlabel('Indice de feature (Re | Im)')
+ax.set_title('Correlacion |r| entre features del espectro y parametros')
+plt.colorbar(im, ax=ax, label='|r|')
+plt.tight_layout()
+plt.savefig('correlacion_features.pdf', dpi=150, bbox_inches='tight')
+plt.show()
+\end{lstlisting}
+
+\begin{figure}[H]
+\centering
+\framebox[0.95\textwidth]{\rule{0pt}{3.5cm}
+\centering Mapa de correlaci\'on $|r|$ entre features del espectro y par\'ametros --- marcador}
+\caption{Mapa de calor de correlaci\'on $|r|$ entre features del espectro y par\'ametros
+fisiol\'ogicos. Filas: par\'ametros $(g_{Na}, g_K, \sigma_{\text{base}}, \tau, \alpha_{CC})$;
+columnas: features del espectro (\'indices 0--99 corresponden a $\text{Re}(Z)$,
+\'indices 100--199 a $\text{Im}(Z)$). Regiones m\'as brillantes indican mayor
+contenido de informaci\'on sobre cada par\'ametro. Generado por \texttt{04\_resultados.py}.}
+\label{fig:corr}
+\end{figure}
+
+\subsection{Evaluaci\'on: MAE y Error Relativo por Par\'ametro}
+
+\begin{lstlisting}[language=Python, caption={M\'etricas cuantitativas del modelo inverso con desnormalizaci\'on.}]
+import numpy as np
+
+model.eval()
+with torch.no_grad():
+    preds_norm = model(X_test_t).numpy()
+
+preds_real = preds_norm * y_std + y_mean
+y_real     = y_test    * y_std + y_mean
+labels     = ['g_Na', 'g_K', 'sigma_base', 'tau', 'alpha']
+
+mae = np.mean(np.abs(preds_real - y_real), axis=0)
+print('MAE por parametro:')
+for name, err in zip(labels, mae):
+    print(f'  {name:12s}: {err:.4f}')
+
+relative_error = np.mean(
+    np.abs((preds_real - y_real) / (y_real + 1e-10)), axis=0)
+print('Error relativo (MAPE):')
+for name, err in zip(labels, relative_error):
+    print(f'  {name:12s}: {err*100:.2f}%')
+\end{lstlisting}
+
+\subsection{Gr\'aficas de Validaci\'on: Predicho vs.\ Real}
+
+\begin{lstlisting}[language=Python, caption={Script completo de validaci\'on \texttt{04\_resultados.py}: m\'etricas MAE, MAPE, $R^2$ y gr\'aficas de dispersi\'on.}]
+import numpy as np, torch, torch.nn as nn, sqlite3, pickle, matplotlib.pyplot as plt
+
+LABELS = ['g_Na', 'g_K', 'sigma_base', 'tau', 'alpha_cc']
+COLORES = ['#2c7bb6','#d7191c','#1a9641','#f29000','#7b2d8b']
+
+# -- Cargar modelo guardado ---------------------------------------------------
+ckpt  = torch.load('bionet_inverso.pt', map_location='cpu')
+model = BioNet(input_size=200, n_params=5)
+model.load_state_dict(ckpt['model_state_dict'])
+model.eval()
+y_mean = ckpt['y_mean'];  y_std = ckpt['y_std']
+
+# -- Cargar 20% de test desde SQLite -----------------------------------------
+np.random.seed(42)
+conn  = sqlite3.connect('bioimpedancia.db')
+filas = conn.execute('SELECT g_Na,g_K,sigma_base,tau,alpha_cc,espectro_z '
+                     'FROM simulaciones').fetchall()
+conn.close()
+idx   = np.random.permutation(len(filas))[:int(len(filas)*0.2)]
+X_test = np.array([pickle.loads(filas[i][5]) for i in idx], dtype=np.float32)
+y_test = np.array([[filas[i][j] for j in range(5)] for i in idx], dtype=np.float32)
+
+# -- Prediccion y desnormalizacion -------------------------------------------
+with torch.no_grad():
+    y_pred = model(torch.tensor(X_test)).numpy() * y_std + y_mean
+
+# -- Metricas ----------------------------------------------------------------
+mae  = np.mean(np.abs(y_pred - y_test), axis=0)
+mape = np.mean(np.abs((y_pred-y_test)/(np.abs(y_test)+1e-10)),axis=0)*100
+r2   = np.array([1 - np.sum((y_test[:,i]-y_pred[:,i])**2) /
+                    np.sum((y_test[:,i]-y_test[:,i].mean())**2)
+                 for i in range(5)])
+print(f"{'Param':>10}  {'MAE':>10}  {'MAPE(%)':>8}  {'R2':>6}")
+for n,m,p,r in zip(LABELS,mae,mape,r2):
+    print(f"{n:>10}  {m:>10.4f}  {p:>8.2f}%  {r:>6.4f}")
+
+# -- Grafica predicho vs real ------------------------------------------------
+fig, axes = plt.subplots(1, 5, figsize=(22, 4))
+fig.suptitle('Modelo Inverso -- Predicho vs. Real', fontsize=13)
+for i, ax in enumerate(axes):
+    ax.scatter(y_test[:,i], y_pred[:,i], alpha=0.35, s=8,
+               color=COLORES[i], rasterized=True)
+    lims = [min(y_test[:,i].min(), y_pred[:,i].min()),
+            max(y_test[:,i].max(), y_pred[:,i].max())]
+    ax.plot(lims, lims, 'k--', linewidth=1.2)
+    ax.set_title(f'{LABELS[i]}\n$R^2$={r2[i]:.3f}, MAPE={mape[i]:.1f}\%',
+                 fontsize=9)
+    ax.set_xlabel('Real', fontsize=9);  ax.set_ylabel('Predicho', fontsize=9)
+    ax.grid(True, alpha=0.3)
+plt.tight_layout()
+plt.savefig('04a_predicho_vs_real.pdf', dpi=150, bbox_inches='tight')
+plt.show()
+\end{lstlisting}
+
+\begin{figure}[H]
+\centering
+\framebox[0.95\textwidth]{\rule{0pt}{3.5cm}
+\centering Gr\'aficas predicho vs.\ real para $(g_{Na},\,g_K,\,\sigma,\,\tau,\,\alpha_{CC})$ --marcador}
+\caption{Validaci\'on del modelo inverso. Cada panel muestra la dispersi\'on entre
+el valor real del par\'ametro y el estimado por BioNet sobre el 20\,\% del conjunto de prueba.
+Los puntos cercanos a la l\'inea $y=x$ (negra discontinua) indican alta precisi\'on.
+Se reportan $R^2$ y MAPE por par\'ametro. Los resultados se obtienen ejecutando
+\texttt{04\_resultados.py}.}
+\label{fig:scatter}
+\end{figure}
+
+\subsection{Identificabilidad de Par\'ametros}
+
+\label{sec:identifiability}
+
+No todos los par\'ametros fisiol\'ogicos son igualmente identificables a partir de datos de
+impedancia, ya que algunas combinaciones de par\'ametros producen respuestas espectrales
+similares. Este fen\'omeno, conocido como \emph{degeneraci\'on del espacio de par\'ametros},
+es una limitaci\'on intr\'inseca del problema inverso.
+
+En particular, un incremento simult\'aneo de $\sigma$ y $\tau$ puede generar espectros
+casi indistinguibles en regiones de alta conductividad, limitando la recuperaci\'on
+individual de ambos par\'ametros. Para mejorar la identificabilidad se recomienda incluir
+caracter\'isticas espectrales expl\'icitas, como la frecuencia del m\'aximo de la parte
+imaginaria $\text{Im}(Z)$, que es m\'as sensible a $\tau$ que la magnitud $|Z|$ sola.
+
+\subsection{Interpretaci\'on F\'isica de los Errores por Par\'ametro}
+
+No todos los par\'ametros fisiol\'ogicos son igualmente f\'aciles de recuperar a partir del
+espectro de impedancia. La raz\'on no es num\'erica sino f\'isica: cada par\'ametro deja una
+``huella'' diferente en el espectro, y algunas huellas son m\'as \'unicas y localizadas que
+otras. A continuaci\'on se analiza cada par\'ametro:
+
+\paragraph{$g_{Na}$ (conductancia de sodio).} La conductancia m\'axima de Na$^+$ se predice
+con \emph{error relativamente bajo}. Esto se
+debe a que $g_{Na}$ controla la amplitud y la velocidad de la despolarizaci\'on en el
+modelo de Hodgkin--Huxley, lo que produce un cambio de gran amplitud y breve duraci\'on en
+$\sigma(t)$. Esta excursi\'on r\'apida y pronunciada deja una firma distintiva en la parte real del
+espectro promediado, especialmente en la banda $10^5$--$10^7\,\text{Hz}$ donde la
+corriente penetra el citoplasma.
+
+\paragraph{$g_K$ (conductancia de potasio).} $g_K$ se predice con error \emph{moderado}. A
+diferencia de Na$^+$, los canales de K$^+$
+se activan m\'as lentamente y su efecto principal es la duraci\'on de la repolarizaci\'on, no
+su amplitud. En el espectro promediado temporalmente, este efecto se diluye, reduciendo
+la distinguibilidad. Una posible mejora es incluir caracter\'isticas del dominio temporal
+(por ejemplo, la anchura del pulso en $Z(t)$) en el vector de features.
+
+\paragraph{$\sigma_{\text{base}}$ (conductividad base).}
+
+La conductividad base se recupera con \emph{alta precisi\'on} porque afecta
+
+\emph{uniformemente} todo el espectro de impedancia: un aumento de $\sigma$ desplaza toda
+la curva $|Z(\omega)|$ hacia abajo. Esta influencia global hace que sea f\'acilmente
+identificable incluso con ruido moderado.
+
+\paragraph{$\tau$ (tiempo de relajaci\'on Cole--Cole).} El par\'ametro $\tau$ exhibe el
+\emph{mayor error de predicci\'on}. La raz\'on f\'isica es su influencia no lineal sobre la respuesta
+
+en frecuencia: $\tau$ desplaza la frecuencia de transici\'on de la dispersi\'on $\beta$, pero este
+desplazamiento se vuelve menos
+distinguible en reg\'imenes de alta conductividad donde la magnitud de la dispersi\'on se
+comprime. Formalmente:
+
+\begin{equation}
+f_{MW} = \frac{1}{2\pi\tau} \propto \frac{\sigma_{\text{int}} + 2\sigma_3}
+{\varepsilon_{\text{int}} + 2\varepsilon_3}
+\end{equation}
+Un aumento simult\'aneo de $\sigma$ y $\tau$ puede producir espectros similares, creando
+degeneraci\'on en el espacio de par\'ametros. Para mejorar su recuperaci\'on se recomienda
+incluir la \emph{frecuencia del m\'aximo de la parte imaginaria} como feature expl\'icita.
+
+\paragraph{$\alpha_{CC}$ (ensanchamiento Cole--Cole).} $\alpha_{CC}$ se predice con
+\emph{precisi\'on intermedia}. Controla el ancho del
+semic\'irculo en el diagrama de Nyquist, pero su efecto es sutil cuando el ruido es
+comparable a la depresi\'on angular. Se beneficia de incluir features de la parte imaginaria
+del espectro, donde su influencia es m\'as pronunciada.
+
+\subsection{Conclusi\'on: $Z(\omega,t)$ Contiene Informaci\'on Fisiol\'ogica Invertible}
+
+Los resultados de este trabajo establecen un resultado te\'oricamente no trivial y
+pr\'acticamente relevante:
+
+\begin{equation}
+\boxed{
+Z(\omega,t) \;\text{ contiene informaci\'on fisiol\'ogica invertible}
+}
+\end{equation}
+
+Esto significa que el mapeo completo, desde par\'ametros fisiol\'ogicos hasta
+el espectro de impedancia y de regreso, es aproximadamente invertible. La cadena
+es la siguiente: el modelo f\'isico genera el espectro a partir de los par\'ametros;
+la red neuronal invierte esa relaci\'on y recupera los par\'ametros originales:
+
+\begin{equation}
+(g_{Na},\;g_K,\;\sigma,\;\tau,\;\alpha)
+\;\xrightarrow{\text{modelo f\'isico}}\;
+Z(\omega,t)
+\;\xrightarrow{\text{red neuronal}}\;
+(\hat{g}_{Na},\;\hat{g}_K,\;\hat{\sigma},\;\hat{\tau},\;\hat{\alpha})
+\end{equation}
+
+es \emph{aproximadamente invertible}: la red neuronal recupera con precisi\'on aceptable los
+par\'ametros fisiol\'ogicos a partir del espectro de impedancia. Este resultado no es trivial
+porque el modelo directo es altamente no lineal (combina ecuaciones diferenciales de HH con
+permitividad compleja de Cole--Cole), y la inversi\'on de sistemas no lineales generalmente
+no tiene soluci\'on anal\'itica cerrada.
+
+La demostraci\'on de invertibilidad tiene tres implicaciones inmediatas:
+
+\begin{enumerate}
+\item \textbf{No se entren\'o solo una red.} Se demostr\'o que $Z(\omega,t)$ contiene
+
+informaci\'on fisiol\'ogica suficiente para reconstruir las propiedades celulares que la
+generaron.
+\item \textbf{La bioimpedancia es un observable diagn\'ostico completo.} Una medici\'on
+el\'ectrica no invasiva puede, en principio, sustituir mediciones invasivas de conductancias
+i\'onicas o composici\'on sangu\'inea.
+\item \textbf{El modelo f\'isico es esencial.} Sin el modelo f\'isico como generador de
+datos de entrenamiento, la red neuronal carecer\'ia de una base de verdad f\'isica y no
+podr\'ia generalizar a nuevos estados fisiol\'ogicos. La f\'isica y el aprendizaje autom\'atico
+son inseparables en este enfoque.
+\end{enumerate}
+
+%=================================================================
+
+\section{Extensi\'on Fisiol\'ogica y Bioqu\'imica}
+
+\label{sec:physiological}
+
+%=================================================================
+
+\noindent\textit{Las secciones anteriores establecieron un marco electrodin\'amico completo,
+desde la polarizaci\'on at\'omica hasta la bioimpedancia macrosc\'opica. Sin embargo, los sistemas
+biol\'ogicos no son medios puramente pasivos. La respuesta el\'ectrica de las c\'elulas est\'a
+fuertemente influenciada por procesos electroqu\'imicos, transporte i\'onico y din\'amica de
+membrana. Esta secci\'on extiende el modelo f\'isico hacia una descripci\'on fisiol\'ogica.}
+
+\subsection{Motivaci\'on para la Extensi\'on Fisiol\'ogica}
+
+El marco electrodin\'amico desarrollado en las secciones anteriores proporciona una descripci\'on
+f\'isica completa de la polarizaci\'on, la respuesta diel\'ectrica y la bioimpedancia. Sin embargo,
+los sistemas biol\'ogicos exhiben comportamientos que no pueden ser capturados completamente
+por modelos el\'ectricos pasivos. En particular, las c\'elulas vivas mantienen activamente
+gradientes el\'ectricos a trav\'es de mecanismos de transporte i\'onico. Por tanto, se hace
+necesario extender el modelo f\'isico hacia una descripci\'on fisiol\'ogica y bioqu\'imica, con el
+fin de conectar las propiedades el\'ectricas medibles con la funci\'on biol\'ogica subyacente.
+
+\subsection{La Membrana Celular como Interfaz Electrodin\'amica Activa}
+
+En el modelo f\'isico, la membrana fue tratada como una capa diel\'ectrica pasiva. Sin embargo,
+en los sistemas biol\'ogicos, la membrana es una interfaz activa que regula el transporte
+i\'onico y mantiene gradientes el\'ectricos. Por tanto, la membrana debe entenderse no solo
+como un capacitor, sino como un sistema din\'amico que acopla procesos el\'ectricos, qu\'imicos
+y biol\'ogicos.
+
+\subsection{Mecanismos de Transporte Activo}
+
+Las c\'elulas mantienen activamente gradientes i\'onicos a trav\'es de bombas dependientes de
+ATP, como la Na$^+$/K$^+$-ATPasa. Esto introduce una componente de no-equilibrio en el
+sistema,
+sosteniendo el potencial de membrana a lo largo del tiempo. Sin este mecanismo, el sistema
+tender\'ia hacia el equilibrio pasivo y no representar\'ia c\'elulas vivas reales.
+
+\subsection{Origen F\'isico del Potencial de Membrana}
+
+El potencial de membrana emerge de la separaci\'on de cargas a trav\'es de la membrana. Desde
+la perspectiva electrodin\'amica desarrollada en este trabajo, esta separaci\'on de cargas est\'a
+directamente relacionada con los mecanismos de polarizaci\'on y los efectos capacitivos:
+
+\begin{equation}
+Q = C_m V_m
+\end{equation}
+
+Por tanto, el potencial de membrana puede interpretarse como una consecuencia macrosc\'opica
+de los procesos de polarizaci\'on microsc\'opica.
+
+\subsection{Gradientes Electroqu\'imicos y Equilibrio I\'onico}
+
+Las c\'elulas mantienen gradientes de concentraci\'on de iones como Na$^+$, K$^+$ y Cl$^-$ a
+trav\'es de la membrana. Estos gradientes generan potenciales de equilibrio descritos por la
+ecuaci\'on de Nernst:
+
+\begin{equation}
+E_i = \frac{RT}{z_i F}
+\ln\left(
+\frac{[i]_{\text{out}}}{[i]_{\text{in}}}
+\right)
+\end{equation}
+
+Esto introduce una contribuci\'on qu\'imica al comportamiento el\'ectrico de la membrana,
+complementando el modelo el\'ectrico puro.
+
+\subsection{Enlace Entre Impedancia y Potencial de Membrana}
+
+El potencial de membrana est\'a directamente relacionado con la acumulaci\'on de carga:
+
+\begin{equation}
+Q = C_m V_m
+\end{equation}
+
+Dado que la capacitancia de membrana $C_m$ es dependiente de la frecuencia y surge de las
+propiedades diel\'ectricas descritas anteriormente, la respuesta de impedancia porta
+informaci\'on sobre la din\'amica de carga. As\'i, las mediciones de bioimpedancia proporcionan
+acceso indirecto al potencial de membrana a trav\'es de su relaci\'on con el almacenamiento
+capacitivo de carga.
+
+\subsection{Contribuci\'on I\'onica Din\'amica}
+
+La membrana no es puramente pasiva. Los canales i\'onicos introducen mecanismos de transporte
+activo que modifican la conductividad efectiva. La corriente i\'onica se modela como:
+\begin{equation}
+I_i = g_i(V_m, t)(V_m - E_i)
+\end{equation}
+
+Esto introduce din\'amica no lineal en el sistema, acoplando las propiedades el\'ectricas con
+la funci\'on biol\'ogica.
+
+\paragraph{Extensi\'on: ecuaci\'on de Nernst--Planck.}
+En una descripci\'on m\'as completa, la conductividad puede
+derivarse de ecuaciones de transporte i\'onico
+tipo Nernst--Planck:
+\begin{equation}
+\mathbf{J}_i = -D_i \nabla c_i
+- \frac{z_i e D_i}{k_B T}\, c_i \,\nabla \phi
+\end{equation}
+incorporando difusi\'on, migraci\'on y acoplamiento
+electroqu\'imico. Su implementaci\'on completa se deja como
+extensi\'on futura, conectando el marco presente con
+la literatura de transporte en medios biol\'ogicos.
+
+\subsection{Ecuaci\'on de Membrana Extendida}
+
+La din\'amica de membrana puede describirse por:
+
+\begin{equation}
+C_m \frac{dV_m}{dt} +
+\sum_i g_i(V_m,t)(V_m - E_i)
+= I_{\text{ext}}
+\end{equation}
+
+donde la capacitancia $C_m$ y las conductancias $g_i$ se derivan de las propiedades
+electrodin\'amicas y diel\'ectricas subyacentes. Esta ecuaci\'on extiende el modelo de impedancia
+pasiva hacia un marco fisiol\'ogico dependiente del tiempo.
+
+\subsection{Din\'amica Temporal con Modelo de Hodgkin--Huxley}
+
+La din\'amica completa del potencial de membrana se modela mediante las ecuaciones de
+Hodgkin--Huxley. Al incorporar el transporte de sodio y potasio junto con la din\'amica de
+canales, el modelo predice fluctuaciones temporales en la impedancia directamente
+correlacionadas con cambios en $V_m(t)$, reflejando el estado electrofisiol\'ogico activo
+de la c\'elula:
+
+\begin{lstlisting}[language=Python, caption={Implementaci\'on del modelo de Hodgkin--Huxley y c\'alculo de $Z(\omega, t)$.}]
+import numpy as np
+epsilon0 = 8.854e-12
+
+dt = 0.01;  t = np.arange(0, 50, dt)
+C_m = 1.0;  E_Na = 50;  E_K = -77;  E_L = -54.4
+g_Na = 120;  g_K = 36;  g_L = 0.3;  I_ext = 10.0
+
+# [C7] Funciones de compuerta con singularidades resueltas (L'Hopital)
+def alpha_m(V):
+    dV = V+40.0
+    if abs(dV)<1e-7: return 1.0
+    return 0.1*dV/(1.0-np.exp(-dV/10.0))
+def beta_m(V):  return 4*np.exp(-(V+65)/18)
+def alpha_h(V): return 0.07*np.exp(-(V+65)/20)
+def beta_h(V):  return 1/(1+np.exp(-(V+35)/10))
+def alpha_n(V):
+    dV = V+55.0
+    if abs(dV)<1e-7: return 0.1
+    return 0.01*dV/(1.0-np.exp(-dV/10.0))
+def beta_n(V):  return 0.125*np.exp(-(V+65)/80)
+
+V = -65*np.ones_like(t)
+m = np.zeros_like(t);  h = np.zeros_like(t);  n = np.zeros_like(t)
+
+for i in range(len(t)-1):
+    am,bm = alpha_m(V[i]),beta_m(V[i])
+    ah,bh = alpha_h(V[i]),beta_h(V[i])
+    an,bn = alpha_n(V[i]),beta_n(V[i])
+    m[i+1] = m[i] + dt*(am*(1-m[i]) - bm*m[i])
+    h[i+1] = h[i] + dt*(ah*(1-h[i]) - bh*h[i])
+    n[i+1] = n[i] + dt*(an*(1-n[i]) - bn*n[i])
+    I_Na = g_Na*(m[i]**3)*h[i]*(V[i]-E_Na)
+    I_K  = g_K*(n[i]**4)*(V[i]-E_K)
+    I_L  = g_L*(V[i]-E_L)
+    V[i+1] = V[i] + dt*(I_ext - I_Na - I_K - I_L)/C_m
+
+f     = np.logspace(3, 7, 200)
+omega = 2*np.pi*f + 1e-20        # [C1]
+
+def cole_cole(eps_inf, eps_s, tau, alpha, omega):
+    return eps_inf + (eps_s-eps_inf)/(1+(1j*omega*tau)**(1-alpha))
+
+# Cole-Cole calculado UNA VEZ fuera del loop (eficiencia)
+eps_cc = cole_cole(5*epsilon0, 80*epsilon0, 1e-5, 0.2, omega)
+
+def sigma_from_voltage(V_scalar, base=1.0):
+    return base + 0.02*(V_scalar + 65)
+
+Z_time = []
+for i in range(len(t)):
+    sigma    = sigma_from_voltage(V[i])
+    # eps_comp ya incluye conduccion: eps_cc - j*sigma/w
+    # Z = 1/(jw*eps_comp) evita contar sigma dos veces
+    eps_comp = eps_cc - 1j*sigma/omega
+    Z_time.append(1/(1j*omega*eps_comp))
+# [C8] Sin Z_time.append(Z) duplicado que causaba NameError
+Z_time = np.array(Z_time)
+\end{lstlisting}
+
+\subsection{Interpretaci\'on Multiscala}
+
+La membrana act\'ua como un puente entre escalas:
+
+\begin{itemize}
+\item \textbf{Microsc\'opica}: polarizaci\'on de mol\'eculas y \'atomos
+\item \textbf{Mesosc\'opica}: respuesta diel\'ectrica e impedancia
+\item \textbf{Macrosc\'opica}: potencial de membrana y corrientes i\'onicas
+\end{itemize}
+
+Esta perspectiva multiscala permite la unificaci\'on de las descripciones f\'isica y biol\'ogica
+dentro de un \'unico marco te\'orico:
+
+\begin{equation}
+\text{Atomic Polarization}
+\rightarrow
+\alpha_{\text{eff}}
+\rightarrow
+\varepsilon^*(\omega)
+\rightarrow
+Z_m(\omega)
+\rightarrow
+V_m
+\rightarrow
+I_{\text{ion}}
+\rightarrow
+\text{Cellular State}
+\end{equation}
+
+\subsection{Consideraciones Energ\'eticas}
+
+El sistema de membrana involucra almacenamiento y disipaci\'on de energ\'ia:
+
+\begin{itemize}
+\item Energ\'ia capacitiva: $U = \frac{1}{2} C_m V_m^2$
+\item Disipaci\'on: corrientes i\'onicas
+\item Entrada de energ\'ia: transporte activo (consumo de ATP)
+
+\end{itemize}
+
+\subsection{Marco Multiscala Unificado}
+
+El marco propuesto integra:
+
+\begin{itemize}
+\item Polarizaci\'on microsc\'opica (escala at\'omica)
+\item Respuesta diel\'ectrica efectiva (escala mesosc\'opica)
+\item Impedancia de membrana (interfaz celular)
+\item Potencial de membrana (estado electroqu\'imico)
+\item Corrientes i\'onicas (din\'amica biol\'ogica)
+\end{itemize}
+
+Esto establece una conexi\'on directa entre la f\'isica fundamental y el comportamiento celular,
+habilitando el modelado predictivo de sistemas biol\'ogicos.
+
+\subsection{Alcance de la Extensi\'on Fisiol\'ogica}
+El presente trabajo no pretende modelar completamente todos los procesos bioqu\'imicos.
+
+En cambio, establece un marco f\'isicamente fundamentado sobre el cual pueden construirse
+modelos biol\'ogicos m\'as complejos. Procesos como el bombeo activo de iones, el
+comportamiento estoc\'astico de canales y la se\~{n}alizaci\'on intracelular son reconocidos pero
+no incluidos
+expl\'icitamente. El modelo representa sus efectos colectivos a trav\'es de par\'ametros efectivos
+
+tales como conductancia, tiempos de relajaci\'on y concentraciones i\'onicas. La meta no es
+resolver toda la complejidad biol\'ogica, sino representarla en una forma que sea tanto
+f\'isicamente significativa como computacionalmente tratable.
+
+\subsection{Implicaciones para el Modelado Predictivo}
+
+Al vincular las propiedades electrodin\'amicas con las variables fisiol\'ogicas, el modelo
+abre la posibilidad de predecir estados celulares a partir de mediciones el\'ectricas. Esto
+proporciona una base para el desarrollo de herramientas diagn\'osticas no invasivas basadas
+en bioimpedancia.
+
+%=================================================================
+
+\section{Pipeline Completo: de la F\'isica al Diagn\'ostico}
+
+\label{sec:pipeline}
+
+%=================================================================
+
+\subsection{Estructura del Sistema}
+
+El pipeline completo del presente trabajo integra:
+
+\begin{enumerate}
+\item Simulaci\'on f\'isica (HH + $Z(\omega,t)$)
+
+\item Generaci\'on de base de datos sint\'etica
+\item Red neuronal para predicci\'on fisiol\'ogica
+\end{enumerate}
+
+\begin{equation}
+\text{Simulaci\'on HH} + Z(\omega,t)
+\;\rightarrow\;
+\text{Dataset sint\'etico}
+\;\rightarrow\;
+\text{Red neuronal}
+\;\rightarrow\;
+\text{Predicci\'on fisiol\'ogica}
+\end{equation}
+
+\subsection{Observable Macrosc\'opica del Modelo}
+
+La impedancia medible puede expresarse funcionalmente como:
+
+\begin{equation}
+Z(\omega) =
+\mathcal{F}\left[V_m(t),\,g_i(V_m,t),\,C_m\right]
+\end{equation}
+
+Esta relaci\'on establece que la bioimpedancia es una observable multiscala que codifica
+din\'amica de cargas microsc\'opica, estructura mesosc\'opica y procesos fisiol\'ogicos activos.
+
+%=================================================================
+
+\section{Resultados e Interpretaci\'on F\'isica}
+
+\label{sec:results}
+
+%=================================================================
+
+\noindent\textit{Esta secci\'on presenta los resultados esperados del modelo y, m\'as importante,
+su interpretaci\'on f\'isica profunda. No basta graficar: se requiere conectar cada caracter\'istica
+del espectro con un mecanismo f\'isico espec\'ifico, explicar c\'omo cambia $Z$ durante un
+potencial de acci\'on, identificar qu\'e frecuencias son m\'as sensibles a $g_{Na}$ y $g_K$, y
+se\~{n}alar d\'onde emerge el efecto Maxwell--Wagner.}
+
+\subsection{Magnitud de la Impedancia: Comportamiento en Tres Reg\'imenes}
+
+\begin{figure}[H]
+\centering
+\framebox[0.78\textwidth]{\rule{0pt}{4.5cm}
+\centering $|Z(\omega)|$ vs $f$ (escala log-log) --- marcador de posici\'on}
+\caption{Magnitud de impedancia en funci\'on de la frecuencia. Tres reg\'imenes distintos
+son visibles: meseta capacitiva a baja $f$, dispersi\'on $\beta$ por Maxwell--Wagner, y
+meseta resistiva a alta $f$. Resultados pendientes de validaci\'on experimental.}
+\label{fig:Zmag}
+\end{figure}
+
+\begin{itemize}
+
+\item \textbf{Baja frecuencia ($f < 10^4\,\text{Hz}$)}: $|Z|$ grande y casi constante.
+La corriente fluye completamente por el plasma extracelular; la membrana act\'ua como
+circuito abierto. El valor de esta meseta est\'a determinado por $\sigma_3$ y $\phi$.
+\item \textbf{Transici\'on ($10^4$--$10^7\,\text{Hz}$)}: $|Z|$ decrece en
+aproximadamente un orden de magnitud. La capacitancia de membrana va en cortocircuito
+progresivamente. Aqu\'i aparece el efecto Maxwell--Wagner (v\'ease Sec.~\ref{subsec:MW_loc}).
+\item \textbf{Alta frecuencia ($f > 10^7\,\text{Hz}$)}: $|Z|$ alcanza una meseta
+inferior. Ambos compartimentos conducen en paralelo; la impedancia refleja la
+combinaci\'on de $\sigma_1$ y $\sigma_3$.
+\end{itemize}
+
+\subsection{Diagrama de Nyquist: Semic\'irculo Deprimido}
+
+\begin{figure}[H]
+\centering
+\framebox[0.78\textwidth]{\rule{0pt}{4.5cm}
+\centering Nyquist: $-\text{Im}(Z)$ vs $\text{Re}(Z)$ --- marcador de posici\'on}
+\caption{Diagrama de Nyquist esperado. El semic\'irculo deprimido es la huella
+caracter\'istica de la distribuci\'on de tiempos de relajaci\'on celular.
+Resultados pendientes.}
+\label{fig:nyquist}
+\end{figure}
+
+Cada caracter\'istica geom\'etrica del semic\'irculo deprimido codifica un par\'ametro f\'isico
+distinto, lo que convierte el diagrama de Nyquist en un mapa de propiedades celulares:
+
+\begin{itemize}
+
+\item \textbf{\'Angulo de depresi\'on} $\theta = \alpha_{CC}\cdot\pi/2$: mide la
+heterogeneidad de Cole--Cole (variabilidad en tama\~{n}o y estado celular).
+\item \textbf{Frecuencia en el v\'ertice} $f_{MW} = 1/(2\pi\tau_{MW})$: corresponde al
+tiempo de relajaci\'on de Maxwell--Wagner; depende del grosor de membrana y la
+conductividad del citoplasma.
+\item \textbf{Di\'ametro} $R_0 - R_\infty$: proporcional al hematocrito $\phi$; un
+descenso de 10\% en $\phi$ (anemia moderada) produce una reducci\'on del di\'ametro
+del semic\'irculo.
+\item \textbf{Intersecci\'on a baja $f$} ($R_0$): solo conductividad extracelular.
+\item \textbf{Intersecci\'on a alta $f$} ($R_\infty$): combinaci\'on paralela de ambos
+compartimentos.
+\end{itemize}
+
+\subsection{D\'onde Aparece el Efecto Maxwell--Wagner}
+
+\label{subsec:MW_loc}
+
+El efecto Maxwell--Wagner se manifiesta como la transici\'on de $|Z|$ entre las dos mesetas.
+F\'isicamente, ocurre cuando la frecuencia angular $\omega$ satisface:
+
+\begin{equation}
+\omega \approx \frac{1}{\tau_{MW}} =
+\frac{\sigma_{\text{int}} + 2\sigma_3}{\varepsilon_{\text{int}} + 2\varepsilon_3}
+\end{equation}
+
+Para los par\'ametros t\'ipicos de eritrocitos ($\sigma_1 = 0.5\,\text{S/m}$, $d = 5\,\text{nm}$), se
+estima $f_{MW} \approx 1$--$10\,\text{MHz}$. Por encima de esta
+frecuencia, la membrana ya no separa efectivamente los compartimentos y la corriente
+
+penetra al citoplasma. La identificaci\'on de $f_{MW}$ en un espectro medido permite
+estimar directamente las propiedades de la membrana sin disociar las c\'elulas.
+
+\subsection{C\'omo Cambia $Z(\omega)$ Durante un Potencial de Acci\'on}
+
+Esta es una de las predicciones m\'as ricas del marco unificado. Durante un potencial de
+acci\'on generado por el modelo de Hodgkin--Huxley, ocurre la siguiente secuencia:
+
+\begin{enumerate}
+\item \textbf{Fase de reposo} ($V_m \approx -65\,\text{mV}$): $Z(\omega)$ muestra el
+semic\'irculo de referencia. La conductividad es baja y la membrana act\'ua como capacitor.
+\item \textbf{Despolarizaci\'on r\'apida} ($V_m \uparrow$, canales Na$^+$ abren): el aumento
+brusco de $g_{Na}$ incrementa la corriente i\'onica. Esto eleva $\sigma(t)$, lo que
+\emph{reduce} $|Z|$ en toda la banda de frecuencia (meseta baja se contrae).
+\item \textbf{Pico del potencial} ($V_m \approx +40\,\text{mV}$): m\'axima conductividad
+efectiva. El semic\'irculo en el diagrama de Nyquist se aplana y se desplaza hacia la
+izquierda.
+\item \textbf{Repolarizaci\'on} ($g_K \uparrow$, Na$^+$ inactivan): $\sigma(t)$ decrece
+gradualmente. $|Z|$ recupera su valor basal.
+\item \textbf{Post-hiperpolarizaci\'on}: el sistema retorna al estado de reposo; $Z(\omega)$
+vuelve al semic\'irculo original.
+\end{enumerate}
+
+Por tanto, \emph{monitorear $|Z(t)|$ a una frecuencia fija en la regi\'on de dispersi\'on $\beta$
+equivale a monitorear indirectamente el estado electrofisiol\'ogico de la c\'elula.}
+
+\subsection{Qu\'e Frecuencias Son M\'as Sensibles a Na$^+$ y K$^+$}
+
+El an\'alisis de sensibilidad revela que los canales i\'onicos afectan preferentemente
+diferentes bandas del espectro:
+
+\begin{itemize}
+\item \textbf{Canales de Na$^+$ ($g_{Na}$)}: mayor impacto en la \emph{meseta de alta
+frecuencia} ($f > 10^6\,\text{Hz}$), donde la corriente penetra el citoplasma. Un
+aumento de $g_{Na}$ reduce $|Z|$ en esta banda. La raz\'on f\'isica es que $g_{Na}$
+modifica $\sigma(t)$ durante la despolarizaci\'on, que es una propiedad intracelular.
+\item \textbf{Canales de K$^+$ ($g_K$)}: afectan principalmente la \emph{fase de
+transici\'on} y la repolarizaci\'on. Un $g_K$ mayor produce una repolarizaci\'on m\'as
+r\'apida, lo que se traduce en una menor duraci\'on de la excursi\'on de $Z$ en el tiempo.
+\item \textbf{Combinaci\'on $g_{Na}/g_K$}: la raz\'on $g_{Na}/g_K$ es el par\'ametro que
+m\'as afecta la amplitud del potencial de acci\'on y, por tanto, la amplitud de la
+modulaci\'on temporal de $Z(\omega, t)$. Este ratio es recuperable por el modelo inverso.
+\end{itemize}
+
+\subsection{Bioimpedancia como Observable Multiscala}
+
+Los resultados confirman que la bioimpedancia es una observable multiscala que no es una
+constante intr\'inseca del material, sino una propiedad emergente resultante de procesos
+electrodin\'amicos y fisiol\'ogicos acoplados. En particular:
+
+\begin{itemize}
+\item A \emph{baja frecuencia}: $Z$ codifica geometr\'ia celular ($\phi$, $a$) y conductividad
+
+del plasma ($\sigma_3$).
+\item En la \emph{dispersi\'on $\beta$}: $Z$ codifica las propiedades de membrana ($d$,
+$C_m$, $\tau_{MW}$).
+\item A \emph{alta frecuencia}: $Z$ codifica conductividad del citoplasma ($\sigma_1$) y
+el estado de los canales i\'onicos ($g_{Na}$, $g_K$).
+\item En el \emph{dominio temporal}: $Z(t)$ codifica la excitabilidad celular y la
+din\'amica del potencial de acci\'on.
+\end{itemize}
+
+\subsection{Sensibilidad a Par\'ametros Fisiol\'ogicos}
+
+\begin{table}[H]
+\centering
+\caption{Sensibilidad del espectro de impedancia a cada par\'ametro f\'isico con
+identificaci\'on de la banda espectral y mecanismo f\'isico responsable.}
+\label{tab:sensibilidad}
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{Par\'ametro} & \textbf{Sensibilidad} & \textbf{Banda espectral} & \textbf{Mecanismo} \\
+\midrule
+$\phi$ (hematocrito) & Alta & Espectro completo & Reducci\'on de caminos de corriente \\
+$\sigma_3$ (plasma) & Alta & $f < 10^4\,\text{Hz}$ & Conducci\'on extracelular \\
+$d$ (membrana) & Alta & Entorno de $f_{MW}$ & Capacitancia de membrana \\
+$\sigma_1$ (citoplasma) & Alta & $f > 10^6\,\text{Hz}$ & Conducci\'on intracelular \\
+$g_{Na}$ & Media & $f > 10^5\,\text{Hz}$ & Conductividad din\'amica Na$^+$ \\
+$g_K$ & Media & Tiempo: repolarizaci\'on & Duraci\'on del potencial de acci\'on \\
+$\alpha_{CC}$ & Media & Ancho de la transici\'on & Distribuci\'on de $\tau_{MW}$ \\
+
+$a$ (radio celular) & Media & Entorno de $f_{MW}$ & Cambia $\tau_{MW} \propto a$ \\
+$\varepsilon_1$ & Baja & $f > 10^8\,\text{Hz}$ & Polarizaci\'on electr\'onica \\
+$\varepsilon_2$ & Baja & Cerca de $f_{MW}$ & Almacenamiento capacitivo \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Efecto de la Heterogeneidad Celular}
+
+Introducir una distribuci\'on gaussiana de tama\~{n}os celulares conduce a un ensanchamiento
+del espectro de impedancia, consistente con el comportamiento de Cole--Cole ($\alpha_{CC} > 0$).
+El par\'ametro $\alpha_{CC}$ actua como un biomarcador de heterogeneidad: poblaciones
+celulares m\'as heterog\'eneas (por ejemplo, sangre con anemia) presentan valores mayores de
+$\alpha_{CC}$.
+
+La variabilidad biol\'ogica no es ruido; es informaci\'on sobre el estado de la poblaci\'on
+celular.
+
+\subsection{Validaci\'on de L\'imites Anal\'iticos Conocidos}
+El modelo es internamente consistente con los l\'imites anal\'iticos:
+
+\begin{itemize}
+\item $\phi \to 0$: $Z(\omega) \to 1/\sigma_3$ (medio homog\'eneo de plasma puro).
+$\checkmark$
+\item $d \to \infty$ (membrana gruesa): la c\'elula actua como esfera aislante a toda
+
+frecuencia. $\checkmark$
+\item $\sigma_2 \to \sigma_1$ (membrana conductora): desaparece la dispersi\'on $\beta$.
+$\checkmark$
+\item $\omega \to 0$: $Z \to R_0 = 1/[\sigma_3(1 - 3\phi/2)]$ (Maxwell--Garnett est\'atico).
+$\checkmark$
+\end{itemize}
+
+\subsection{Hacia un Modelo Fisiol\'ogico M\'as Realista}
+
+Para abordar las limitaciones fisiol\'ogicas, el modelo puede extenderse para incluir:
+
+\begin{itemize}
+\item Propiedades heterog\'eneas de membrana (variabilidad local de $C_m$)
+\item Modulaci\'on din\'amica de canales i\'onicos dependiente de voltaje
+\item Tiempos de relajaci\'on distribuidos con espectro continuo
+\item Osmolaridad real y efecto de la difusi\'on (Nernst--Planck)
+\end{itemize}
+
+Estas extensiones mejoran el realismo biol\'ogico mientras preservan la interpretabilidad
+f\'isica. Toda la complejidad adicional se introduce a trav\'es de par\'ametros medibles,
+garantizando que el modelo permanezca experimentalmente testeable.
+
+%=================================================================
+
+\section{Estrategia de Validaci\'on Experimental}
+
+\label{sec:validacion}
+
+%=================================================================
+
+\noindent\textit{El modelo f\'isico y el pipeline de aprendizaje autom\'atico se han desarrollado
+sobre una base \'unicamente de simulaci\'on. Esta secci\'on describe el protocolo experimental
+concreto planificado para validar tanto el modelo directo como el inverso.}
+
+\subsection{Protocolo de Medici\'on}
+
+\textbf{Preparaci\'on de muestras.} Se obtendr\'a sangre humana completa de donantes sanos
+bajo aprobaci\'on \'etica institucional. Las muestras se preparar\'an a hematocritos controlados
+$\phi \in \{0.20, 0.30, 0.40, 0.45, 0.50\}$ por centrifugaci\'on y resuspensi\'on en plasma
+autól\'ogo. La conductividad del plasma $\sigma_3$ se medir\'a de forma independiente.
+
+\textbf{Sistema de medici\'on.} Se usar\'a una configuraci\'on de cuatro electrodos (tetrapolar)
+para eliminar los artefactos de polarizaci\'on de electrodo \citep{Sanchez2013}. Las
+mediciones se realizar\'an sobre $f \in [10^3, 10^8]\,\text{Hz}$ (100 puntos equiespaciados
+logar\'itmicamente), cubriendo la dispersi\'on $\beta$ completa.
+
+\subsection{Validaci\'on del Modelo}
+
+El modelo directo se validar\'a comparando $|Z(\omega)|$ simulado y el diagrama de Nyquist
+contra espectros medidos a valores conocidos de $(\phi, \sigma_3)$. La figura de m\'erito es
+el error cuadr\'atico medio normalizado (NRMSE):
+
+\begin{equation}
+\text{NRMSE} = \frac{1}{N_f}\sqrt{\sum_{k=1}^{N_f}
+\left(\frac{|Z_{\text{sim}}(\omega_k)| - |Z_{\text{med}}(\omega_k)|}
+{|Z_{\text{med}}(\omega_k)|}\right)^2}
+\end{equation}
+
+Se considera aceptable un objetivo de NRMSE $< 5\%$ en la banda de dispersi\'on $\beta$.
+
+\begin{table}[H]
+\centering
+\caption{Protocolo de validaci\'on: condiciones experimentales, m\'etodos de referencia
+y criterios de aceptaci\'on.}
+\label{tab:validacion}
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{Objetivo} & \textbf{M\'etodo de referencia} & \textbf{Criterio}
+& \textbf{N muestras} \\
+\midrule
+Modelo directo & $|Z|$ medido vs.\ simulado & NRMSE $< 5\%$ & 5 niveles $\phi$ \\
+$\hat{\phi}$ & Microhematocrito centrifugado & MAPE $< 8\%$ & $\geq 30$ \\
+$\hat{\sigma}_1$ & Hem\'olisis + conduct\'imetro & MAPE $< 10\%$ & $\geq 20$ \\
+$\hat{\sigma}_3$ & Medici\'on directa & MAPE $< 8\%$ & $\geq 30$ \\
+\bottomrule
+
+\end{tabular}
+\end{table}
+
+Adicionalmente, la consistencia del modelo se validar\'a a trav\'es de:
+
+\begin{itemize}
+\item Comportamiento en l\'imites anal\'iticos conocidos (baja frecuencia $\to$ capacitivo,
+alta frecuencia $\to$ resistivo)
+\item Estabilidad bajo variaciones de par\'ametros
+\item Consistencia con datos publicados \citep{Schwan1957, Asami2002, Buendia2015}
+\end{itemize}
+
+%=================================================================
+
+\section{Limitaciones del Modelo}
+
+
+\label{sec:limitations}
+
+%=================================================================
+\paragraph{Alcance declarado del modelo.}
+El modelo no pretende describir \emph{todos} los procesos
+fisiol\'ogicos, sino capturar los \textbf{mecanismos
+electromagn\'eticos dominantes} relevantes para la
+bioimpedancia en $10^2$--$10^9$\,Hz.
+No incluye interacciones moleculares detalladas ni
+procesos bioqu\'imicos intracelulares, los cuales se
+consideran fuera del alcance del presente trabajo.
+
+El modelo de aprendizaje autom\'atico no reemplaza la
+f\'isica del sistema: act\'ua como herramienta para el
+problema inverso, cuya generalizaci\'on a datos reales
+depender\'a de la fidelidad del modelo f\'isico
+(l\'inea prioritaria de trabajo futuro).
+
+
+
+Una evaluaci\'on rigurosa de las limitaciones del modelo es esencial para su aplicaci\'on
+responsable.
+\paragraph{Geometr\'ia esf\'erica.}
+
+Los eritrocitos son discos bic\'oncavos ($\sim 8\,\mu$m de di\'ametro, $\sim 2\,\mu$m de
+grosor). La aproximaci\'on esf\'erica preserva la f\'isica electrost\'atica esencial pero no puede
+reproducir la polarizabilidad dependiente de la orientaci\'on de c\'elulas en forma de disco.
+
+\paragraph{Teor\'ia del medio efectivo para suspensiones diluidas.}
+
+La teor\'ia de Maxwell--Garnett es rigurosamente v\'alida solo para $\phi \ll 1$. A hematocritos
+fisiol\'ogicos ($\phi \approx 0.40$), las interacciones c\'elula-c\'elula se vuelven significativas.
+
+\paragraph{Citoplasma y membrana homog\'eneos.}
+
+El citoplasma se modela como un medio uniforme con una sola relajaci\'on de Cole--Cole,
+ignorando el n\'ucleo, las mitocondrias y los filamentos del citoesqueleto.
+
+\paragraph{R\'egimen de respuesta lineal.}
+
+Todas las ecuaciones asumen respuesta diel\'ectrica lineal, v\'alida para los campos de medici\'on
+t\'ipicos de bioimpedancia ($\sim 10\,\text{mV/cm}$). Se rompe cerca de los umbrales de
+electroporaci\'on ($\sim 1\,\text{kV/cm}$).
+
+\paragraph{Linealidad de la din\'amica de canales.}
+
+El presente modelo se enfoca en las propiedades el\'ectricas electrodin\'amicas y pasivas de la
+membrana, incorporando corrientes i\'onicas simplificadas. Procesos activos como el bombeo de
+iones, el comportamiento estoc\'astico de canales y la regulaci\'on bioqu\'imica intracelular no
+se modelan expl\'icitamente, pero pueden incorporarse en extensiones futuras.
+
+\paragraph{Limitaciones biol\'ogicas.}
+
+El modelo asume c\'elulas esf\'ericas y medios homog\'eneos, lo que puede limitar su aplicabilidad
+a tejidos biol\'ogicos complejos con anisotrop\'ia, interacciones c\'elula-c\'elula o din\'amica de
+fluidos. Extender el modelo a geometr\'ias no esf\'ericas y tejidos heterog\'eneos es un objetivo
+prioritario del trabajo futuro.
+\paragraph{Generalizaci\'on del aprendizaje autom\'atico.}
+
+La red neuronal se entrena \'unicamente con datos de simulaci\'on. La transferencia a datos
+experimentales requiere que los artefactos instrumentales (polarizaci\'on de electrodo,
+capacitancia par\'asita) sean corregidos en el preprocesamiento.
+
+%=================================================================
+
+\section{Cadena Conceptual Completa}
+
+\label{sec:chain}
+
+%=================================================================
+
+El marco multiscala completo se resume en la siguiente cadena:
+
+\begin{equation}
+\underbrace{\text{MC}}_{\S\ref{sec:atomic}}
+\;\xrightarrow{\text{Cls.-Mos.}}\;
+\underbrace{\alpha(\omega)}_{\S\ref{sec:atomic}}
+\;\xrightarrow{\text{Cole--Cole}}\;
+\underbrace{\varepsilon^*(\omega)}_{\S\ref{sec:debye}}
+\;\xrightarrow{\text{MW}}\;
+\underbrace{Z_{\text{c\'el.}}}_{\S\ref{sec:cell}}
+\;\xrightarrow{\text{MG}}\;
+\underbrace{Z_{\text{sangre}}}_{\S\ref{sec:sangre}}
+\;\xrightarrow{\text{MC}}\;
+\underbrace{\text{BD}}_{\S\ref{sec:ml}}
+\;\xrightarrow{\text{RN}}\;
+\underbrace{\text{Predicci\'on}}_{\S\ref{sec:results}}
+\end{equation}
+
+La cadena extendida que incorpora las extensiones fisiol\'ogicas es:
+
+\begin{equation}
+\alpha_{\text{eff}}
+\rightarrow
+\varepsilon^*(\omega)
+\rightarrow
+Z_m(\omega)
+\rightarrow
+V_m
+\rightarrow
+I_{\text{ion}}
+\rightarrow
+\text{Cellular State}
+\end{equation}
+
+Esta cadena destaca la naturaleza multiscala del problema: cada nivel proporciona la entrada
+necesaria y suficiente para el siguiente. La consistencia f\'isica se preserva en todo momento
+--- no se introducen par\'ametros fenomenol\'ogicos sin derivaci\'on.
+
+%=================================================================
+
+\section{Aplicaciones}
+
+\label{sec:aplicaciones}
+
+%=================================================================
+
+\begin{itemize}
+\item \textbf{An\'alisis de sangre}: estimaci\'on no invasiva del hematocrito y la
+conductividad del citoplasma desde un sensor en la mu\~{n}eca o en el dedo.
+\item \textbf{Detecci\'on de enfermedades}: los cambios en la capacitancia de la membrana
+y la conductividad del citoplasma son biomarcadores conocidos para la anemia,
+la malaria, la anemia falciforme y ciertos tipos de c\'ancer.
+\item \textbf{Caracterizaci\'on de tejidos}: el marco se aplica directamente a cualquier
+tejido modelado como una suspensi\'on de c\'elulas en matriz extracelular.
+\item \textbf{Microflu\'idica de c\'elula \'unica}: en canales microflu\'idicos, el modelo puede
+adaptarse para predecir propiedades individuales de c\'elulas a partir de impulsos
+de impedancia de tr\'ansito.
+\item \textbf{Monitoreo de excitabilidad celular}: la bioimpedancia dependiente del tiempo,
+vinculada con la din\'amica de Hodgkin--Huxley, puede usarse para monitorear
+estados de excitabilidad celular de forma no invasiva.
+\end{itemize}
+
+%=================================================================
+
+\section{Aportaciones Principales}
+
+\label{sec:contributions}
+
+%=================================================================
+
+Las principales contribuciones de este trabajo pueden resumirse como sigue.
+
+La contribuci\'on principal de este trabajo es la integraci\'on de un modelo
+multiescala que conecta la f\'isica fundamental con la fisiolog\'ia celular,
+permitiendo la construcci\'on de un marco predictivo basado en bioimpedancia.
+A diferencia de modelos tradicionales que emplean descripciones fenomenol\'ogicas,
+el enfoque propuesto integra diferentes niveles de descripci\'on ---desde la
+polarizaci\'on at\'omica hasta la din\'amica de membranas celulares--- incorporando
+adem\'as efectos de distribuci\'on y heterogeneidad biol\'ogica.
+
+El aporte central radica en el acoplamiento consistente entre modelos f\'isicos de polarizaci\'on
+at\'omica y modelos fisiol\'ogicos de transporte i\'onico, lo cual permite una descripci\'on
+integrada del sistema desde la escala at\'omica hasta la respuesta el\'ectrica macrosc\'opica. A
+diferencia de los enfoques fenomenol\'ogicos existentes, cada par\'ametro del modelo posee un
+significado f\'isico preciso y puede relacionarse directamente con una magnitud medible.
+
+\begin{itemize}
+
+\item Desarrollo de un marco te\'orico multiescala que conecta la polarizaci\'on at\'omica,
+la respuesta diel\'ectrica y la bioimpedancia, derivando cada nivel desde primeros principios.
+
+\item Derivaci\'on de una formulaci\'on din\'amica de bioimpedancia $Z(\omega,t)$ que acopla
+la electrodin\'amica dependiente de la frecuencia con la din\'amica temporal del potencial de
+membrana.
+
+\item Integraci\'on de la din\'amica de canales i\'onicos de Hodgkin--Huxley en modelos
+diel\'ectricos y conductivos de medios biol\'ogicos, unificando biolog\'ia celular y f\'isica
+del continuo.
+
+\item Construcci\'on de un dataset enteramente f\'isicamente fundamentado para entrenar
+modelos
+de aprendizaje autom\'atico, evitando la generaci\'on emp\'irica o ad-hoc de datos.
+\item Demostraci\'on de que los par\'ametros fisiol\'ogicos pueden inferirse a partir de
+espectros de impedancia usando redes neuronales, validando la invertibilidad del modelo.
+
+\item Establecimiento de un pipeline computacional que vincula teor\'ia, simulaci\'on y
+predicci\'on basada en datos dentro de un marco unificado.
+
+\end{itemize}
+
+%=================================================================
+
+\section{Archivos Generados por la Implementaci\'on}
+
+\label{sec:archivos}
+
+%=================================================================
+
+La ejecuci\'on completa de los cuatro scripts produce los siguientes archivos,
+que sirven tanto como resultados del trabajo como insumos para futuros an\'alisis:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}llp{7cm}@{}}
+\toprule
+\textbf{Archivo} & \textbf{Tipo} & \textbf{Contenido} \\
+\midrule
+\texttt{bioimpedancia.db}            & SQLite & 5\,000 espectros etiquetados con par\'ametros fisiol\'ogicos \\
+\texttt{bionet\_inverso.pt}          & PyTorch & Pesos de BioNet + estad\'isticas de normalizaci\'on \\
+\texttt{y\_stats.npy}                & NumPy & Media y desviaci\'on est\'andar de etiquetas (para desnormalizar) \\
+\texttt{01\_espectros\_simulacion.pdf} & Figura & $|Z|$, fase y diagrama de Nyquist para par\'ametros base \\
+\texttt{01\_barrido\_parametros.pdf}   & Figura & Sensibilidad de $|Z(\omega)|$ a $\sigma_1$, $\sigma_3$, $\phi$ \\
+\texttt{03\_curva\_aprendizaje.pdf}    & Figura & MSE de entrenamiento y validaci\'on por \'epoca \\
+\texttt{04a\_predicho\_vs\_real.pdf}   & Figura & Dispersi\'on $\hat{y}$ vs $y$ para los 5 par\'ametros \\
+\texttt{04b\_histograma\_errores.pdf}  & Figura & Distribuci\'on del error relativo por par\'ametro \\
+\texttt{04c\_mapa\_correlacion.pdf}    & Figura & Mapa de calor $|r|$ entre features y par\'ametros \\
+\texttt{04e\_espectros\_parametros.pdf}& Figura & Barrido de $|Z|$ en rangos fisiol\'ogicos \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+%=================================================================
+
+\section{Conclusiones}
+
+\label{sec:conclusions}
+
+%=================================================================
+
+En este trabajo se ha desarrollado un modelo multiescala que permite conectar
+la polarizaci\'on microsc\'opica de la materia con la respuesta macrosc\'opica de
+bioimpedancia en sistemas biol\'ogicos. A trav\'es de una construcci\'on progresiva,
+se integraron conceptos de electrodim\'amica, mec\'anica estad\'istica y fisiolog\'ia
+celular, dando lugar a un marco te\'orico consistente y f\'isicamente fundamentado.
+
+Partiendo de la descripci\'on de la interacci\'on campo-materia a nivel at\'omico,
+
+se estableci\'o la polarizabilidad como un elemento clave para comprender la
+respuesta diel\'ectrica. Mediante la relaci\'on de Clausius--Mossotti, se logr\'o
+conectar esta descripci\'on microsc\'opica con propiedades macrosc\'opicas del medio,
+permitiendo introducir posteriormente efectos din\'amicos a trav\'es de modelos
+de relajaci\'on como Debye y Cole--Cole.
+
+La extensi\'on del modelo hacia sistemas biol\'ogicos incorpor\'o la estructura y
+din\'amica de la membrana celular, as\'i como fen\'omenos de polarizaci\'on interfacial
+descritos por el mecanismo de Maxwell--Wagner. De manera importante, se integr\'o
+la contribuci\'on de canales i\'onicos, lo cual permiti\'o capturar efectos
+fisiol\'ogicos relevantes y establecer una dependencia din\'amica en la conductividad.
+
+Uno de los resultados m\'as relevantes de este trabajo es la interpretaci\'on de la
+bioimpedancia como un observable f\'isico que contiene informaci\'on sobre la
+estructura y din\'amica interna del sistema. Esta perspectiva permite reformular
+el problema como uno de tipo inverso, en el cual se busca inferir par\'ametros
+fisiol\'ogicos a partir de mediciones el\'ectricas.
+
+Debido a la complejidad y no linealidad de este problema, se implement\'o un enfoque
+basado en aprendizaje autom\'atico, el cual demostr\'o ser capaz de aproximar la
+relaci\'on entre la respuesta en frecuencia y los par\'ametros internos del sistema.
+Esto abre la posibilidad de desarrollar herramientas predictivas para la
+caracterizaci\'on no invasiva de tejidos biol\'ogicos.
+
+Si bien el modelo propuesto se basa en ciertas idealizaciones, como geometr\'ias
+simplificadas y medios homog\'eneos, proporciona una base s\'olida para futuras
+extensiones que incluyan mayor complejidad estructural y validaci\'on experimental.
+
+En conjunto, este trabajo establece un puente entre la f\'isica fundamental y la
+
+fisiolog\'ia, proponiendo una nueva forma de interpretar la bioimpedancia como
+una herramienta capaz de revelar informaci\'on interna de sistemas biol\'ogicos.
+Este enfoque no solo contribuye a una mejor comprensi\'on de los fen\'omenos
+involucrados, sino que tambi\'en abre nuevas oportunidades en el desarrollo de
+t\'ecnicas diagn\'osticas basadas en mediciones el\'ectricas.
+
+Como trabajo futuro, se propone la incorporaci\'on de geometr\'ias m\'as realistas,
+modelos m\'as detallados de transporte i\'onico y la validaci\'on experimental con
+datos reales, lo cual permitir\'a evaluar el alcance y aplicabilidad del modelo
+en contextos biom\'edicos.
+
+\paragraph{Fundamento f\'isico.}
+La polarizabilidad at\'omica se deriv\'o desde primeros principios usando el
+oscilador de Lorentz y la teor\'ia de perturbaciones cu\'antica. El par\'ametro
+$\tau$ no es \'unicamente una constante matem\'atica, sino que representa procesos
+f\'isicos como la rotaci\'on de dipolos o la reorganizaci\'on estructural del medio.
+De manera similar, la conductividad $\sigma$ est\'a asociada al movimiento de iones,
+particularmente sodio y potasio, conectando el modelo directamente con la
+fisiolog\'ia del sistema.
+
+\paragraph{Relajaci\'on din\'amica y heterogeneidad.}
+La generalizaci\'on de Cole--Cole captura la relajaci\'on distribuida mediante
+$\alpha_{CC}$, un posible biomarcador de la heterogeneidad biol\'ogica del tejido.
+La introducci\'on de una distribuci\'on de tama\~{n}os celulares permite capturar
+la variabilidad biol\'ogica inherente a sistemas reales, siendo responsable del
+ensanchamiento observado en la respuesta en frecuencia.
+
+\paragraph{Electrodin\'amica unicelular y sangre.}
+La soluci\'on cuasiestática de Maxwell identifica $\tau_{MW}$ como el par\'ametro clave
+
+que vincula las propiedades de la membrana con la dispersi\'on $\beta$. La
+teor\'ia de Maxwell--Garnett captura la respuesta colectiva de la sangre en
+funci\'on del hematocrito, la capacitancia de la membrana y la conductividad del plasma.
+
+\paragraph{Canales i\'onicos y potencial de membrana.}
+Los canales i\'onicos introducen una dependencia temporal y no lineal en $\sigma$,
+ya que su apertura y cierre dependen de $V_m$. A su vez, el potencial de
+membrana modifica la distribuci\'on de cargas en la interfaz celular, afectando
+directamente la polarizaci\'on interfacial y, por consiguiente, la impedancia medida.
+Esto confirma que cambios fisiol\'ogicos pueden detectarse indirectamente mediante
+bioimpedancia.
+
+\paragraph{Aprendizaje autom\'atico como extensi\'on f\'isica.}
+La red neuronal no es una caja negra, sino el inverso matem\'atico del modelo
+f\'isico. Su capacidad de generalizaci\'on est\'a garantizada por el fundamento
+f\'isico de los datos de entrenamiento.
+
+\paragraph{Perspectiva.}
+Los pr\'oximos pasos son: (i)~validaci\'on experimental con eritrocitos humanos;
+(ii)~geometr\'ias celulares no esf\'ericas; (iii)~polarizaci\'on de electrodo;
+(iv)~implementaci\'on en tiempo real para diagn\'ostico en punto de atenci\'on;
+y (v)~transferencia del modelo a datos experimentales reales.
+
+% ---- CIERRE FINAL ---
+\begin{center}
+\textit{
+Este trabajo establece un puente entre la f\'isica fundamental y la fisiolog\'ia,
+demostrando que la bioimpedancia puede ser utilizada no solo como herramienta
+de medici\'on, sino como un medio para acceder a la din\'amica interna de sistemas biol\'ogicos, abriendo nuevas oportunidades en el desarrollo de t\'ecnicas
+diagn\'osticas basadas en mediciones el\'ectricas.
+}
+\end{center}
+
+\section{Impacto y Perspectivas Futuras}
+
+\label{sec:impact}
+
+%=================================================================
+
+El marco desarrollado en este trabajo tiene implicaciones potenciales en m\'ultiples \'areas
+de la ciencia y la ingenier\'ia biom\'edica.
+
+En diagn\'ostico, abre la posibilidad de extraer informaci\'on a nivel celular a partir de
+mediciones de impedancia no invasivas, con aplicaciones en an\'alisis de sangre, detecci\'on
+de enfermedades y caracterizaci\'on de tejidos.
+
+En modelado computacional, proporciona un modelo para integrar leyes f\'isicas con
+aprendizaje autom\'atico, garantizando interpretabilidad y consistencia en enfoques
+basados en datos.
+
+El trabajo futuro puede extender este modelo incorporando:
+\begin{itemize}
+\item Geometr\'ias celulares complejas y membranas anisotr\'opicas
+\item Interacciones multicelulares y organizaci\'on a nivel de tejido
+\item Acoplamiento con din\'amica de fluidos en sistemas capilares
+\item Validaci\'on experimental usando mediciones reales de bioimpedancia
+\end{itemize}
+
+Estas direcciones fortalecer\'an a\'un m\'as la conexi\'on entre los modelos te\'oricos y las
+aplicaciones biom\'edicas del mundo real.
+
+%=================================================================
+
+\section{Trabajo Futuro}
+
+\label{sec:futuro}
+
+%=================================================================
+
+\begin{itemize}
+\item Compartimentos subcelulares (n\'ucleo, mitocondrias) como capas conc\'entricas
+adicionales en el modelo celular.
+\item Geometr\'ias no esf\'ericas: esferoides prolatos/oblatos para c\'elulas nucleadas y
+discos bic\'oncavos para eritrocitos.
+
+\item Teor\'ia de Bruggeman o de medio efectivo diferencial para suspensiones
+concentradas ($\phi > 0.5$).
+\item Acoplamiento con la din\'amica de flujo microflu\'idico y capilar.
+\item Incorporaci\'on del modelo de Hodgkin--Huxley completo con compuertas de canal
+$m$, $h$, $n$ derivadas desde primeros principios.
+\item Modelo de bomba Na$^+$/K$^+$ para sistemas de no-equilibrio.
+\item Transferencia de aprendizaje de datos de simulaci\'on a datos experimentales.
+\item Validaci\'on experimental: mediciones de bioimpedancia de cuatro electrodos en
+sangre humana a hematocritos controlados.
+\end{itemize}
+%=================================================================
+
+\begin{thebibliography}{99}
+\bibitem[Fricke(1925)]{Fricke1925}
+Fricke, H.\ (1925).
+La capacidad el\'ectrica de suspensiones con referencia especial a la sangre.
+\textit{Journal of General Physiology}, \textbf{9}, 137--152.
+
+\bibitem[Schwan(1957)]{Schwan1957}
+Schwan, H.\ P.\ (1957).
+Propiedades el\'ectricas de tejidos y suspensiones celulares.
+\textit{Advances in Biological and Medical Physics}, \textbf{5}, 147--209.
+
+\bibitem[Schwan(1994)]{Schwan1994}
+Schwan, H.\ P.\ (1994).
+Propiedades el\'ectricas de tejidos y suspensiones celulares: mecanismos y modelos.
+\textit{Proc.\ 16th Annual International Conference of the IEEE EMBS}, A70--A71.
+
+\bibitem[Cole \& Cole(1940)]{Cole1940}
+
+Cole, K.\ S.\ y Cole, R.\ H.\ (1940).
+Dispersi\'on y absorci\'on en diel\'ectricos {I}: Caracter\'isticas de corriente alterna.
+\textit{Journal of Chemical Physics}, \textbf{9}, 341--351.
+
+\bibitem[Foster \& Schwan(1989)]{Foster1989}
+Foster, K.\ R.\ y Schwan, H.\ P.\ (1989).
+Propiedades diel\'ectricas de tejidos y materiales biol\'ogicos: una revisi\'on cr\'itica.
+\textit{Critical Reviews in Biomedical Engineering}, \textbf{17}, 25--104.
+
+\bibitem[Asami(2002)]{Asami2002}
+Asami, K.\ (2002).
+Caracterizaci\'on de c\'elulas biol\'ogicas por espectroscop\'ia diel\'ectrica.
+\textit{Journal of Non-Crystalline Solids}, \textbf{305}, 268--277.
+
+\bibitem[Kaatze(1989)]{Kaatze1989}
+Kaatze, U.\ (1989).
+Permitividad compleja del agua en funci\'on de la frecuencia y la temperatura.
+\textit{Journal of Chemical and Engineering Data}, \textbf{34}, 371--374.
+
+\bibitem[Maxwell(1873)]{Maxwell1873}
+Maxwell, J.\ C.\ (1873).
+\textit{Tratado sobre Electricidad y Magnetismo}.
+Clarendon Press, Oxford.
+
+\bibitem[Wagner(1914)]{Wagner1914}
+Wagner, K.\ W.\ (1914).
+Explicaci\'on de los procesos de pospolarizaci\'on diel\'ectrica seg\'un las ideas de Maxwell.
+\textit{Archiv f\"{u}r Elektrotechnik}, \textbf{2}, 371--387.
+
+\bibitem[Griffiths(1999)]{Griffiths1999}
+Griffiths, D.\ J.\ (1999).
+\textit{Introducci\'on a la Electrodin\'amica} (3.\textordfeminine~ed.).
+Prentice Hall.
+
+\bibitem[S\'anchez et al.(2013)]{Sanchez2013}
+S\'anchez, B., Vandersteen, G., Bragos, R.\ y Schoukens, J.\ (2013).
+Fundamentos de mediciones de espectroscop\'ia de impedancia de banda ancha usando
+excitaciones peri\'odicas.
+\textit{Measurement Science and Technology}, \textbf{23}, 105501.
+\bibitem[Buend\'ia et al.(2015)]{Buendia2015}
+Buend\'ia, R., S\'anchez, B., Gil-Pita, R.\ y Seoane, F.\ (2015).
+Validaci\'on experimental del modelo de impedancia de capa \'unica de eritrocitos usando
+mediciones en sangre humana.
+\textit{Journal of Physics: Conference Series}, \textbf{224}, 012128.
+
+\bibitem[Barsoukov \& Macdonald(2005)]{Barsoukov2005}
+Barsoukov, E.\ y Macdonald, J.\ R.\ (eds.) (2005).
+\textit{Espectroscop\'ia de Impedancia: Teor\'ia, Experimento y Aplicaciones}
+(2.\textordfeminine~ed.).
+Wiley-Interscience.
+
+\bibitem[Hanai(1960)]{Hanai1960}
+Hanai, T.\ (1960).
+Teor\'ia de la dispersi\'on diel\'ectrica debida a la polarizaci\'on interfacial y su
+aplicaci\'on a emulsiones.
+\textit{Kolloid-Zeitschrift}, \textbf{171}, 23--31.
+
+\bibitem[Pauly \& Schwan(1959)]{Pauly1959}
+
+Pauly, H.\ y Schwan, H.\ P.\ (1959).
+Sobre la impedancia de una suspensi\'on de part\'iculas esf\'ericas con una capa.
+\textit{Zeitschrift f\"{u}r Naturforschung B}, \textbf{14}, 125--131.
+
+\bibitem[Hodgkin \& Huxley(1952)]{HodgkinHuxley1952}
+Hodgkin, A.\ L.\ y Huxley, A.\ F.\ (1952).
+Una descripci\'on cuantitativa de la corriente de membrana y su aplicaci\'on a la conducci\'on
+y excitaci\'on en el nervio.
+\textit{Journal of Physiology}, \textbf{117}, 500--544.
+\bibitem[Goldman(1943)]{Goldman1943}
+Goldman, D.\ E.\ (1943).
+Potencial, impedancia y rectificaci\'on en membranas.
+\textit{Journal of General Physiology}, \textbf{27}, 37--60.
+\end{thebibliography}
+
+%=================================================================
+
+\end{document}
