@@ -48,3 +48,7 @@ El modelo multiescala de la tesis y el generador temporal son exploraciones dist
 Las cuatro aplicaciones web están en `demos-web/dist`. Ejecuta `node demos-web/test.mjs` para comprobar el parser CSV con comillas y saltos de línea, fechas inválidas, limpieza de espectros, deduplicación STIX y fórmulas de recargo/margen/impuesto. Se verificaron en el navegador las cuatro rutas con sus ejemplos y el recálculo de cotización al cambiar el peso. La carga de archivos utiliza las mismas funciones puras, con límites de tamaño y mensajes de error.
 
 Los prototipos originales permanecen documentados por separado. La cotización no es una factura; el máximo espectral no es una identificación física; los patrones STIX no son un diagnóstico de seguridad.
+
+## Alojamiento del laboratorio
+
+El laboratorio se migró a [Railway](https://juan-serena-data-lab-production.up.railway.app/) conservando los archivos de las cuatro aplicaciones. Se verificaron construcción, healthcheck, respuestas HTTPS, contenido de assets, MIME de módulos, respuestas 404 y los cuatro ejemplos en navegador. [Evidencia y configuración](demos-web/RAILWAY.md).

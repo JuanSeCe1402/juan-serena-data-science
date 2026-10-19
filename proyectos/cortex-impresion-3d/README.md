@@ -1,6 +1,6 @@
 # Cortex Studio 3D: costos y cotizaciones
 
-**[Probar la aplicación web](https://juan-serena-data-lab.blithe-tang-9862.chatgpt.site/#cortex)** · [Código de la versión web](../../demos-web/README.md)
+**[Probar la aplicación web](https://juan-serena-data-lab-production.up.railway.app/#cortex)** · [Código de la versión web](../../demos-web/README.md)
 
 Aplicación Tkinter para costos de material y electricidad, recargo y exportación a PDF. Incluye los módulos recuperados; no contiene cotizaciones ni nombres de clientes.
 

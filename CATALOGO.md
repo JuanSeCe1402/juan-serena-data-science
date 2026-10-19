@@ -41,14 +41,14 @@ El portafolio reúne 31 líneas de trabajo: aplicaciones, investigación, herram
 
 ## Demos en línea
 
-**[Abrir Applied Data Lab](https://juan-serena-data-lab.blithe-tang-9862.chatgpt.site)** · Acceso público, sin cuenta ni claves API.
+**[Abrir Applied Data Lab](https://juan-serena-data-lab-production.up.railway.app)** · Acceso público, sin cuenta ni claves API.
 
 | Aplicación | Qué puedes hacer |
 |---|---|
-| [Cortex 3D](https://juan-serena-data-lab.blithe-tang-9862.chatgpt.site/#cortex) | Calcular material, electricidad, operación, recargo o margen e impuesto; exportar JSON e imprimir la estimación. |
-| [Movilidad urbana](https://juan-serena-data-lab.blithe-tang-9862.chatgpt.site/#movilidad) | Cargar CSV, validar viajes, explorar horarios y estaciones, descargar un reporte. |
-| [Espectros ópticos](https://juan-serena-data-lab.blithe-tang-9862.chatgpt.site/#espectros) | Cargar CSV instrumentales, visualizar la señal, localizar el máximo global y exportar métricas. |
-| [Indicadores STIX](https://juan-serena-data-lab.blithe-tang-9862.chatgpt.site/#stix) | Cargar uno o varios bundles, contar objetos y deduplicar patrones entre colecciones. |
+| [Cortex 3D](https://juan-serena-data-lab-production.up.railway.app/#cortex) | Calcular material, electricidad, operación, recargo o margen e impuesto; exportar JSON e imprimir la estimación. |
+| [Movilidad urbana](https://juan-serena-data-lab-production.up.railway.app/#movilidad) | Cargar CSV, validar viajes, explorar horarios y estaciones, descargar un reporte. |
+| [Espectros ópticos](https://juan-serena-data-lab-production.up.railway.app/#espectros) | Cargar CSV instrumentales, visualizar la señal, localizar el máximo global y exportar métricas. |
+| [Indicadores STIX](https://juan-serena-data-lab-production.up.railway.app/#stix) | Cargar uno o varios bundles, contar objetos y deduplicar patrones entre colecciones. |
 
 Los ejemplos de análisis son **sintéticos** y están identificados. Los archivos propios se procesan dentro del navegador. Estas aplicaciones tienen un alcance funcional delimitado; no convierten los prototipos de investigación en modelos científicamente validados.
 

@@ -1,6 +1,6 @@
 # Movilidad urbana y bicicletas compartidas
 
-**[Probar la aplicación web](https://juan-serena-data-lab.blithe-tang-9862.chatgpt.site/#movilidad)** · [Código de la versión web](../../demos-web/README.md)
+**[Probar la aplicación web](https://juan-serena-data-lab-production.up.railway.app/#movilidad)** · [Código de la versión web](../../demos-web/README.md)
 
 Base de análisis de viajes: volumen por ciudad, duración y distribución por hora. Incluye un ejemplo sintético y una herramienta que acepta CSV locales.
 

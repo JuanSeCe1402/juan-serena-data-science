@@ -2,6 +2,8 @@
 
 El laboratorio conserva sus cuatro aplicaciones HTML/CSS/JavaScript. Caddy sirve únicamente `dist/`; los archivos de análisis se procesan dentro del navegador. No requiere base de datos, volumen, claves API ni carga de archivos al servidor.
 
+**URL pública verificada:** [https://juan-serena-data-lab-production.up.railway.app/](https://juan-serena-data-lab-production.up.railway.app/)
+
 ## Configuración del servicio
 
 - Proyecto: WUNSCE; servicio independiente `juan-serena-data-lab`.
@@ -37,3 +39,13 @@ Comprobar `/`, `/app.mjs`, `/core.mjs` y `/style.css`, el MIME JavaScript de los
 La publicación previa en Sites se conserva durante la migración. Las actualizaciones del portafolio deben apuntar al dominio Railway comprobado. Los datos que un visitante seleccione no se envían al servicio de alojamiento para análisis.
 
 [Código e instrucciones](README.md) · [Portafolio](../README.md)
+
+## Validación de la migración — 19 de octubre de 2026
+
+Railway completó el despliegue `fb7170b7-ce49-480d-9b18-2a2a6cccdccf` desde el commit `98db69f262cdc7d36a9c4c2d52277bb3e1558911`. La construcción validó Caddy y el healthcheck de `/` pasó.
+
+Se verificaron por HTTPS, con validación normal de certificados de Windows, las cuatro rutas de archivos (`/`, `/app.mjs`, `/core.mjs`, `/style.css`): HTTP 200, contenido idéntico al repositorio mediante SHA-256 y MIME correcto. Cinco rutas inexistentes o de archivos de configuración devolvieron 404.
+
+En el navegador se comprobaron las cuatro demos: Cortex mostró $125.64 con sus parámetros iniciales; movilidad, 240 viajes; espectros, 301 pares y máximo en X=1552; STIX, ocho objetos, cinco indicadores y un patrón repetido. Se ejecutó `node test.mjs` con sus casos de lógica e inválidos.
+
+La fuente GitHub está conectada a `main`, con raíz `/demos-web`. Los cambios en esa carpeta disparan construcción y despliegue; no se usan comandos manuales para futuras actualizaciones ordinarias.

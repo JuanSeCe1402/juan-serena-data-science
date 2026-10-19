@@ -47,7 +47,7 @@ Una aplicación administrativa con agenda, roles, conversación y transición a 
 
 ## Más demos para explorar
 
-**[Applied Data Lab](https://juan-serena-data-lab.blithe-tang-9862.chatgpt.site)** reúne cuatro herramientas de costos 3D, movilidad urbana, espectros ópticos e indicadores STIX. Puedes usar los ejemplos sintéticos y procesar archivos dentro del navegador.
+**[Applied Data Lab](https://juan-serena-data-lab-production.up.railway.app)** reúne cuatro herramientas de costos 3D, movilidad urbana, espectros ópticos e indicadores STIX. Puedes usar los ejemplos sintéticos y procesar archivos dentro del navegador.
 
 [Ver las cuatro demos y su alcance](CATALOGO.md#demos-en-línea) · [Código y pruebas](demos-web/README.md)
 

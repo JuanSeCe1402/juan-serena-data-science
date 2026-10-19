@@ -4,6 +4,12 @@ Cuatro demos web: costos de impresión 3D, movilidad urbana, espectros e indicad
 
 Los archivos se procesan localmente en el navegador, sin solicitudes de análisis a un servidor. Los ejemplos están etiquetados como sintéticos. Este alcance incluye carga, validación, métricas, visualización y exportación JSON; no equivale a validar los modelos académicos del portafolio.
 
+## En línea
+
+**[Abrir el laboratorio en Railway](https://juan-serena-data-lab-production.up.railway.app/)**
+
+Despliegue automático desde la rama `main`, limitado a cambios en `/demos-web/**`. Las cuatro herramientas conservan sus rutas por fragmento. [Configuración y despliegue](RAILWAY.md).
+
 ## Pruebas
 
 ```bash
