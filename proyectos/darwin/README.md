@@ -1,8 +1,29 @@
-# Predicción de recompra y evaluación reproducible — DARWIN
+# DARWIN · Predicción de recompra con evaluación reproducible
 
-Experimento sintético con regresión logística y Random Forest. Incluye limpieza, Pipeline, partición reservada, métricas y aplicación Flask. Los resultados describen el generador artificial, no clientes reales.
+**Machine learning aplicado · Python · pandas · scikit-learn · Flask**
 
-**Estado:** implementación recuperada para portafolio con pruebas automatizadas; ver el alcance y resultados en [VALIDACION](../../VALIDACION.md).
+[Probar demo](https://wunsce-darwin-production.up.railway.app/app) · [Núcleo del experimento](core.py) · [Pruebas del modelo](tests/test_core.py)
+
+![Evaluación de DARWIN en una ejecución sintética](../../docs/capturas/darwin.png)
+
+## Problema
+
+Una predicción de recompra necesita contexto: de dónde salen las variables, qué clientes se reservaron y cómo se compara el modelo con una referencia sencilla. Este proyecto hace visible ese recorrido en una aplicación web.
+
+## Implementación
+
+- Generador reproducible de historiales ficticios y limpieza de entradas.
+- Regresión logística y Random Forest, con imputación dentro de un Pipeline y escalado para la regresión logística.
+- División estratificada 75/25 antes de ajustar el preprocesamiento; IDs y etiqueta excluidos de las variables.
+- Métricas, matriz de confusión, scores y exportación de predicciones del conjunto reservado.
+
+## Evidencia y decisiones
+
+La suite incluye **63 casos aprobados** en la incorporación. Comprueba reproducibilidad, particiones disjuntas, ajuste del preprocesamiento solo con entrenamiento y recálculo de métricas, además de interfaz y configuración. [Alcance de validación](../../VALIDACION.md).
+
+La referencia mayoritaria se elige en entrenamiento y se evalúa en la misma prueba. Los umbrales no se optimizan usando prueba. Esta separación hace inspeccionable el procedimiento, sin garantizar rendimiento fuera del generador.
+
+**Límite:** tanto el historial como la recompra son sintéticos. La captura muestra una ejecución de regresión logística con 1500 clientes ficticios y semilla 42; no son resultados comerciales. La partición es aleatoria, no temporal. El siguiente paso sería evaluar sobre una fuente pública documentada con un diseño temporal adecuado.
 
 ## Ejecutar localmente
 

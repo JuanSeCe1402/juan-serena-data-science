@@ -1,8 +1,27 @@
-# Limpieza y perfilado de datos — NANA
+# NANA · Limpieza y perfilado de datos
 
-Transforma el ejemplo sintético incluido y exporta CSV/SQLite. Conserva identificadores y señala casos ambiguos. Su índice de completitud y unicidad no mide exactitud semántica.
+**Ingeniería de datos · Python · pandas · SQLite · Flask**
 
-**Estado:** implementación recuperada para portafolio con pruebas automatizadas; ver el alcance y resultados en [VALIDACION](../../VALIDACION.md).
+[Probar demo](https://wunsce-nana-production.up.railway.app/app) · [Motor de transformación](core.py) · [Pruebas del núcleo](tests/test_core.py)
+
+![Perfil de columnas de NANA](../../docs/capturas/nana.png)
+
+## Problema
+
+Un CSV puede contener encabezados inconsistentes, filas duplicadas y valores ausentes. Antes de analizarlo o llevarlo a una base de datos, conviene conocer qué se transformó y qué necesita revisión.
+
+## Implementación
+
+- Normalización y desambiguación de encabezados, tratamiento de marcadores de faltantes y eliminación de duplicados.
+- Inferencia conservadora de tipos: preserva identificadores y evita conversiones parciales que descarten valores.
+- Perfil de columnas con tipos, faltantes y valores únicos; vista previa y exportación CSV/SQLite.
+- Descargas ligadas a la sesión y neutralización de prefijos de fórmulas en el CSV.
+
+## Evidencia y decisiones
+
+El ejemplo incluido pasa de **6 registros a 5** al retirar un duplicado y conserva **2 valores faltantes** para revisión. No inventa datos para completar las celdas. La suite de la incorporación aprobó **30 casos**, con comprobaciones de transformación, aislamiento, salidas e interfaz. [Alcance de validación](../../VALIDACION.md).
+
+**Límite:** la demo pública procesa solo el ejemplo ficticio incluido. Su índice combina completitud y unicidad; no mide exactitud semántica. Las fechas ambiguas y los identificadores se conservan. El siguiente paso es ampliar los casos de prueba de formatos locales y documentar reglas por dominio.
 
 ## Ejecutar localmente
 

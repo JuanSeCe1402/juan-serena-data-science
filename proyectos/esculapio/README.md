@@ -1,8 +1,29 @@
-# Agenda y operación administrativa de consultorio — ESCULAPIO
+# ESCULAPIO · Agenda y operación administrativa
 
-Demo FastAPI, Jinja y SQLAlchemy con agenda, roles simulados y transición a atención humana. Integraciones y trabajos externos deshabilitados por defecto; solo alias ficticios.
+**Desarrollo backend · Python · FastAPI · SQLAlchemy · SQLite · Jinja**
 
-**Estado:** implementación recuperada para portafolio con pruebas automatizadas; ver el alcance y resultados en [VALIDACION](../../VALIDACION.md).
+[Probar demo](https://wunsce-esculapio-production.up.railway.app/demo) · [Aplicación](app/main.py) · [Reservas](app/scheduler.py) · [Pruebas de servicios](tests/test_services.py)
+
+![Atención humana en el buzón de ESCULAPIO con alias ficticios](../../docs/capturas/esculapio.png)
+
+## Problema
+
+Coordinar una agenda y las solicitudes de atención exige mantener consistencia entre horarios, permisos y conversación. Una reserva concurrente o un cambio de estado inesperado puede alterar el flujo administrativo.
+
+## Implementación
+
+- Agenda y reprogramación con restricciones, transacciones y detección de versiones desactualizadas.
+- Roles y controles de acciones en servidor; la demo permite explorar roles simulados.
+- Pausa de respuestas automáticas al solicitar atención humana y reanudación explícita por el rol autorizado.
+- Base temporal por sesión, alias ficticios, PDF de agenda y adaptador de mensajería desactivado en la demo.
+
+## Evidencia y decisiones
+
+La suite de la incorporación aprobó **74 casos**, incluidos reservas concurrentes, permisos, citas desactualizadas y conservación de pausas manuales. Los transportes externos se prueban con respuestas simuladas. [Alcance de validación](../../VALIDACION.md).
+
+La demo separa los espacios de cada visitante y limita las entradas administrativas. La selección pública de rol permite explorar la interfaz; no representa autenticación de una clínica real.
+
+**Límite:** no contiene pacientes reales ni realiza envíos externos. La integración con un proveedor, la operación privada y sus requisitos necesitan verificaciones propias. No es una aplicación diagnóstica ni un expediente clínico.
 
 ## Ejecutar localmente
 
