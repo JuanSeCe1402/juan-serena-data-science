@@ -1,0 +1,22 @@
+{
+	admin off
+	auto_https off
+}
+
+:{$PORT:8080} {
+	root * /srv
+	encode zstd gzip
+	header {
+		X-Content-Type-Options nosniff
+		Referrer-Policy strict-origin-when-cross-origin
+		X-Frame-Options DENY
+	}
+
+	@document path / /index.html
+	header @document Cache-Control "no-cache"
+
+	@assets path *.mjs *.css
+	header @assets Cache-Control "public, max-age=300"
+
+	file_server
+}
