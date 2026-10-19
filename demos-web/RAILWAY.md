@@ -22,9 +22,9 @@ Las rutas de herramientas usan fragmentos (`/#cortex`, `/#movilidad`, `/#espectr
 ## Verificar o desplegar
 
 ```bash
-cd demos-web
-node test.mjs
-railway up --project <id-del-proyecto> --service juan-serena-data-lab --environment production --detach
+# Desde la raíz del repositorio
+node demos-web/test.mjs
+railway up --project 14e204d8-0276-4b58-9a9e-6f6a2acaacfc --service juan-serena-data-lab --environment production --detach
 ```
 
 Con Docker instalado, construir desde esta carpeta y probar un puerto alternativo:
@@ -48,4 +48,6 @@ Se verificaron por HTTPS, con validación normal de certificados de Windows, las
 
 En el navegador se comprobaron las cuatro demos: Cortex mostró $125.64 con sus parámetros iniciales; movilidad, 240 viajes; espectros, 301 pares y máximo en X=1552; STIX, ocho objetos, cinco indicadores y un patrón repetido. Se ejecutó `node test.mjs` con sus casos de lógica e inválidos.
 
-La fuente GitHub está conectada a `main`, con raíz `/demos-web`. Los cambios en esa carpeta disparan construcción y despliegue; no se usan comandos manuales para futuras actualizaciones ordinarias.
+La fuente GitHub está configurada en `main`, con raíz `/demos-web`. El despliegue inicial terminó correctamente, pero la creación del disparador automático fue rechazada por Railway porque su integración de GitHub no tiene acceso autorizado a este repositorio. Por ello no se afirma que los pushes futuros desplieguen automáticamente.
+
+Para habilitar autodeploy, el titular debe conceder a la aplicación de Railway acceso al repositorio en GitHub y conectar el disparador de `main` en Railway. No se ampliaron permisos de cuenta durante esta migración. Hasta entonces, actualizar mediante `railway up` desde la raíz del checkout, como se indica arriba; el Root Directory del servicio limita la construcción a `/demos-web`.

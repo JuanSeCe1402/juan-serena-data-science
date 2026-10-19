@@ -8,7 +8,7 @@ Los archivos se procesan localmente en el navegador, sin solicitudes de análisi
 
 **[Abrir el laboratorio en Railway](https://juan-serena-data-lab-production.up.railway.app/)**
 
-Despliegue automático desde la rama `main`, limitado a cambios en `/demos-web/**`. Las cuatro herramientas conservan sus rutas por fragmento. [Configuración y despliegue](RAILWAY.md).
+Código versionado en la rama `main` y servicio publicado en Railway. Las cuatro herramientas conservan sus rutas por fragmento. La activación de actualizaciones automáticas requiere conceder a la integración de Railway acceso a este repositorio. [Configuración y despliegue](RAILWAY.md).
 
 ## Pruebas
 
