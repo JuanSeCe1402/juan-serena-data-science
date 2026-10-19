@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{% block title %}FREY · WUNSCE{% endblock %}</title>
+  <meta name="description" content="{% block description %}{{ seo_description }}{% endblock %}">
+  <script src="{{ url_for('static', filename='js/boot.js') }}"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <script defer src="{{ url_for('static', filename='js/main.js') }}"></script>
+  <meta name="theme-color" content="#3e4228">
+  <meta name="robots" content="{{ 'noindex, follow' if request.endpoint == 'product_app' or code is defined else 'index, follow' }}">
+  {% if canonical_url %}<link rel="canonical" href="{{ canonical_url }}">{% endif %}
+  <link rel="icon" href="{{ url_for('static', filename='img/wunsce-logo-144.webp') }}" type="image/webp">
+{% if canonical_url %}
+  <meta property="og:site_name" content="WUNSCE Analytics & Environments">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_MX">
+  <meta property="og:title" content="{{ self.title()|striptags|trim }}">
+  <meta property="og:description" content="{{ seo_description }}">
+  <meta property="og:url" content="{{ canonical_url }}">
+  <meta property="og:image" content="{{ social_image }}">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="WUNSCE Analytics & Environments — Comprender. Elegir. Transformar.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ self.title()|striptags|trim }}">
+  <meta name="twitter:description" content="{{ seo_description }}">
+  <meta name="twitter:image" content="{{ social_image }}">
+  <meta name="twitter:image:alt" content="WUNSCE Analytics & Environments — Comprender. Elegir. Transformar.">
+  {% endif %}
+</head>
+<body>
+<a class="skip-link" href="#main-content">Saltar al contenido</a>
+<header class="site-header">
+  <a class="brand" href="{{ url_for('home') }}"{% if request.endpoint == 'home' %} aria-current="page"{% endif %}>
+    <img src="{{ url_for('static', filename='img/wunsce-logo-144.webp') }}" alt="" width="42" height="42">
+    <div>
+      <strong>WUNSCE</strong>
+      <span>Analytics & Environments</span>
+    </div>
+  </a>
+  <button type="button" class="menu-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-nav">☰</button>
+  <nav id="main-nav" class="nav" aria-label="Navegación principal">
+    <a href="{{ url_for('home') }}"{% if request.endpoint == 'home' %} aria-current="page"{% endif %}>Inicio</a>
+    <a href="{{ url_for('features') }}"{% if request.endpoint == 'features' %} aria-current="page"{% endif %}>Capacidades</a>
+    <a href="{{ url_for('case_study') }}"{% if request.endpoint == 'case_study' %} aria-current="page"{% endif %}>Caso demostrativo</a>
+    <a href="{{ url_for('architecture') }}"{% if request.endpoint == 'architecture' %} aria-current="page"{% endif %}>Arquitectura</a>
+    <a class="nav-cta" href="{{ url_for('product_app') }}"{% if request.endpoint == 'product_app' %} aria-current="page"{% endif %}>Abrir FREY</a>
+  </nav>
+</header>
+<div class="return-bar"><a class="back-to-wunsce" href="{{ wunsce_url }}" lang="en"><span aria-hidden="true">←</span> Back to WUNSCE</a></div>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+  <div class="flash-wrap">
+    {% for category, message in messages %}
+      <div class="flash {{ category }}" role="alert">{{ message }}</div>
+    {% endfor %}
+  </div>
+  {% endif %}
+{% endwith %}
+
+<main id="main-content" tabindex="-1">{% block content %}{% endblock %}</main>
+
+<footer class="site-footer">
+  <div>
+    <strong>WUNSCE</strong>
+    <p lang="en">Understand. Choose. Transform.</p>
+  </div>
+  <div class="footer-links">
+    <a href="{{ url_for('features') }}"{% if request.endpoint == 'features' %} aria-current="page"{% endif %}>Capacidades</a>
+    <a href="{{ url_for('case_study') }}"{% if request.endpoint == 'case_study' %} aria-current="page"{% endif %}>Caso demostrativo</a>
+    <a href="{{ url_for('architecture') }}"{% if request.endpoint == 'architecture' %} aria-current="page"{% endif %}>Arquitectura</a>
+  </div>
+  <div class="footer-contact"><span>FREY · Demo pública de costos y precios con valores hipotéticos.</span></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Caso demostrativo · NANA{% endblock %}
+{% block content %}
+<section class="page-hero">
+  <div class="eyebrow">EJEMPLO SINTÉTICO · WUNSCE I+D</div>
+  <h1>De archivos inconsistentes a una estructura lista para análisis.</h1>
+  <p>Un escenario ficticio, sin clientes ni datos reales, diseñado para enseñar cómo WUNSCE aborda la primera etapa de un proyecto de datos.</p>
+</section>
+
+<section class="section case-grid">
+  <div class="case-label">01 · Problema</div>
+  <div>
+    <h2>Información útil atrapada en archivos difíciles de reutilizar.</h2>
+    <p>El escenario parte de exportaciones CSV con encabezados inconsistentes, registros duplicados, fechas en formatos mixtos y campos faltantes.</p>
+  </div>
+
+  <div class="case-label">02 · Objetivo</div>
+  <div>
+    <h2>Crear una transformación reproducible.</h2>
+    <p>La meta no es “arreglar un Excel” una sola vez, sino producir un flujo que pueda ejecutarse nuevamente y entregar resultados comparables.</p>
+  </div>
+
+  <div class="case-label">03 · Solución</div>
+  <div>
+    <h2>NANA.</h2>
+    <p>El sistema recibe un CSV, perfila su calidad, normaliza su estructura, elimina duplicados exactos, convierte tipos no ambiguos y genera dos salidas: CSV limpio y SQLite.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="before-after">
+    <div class="ba-card bad">
+      <small>ANTES</small>
+      <h3>productos_demo.csv</h3>
+      <ul><li>Encabezados inconsistentes</li><li>Duplicados</li><li>Campos vacíos</li><li>Fechas mezcladas</li></ul>
+    </div>
+    <div class="ba-arrow">→</div>
+    <div class="ba-card good">
+      <small>DESPUÉS</small>
+      <h3>clean_data.db</h3>
+      <ul><li>Campos normalizados</li><li>Registros únicos</li><li>Reporte de calidad</li><li>Estructura consultable</li></ul>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="eyebrow">ALCANCE DE LA DEMO</div>
+  <h2>Data engineering antes de analytics.</h2>
+  <p class="wide-copy">NANA demuestra ETL básico, calidad de datos, exportación estructurada y una arquitectura suficientemente clara para evolucionar hacia validaciones específicas, esquemas configurables, PostgreSQL, procesamiento por lotes y dashboards posteriores.</p>
+</section>
+{% endblock %}

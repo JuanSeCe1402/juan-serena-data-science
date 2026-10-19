@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Escenario demostrativo calculado · FREY{% endblock %}
+{% block content %}
+<section class="page-hero"><div class="eyebrow">ESCENARIO DEMOSTRATIVO · MXN</div><h1>El costo y el precio, en una misma vista.</h1><p>{{ name }} · {{ result.quantity }} unidades. Valores hipotéticos, antes de impuestos y descuentos.</p></section>
+<section class="section metrics" aria-label="Resumen del escenario">
+  <article><span>Costo total del lote</span><strong>${{ result.total_cost|money }}</strong></article>
+  <article><span>Costo por unidad</span><strong>${{ result.unit_cost|money }}</strong></article>
+  <article><span>Margen objetivo</span><strong>{{ result.margin }}%</strong></article>
+  <article><span>Precio sugerido del lote</span><strong>${{ result.suggested_price|money }}</strong></article>
+  <article><span>Utilidad bruta estimada del lote</span><strong>${{ result.profit|money }}</strong></article>
+</section>
+<section class="section details-grid">
+  <div><h2>Cómo se obtiene</h2><dl class="cost-breakdown"><dt>Costo base</dt><dd>${{ result.base_cost|money }}</dd><dt>Merma adicional ({{ result.waste_percent }} %)</dt><dd>${{ result.waste_cost|money }}</dd><dt>Costo total del lote</dt><dd>${{ result.total_cost|money }}</dd><dt>Precio por unidad de referencia</dt><dd>${{ result.unit_price|money }}</dd></dl></div>
+  <div><h2>Qué significa</h2><p>Precio del lote = costo total ÷ (1 − margen objetivo ÷ 100). La utilidad bruta estimada es la diferencia entre ese precio y el costo total.</p><p>El precio del lote se redondea hacia arriba al centavo para cubrir el margen objetivo. Los valores unitarios se redondean por separado: multiplicarlos puede producir diferencias de centavos.</p><p>No es utilidad neta ni una promesa de rentabilidad. Faltan los impuestos, descuentos y cualquier gasto que no hayas incluido.</p></div>
+</section>
+<section class="section"><h2>Compara otros márgenes</h2><p>Costo y cantidad no cambian. Solo varía el margen objetivo sobre venta.</p><div class="table-wrap" role="region" aria-label="Escenarios de margen, desplazamiento horizontal" tabindex="0"><table><caption>Comparación hipotética en MXN para el mismo lote</caption><thead><tr><th scope="col">Margen objetivo</th><th scope="col">Precio del lote</th><th scope="col">Precio unitario de referencia</th><th scope="col">Utilidad bruta del lote</th></tr></thead><tbody>{% for row in scenarios %}<tr><td>{{ row.margin }}%</td><td>${{ row.price|money }}</td><td>${{ row.unit_price|money }}</td><td>${{ row.profit|money }}</td></tr>{% endfor %}</tbody></table></div></section>
+<section class="section result-actions"><form method="post" action="{{ url_for('quote') }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="btn primary" type="submit">Descargar escenario en PDF</button></form><a class="btn ghost" href="{{ url_for('product_app') }}">Calcular otro escenario</a><p>El PDF se recalcula en el servidor desde esta sesión. No es una cotización vinculante; no contiene clientes ni testimonios.</p></section>
+{% endblock %}

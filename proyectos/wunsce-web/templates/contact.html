@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-hero">
+  <div class="eyebrow">CONTACTO</div>
+  <h1>Cuéntanos qué podría funcionar mejor.</h1>
+  <p>Cuéntanos qué proceso, datos o sistema quieres mejorar. El primer paso es entender el problema y definir si realmente necesita una solución tecnológica.</p>
+</section>
+
+<section class="section contact-grid">
+  {% if contact_phone %}
+  <div class="contact-card">
+    <span>TELÉFONO</span>
+    <a href="tel:+{{ contact_phone }}">{% if contact_phone|length == 12 and contact_phone.startswith('52') %}+52 {{ contact_phone[2:5] }} {{ contact_phone[5:8] }} {{ contact_phone[8:] }}{% else %}+{{ contact_phone }}{% endif %}</a>
+  </div>
+  {% endif %}
+  {% if contact_email %}
+  <div class="contact-card">
+    <span>CORREO</span>
+    <a href="mailto:{{ contact_email }}">{{ contact_email }}</a>
+  </div>
+  {% endif %}
+  {% if contact_whatsapp %}
+  <div class="contact-card">
+    <span>WHATSAPP</span>
+    <a href="https://wa.me/{{ contact_whatsapp }}" target="_blank" rel="noopener noreferrer">Hablar por WhatsApp ↗</a>
+  </div>
+  {% endif %}
+  {% if github_url %}
+  <div class="contact-card">
+    <span>GITHUB</span>
+    <a href="{{ github_url }}" target="_blank" rel="noopener noreferrer">Ver perfil de GitHub ↗</a>
+  </div>
+  {% endif %}
+  {% if not contact_phone and not contact_email and not contact_whatsapp and not github_url %}
+  <p>Los medios de contacto estarán disponibles próximamente.</p>
+  {% endif %}
+</section>
+
+<section class="section contact-note">
+  <h2>Tres preguntas para empezar a construir.</h2>
+  <div class="three-col">
+    <article><strong>01</strong><p>¿Qué está pasando hoy?</p></article>
+    <article><strong>02</strong><p>¿Qué quieres que ocurra en su lugar?</p></article>
+    <article><strong>03</strong><p>¿Qué información y sistemas ya existen?</p></article>
+  </div>
+</section>
+{% endblock %}

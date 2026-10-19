@@ -1,29 +1,44 @@
 # Validación y límites
 
-La preparación del portafolio se realizó el 19 de octubre de 2026. Las fechas históricas de archivos no se usan como prueba de ejecución o autoría.
+Revisión e incorporación: 19 de octubre de 2026. Las fechas históricas de archivos no se usan como prueba de ejecución o autoría.
 
-## Comprobaciones automatizadas
+## Resultados locales de la incorporación
 
-Ejecutar desde la raíz:
+| Suite | Casos aprobados | Alcance |
+|---|---:|---|
+| NANA | 30 | Núcleo, interfaz, demo pública, protección de salidas y metadatos |
+| DARWIN | 63 | Generación, partición, preprocesamiento, métricas, interfaz y configuración |
+| FREY | 57 | Cálculos, validación, interfaz, PDF y configuración |
+| TIKAL | 60 | Flujos de clientes, pedidos, inventario y tareas, aislamiento y configuración |
+| ESCULAPIO | 74 | Agenda, roles, concurrencia, pausa humana, transportes simulados e interfaz |
+| Portal WUNSCE | 83 | Rutas, contacto, SEO, navegación y configuración |
+| Métodos numéricos | 4 | Reproducción de polinomios, degeneración, inversa, ajuste y orden de RK4 |
+| Bioimpedancia | 4 | Particiones completas/disjuntas, normalización sin información reservada y contrato de 600 variables |
+| **Total** | **375** | Casos parametrizados de pytest y métodos de unittest |
+
+Las seis suites de aplicaciones se ejecutaron por separado con Python 3.12.14 en Windows y dependencias ya instaladas, sin leer configuraciones privadas. ESCULAPIO se mantuvo en demo, sin integraciones ni trabajos externos. Los casos de WhatsApp verifican respuestas simuladas; no se enviaron mensajes reales. No se probó una instalación limpia de todos los requisitos durante esta incorporación.
+
+La comprobación general revisa sintaxis de los módulos Python, vínculos Markdown y las cuatro demos CLI existentes con entradas inválidas. Se corrigió su lectura explícita en UTF-8 para Windows y se excluyen dependencias y cachés. La comprobación de publicación busca artefactos privados y ciertos formatos de secretos. Es una detección limitada y no una garantía de ausencia de información sensible.
 
 ```bash
-python3 herramientas/verificar.py
+python herramientas/verificar.py
+python herramientas/comprobar_publicacion.py
+python -m unittest discover -s proyectos/metodos-numericos -v
+python -m unittest discover -s proyectos/bioimpedancia/reproducible -v
 ```
 
-Verifica sintaxis de todos los archivos `.py`, existencia de enlaces Markdown locales, ejemplos sintéticos y casos de datos inválidos de las cuatro herramientas CLI nuevas. Incluye diferencias entre finalización y convergencia en Quantum ESPRESSO, pares no finitos en espectros, duraciones inválidas y patrones duplicados/ausentes en STIX.
+Para bioimpedancia instalar previamente su requirements.txt. Para cada aplicación instalar sus propios requisitos y ejecutar pytest desde su carpeta. El workflow de aplicaciones usa trabajos aislados; no despliega servicios. El resultado de GitHub Actions debe consultarse por ejecución y no se presume a partir de los resultados locales.
 
-Las herramientas de movilidad, espectros, convergencia y STIX solo requieren la biblioteca estándar. La demo de estadística requiere NumPy, SciPy y Matplotlib y se comprueba por separado cuando esas dependencias están disponibles.
+## Ejecuciones pequeñas de bioimpedancia
 
-## Fuera de estas comprobaciones
+Se ejecutaron generador y evaluación con 15 muestras sintéticas, semilla 42, 600 variables y partición 9/3/3. Se guardan salidas de Ridge y BioNet en la carpeta reproducible. Ridge se ejecutó con Python 3.12.14, NumPy 2.5.4 y scikit-learn 1.9.1. BioNet se ejecutó durante dos épocas con Python 3.9.13, NumPy 2.0.2, scikit-learn 1.6.1 y PyTorch 2.8.0 en CPU.
 
-- Ejecución completa de interfaces Tkinter, Pygame y OpenGL.
-- Entrenamientos de redes neuronales y resultados del manuscrito de bioimpedancia.
-- Exactitud física, calibración experimental, publicación científica y validación clínica.
-- Compatibilidad de versiones de las dependencias históricas.
-- Integración de fragmentos HTML con un carrito de tienda real.
+Estas salidas comprueban el flujo y contienen también resultados desfavorables. Tres muestras de prueba no permiten estimar rendimiento científico. No reproducen las métricas del manuscrito ni demuestran identificabilidad, exactitud física o validación clínica. No se cargaron las bases ni checkpoints anteriores; no se publican sus métricas como resultados de esta revisión.
 
-Un chequeo de sintaxis correcto no implica que un prototipo funcione o produzca resultados correctos. Las fichas de cada proyecto enumeran pendientes conocidos.
+## Material histórico y límites
 
-## Resultado de la preparación local
+Las herramientas CLI de movilidad, espectros, convergencia y STIX solo requieren biblioteca estándar y mantienen sus ejemplos sintéticos. La demo estadística conserva su verificación histórica local descrita en el proyecto; no se reejecutó en esta incorporación.
 
-Se completaron las comprobaciones de sintaxis de 33 archivos Python, enlaces y las cuatro herramientas CLI. La demo estadística se ejecutó adicionalmente en un entorno local con NumPy, SciPy y Matplotlib, produjo JSON y una figura sintética. No se han fijado versiones de dependencias ni probado una instalación limpia.
+No se ejecutaron las interfaces históricas Tkinter, Pygame u OpenGL; no se compiló Fortran ni se validó la simulación de hidrógeno. No se compilaron el manuscrito ni sus figuras. No se verificaron calibraciones, despliegues nuevos, Docker, Gunicorn en Linux, servicios externos o mejoras comerciales. Un chequeo de sintaxis no acredita que esos prototipos funcionen correctamente.
+
+El modelo multiescala de la tesis y el generador temporal son exploraciones distintas. Las afirmaciones físicas originales y unidades siguen pendientes de revisión, aunque la separación estadística se haya mejorado.

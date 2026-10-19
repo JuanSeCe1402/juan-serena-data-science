@@ -1,0 +1,79 @@
+{
+  "data_source": "synthetic_exploratory_model",
+  "model": "bionet",
+  "seed": 42,
+  "samples": 15,
+  "features": 600,
+  "split_ids": {
+    "train": [
+      14,
+      10,
+      5,
+      2,
+      4,
+      12,
+      1,
+      13,
+      8
+    ],
+    "validation": [
+      3,
+      0,
+      11
+    ],
+    "test": [
+      6,
+      7,
+      9
+    ]
+  },
+  "normalization_fit": "train_only",
+  "metrics": {
+    "g_Na": {
+      "mae": 19.19584952844144,
+      "baseline_mean_mae": 20.374310528790506,
+      "r2": -0.00427069928474566
+    },
+    "g_K": {
+      "mae": 8.672920167683136,
+      "baseline_mean_mae": 9.511359532674156,
+      "r2": -2.5985890466885
+    },
+    "sigma_base": {
+      "mae": 0.27953527519367244,
+      "baseline_mean_mae": 0.31997588828757956,
+      "r2": 0.1716028242239307
+    },
+    "tau": {
+      "mae": 1.8667173967523746e-05,
+      "baseline_mean_mae": 1.8333824738403092e-05,
+      "r2": -1.5698091219065615
+    },
+    "alpha": {
+      "mae": 0.07885860181835216,
+      "baseline_mean_mae": 0.08580179926421906,
+      "r2": -3.1930924981698423
+    }
+  },
+  "limitations": [
+    "Small synthetic experiment; not an accuracy claim.",
+    "Physical identifiability and experimental validity not established.",
+    "No historical checkpoints or datasets were used."
+  ],
+  "runtime": {
+    "python": "3.9.13",
+    "numpy": "2.0.2",
+    "scikit-learn": "1.6.1",
+    "torch": "2.8.0"
+  },
+  "training": {
+    "epochs": 2,
+    "ridge_alpha": null
+  },
+  "generation": {
+    "noise_level": 0.01,
+    "duration_ms": 50.0,
+    "dt_ms": 0.02,
+    "purpose": "smoke_test_only"
+  }
+}

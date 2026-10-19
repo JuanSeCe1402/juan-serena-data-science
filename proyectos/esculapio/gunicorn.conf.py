@@ -1,0 +1,9 @@
+import os
+port=int(os.getenv('PORT') or '8000')
+if not 1<=port<=65535:raise ValueError('PORT must be between 1 and 65535')
+bind=f'0.0.0.0:{port}'
+workers=1
+worker_class='uvicorn_worker.UvicornWorker'
+timeout=90
+accesslog=None
+errorlog='-'

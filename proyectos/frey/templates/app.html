@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Calculadora demostrativa de costos y margen · FREY{% endblock %}
+{% block content %}
+<section class="page-hero"><div class="eyebrow">DEMO · VALORES HIPOTÉTICOS</div><h1>Primero el costo. Después, el precio.</h1><p>Todos los costos corresponden al lote completo, en MXN. La cantidad solo distribuye el total entre unidades. No incluyas información real, confidencial ni nombres de clientes.</p><div class="actions"><a class="btn ghost" href="{{ url_for('product_app',example='lote') }}">Ejemplo: lote de piezas</a><a class="btn ghost" href="{{ url_for('product_app',example='servicio') }}">Ejemplo: servicio</a></div></section>
+<section class="section">
+  {% if error %}<div class="form-error" role="alert" tabindex="-1" data-error><h2>Revisa los datos</h2><p>{{ error }}</p></div>{% endif %}
+  <form class="form-shell" method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <fieldset><legend>1. Define el lote o servicio</legend><div class="form-grid">
+      <div class="field full"><label for="name">Nombre del ejemplo</label><input id="name" name="name" value="{{ values.name }}" maxlength="80" required aria-describedby="name-help"><small id="name-help">Usa una descripción ficticia, de hasta 80 caracteres.</small></div>
+      <div class="field"><label for="quantity">Cantidad de unidades</label><input id="quantity" type="number" name="quantity" min="1" max="100000" step="1" value="{{ values.quantity }}" required aria-describedby="quantity-help"><small id="quantity-help">Entre 1 y 100000. Para un servicio completo puedes usar 1.</small></div>
+    </div></fieldset>
+    <fieldset><legend>2. Introduce los costos del lote completo</legend><p id="costs-help">Hasta MXN 1,000,000 por concepto. Usa punto o coma decimal, sin separadores de miles; por ejemplo, 1250.50. No introduzcas el costo por unidad.</p><div class="form-grid">
+      {% for key,label,hint in [('material','Materiales (MXN)','Insumos necesarios para todo el lote.'),('labor','Mano de obra (MXN)','Costo del tiempo de trabajo asignado al lote.'),('machine','Uso de máquina (MXN)','Costo asignado de uso o depreciación; no el precio de compra completo.'),('energy','Energía (MXN)','Consumo atribuible a este trabajo.'),('overhead','Indirectos (MXN)','Gastos asignados no incluidos arriba. Evita contarlos dos veces.')] %}
+      <div class="field"><label for="{{ key }}">{{ label }}</label><input id="{{ key }}" name="{{ key }}" inputmode="decimal" maxlength="12" value="{{ values[key] }}" required aria-describedby="{{ key }}-help costs-help"><small id="{{ key }}-help">{{ hint }}</small></div>
+      {% endfor %}
+    </div></fieldset>
+    <fieldset><legend>3. Ajusta merma y margen</legend><div class="form-grid">
+      <div class="field"><label for="waste">Merma adicional (%)</label><input id="waste" name="waste" inputmode="decimal" maxlength="6" value="{{ values.waste }}" required aria-describedby="waste-help"><small id="waste-help">De 0 a 100. Se aplica sobre la suma de costos; usa 0 si ya contemplaste la merma.</small></div>
+      <div class="field"><label for="margin">Margen objetivo sobre venta (%)</label><input id="margin" name="margin" inputmode="decimal" maxlength="5" value="{{ values.margin }}" required aria-describedby="margin-help"><small id="margin-help">De 0 a 95. Un margen de 30 % significa que el costo representa 70 % del precio. No es un recargo de 30 % sobre costo.</small></div>
+    </div></fieldset>
+    <button class="btn primary" type="submit">Ver costos, precio y utilidad</button>
+    <p class="demo-note">FREY calcula con los costos proporcionados; no verifica que estén completos. No aplica impuestos, descuentos ni cargos no introducidos.</p>
+  </form>
+</section>
+{% endblock %}

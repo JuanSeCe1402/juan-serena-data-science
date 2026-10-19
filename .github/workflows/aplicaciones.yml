@@ -1,0 +1,35 @@
+name: Aplicaciones y evaluación reproducible
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  aplicaciones:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        proyecto: [nana, darwin, frey, tikal, esculapio, wunsce-web]
+    defaults:
+      run:
+        working-directory: proyectos/${{ matrix.proyecto }}
+    env:
+      DEMO_MODE: 'true'
+      INTEGRATIONS_ENABLED: 'false'
+      ENABLE_JOBS: 'false'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements-dev.txt
+      - run: python -m pytest -q
+  cientifico:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r proyectos/bioimpedancia/reproducible/requirements.txt
+      - run: python -m unittest discover -s proyectos/metodos-numericos -v
+      - run: python -m unittest discover -s proyectos/bioimpedancia/reproducible -v

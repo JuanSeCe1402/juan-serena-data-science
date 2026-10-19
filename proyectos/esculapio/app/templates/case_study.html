@@ -1,0 +1,46 @@
+{% extends "public_base.html" %}
+{% block title %}Caso de estudio: presencia y operación digital de consultorio · ESCULAPIO{% endblock %}
+{% block content %}
+<section class="page-hero">
+  <div class="eyebrow">CASO DE ESTUDIO · WEB PUBLICADA + DEMO ADMINISTRATIVA</div>
+  <h1>De la presencia profesional al seguimiento del consultorio.</h1>
+  <p>La web del Dr. Jonathan Ceseña es una implementación pública disponible. La demo de ESCULAPIO permite explorar por separado la operación administrativa con datos ficticios.</p>
+  <div class="actions">
+    <a class="btn primary" href="https://dr-jonathan-web-production.up.railway.app/" target="_blank" rel="noopener noreferrer">Ver web del Dr. Jonathan ↗</a>
+    <a class="btn ghost" href="/demo">Explorar demo administrativa</a>
+  </div>
+</section>
+<section class="section case-section" id="contexto">
+  <h2>Contexto</h2>
+  <p>Antes de solicitar una consulta, un visitante necesita conocer al profesional, sus servicios y cómo contactarlo. Dentro del consultorio, el equipo necesita coordinar disponibilidad, citas, comunicaciones y tareas de asistencia.</p>
+  <p>La web publicada del Dr. Jonathan Esaú Ceseña Barrientos reúne su presentación profesional, información sobre servicios, ubicaciones y enlaces a su perfil en Doctoralia. El entorno administrativo de ESCULAPIO se presenta en una demostración independiente.</p>
+</section>
+<section class="section case-section" id="problema">
+  <h2>Problema</h2>
+  <p>La información pública dispersa dificulta entender la oferta del consultorio y encontrar el siguiente paso. En la operación interna, consultar agenda y mensajes por separado dificulta mantener el contexto de cada solicitud. También hace falta distinguir qué puede hacer cada integrante del equipo y evitar que la automatización interfiera con una conversación humana.</p>
+</section>
+<section class="section case-section" id="solucion">
+  <h2>Solución construida</h2>
+  <div class="feature-grid case-implementations">
+    <article><h3>Web profesional publicada</h3><p>Perfil, servicios, páginas informativas, ubicaciones, aviso de privacidad y acceso a Doctoralia. Incluye un formulario para preparar una solicitud de contacto; su presencia no confirma una reserva ni una integración operativa con WhatsApp.</p><a class="text-link" href="https://dr-jonathan-web-production.up.railway.app/" target="_blank" rel="noopener noreferrer">Visitar la implementación pública ↗</a></article>
+    <article><h3>Demo administrativa</h3><p>Panel con agenda y calendario, directorio ficticio, buzón, estados de atención humana y controles por rol. Utiliza bases temporales separadas y comunicaciones externas desactivadas.</p><a class="text-link" href="/demo">Probar con datos ficticios →</a></article>
+  </div>
+</section>
+<section class="section case-section" id="arquitectura">
+  <h2>Arquitectura general</h2>
+  <ol class="case-flow"><li>Web profesional pública</li><li>Caso de estudio y demo independiente</li><li>Acceso y permisos del equipo</li><li>Agenda, pacientes y mensajes</li><li>Base de datos y adaptador de integración controlado</li></ol>
+  <p>La web profesional es una aplicación independiente en Node.js. El entorno administrativo utiliza FastAPI, Jinja y SQLAlchemy; la demo usa SQLite por sesión. No se afirma que ambos despliegues compartan datos o estén conectados.</p>
+  <p>El conector de WhatsApp se conserva en el código administrativo, pero su operación externa está desactivada y no se presenta como verificada en esta demostración.</p>
+</section>
+<section class="section case-section" id="funcionalidades">
+  <h2>Funcionalidades principales</h2>
+  <ul><li>Presentación profesional, servicios e información de contacto en la web publicada.</li><li>Enlaces a Doctoralia y formulario de solicitud de contacto en la web profesional.</li><li>Consulta de horarios y reservas sin solapamientos en la demo.</li><li>Reprogramación, cancelación y registro administrativo de asistencia.</li><li>Directorio ficticio con citas relacionadas.</li><li>Buzón y transferencia explícita a atención humana.</li><li>Permisos diferentes para doctor y asistente.</li><li>Configuración de horarios, excepciones y agenda en PDF.</li></ul>
+</section>
+<section class="section case-section" id="resultados">
+  <h2>Resultados</h2>
+  <p>La web profesional está publicada y permite consultar la información del Dr. Jonathan y acceder a sus páginas de servicios y contacto. La disponibilidad pública se comprobó el 19 de octubre de 2026; no equivale a una medición de captación o de citas confirmadas.</p>
+  <p>La demostración administrativa permite observar agenda y conversaciones en un entorno común, probar permisos por rol y conservar el control humano cuando se solicita. Estos comportamientos del software no constituyen mediciones del impacto en un consultorio real.</p>
+  <p>No se atribuyen cifras de ahorro de tiempo, pacientes atendidos, conversión ni resultados clínicos. Para evaluar impacto operativo será necesario definir y medir indicadores con datos autorizados.</p>
+  <a class="btn primary" href="/demo">Explorar la demostración</a>
+</section>
+{% endblock %}

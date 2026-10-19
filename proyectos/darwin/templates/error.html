@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+{% block title %}{{ code }} · DARWIN{% endblock %}
+{% block content %}
+<section class="page-hero"><div class="eyebrow">DARWIN · {{ code }}</div><h1>No pudimos completar esta solicitud.</h1><p>{{ message }}</p><a class="btn primary" href="{{ url_for('product_app') }}">Volver a la demo</a></section>
+{% endblock %}

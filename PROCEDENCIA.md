@@ -21,3 +21,13 @@ Las líneas correspondientes permanecen representadas por fichas, herramientas o
 Antes de habilitar una licencia global, confirmar autoría y condiciones de uso de cada archivo académico recuperado. Los datos nuevos que se incorporen deben documentar fuente, licencia, fecha de obtención, variables y transformaciones. Las dependencias se distribuyen por sus propios canales y licencias.
 
 Los textos recuperados se normalizaron a UTF-8 y finales de línea LF, eliminando espacios al final de línea. No se cambiaron fórmulas ni algoritmos en esa normalización.
+
+## Ampliación con aplicaciones y colecciones
+
+La incorporación posterior añade fuentes, pruebas, interfaz y recursos de marca de seis aplicaciones WUNSCE, colecciones educativas y funciones de la tesis. Ver [INCORPORACION](INCORPORACION.md) y [manifiesto](manifiesto-incorporacion.json). El manifiesto conserva nombres y hashes de fuentes sin rutas privadas del equipo; no es una certificación de autoría ni de licencias.
+
+Las adaptaciones nuevas se distinguen del archivo: evaluación de bioimpedancia con normalización ajustada solo en entrenamiento, API y pruebas de métodos numéricos, correcciones de unidad de salida y tiempo en el ejercicio Fortran de contaminantes y semilla/comentario sintético del prototipo de hidrógeno. Se conserva la coautoría de Raul Alfonso Cano Villegas y Juan Manuel Serena Ceceña en interpolación; se omiten matrículas.
+
+El bot genérico de WhatsApp localizado deriva del tutorial [daveebbelaar/python-whatsapp-bot](https://github.com/daveebbelaar/python-whatsapp-bot). No se incorpora como proyecto propio. ESCULAPIO conserva su documentación de implementación y dependencias; el funcionamiento real de integraciones no se atribuye a pruebas simuladas.
+
+Los recursos visuales WUNSCE se conservan como parte del proyecto del titular, sin atribuir autoría exclusiva de recursos generados o componentes externos. No se añade una licencia global a material de procedencia pendiente.

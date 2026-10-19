@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<link rel="icon" href="/static/img/wunsce-logo-144.webp" type="image/webp">
+<meta name="robots" content="noindex,nofollow">
+<meta name="csrf-token" content="{{ csrf_token }}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editar paciente — {{ clinic_name }}</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body class="panel-page" data-demo="{{ 'true' if demo_mode else 'false' }}">
+<a class="skip-link" href="#main-content">Saltar al contenido</a>
+<div class="wunsce-return"><a href="{{ wunsce_url }}" lang="en">← Back to WUNSCE</a><a href="/case-study">Caso de estudio ESCULAPIO</a></div>
+{% if demo_mode %}<aside class="demo-banner" aria-label="Alcance de la demo"><strong>DEMO AISLADA · SOLO DATOS FICTICIOS</strong><p>Rol simulado: {{ 'doctor' if request.session.get('role') == 'doctor' else 'asistente' }}. Solo ejemplos ficticios, sin envíos externos. Caduca en 30 minutos. No introduzcas datos reales ni información clínica.</p><form method="post" action="/demo/reset"><input type="hidden" name="csrf_token" value="{{ csrf_token }}"><button type="submit" class="small-action secondary">Cerrar y eliminar mi demo</button></form></aside>{% endif %}
+<header class="top">
+  <div><h1>{{ clinic_name }}</h1><p>Editar paciente · {{ doctor_name }}</p></div>
+  <nav class="top-nav" aria-label="Operación del consultorio">
+    <a class="nav-link" href="/panel">Agenda</a>
+    <a class="nav-link" href="/panel/calendar">Calendario</a>
+    <a class="nav-link active" href="/panel/patients">Pacientes</a>
+    <a class="nav-link" href="/panel/messages">Mensajes <span id="navUnread" class="nav-badge hidden"></span></a>
+    {% if request.state.user_role == 'doctor' %}<a class="nav-link" href="/panel/settings">Configuración</a>{% endif %}
+  </nav>
+</header>
+
+<main id="main-content" tabindex="-1" class="reschedule-page">
+  {% if error %}<div class="alert error" role="alert" tabindex="-1">{{ error }}</div>{% endif %}
+
+  <div class="card reschedule-card">
+    <h2>Editar paciente</h2>
+    <p class="hint">Puedes corregir nombre, edad o WhatsApp. Las citas y el historial permanecen asociados al mismo paciente.</p>
+
+    <form method="post" action="/panel/patients/{{ patient.id }}/edit" class="reschedule-form"><input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+      <div class="field">
+        <label for="edit_patient-field-1">Nombre completo</label><input type="text" name="patient_name" maxlength="120"{% if demo_mode %} pattern="Paciente Demo [0-9]{2}"{% endif %} value="{{ patient.name or '' }}" maxlength="120" required id="edit_patient-field-1">
+      </div>
+
+      <div class="field">
+        <label>Edad</label>
+        {% if not demo_mode %}<input type="number" name="patient_age" min="1" max="119" value="{{ patient.age if patient.age else '' }}">{% else %}<input type="text" aria-label="Edad desactivada en demo" value="No aplica" disabled>{% endif %}
+      </div>
+
+      <div class="field full-edit-field">
+        <label for="edit_patient-field-2">WhatsApp</label><input type="tel" name="patient_phone" maxlength="15" value="{{ patient.phone }}" required id="edit_patient-field-2">
+        <span class="field-help">Si cambias el número, el buzón local del paciente también se mueve al nuevo WhatsApp. El sistema impedirá usar un número que ya tenga datos registrados.</span>
+      </div>
+
+      <div class="button-row edit-actions">
+        <button type="submit">Guardar cambios</button>
+        <a class="button-link secondary" href="/panel/patients/{{ patient.id }}">Cancelar</a>
+      </div>
+    </form>
+  </div>
+</main>
+
+<script defer src="/static/panel-js/edit_patient.js"></script>
+<script defer src="/static/panel-js/common.js"></script></body>
+</html>

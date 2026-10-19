@@ -1,0 +1,19 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{% block title %}Operación digital de consultorio · ESCULAPIO{% endblock %}</title><meta name="description" content="{{ seo_description }}"><meta name="robots" content="{{ 'index,follow' if canonical_url else 'noindex,nofollow' }}">{% if canonical_url %}<link rel="canonical" href="{{ canonical_url }}">{% endif %}<meta name="theme-color" content="#3e4228"><link rel="icon" href="/static/img/wunsce-logo-144.webp" type="image/webp"><script src="/static/boot.js"></script><link rel="stylesheet" href="/static/css/public.css"><script defer src="/static/public.js"></script>{% if canonical_url %}
+  <meta property="og:site_name" content="WUNSCE Analytics & Environments">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_MX">
+  <meta property="og:title" content="{{ self.title()|striptags|trim }}">
+  <meta property="og:description" content="{{ seo_description }}">
+  <meta property="og:url" content="{{ canonical_url }}">
+  <meta property="og:image" content="{{ social_image }}">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="WUNSCE Analytics & Environments — Comprender. Elegir. Transformar.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ self.title()|striptags|trim }}">
+  <meta name="twitter:description" content="{{ seo_description }}">
+  <meta name="twitter:image" content="{{ social_image }}">
+  <meta name="twitter:image:alt" content="WUNSCE Analytics & Environments — Comprender. Elegir. Transformar.">
+  {% endif %}
+</head><body><a class="skip-link" href="#main-content">Saltar al contenido</a><header class="site-header"><a class="brand" href="/"><img src="/static/img/wunsce-logo-144.webp" alt="" width="42" height="42"><div><strong>WUNSCE</strong><span>Analytics & Environments</span></div></a><button class="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-nav">☰</button><nav id="main-nav" class="nav" aria-label="Navegación principal"><a href="/">Inicio</a><a href="/features">Funcionalidades</a><a href="/case-study">Caso de estudio</a><a href="/architecture">Arquitectura</a>{% if demo_mode %}<a class="nav-cta" href="/demo">Explorar demo</a>{% endif %}</nav></header><div class="return-bar"><a class="back-to-wunsce" lang="en" href="{{ wunsce_url }}">← Back to WUNSCE</a></div><main id="main-content" tabindex="-1">{% block content %}{% endblock %}</main><footer class="site-footer"><div><strong>WUNSCE</strong><p lang="en">Understand. Choose. Transform.</p></div><div class="footer-links"><a href="/case-study">Caso de estudio</a><a href="/privacy">Privacidad de la demo</a><a href="/architecture">Arquitectura</a></div><p>ESCULAPIO · Operación administrativa. No realiza diagnóstico, tratamiento ni recomendaciones clínicas automatizadas.</p></footer></body></html>

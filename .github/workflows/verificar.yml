@@ -11,3 +11,4 @@ jobs:
         with:
           python-version: '3.11'
       - run: python herramientas/verificar.py
+      - run: python herramientas/comprobar_publicacion.py

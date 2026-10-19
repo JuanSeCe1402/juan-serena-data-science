@@ -1,0 +1,19 @@
+<section class="section featured-project" aria-labelledby="featured-project-title">
+  <div class="section-heading">
+    <div class="eyebrow" lang="en">Featured Project</div>
+    <h2 id="featured-project-title">{{ featured_project.function }}</h2>
+    <p class="featured-identity"><strong>{{ featured_project.name }}</strong><span>{{ featured_project.status }}</span></p>
+  </div>
+  <div class="featured-layout">
+    <figure class="featured-screenshot">
+      <img src="{{ featured_project.screenshot }}" alt="{{ featured_project.screenshot_alt }}" width="1280" height="800" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+    </figure>
+    <div class="featured-copy">
+      <h3>El problema</h3>
+      <p>{{ featured_project.problem }}</p>
+      <h3>La solución</h3>
+      <p>{{ featured_project.solution }}</p>
+      <a class="btn primary" href="{{ featured_project.cta_url }}">{{ featured_project.cta_label }}</a>
+    </div>
+  </div>
+</section>

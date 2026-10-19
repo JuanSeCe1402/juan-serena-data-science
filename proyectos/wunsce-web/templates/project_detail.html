@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="project-hero">
+  <div>
+    <div class="eyebrow">{{ project.category }}</div>
+    <h1>{{ project.subtitle }}</h1>
+    <p class="project-brand">{{ project.name }} · {{ project.display_status }}</p>
+    <p>{{ project.summary }}</p>
+    <blockquote>{{ project.tagline }}</blockquote>
+    <div class="actions">
+      {% if project.url %}
+        <a class="btn primary" href="{{ project.url }}" target="_blank" rel="noopener noreferrer">{{ project.cta_label }} ↗</a>
+      {% else %}
+        <span class="status-pill">Enlace público no configurado</span>
+      {% endif %}
+      {% if project.implementation_url %}<a class="btn ghost" href="{{ project.implementation_url }}" target="_blank" rel="noopener noreferrer">Ver web del Dr. Jonathan ↗</a>{% endif %}
+      <a class="btn ghost" href="{{ url_for('projects') }}">Volver a proyectos</a>
+    </div>
+  </div>
+  <div class="project-monolith">
+    {% include "_project_art.html" %}
+    <span>{{ project.display_status }}</span>
+    <strong>{{ project.name }}</strong>
+    <small>WUNSCE</small>
+  </div>
+</section>
+
+<section class="section detail-grid">
+  <div>
+    <div class="eyebrow">SU PAPEL EN EL ECOSISTEMA</div>
+    <h2>{{ project.subtitle }}</h2>
+  </div>
+  <div>
+    <p>{{ project.summary }}</p>
+    {% if project.slug == 'esculapio' %}
+      <p>Incluye una web profesional publicada y una demo administrativa independiente. El caso de estudio diferencia lo publicado de lo simulado; no afirma que compartan datos ni que WhatsApp esté operativo.</p>
+    {% elif project.slug == 'nana' %}
+      <p>Funciona como capa de preparación de datos: limpieza, normalización, calidad y salida estructurada.</p>
+    {% elif project.slug == 'frey' %}
+      <p>Convierte costos operativos en decisiones de precio, margen y rentabilidad.</p>
+    {% elif project.slug == 'tikal' %}
+      <p>Centraliza la operación diaria y ofrece una base para evolucionar hacia un ERP ligero.</p>
+    {% elif project.slug == 'darwin' %}
+      <p>Demuestra cómo los datos históricos pueden convertirse en señales predictivas útiles y comprensibles.</p>
+    {% endif %}
+  </div>
+</section>
+{% set character = characters_by_slug[project.slug] %}
+<section class="section project-lore" aria-labelledby="lore-title">
+  <div class="eyebrow">EL NOMBRE TAMBIÉN CUENTA UNA HISTORIA</div>
+  <h2 id="lore-title">{{ character.name }} · {{ character.title }}</h2>
+  <p class="lore-origin">{{ character.origin }}</p>
+  <div class="lore-columns">
+    <article><span class="eyebrow">EN LA TRAVESÍA</span><p>{{ character.story }}</p></article>
+    <article><span class="eyebrow">EN WUNSCE</span><p>{{ character.business }}</p></article>
+  </div>
+  <blockquote>«{{ character.principle }}»</blockquote>
+  <a class="text-link" href="{{ url_for('universe') }}#{{ character.slug }}">Explorar el universo de {{ character.name }} →</a>
+</section>
+{% endblock %}

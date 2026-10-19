@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Arquitectura · NANA{% endblock %}
+{% block content %}
+<section class="page-hero">
+  <div class="eyebrow">ARQUITECTURA</div>
+  <h1>Simple por diseño. Extensible por intención.</h1>
+  <p>La arquitectura separa presentación, transformación y artefactos generados.</p>
+</section>
+
+<section class="section">
+  <div class="arch-flow">
+    <div><small>INPUT</small><strong>CSV</strong></div><span>→</span>
+    <div><small>WEB</small><strong>Flask</strong></div><span>→</span>
+    <div><small>CORE</small><strong>Pandas</strong></div><span>→</span>
+    <div><small>OUTPUT</small><strong>CSV / SQLite</strong></div>
+  </div>
+</section>
+
+<section class="section two-col">
+  <div>
+    <div class="eyebrow">CAPAS</div>
+    <h2>Separación útil para crecer.</h2>
+  </div>
+  <div class="copy">
+    <p><b>Presentación:</b> landing, documentación y demo en Flask.</p>
+    <p><b>Transformación:</b> lógica de limpieza aislada en <code>core.py</code>.</p>
+    <p><b>Runtime:</b> resultados temporales en <code>/tmp</code>, adecuados para demo.</p>
+    <p><b>Deploy:</b> Gunicorn + Dockerfile + Railway.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="eyebrow">SIGUIENTE EVOLUCIÓN</div>
+  <div class="feature-grid">
+    <article><h3>PostgreSQL</h3><p>Persistencia de datasets, ejecuciones y auditoría.</p></article>
+    <article><h3>Usuarios</h3><p>Autenticación, proyectos y permisos por organización.</p></article>
+    <article><h3>Reglas</h3><p>Validaciones de negocio configurables por dataset.</p></article>
+    <article><h3>API</h3><p>Procesamiento automático desde otros sistemas.</p></article>
+  </div>
+</section>
+{% endblock %}

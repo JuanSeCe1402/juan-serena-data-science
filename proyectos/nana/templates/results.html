@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Resultados · NANA{% endblock %}
+{% block content %}
+<section class="page-hero compact">
+  <div class="eyebrow">EJEMPLO SINTÉTICO PROCESADO</div>
+  <h1>El ejemplo ya tiene una primera capa de estructura.</h1>
+</section>
+
+<section class="section metrics">
+  <article><span>Registros de entrada</span><strong>{{ report.rows_input }}</strong></article>
+  <article><span>Duplicados detectados</span><strong>{{ report.duplicates_found }}</strong></article>
+  <article><span>Valores faltantes</span><strong>{{ report.missing_values }}</strong></article>
+  <article class="score"><span>Índice orientativo</span><strong>{{ score }}%</strong></article>
+</section>
+
+<section class="section"><p>Estas cifras se calculan sobre el ejemplo sintético de esta ejecución; no son resultados de un cliente. El índice combina 65 % de completitud y 35 % de unicidad del archivo de entrada. No mide exactitud, validez de negocio ni calidad integral.</p><p>Descargas privadas de esta sesión, disponibles hasta 30 minutos. Las fechas ambiguas y los identificadores se conservan para revisión. El CSV neutraliza fórmulas de hojas de cálculo; SQLite conserva el texto original.</p></section>
+<section class="section result-actions">
+  <a class="btn primary" href="{{ url_for('download', job_id=job_id, kind='csv') }}">Descargar CSV limpio</a>
+  <a class="btn ghost" href="{{ url_for('download', job_id=job_id, kind='sqlite') }}">Descargar SQLite</a>
+  <a class="btn text-btn" href="{{ url_for('nana_app') }}">Volver al ejemplo</a>
+</section>
+
+<section class="section">
+  <div class="eyebrow">PERFIL DE COLUMNAS</div>
+  <div class="table-wrap" role="region" aria-label="Perfil de columnas, desplazamiento horizontal" tabindex="0">
+    <table><caption>Datos sintéticos de esta ejecución</caption>
+      <thead><tr><th scope="col">Columna</th><th scope="col">Tipo</th><th scope="col">Faltantes</th><th scope="col">Únicos</th></tr></thead>
+      <tbody>{% for c in columns %}<tr><td>{{ c.column }}</td><td>{{ c.dtype }}</td><td>{{ c.missing }}</td><td>{{ c.unique }}</td></tr>{% endfor %}</tbody>
+    </table>
+  </div>
+</section>
+
+<section class="section">
+  <div class="eyebrow">VISTA PREVIA</div>
+  <div class="table-wrap wide-table" role="region" aria-label="Vista previa, desplazamiento horizontal" tabindex="0">
+    <table><caption>Datos sintéticos de esta ejecución</caption>
+      <thead><tr>{% for h in headers %}<th scope="col">{{ h }}</th>{% endfor %}</tr></thead>
+      <tbody>
+      {% for row in preview %}
+        <tr>{% for h in headers %}<td>{{ row[h] }}</td>{% endfor %}</tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

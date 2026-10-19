@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<link rel="icon" href="/static/img/wunsce-logo-144.webp" type="image/webp">
+<meta name="robots" content="noindex,nofollow">
+<meta name="csrf-token" content="{{ csrf_token }}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calendario — {{ clinic_name }}</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body class="panel-page" data-demo="{{ 'true' if demo_mode else 'false' }}">
+<a class="skip-link" href="#main-content">Saltar al contenido</a>
+<div class="wunsce-return"><a href="{{ wunsce_url }}" lang="en">← Back to WUNSCE</a><a href="/case-study">Caso de estudio ESCULAPIO</a></div>
+{% if demo_mode %}<aside class="demo-banner" aria-label="Alcance de la demo"><strong>DEMO AISLADA · SOLO DATOS FICTICIOS</strong><p>Rol simulado: {{ 'doctor' if request.session.get('role') == 'doctor' else 'asistente' }}. Solo ejemplos ficticios, sin envíos externos. Caduca en 30 minutos. No introduzcas datos reales ni información clínica.</p><form method="post" action="/demo/reset"><input type="hidden" name="csrf_token" value="{{ csrf_token }}"><button type="submit" class="small-action secondary">Cerrar y eliminar mi demo</button></form></aside>{% endif %}
+<header class="top">
+  <div>
+    <h1>{{ clinic_name }}</h1>
+    <p>Calendario de citas · {{ doctor_name }}</p>
+  </div>
+  <nav class="top-nav" aria-label="Operación del consultorio">
+    <a class="nav-link" href="/panel">Agenda</a>
+    <a class="nav-link active" href="/panel/calendar">Calendario</a>
+    <a class="nav-link" href="/panel/patients">Pacientes</a>
+    <a class="nav-link" href="/panel/messages">Mensajes <span id="navUnread" class="nav-badge hidden"></span></a>
+    {% if request.state.user_role == 'doctor' %}<a class="nav-link" href="/panel/settings">Configuración</a>{% endif %}
+  </nav>
+</header>
+
+<main id="main-content" tabindex="-1" class="calendar-page">
+  {% if notice %}<div class="alert success" role="status">{{ notice }}</div>{% endif %}
+  {% if error %}<div class="alert error" role="alert" tabindex="-1">{{ error }}</div>{% endif %}
+  <div class="card calendar-full-card">
+    <div class="calendar-page-head">
+      <div>
+        <h2>Calendario de citas</h2>
+        <p class="hint">Consulta todo el mes y selecciona un día para ver los detalles.</p>
+      </div>
+      <a class="button-link" href="/panel">+ Agregar cita</a>
+    </div>
+
+    <div class="calendar-toolbar">
+      <button type="button" class="small-action secondary" id="calendarPrev" aria-label="Mes anterior">←</button>
+      <strong id="calendarTitle"></strong>
+      <button type="button" class="small-action secondary" id="calendarNext" aria-label="Mes siguiente">→</button>
+      <button type="button" class="small-action secondary" id="calendarToday">Hoy</button>
+    </div>
+
+    <div class="calendar-weekdays">
+      <span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span><span>Dom</span>
+    </div>
+    <div id="calendarGrid" class="calendar-grid"></div>
+
+    <div id="calendarDayDetail" aria-live="polite" class="calendar-detail">
+      <p class="empty">Selecciona un día para ver sus citas.</p>
+    </div>
+  </div>
+</main>
+
+<script defer src="/static/panel-js/calendar.js"></script>
+<script defer src="/static/panel-js/common.js"></script></body>
+</html>

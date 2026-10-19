@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<link rel="icon" href="/static/img/wunsce-logo-144.webp" type="image/webp">
+<meta name="robots" content="noindex,nofollow">
+<meta name="csrf-token" content="{{ csrf_token }}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Configuración — {{ clinic_name }}</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body class="panel-page" data-demo="{{ 'true' if demo_mode else 'false' }}">
+<a class="skip-link" href="#main-content">Saltar al contenido</a>
+<div class="wunsce-return"><a href="{{ wunsce_url }}" lang="en">← Back to WUNSCE</a><a href="/case-study">Caso de estudio ESCULAPIO</a></div>
+{% if demo_mode %}<aside class="demo-banner" aria-label="Alcance de la demo"><strong>DEMO AISLADA · SOLO DATOS FICTICIOS</strong><p>Rol simulado: {{ 'doctor' if request.session.get('role') == 'doctor' else 'asistente' }}. Solo ejemplos ficticios, sin envíos externos. Caduca en 30 minutos. No introduzcas datos reales ni información clínica.</p><form method="post" action="/demo/reset"><input type="hidden" name="csrf_token" value="{{ csrf_token }}"><button type="submit" class="small-action secondary">Cerrar y eliminar mi demo</button></form></aside>{% endif %}
+<header class="top">
+  <div>
+    <h1>{{ clinic_name }}</h1>
+    <p>Configuración del consultorio · {{ doctor_name }}</p>
+  </div>
+  <nav class="top-nav" aria-label="Operación del consultorio">
+    <a class="nav-link" href="/panel">Agenda</a>
+    <a class="nav-link" href="/panel/calendar">Calendario</a>
+    <a class="nav-link" href="/panel/patients">Pacientes</a>
+    <a class="nav-link" href="/panel/messages">Mensajes <span id="navUnread" class="nav-badge hidden"></span></a>
+    {% if request.state.user_role == 'doctor' %}<a class="nav-link active" href="/panel/settings">Configuración</a>{% endif %}
+  </nav>
+</header>
+
+<main id="main-content" tabindex="-1" class="settings-page">
+  {% if notice %}<div class="alert success" role="status">{{ notice }}</div>{% endif %}
+  {% if error %}<div class="alert error" role="alert" tabindex="-1">{{ error }}</div>{% endif %}
+  <div class="settings-intro">
+    <h2>Configuración</h2>
+    <p>Administra horarios, atención humana, notificaciones y excepciones del consultorio.</p>
+  </div>
+  <div class="settings-grid">
+
+    <div class="card">
+      <h2>Horario general</h2>
+      <form class="inline" method="post" action="/panel/settings"><input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+        <input type="hidden" name="alert_contact_name" value="{{ cfg.alert_contact_name or '' }}">
+        <input type="hidden" name="alert_contact_phone" value="{{ cfg.alert_contact_phone or '' }}">
+        {% if cfg.alert_whatsapp_enabled %}<input type="hidden" name="alert_whatsapp_enabled" value="on">{% endif %}
+        {% if cfg.alert_human_requests %}<input type="hidden" name="alert_human_requests" value="on">{% endif %}
+        {% if cfg.alert_new_appointments %}<input type="hidden" name="alert_new_appointments" value="on">{% endif %}
+        {% if cfg.alert_cancellations %}<input type="hidden" name="alert_cancellations" value="on">{% endif %}
+        {% if cfg.alert_reschedules %}<input type="hidden" name="alert_reschedules" value="on">{% endif %}
+        <div class="field"><label for="work_start">Hora de inicio</label><input type="time" id="work_start" name="work_start" value="{{ cfg.work_start }}" required></div>
+        <div class="field"><label for="work_end">Hora de fin</label><input type="time" id="work_end" name="work_end" value="{{ cfg.work_end }}" required></div>
+        <div class="field"><label for="consult_minutes">Minutos por consulta</label><input type="number" id="consult_minutes" name="consult_minutes" min="10" max="120" step="5" value="{{ cfg.consult_minutes }}" required></div>
+        <div class="field"><label for="human_auto_resume_minutes">Reactivar bot tras atención humana</label>
+          <select id="human_auto_resume_minutes" name="human_auto_resume_minutes">
+            {% for mins, label in ([(0,'Nunca automáticamente · demo')] if demo_mode else [(15,'15 minutos'),(30,'30 minutos'),(60,'1 hora'),(120,'2 horas'),(0,'Nunca automáticamente')]) %}
+            <option value="{{ mins }}" {% if cfg.human_auto_resume_minutes == mins %}selected{% endif %}>{{ label }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="field full">
+          <label>Días que se atiende</label>
+          <div class="checkboxes">
+            {% set dias = [('0','Lun'), ('1','Mar'), ('2','Mié'), ('3','Jue'), ('4','Vie'), ('5','Sáb'), ('6','Dom')] %}
+            {% set active_days = cfg.work_days.split(',') %}
+            {% for val, label in dias %}
+            <label><input type="checkbox" name="work_days_check" value="{{ val }}" {% if val in active_days %}checked{% endif %} data-sync-days="true"> {{ label }}</label>
+            {% endfor %}
+          </div>
+          <input type="hidden" name="work_days" id="work_days_hidden" value="{{ cfg.work_days }}">
+        </div>
+        <button type="submit">Guardar horario</button>
+      </form>
+      <p class="hint">La revisión de laboratorios siempre dura 20 minutos. La duración configurada aquí aplica a consultas normales. La reactivación automática solo empieza después de que el consultorio responda a una solicitud humana; una pausa manual siempre es indefinida.</p>
+    </div>
+
+
+    <div class="card">
+      <h2>🔔 Alertas por WhatsApp</h2>{% if demo_mode %}<p>Integración desactivada: no configures destinatarios ni actives alertas.</p>{% endif %}
+      <p class="hint">Configura a la persona que recibirá las alertas del bot. Puedes cambiarla cuando cambie la asistente o recepción.</p>
+      <form class="inline" method="post" action="/panel/settings"><input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+        <input type="hidden" name="work_start" value="{{ cfg.work_start }}">
+        <input type="hidden" name="work_end" value="{{ cfg.work_end }}">
+        <input type="hidden" name="consult_minutes" value="{{ cfg.consult_minutes }}">
+        <input type="hidden" name="work_days" value="{{ cfg.work_days }}">
+        <input type="hidden" name="human_auto_resume_minutes" value="{{ cfg.human_auto_resume_minutes }}">
+        <div class="field"><label for="settings-field-1">Nombre del contacto</label><input type="text" name="alert_contact_name" value="{{ cfg.alert_contact_name or '' }}" placeholder="Ej. Ana - Asistente" id="settings-field-1"></div>
+        <div class="field"><label for="settings-field-2">WhatsApp del contacto</label><input type="tel" name="alert_contact_phone" value="{{ cfg.alert_contact_phone or '' }}" placeholder="Ej. 52181XXXXXXXX" id="settings-field-2"></div>
+        <div class="field full">
+          <label><input type="checkbox" name="alert_whatsapp_enabled" {% if cfg.alert_whatsapp_enabled %}checked{% endif %}> Activar alertas por WhatsApp</label>
+        </div>
+        <div class="field full">
+          <label>Eventos que generan alerta</label>
+          <div class="checkboxes">
+            <label><input type="checkbox" name="alert_human_requests" {% if cfg.alert_human_requests %}checked{% endif %}> Solicitud de humano</label>
+            <label><input type="checkbox" name="alert_new_appointments" {% if cfg.alert_new_appointments %}checked{% endif %}> Citas nuevas</label>
+            <label><input type="checkbox" name="alert_cancellations" {% if cfg.alert_cancellations %}checked{% endif %}> Cancelaciones</label>
+            <label><input type="checkbox" name="alert_reschedules" {% if cfg.alert_reschedules %}checked{% endif %}> Reagendaciones</label>
+          </div>
+        </div>
+        <button type="submit">Guardar alertas</button>
+      </form>
+      <p class="hint">Una solicitud humana genera una sola alerta mientras siga pendiente, evitando avisos repetidos si el paciente manda varios mensajes.</p>
+    </div>
+
+
+    <div class="card">
+      <h2>Excepciones por día</h2>
+      <h3>Bloquear un día completo</h3>
+      <form class="inline" method="post" action="/panel/block-day"><input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+        <div class="field"><label for="settings-field-3">Fecha</label><input type="date" name="day" min="{{ today.isoformat() }}" required id="settings-field-3"></div>
+        <div class="field"><label for="settings-field-4">Motivo</label>{% if demo_mode %}<input type="text" name="note" aria-label="Nota demo" value="Demostración administrativa" readonly>{% else %}<input type="text" name="note" placeholder="Ej. Vacaciones" id="settings-field-4">{% endif %}</div>
+        <button type="submit" class="danger">Bloquear día</button>
+      </form>
+
+      <h3>Horario especial</h3>
+      <form class="inline" method="post" action="/panel/custom-day"><input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+        <div class="field"><label for="settings-field-5">Fecha</label><input type="date" name="day" min="{{ today.isoformat() }}" required id="settings-field-5"></div>
+        <div class="field"><label for="settings-field-6">Desde</label><input type="time" name="custom_start" required id="settings-field-6"></div>
+        <div class="field"><label for="settings-field-7">Hasta</label><input type="time" name="custom_end" required id="settings-field-7"></div>
+        <div class="field"><label for="settings-field-8">Nota</label>{% if demo_mode %}<input type="text" name="note" aria-label="Nota demo" value="Demostración administrativa" readonly>{% else %}<input type="text" name="note" placeholder="Ej. Solo en la tarde" id="settings-field-8">{% endif %}</div>
+        <button type="submit">Guardar excepción</button>
+      </form>
+
+      <h3>Excepciones activas</h3>
+      {% if overrides %}
+        {% for o in overrides %}
+        <div class="override-row">
+          <div>{% if o.is_blocked %}<span class="tag">Bloqueado</span>{% else %}<span class="tag special">{{ o.custom_start }}–{{ o.custom_end }}</span>{% endif %} {{ o.date.strftime('%d/%m/%Y') }} — {{ o.note or '' }}</div>
+          <form method="post" action="/panel/override/{{ o.id }}/delete"><input type="hidden" name="csrf_token" value="{{ csrf_token }}"><button type="submit" class="ghost">Quitar</button></form>
+        </div>
+        {% endfor %}
+      {% else %}<p class="empty">No hay excepciones registradas.</p>{% endif %}
+    </div>
+
+
+    <div class="card activity-card">
+      <h2>Bitácora de actividad</h2>
+      <p class="hint">Últimas 100 acciones realizadas desde el panel. Sirve para saber quién cambió una cita, paciente o configuración.</p>
+      {% if activity %}
+      <div class="activity-table-wrap">
+        <table class="activity-table">
+          <thead>
+            <tr><th scope="col">Fecha</th><th scope="col">Usuario</th><th scope="col">Acción</th><th scope="col">Detalle</th></tr>
+          </thead>
+          <tbody>
+          {% for item in activity %}
+            <tr>
+              <td>{{ item.created_at.strftime('%d/%m/%Y %H:%M') }}</td>
+              <td><strong>{{ item.actor }}</strong><br><small>{{ 'Doctor' if item.role == 'doctor' else 'Asistente' }}</small></td>
+              <td>{{ item.action.replace('_',' ') }}</td>
+              <td>{{ item.details or '—' }}</td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+        <p class="empty">La bitácora comenzará a llenarse con las nuevas acciones del panel.</p>
+      {% endif %}
+    </div>
+  </div>
+</main>
+
+<script defer src="/static/panel-js/settings.js"></script>
+<script defer src="/static/panel-js/common.js"></script></body>
+</html>

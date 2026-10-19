@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="hero">
+  <div class="hero-copy">
+    <div class="eyebrow"><span class="brand-spark" aria-hidden="true">✦</span> SOFTWARE · DATOS · PROPÓSITO</div>
+    <h1 lang="en">Understand.<br>Choose.<br><em>Transform.</em></h1>
+    <p class="hero-proposition">WUNSCE crea automatización, analítica y entornos digitales para operaciones empresariales.</p>
+    <p>Organizamos información, conectamos herramientas y simplificamos procesos para que tu equipo trabaje con mayor claridad.</p>
+    <div class="actions">
+      <a class="btn primary" href="{{ url_for('contact') }}">Hablar de un proyecto</a>
+      <a class="hero-secondary" href="{{ url_for('projects') }}">Ver proyectos <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="hero-note">Comprender. Elegir. Transformar.</div>
+  </div>
+
+  <div class="hero-visual editorial-visual">
+    <div class="hero-image-frame workshop-frame">
+      <img src="{{ url_for('static', filename='img/taller-wunsce-transparente.webp') }}" srcset="{{ url_for('static', filename='img/taller-wunsce-transparente-640.webp') }} 640w, {{ url_for('static', filename='img/taller-wunsce-transparente-960.webp') }} 960w, {{ url_for('static', filename='img/taller-wunsce-transparente.webp') }} 1536w" sizes="(max-width: 620px) calc(100vw - 36px), (max-width: 900px) 48vw, 650px" alt="Wus y Wis convierten ideas en un plan, unidos por un hilo dorado en su taller" width="1536" height="1024" fetchpriority="high" decoding="async">
+      <div class="image-caption"><span>IDEAS QUE TOMAN FORMA</span><span>01 — WUNSCE</span></div>
+    </div>
+    <div class="visual-signature"><span aria-hidden="true">✦</span> Analítica + Entornos digitales</div>
+  </div>
+</section>
+
+<section class="signal-strip">
+  <div><span>01</span><strong>Comprender</strong></div>
+  <div><span>02</span><strong>Estructurar</strong></div>
+  <div><span>03</span><strong>Automatizar</strong></div>
+  <div><span>04</span><strong>Analizar</strong></div>
+  <div><span>05</span><strong>Evolucionar</strong></div>
+</section>
+
+<section class="section intro-grid">
+  <div>
+    <div class="eyebrow">LO QUE CONSTRUIMOS</div>
+    <h2>Tecnología que entiende tu operación.</h2>
+  </div>
+  <div class="intro-copy">
+    <p>WUNSCE trabaja en la intersección de software, datos y procesos. Una solución puede ser un asistente, una base estructurada, un dashboard, un sistema administrativo o un entorno completo.</p>
+    <p>El objetivo es siempre el mismo: entender primero, construir después.</p>
+  </div>
+</section>
+
+<section class="section services-home">
+  <div class="section-heading">
+    <div class="eyebrow">SERVICIOS</div>
+    <h2>Tres formas de convertir ideas en valor.</h2>
+  </div>
+  <div class="service-grid">
+    {% for service in services %}
+    <article class="service-card">
+      <div class="service-symbol" aria-hidden="true">{% if loop.index == 1 %}↗{% elif loop.index == 2 %}◈{% else %}⌘{% endif %}</div>
+      <span>{{ service.short }}</span>
+      <h3>{{ service.name }}</h3>
+      <p>{{ service.summary }}</p>
+      <a href="{{ url_for('services') }}" aria-label="Ver capacidades de {{ service.name }}">Ver capacidades <span aria-hidden="true">→</span></a>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section id="como-trabajamos" class="section work-process" aria-labelledby="work-process-title">
+  <div class="section-heading">
+    <div class="eyebrow">DEL PROBLEMA A LA SOLUCIÓN</div>
+    <h2 id="work-process-title">Cómo trabajamos</h2>
+    <p class="muted">Definimos lo que necesitas antes de elegir la tecnología.</p>
+  </div>
+  <ol class="work-steps">
+    <li><span class="step-number" aria-hidden="true">01</span><h3>Diagnóstico</h3><p>Escuchamos a tu equipo, revisamos el proceso y los datos disponibles, y acordamos el problema, el alcance y los criterios para evaluar la solución.</p></li>
+    <li><span class="step-number" aria-hidden="true">02</span><h3>Implementación</h3><p>Construimos e integramos la solución acordada. La probamos con casos de uso reales y documentamos cómo utilizarla.</p></li>
+    <li><span class="step-number" aria-hidden="true">03</span><h3>Evolución</h3><p>Revisamos el funcionamiento y las necesidades que surgen con el uso para acordar ajustes y siguientes mejoras.</p></li>
+  </ol>
+</section>
+
+{% if featured_project %}{% include "_featured_project.html" %}{% endif %}
+
+{% include "_ecosystem.html" %}
+
+<section id="proyectos" class="section projects-home">
+  <div class="section-heading split-heading">
+    <div>
+      <div class="eyebrow">NUESTRO ECOSISTEMA</div>
+      <h2>Explora las herramientas del ecosistema.</h2>
+    </div>
+    <a class="text-link" href="{{ url_for('projects') }}">Ver todos los proyectos →</a>
+  </div>
+
+  <div class="project-grid">
+    {% for project in projects %}
+    {% include "_project_card.html" %}
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section final-cta">
+  <div>
+    <div class="eyebrow">EL SIGUIENTE PASO</div>
+    <h2>Las buenas ideas empiezan con una conversación.</h2>
+    <p>Un proceso repetitivo, datos difíciles de usar, un sistema que ya no alcanza o una idea que necesita estructura.</p>
+  </div>
+  <a class="btn primary" href="{{ url_for('contact') }}">Hablar de un proyecto</a>
+</section>
+
+<section id="origen" class="section story-block">
+  <img class="story-image story-journey" src="{{ url_for('static', filename='img/wus-wis-camino.webp') }}" srcset="{{ url_for('static', filename='img/wus-wis-camino-640.webp') }} 640w, {{ url_for('static', filename='img/wus-wis-camino-960.webp') }} 960w, {{ url_for('static', filename='img/wus-wis-camino.webp') }} 1440w" sizes="(max-width: 620px) calc(100vw - 36px), 50vw" alt="Wus y Wis comparten camino entre montañas bajo el emblema dorado de WUNSCE" width="1440" height="810" loading="lazy" decoding="async">
+  <div>
+    <div class="eyebrow light">EL ORIGEN</div>
+    <h2>Wus y Wis.</h2>
+    <p>Wus y Wis son los principios de WUNSCE. Wus imagina lo que podría existir. Wis pregunta qué merece ser construido. Parecen dos viajeros, pero son dos caras de una misma inteligencia creadora: deseo y criterio que encuentran una sola dirección.</p>
+  </div>
+  <div class="story-actions"><a class="btn light-btn" href="{{ url_for('universe') }}">Entrar al universo →</a><a class="story-secondary" href="{{ url_for('about') }}">Nuestra historia</a></div>
+</section>
+
+{% endblock %}

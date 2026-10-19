@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}NANA · Data Transformation Environment{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="hero-copy">
+    <div class="eyebrow">WUNSCE I+D · INGENIERÍA DE DATOS</div>
+    <h1>Convierte datos desordenados en información lista para trabajar.</h1>
+    <p>NANA es un entorno de transformación de datos que procesa un CSV sintético, detecta problemas de calidad, normaliza su estructura y genera salidas listas para análisis, bases de datos y nuevas aplicaciones.</p>
+    <div class="actions">
+      <a class="btn primary" href="{{ url_for('nana_app') }}">Probar NANA</a>
+      <a class="btn ghost" href="{{ url_for('case_study') }}">Ver caso demostrativo</a>
+    </div>
+    <p>NANA, inspirada en Nanahuatzin, lleva la idea de dar luz a lo que estaba disperso al trabajo con datos.</p>
+    <div class="hero-note">Datos estructurados. Listos para explorar.</div>
+  </div>
+  <div class="hero-visual">
+    <div class="data-card">
+      <div class="data-card-top"><span>EJEMPLO SINTÉTICO</span><span>→</span><span>NANA</span></div>
+      <div class="fake-row"><b>productos_demo.csv</b><span class="pill warn">duplicados</span></div>
+      <div class="fake-row"><b>fechas_demo.csv</b><span class="pill warn">fechas mixtas</span></div>
+      <div class="fake-row"><b>inventario_demo.csv</b><span class="pill warn">campos vacíos</span></div>
+      <div class="transform-arrow">↓</div>
+      <div class="output-grid">
+        <div><small>SALIDA</small><strong>clean_data.csv</strong></div>
+        <div><small>BASE DE DATOS</small><strong>clean_data.db</strong></div>
+        <div><small>REVISIÓN</small><strong>Reporte</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="stats-strip">
+  <div><strong>01</strong><span>Ingesta</span></div>
+  <div><strong>02</strong><span>Perfilado</span></div>
+  <div><strong>03</strong><span>Limpieza</span></div>
+  <div><strong>04</strong><span>Normalización</span></div>
+  <div><strong>05</strong><span>Exportación</span></div>
+</section>
+
+<section class="section two-col">
+  <div>
+    <div class="eyebrow">EL PROBLEMA</div>
+    <h2>El análisis empieza antes del dashboard.</h2>
+  </div>
+  <div class="copy">
+    <p>Muchas organizaciones almacenan información en hojas y exportaciones que fueron creciendo sin una estructura definida. Antes de construir indicadores o modelos, esos datos necesitan limpieza, consistencia y trazabilidad.</p>
+    <p>NANA convierte ese primer obstáculo en un proceso reproducible.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="eyebrow">CAPACIDADES</div>
+  <h2>Un pipeline pequeño, claro y extensible.</h2>
+  <div class="feature-grid">
+    <article><span>01</span><h3>Columnas consistentes</h3><p>Normaliza encabezados para facilitar consultas, SQL e integraciones.</p></article>
+    <article><span>02</span><h3>Duplicados</h3><p>Detecta y elimina registros exactos duplicados antes de continuar.</p></article>
+    <article><span>03</span><h3>Valores faltantes</h3><p>Cuantifica campos incompletos y los incorpora al reporte de calidad.</p></article>
+    <article><span>04</span><h3>Tipos de datos</h3><p>Intenta inferir números y fechas de forma conservadora.</p></article>
+    <article><span>05</span><h3>Data Quality Score</h3><p>Resume completitud y unicidad en una métrica fácil de entender.</p></article>
+    <article><span>06</span><h3>CSV + SQLite</h3><p>Entrega resultados utilizables por analistas y aplicaciones.</p></article>
+  </div>
+</section>
+
+<section class="section dark-block">
+  <div>
+    <div class="eyebrow light">NANA + WUNSCE</div>
+    <h2>De información dispersa a un entorno de datos utilizable.</h2>
+  </div>
+  <a class="btn light-btn" href="{{ url_for('nana_app') }}">Abrir la demo</a>
+</section>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-hero">
+  <div class="eyebrow">WUNSCE</div>
+  <h1>El deseo de comprender. La elección de construir.</h1>
+  <p>WUNSCE nace de una idea sencilla: la tecnología es más útil cuando empieza con una buena comprensión del problema.</p>
+</section>
+
+<figure class="about-editorial about-choice section"><img src="{{ url_for('static', filename='img/arbol-conocimiento-transparente.webp') }}" alt="Árbol de conocimiento nacido de la obsidiana, cuyas ramas conectan datos, procesos e ideas bajo una estrella dorada" width="1448" height="1086" loading="lazy" decoding="async"><figcaption>Deseo y elección. Dos impulsos, una misma búsqueda.</figcaption></figure>
+<section class="section about-story">
+  <div class="story-panel">
+    <img class="principle-avatar" src="{{ url_for('static', filename='img/emblems/wus.webp') }}" alt="Emblema de Wus" width="768" height="768" loading="lazy">
+    <div>
+      <h2>Wus · El mago.</h2>
+      <p>Representa deseo, impulso, imaginación y la capacidad de convertir una posibilidad en algo tangible.</p>
+    </div>
+  </div>
+  <div class="story-panel">
+    <img class="principle-avatar" src="{{ url_for('static', filename='img/emblems/wis.webp') }}" alt="Emblema de Wis" width="768" height="768" loading="lazy">
+    <div>
+      <h2>Wis · El sabio.</h2>
+      <p>Representa elección, entendimiento, criterio y la decisión de construir solo lo que tiene sentido.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section philosophy">
+  <div class="eyebrow">NUESTRA FILOSOFÍA</div>
+  <h2>Comprender. Elegir. Transformar.</h2>
+  <p>Comprender antes de automatizar. Elegir antes de construir. Transformar solo cuando la solución aporta claridad, utilidad o crecimiento.</p>
+  <a class="text-link universe-about-link" href="{{ url_for('universe') }}">Explorar nuestros principios y el lore de los proyectos →</a>
+</section>
+
+<section class="section principles">
+  <div class="three-col">
+    <article><strong>01</strong><h3>Claridad</h3><p>Sistemas entendibles por las personas que los usan.</p></article>
+    <article><strong>02</strong><h3>Utilidad</h3><p>La tecnología debe resolver una necesidad concreta.</p></article>
+    <article><strong>03</strong><h3>Evolución</h3><p>Construir con espacio para aprender y crecer.</p></article>
+  </div>
+</section>
+{% endblock %}

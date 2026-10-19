@@ -8,6 +8,19 @@ Este repositorio organiza proyectos recuperados del archivo personal, nuevas her
 
 **Perfil:** [JuanSeCe1402](https://github.com/JuanSeCe1402)
 
+## Proyectos destacados
+
+| Proyecto | Qué demuestra | Estado |
+|---|---|---|
+| [DARWIN: predicción de recompra](proyectos/darwin/README.md) | Pipeline de ML, evaluación reservada y aplicación Flask | Demo sintética con pruebas |
+| [NANA: transformación de datos](proyectos/nana/README.md) | Limpieza, perfilado y exportación CSV/SQLite | Demo sintética con pruebas |
+| [Bioimpedancia: simulación e inferencia](proyectos/bioimpedancia/README.md) | Modelos físicos recuperados, particiones fijas y comparación de modelos | Investigación exploratoria; ejecución pequeña reproducible |
+| [ESCULAPIO: agenda y operación](proyectos/esculapio/README.md) | FastAPI, SQLAlchemy, roles y atención humana | Demo aislada con pruebas; integraciones simuladas |
+| [FREY: costos y escenarios](proyectos/frey/README.md) | Precisión decimal, márgenes y PDF | Demo con pruebas |
+| [TIKAL: operaciones de negocio](proyectos/tikal/README.md) | Clientes ficticios, pedidos, inventario y tareas | Demo transaccional con pruebas |
+
+Las aplicaciones WUNSCE incluyen código, interfaz, recursos y pruebas en este repositorio. Cada una se ejecuta desde su propia carpeta con su entorno. Las demos sintéticas y las verificaciones locales no acreditan resultados comerciales ni validación experimental. La selección y procedencia se explican en [INCORPORACION](INCORPORACION.md).
+
 ## Explorar por disciplina
 
 | Área | Proyecto | Estado |
@@ -32,6 +45,17 @@ Este repositorio organiza proyectos recuperados del archivo personal, nuevas her
 | Datos, astronomía y divulgación | [Starlight: propuesta de observación y datos meteorológicos](proyectos/starlight/README.md) | Propuesta conceptual |
 | Ingeniería de datos y biofísica | [Serena: arquitectura de datos biomédicos](proyectos/serena/README.md) | Propuesta conceptual |
 | Divulgación, investigación y planificación | [Comunicación científica y gestión de proyectos](proyectos/comunicacion-cientifica/README.md) | Documentación de experiencias |
+| Aprendizaje automático aplicado | [DARWIN](proyectos/darwin/README.md) | Demo sintética con evaluación reservada |
+| Ingeniería de datos | [NANA](proyectos/nana/README.md) | Transformación y perfilado |
+| Análisis de costos | [FREY](proyectos/frey/README.md) | Escenarios y PDF |
+| Datos transaccionales | [TIKAL](proyectos/tikal/README.md) | Demo operativa |
+| Desarrollo backend | [ESCULAPIO](proyectos/esculapio/README.md) | Demo administrativa |
+| Desarrollo web | [Portal WUNSCE](proyectos/wunsce-web/README.md) | Sitio Flask y despliegue documentado |
+| Métodos numéricos | [Interpolación y Runge–Kutta](proyectos/metodos-numericos/README.md) | API Python comprobada y fuentes Fortran |
+| Energía y simulación | [Almacenamiento de hidrógeno](proyectos/almacenamiento-hidrogeno/README.md) | Archivo exploratorio en revisión |
+| Algoritmos | [Fundamentos de programación](proyectos/fundamentos-programacion/README.md) | Colección académica |
+| Programación creativa | [Simulaciones visuales](proyectos/simulaciones-visuales/README.md) | Prototipos de interfaz |
+| Estimación y modelado | [Orden de magnitud](proyectos/orden-magnitud/README.md) | Ejercicio académico |
 
 ## Empezar
 
@@ -41,6 +65,7 @@ python3 proyectos/movilidad-urbana/analizar.py
 python3 proyectos/espectros-opticos/analizar.py
 python3 proyectos/convergencia-manganeso/extraer.py
 python3 proyectos/indicadores-stix/analizar.py
+python3 proyectos/metodos-numericos/metodos.py
 ```
 
 Esas cuatro herramientas solo necesitan la biblioteca estándar de Python y tienen casos sintéticos. Los prototipos de interfaz y aprendizaje automático tienen dependencias propias y no están cubiertos por esas comprobaciones.

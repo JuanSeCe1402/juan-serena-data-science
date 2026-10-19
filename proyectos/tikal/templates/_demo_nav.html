@@ -1,0 +1,7 @@
+<div class="demo-shell">
+  <div class="demo-banner"><strong>ENTORNO DEMO AISLADO</strong><p>Todos los registros iniciales son ficticios. Tus cambios solo afectan esta sesión; no introduzcas datos reales ni sensibles. Caduca en 30 minutos y puede borrarse al reiniciar la app.</p></div>
+  <nav class="module-nav" aria-label="Módulos operativos">
+    {% for endpoint,label in [('product_app','Resumen y pipeline'),('clients','Clientes demo'),('orders','Pedidos demo'),('inventory','Inventario demo'),('tasks','Tareas demo')] %}<a href="{{ url_for(endpoint) }}"{% if request.endpoint == endpoint %} aria-current="page"{% endif %}>{{ label }}</a>{% endfor %}
+  </nav>
+  <details class="reset-panel"><summary>Reiniciar mi entorno demo</summary><p>Se descartan únicamente los cambios de esta sesión y se vuelve al ejemplo inicial.</p><form method="post" action="{{ url_for('reset_demo') }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="btn ghost" type="submit">Descartar mis cambios demo</button></form></details>
+</div>

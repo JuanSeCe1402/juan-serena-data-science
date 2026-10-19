@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <script>document.documentElement.classList.add('js');</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ seo_title }}</title>
+  <meta name="description" content="{{ seo_description }}">
+  <meta name="robots" content="{{ 'index, follow, max-image-preview:large' if seo_indexable else 'noindex, follow' }}">
+  <meta name="theme-color" content="#3e4228">
+  {% if canonical_url %}<link rel="canonical" href="{{ canonical_url }}">{% endif %}
+  <meta property="og:site_name" content="WUNSCE Analytics & Environments">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_MX">
+  <meta property="og:title" content="{{ seo_title }}">
+  <meta property="og:description" content="{{ seo_description }}">
+  {% if canonical_url %}<meta property="og:url" content="{{ canonical_url }}">{% endif %}
+  <meta property="og:image" content="{{ social_image }}">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="WUNSCE Analytics & Environments — Comprender. Elegir. Transformar.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ seo_title }}">
+  <meta name="twitter:description" content="{{ seo_description }}">
+  <meta name="twitter:image" content="{{ social_image }}">
+  <meta name="twitter:image:alt" content="WUNSCE Analytics & Environments — Comprender. Elegir. Transformar.">
+  <link rel="icon" href="{{ url_for('favicon') }}" sizes="16x16 32x32 48x48">
+  <link rel="icon" type="image/png" sizes="192x192" href="{{ url_for('static', filename='img/favicon-192.png') }}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='img/apple-touch-icon.png') }}">
+  {% if seo_indexable %}<script type="application/ld+json">{{ structured_data|tojson }}</script>{% endif %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <script defer src="{{ url_for('static', filename='js/main.js') }}"></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Saltar al contenido</a>
+<header class="site-header">
+  <a class="brand" href="{{ url_for('home') }}">
+    <img src="{{ url_for('static', filename='img/wunsce-logo-144.webp') }}" alt="" width="49" height="49" decoding="async">
+    <div class="brand-copy">
+      <strong>WUNSCE</strong>
+      <span>Analytics & Environments</span>
+    </div>
+  </a>
+
+  <button type="button" class="menu-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-nav">☰</button>
+
+  <nav id="main-nav" class="nav" aria-label="Navegación principal">
+    <a href="{{ url_for('home') }}"{% if request.endpoint == 'home' %} aria-current="page"{% endif %}>Inicio</a>
+    <a href="{{ url_for('services') }}"{% if request.endpoint == 'services' %} aria-current="page"{% endif %}>Servicios</a>
+    <a href="{{ url_for('home') }}#ecosistema">Ecosistema</a>
+    <a href="{{ url_for('projects') }}"{% if request.endpoint in ['projects', 'project_detail'] %} aria-current="page"{% endif %}>Proyectos</a>
+    <a href="{{ url_for('about') }}"{% if request.endpoint == 'about' %} aria-current="page"{% endif %}>WUNSCE</a>
+    <a href="{{ url_for('universe') }}"{% if request.endpoint == 'universe' %} aria-current="page"{% endif %}>Universo</a>
+    <a class="nav-cta" href="{{ url_for('contact') }}"{% if request.endpoint == 'contact' %} aria-current="page"{% endif %}>Hablemos</a>
+  </nav>
+</header>
+
+<main id="main-content" tabindex="-1">
+  {% block content %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <div>
+    <strong>WUNSCE</strong>
+    <p>Comprender. Elegir. Transformar.</p>
+  </div>
+  <div class="footer-links">
+    <a href="{{ url_for('services') }}">Servicios</a>
+    <a href="{{ url_for('projects') }}">Proyectos</a>
+    <a href="{{ url_for('about') }}">Nuestra historia</a>
+    <a href="{{ url_for('universe') }}">Universo WUNSCE</a>
+    <a href="{{ url_for('contact') }}">Contacto</a>
+  </div>
+  <div class="footer-links">
+    {% if github_url %}<a href="{{ github_url }}" target="_blank" rel="noopener">GitHub</a>{% endif %}
+    {% if linkedin_url %}<a href="{{ linkedin_url }}" target="_blank" rel="noopener">LinkedIn</a>{% endif %}
+    {% if contact_email %}<a href="mailto:{{ contact_email }}">{{ contact_email }}</a>{% endif %}
+    {% if contact_phone %}<a href="tel:+{{ contact_phone }}">Llamar a WUNSCE</a>{% endif %}
+    {% if contact_whatsapp %}<a href="https://wa.me/{{ contact_whatsapp }}" target="_blank" rel="noopener">WhatsApp</a>{% endif %}
+    {% if not github_url and not linkedin_url and not contact_email and not contact_whatsapp and not contact_phone %}
+      <span>Comprender. Elegir. Transformar.</span>
+    {% endif %}
+  </div>
+</footer>
+</body>
+</html>

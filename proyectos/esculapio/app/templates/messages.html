@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<link rel="icon" href="/static/img/wunsce-logo-144.webp" type="image/webp">
+<meta name="robots" content="noindex,nofollow">
+<meta name="csrf-token" content="{{ csrf_token }}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mensajes — {{ clinic_name }}</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body class="panel-page" data-demo="{{ 'true' if demo_mode else 'false' }}">
+<a class="skip-link" href="#main-content">Saltar al contenido</a>
+<div class="wunsce-return"><a href="{{ wunsce_url }}" lang="en">← Back to WUNSCE</a><a href="/case-study">Caso de estudio ESCULAPIO</a></div>
+{% if demo_mode %}<aside class="demo-banner" aria-label="Alcance de la demo"><strong>DEMO AISLADA · SOLO DATOS FICTICIOS</strong><p>Rol simulado: {{ 'doctor' if request.session.get('role') == 'doctor' else 'asistente' }}. Solo ejemplos ficticios, sin envíos externos. Caduca en 30 minutos. No introduzcas datos reales ni información clínica.</p><form method="post" action="/demo/reset"><input type="hidden" name="csrf_token" value="{{ csrf_token }}"><button type="submit" class="small-action secondary">Cerrar y eliminar mi demo</button></form></aside>{% endif %}
+<header class="top">
+  <div><h1>{{ clinic_name }}</h1><p>{{ "Buzón administrativo demo" if demo_mode else "Buzón de WhatsApp" }}</p></div>
+  <nav class="top-nav" aria-label="Operación del consultorio">
+    <a class="nav-link" href="/panel">Agenda</a>
+    <a class="nav-link" href="/panel/calendar">Calendario</a>
+    <a class="nav-link" href="/panel/patients">Pacientes</a>
+    <a class="nav-link active" href="/panel/messages">Mensajes <span id="navUnread" class="nav-badge hidden"></span></a>
+    {% if request.state.user_role == 'doctor' %}<a class="nav-link" href="/panel/settings">Configuración</a>{% endif %}
+  </nav>
+</header>
+
+<main id="main-content" tabindex="-1" class="messages-page">
+  {% if notice %}<div class="alert success" role="status">{{ notice }}</div>{% endif %}
+  {% if error %}<div class="alert error" role="alert" tabindex="-1">{{ error }}</div>{% endif %}
+
+  {% if demo_mode %}<section class="demo-event"><h2>Simular atención inicial</h2><p>Genera un evento ficticio. Si el bot está pausado, un mensaje nuevo no produce respuesta automática.</p><form method="post" action="/panel/demo-incoming"><input type="hidden" name="csrf_token" value="{{ csrf_token }}"><label for="demo-contact">Paciente demo</label><select id="demo-contact" name="phone"><option value="00000001">Paciente Demo 01</option><option value="00000002">Paciente Demo 02</option><option value="00000003">Paciente Demo 03</option></select><label for="demo-event">Evento administrativo</label><select id="demo-event" name="event"><option value="human">Pedir atención humana</option><option value="message">Seguimiento administrativo</option><option value="menu">Consultar horarios</option></select><button type="submit">Simular evento demo</button></form></section>{% endif %}<div class="messages-toolbar">
+    <div>
+      <strong id="summaryUnread">{{ total_unread }}</strong> sin leer
+      · <strong id="summaryHuman">{{ total_human_requests }}</strong> solicitudes de atención humana
+    </div>
+    <button type="button" id="enableNotifications" class="small-action secondary">🔔 Activar notificaciones</button>
+  </div>
+
+  <div class="messages-layout">
+    <aside class="contacts-card">
+      <h2>Conversaciones</h2>
+      {% if contacts %}
+        {% for c in contacts %}
+        <a class="contact-item {% if c.phone == selected_phone %}selected{% endif %} {% if c.human_requested %}needs-human{% endif %}" href="/panel/messages?phone={{ c.phone }}">
+          <div class="contact-title">
+            <strong>{{ c.name }}</strong>
+            <span class="contact-badges">
+              {% if c.human_requested %}<em class="attention-badge">🔔 Solicita humano</em>{% endif %}
+              {% if c.unread_count %}<em class="unread-badge">{{ c.unread_count }}</em>{% endif %}
+            </span>
+          </div>
+          <span>{{ c.last_text[:55] }}{% if c.last_text|length > 55 %}…{% endif %}</span>
+          <small>{{ c.last_at.strftime('%d/%m %H:%M') }}{% if c.bot_paused %} · bot pausado{% endif %}</small>
+        </a>
+        {% endfor %}
+      {% else %}<p class="empty contacts-empty">Aún no hay mensajes registrados.</p>{% endif %}
+    </aside>
+
+    <section class="chat-card">
+      {% if selected_phone %}
+      <div class="chat-head">
+        <div>
+          <h2>{{ selected_patient.name if selected_patient and selected_patient.name else selected_phone }}</h2>
+          <span>{{ selected_phone }}</span>
+          {% if selected_patient %}<a class="patient-mini-link" href="/panel/patients/{{ selected_patient.id }}">Ver perfil del paciente</a>{% endif %}
+          {% if human_requested %}<span class="attention-badge inline">🔔 Solicitó atención humana</span>{% endif %}
+          {% if bot_paused %}<span class="human-mode-badge">Modo humano</span>{% endif %}
+        </div>
+        <div class="chat-actions">
+          {% if request.state.user_role == 'doctor' %}<form method="post" action="/panel/messages/bot-mode"><input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+            <input type="hidden" name="phone" value="{{ selected_phone }}">
+            {% if bot_paused %}
+              <input type="hidden" name="action" value="resume">
+              <button type="submit" class="small-action">Reanudar bot</button>
+            {% else %}
+              <input type="hidden" name="action" value="pause">
+              <button type="submit" class="small-action secondary">Pausar bot</button>
+            {% endif %}
+          </form>{% endif %}
+          {% if request.state.user_role == 'doctor' %}<form method="post" action="/panel/messages/delete-conversation" data-confirm="¿Borrar toda esta conversación del buzón del bot? Esto no elimina mensajes externos. El bot permanecerá pausado hasta reanudación explícita."><input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+            <input type="hidden" name="phone" value="{{ selected_phone }}">
+            <button type="submit" class="small-action danger">Vaciar chat</button>
+          </form>{% endif %}
+        </div>
+      </div>
+
+      {% if human_requested %}
+      <div class="human-request-note">🔔 <strong>Este paciente pidió hablar con una persona.</strong> El bot permanecerá pausado sin límite hasta que el consultorio responda. {% if human_auto_resume_minutes > 0 %}Después de la primera respuesta comenzará el temporizador de inactividad.{% else %}La reactivación automática está desactivada; el rol doctor debe reanudar el bot explícitamente.{% endif %}</div>
+      {% elif bot_paused and pause_reason == 'human_request' %}
+      <div class="human-mode-note">👤 Atención humana activa. Cada respuesta del consultorio reinicia el temporizador. {% if human_auto_resume_minutes == 0 %}La reactivación automática está desactivada.{% else %}El bot se reactivará tras <strong>{{ human_auto_resume_minutes }} minutos</strong> sin actividad.{% endif %} Solo el rol doctor puede reanudarlo manualmente.</div>
+      {% elif bot_paused %}
+      <div class="human-mode-note">⏸️ Pausa manual indefinida. Los mensajes entrantes se seguirán guardando aquí y el bot no responderá hasta que pulses <strong>Reanudar bot</strong>.</div>
+      {% endif %}
+
+      <div class="chat-thread" id="thread">
+        {% for m in conversation %}
+        <div class="bubble-wrap {{ 'out' if m.direction == 'outgoing' else ('system' if m.direction == 'system' else 'in') }}">
+          <div class="bubble">
+            {% if m.media_path and m.media_mime_type and m.media_mime_type.startswith('image/') %}
+              <a href="/panel/media/{{ m.id }}" target="_blank" rel="noopener">
+                <img src="/panel/media/{{ m.id }}" alt="Foto enviada por el paciente" class="msg-photo">
+              </a>
+              {% if m.text and not m.text.startswith('[') %}<div>{{ m.text }}</div>{% endif %}
+            {% elif m.media_path %}
+              <a href="/panel/media/{{ m.id }}" target="_blank" rel="noopener" class="msg-file-link">
+                📎 Ver archivo adjunto
+              </a>
+              {% if m.text and not m.text.startswith('[') %}<div>{{ m.text }}</div>{% endif %}
+            {% else %}
+              <div>{{ m.text }}</div>
+            {% endif %}
+            <div class="bubble-meta">
+              <small>
+                {{ m.created_at.strftime('%d/%m %H:%M') }}{% if m.source == 'business_app' %} · celular{% endif %}
+                {% if m.direction == 'outgoing' %}
+                  {% set ds = m.delivery_status or 'sent' %}
+                  <span class="delivery-status delivery-{{ ds }}" {% if m.error_detail %}title="{{ m.error_detail }}"{% endif %}>
+                    {% if ds == 'simulated' %}· Simulado: sin envío externo{% elif ds == 'read' %}· ✓✓ Leído
+                    {% elif ds == 'delivered' %}· ✓✓ Entregado
+                    {% elif ds == 'failed' %}· ⚠ Falló
+                    {% else %}· ✓ Enviado{% endif %}
+                  </span>
+                {% endif %}
+              </small>
+              {% if request.state.user_role == 'doctor' %}<form method="post" action="/panel/messages/{{ m.id }}/delete" data-confirm="¿Eliminar este mensaje del buzón?"><input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+                <button type="submit" class="message-delete" title="Eliminar del buzón" aria-label="Eliminar mensaje">×</button>
+              </form>{% endif %}
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        {% if not conversation %}<p class="empty">Esta conversación no tiene mensajes guardados.</p>{% endif %}
+      </div>
+      <form class="chat-compose" method="post" action="/panel/messages/send"><input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+        <input type="hidden" name="phone" value="{{ selected_phone }}">
+        {% if demo_mode %}<label for="demo-reply">Respuesta demostrativa</label><select id="demo-reply" name="body" required>{% for reply in demo_replies %}<option>{{ reply }}</option>{% endfor %}</select>{% else %}<label for="reply-body">Respuesta administrativa</label><textarea id="reply-body" name="body" maxlength="1000" rows="2" required></textarea>{% endif %}
+        <button type="submit">{{ "Registrar respuesta demo" if demo_mode else "Enviar" }}</button>
+      </form>
+      <p class="hint chat-hint">Eliminar aquí borra únicamente la copia almacenada por este bot. El envío por Cloud API está sujeto a las reglas de mensajería de WhatsApp.</p>
+      {% else %}<div class="empty-chat"><p>Selecciona una conversación.</p></div>{% endif %}
+    </section>
+  </div>
+</main>
+<script defer src="/static/panel-js/messages.js"></script>
+<script defer src="/static/panel-js/common.js"></script></body>
+</html>

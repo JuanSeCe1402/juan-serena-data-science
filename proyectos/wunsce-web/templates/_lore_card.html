@@ -1,0 +1,10 @@
+    <article id="{{ character.slug }}" class="character-card character-{{ character.slug }}">
+      <div class="character-portrait"><img src="{{ url_for('static', filename='img/emblems/' ~ character.slug ~ '.webp') }}" alt="Emblema de {{ character.name }}, {{ character.title }}" width="768" height="768" loading="lazy" decoding="async"></div>
+      <div class="character-top"><span class="character-glyph" aria-hidden="true">{{ character.symbol }}</span><span class="eyebrow">{{ character.verb }}</span></div>
+      <h3>{{ character.name }}</h3><div class="character-title">{{ character.title }}</div>
+      <p class="character-origin">{{ character.origin }}</p>
+      <details><summary>En la historia</summary><p>{{ character.story }}</p></details>
+      <div class="character-business"><h4>En la empresa</h4><p>{{ character.business }}</p></div>
+      <blockquote>«{{ character.principle }}»</blockquote>
+      {% if character.slug in ['nana', 'frey', 'tikal', 'darwin', 'esculapio'] %}<a class="text-link" href="{{ url_for('project_detail', slug=character.slug) }}">Conocer el proyecto →</a>{% else %}<span class="character-capability">Principio de la empresa</span>{% endif %}
+    </article>

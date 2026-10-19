@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<link rel="icon" href="/static/img/wunsce-logo-144.webp" type="image/webp">
+<meta name="robots" content="noindex,nofollow">
+<meta name="csrf-token" content="{{ csrf_token }}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reagendar cita — {{ clinic_name }}</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body class="panel-page" data-demo="{{ 'true' if demo_mode else 'false' }}">
+<a class="skip-link" href="#main-content">Saltar al contenido</a>
+<div class="wunsce-return"><a href="{{ wunsce_url }}" lang="en">← Back to WUNSCE</a><a href="/case-study">Caso de estudio ESCULAPIO</a></div>
+{% if demo_mode %}<aside class="demo-banner" aria-label="Alcance de la demo"><strong>DEMO AISLADA · SOLO DATOS FICTICIOS</strong><p>Rol simulado: {{ 'doctor' if request.session.get('role') == 'doctor' else 'asistente' }}. Solo ejemplos ficticios, sin envíos externos. Caduca en 30 minutos. No introduzcas datos reales ni información clínica.</p><form method="post" action="/demo/reset"><input type="hidden" name="csrf_token" value="{{ csrf_token }}"><button type="submit" class="small-action secondary">Cerrar y eliminar mi demo</button></form></aside>{% endif %}
+<header class="top">
+  <div><h1>{{ clinic_name }}</h1><p>Reagendar cita</p></div>
+  <nav class="top-nav" aria-label="Operación del consultorio">
+    <a class="nav-link" href="/panel">Agenda</a>
+    <a class="nav-link" href="/panel/calendar">Calendario</a>
+    <a class="nav-link" href="/panel/patients">Pacientes</a>
+    <a class="nav-link" href="/panel/messages">Mensajes <span id="navUnread" class="nav-badge hidden"></span></a>
+    {% if request.state.user_role == 'doctor' %}<a class="nav-link" href="/panel/settings">Configuración</a>{% endif %}
+  </nav>
+</header>
+
+<div id="reschedule-context" data-id="{{ appt.id }}" data-type="{{ appt.appointment_type or 'consulta' }}" data-date="{{ appt.date.isoformat() }}" data-time="{{ appt.start_time.strftime('%H:%M') }}" hidden></div><main id="main-content" tabindex="-1" class="reschedule-page">
+  {% if error %}<div class="alert error" role="alert" tabindex="-1">{{ error }}</div>{% endif %}
+  <div class="card reschedule-card">
+    <h2>Reagendar cita</h2>
+    <div class="current-appointment">
+      <strong>{{ appt.patient.name or appt.patient.phone }}</strong>
+      <span>{{ appointment_type_label }}</span>
+      <span>Actual: {{ appt.date.strftime('%d/%m/%Y') }} · {{ appt.start_time.strftime('%H:%M') }}–{{ appt.end_time.strftime('%H:%M') }}</span>
+    </div>
+
+    <form method="post" action="/panel/appointment/{{ appt.id }}/reschedule" class="reschedule-form"><input type="hidden" name="expected_version" value="{{ appt.version }}"><input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+      <input type="hidden" name="return_to" value="{{ return_to }}">
+      <div class="field">
+        <label for="reschedule_day">Nueva fecha</label><input type="date" id="reschedule_day" name="day" min="{{ today.isoformat() }}" value="{{ appt.date.isoformat() }}" required>
+      </div>
+      <div class="field">
+        <label for="reschedule_time">Hora disponible</label><select id="reschedule_time" name="start_time" required><option value="">Cargando…</option></select>
+      </div>
+      {% if not demo_mode %}<label class="check-line"><input type="checkbox" name="notify_patient" value="1" checked> Avisar al paciente por WhatsApp</label>{% endif %}
+      <div class="button-row">
+        <button type="submit">Confirmar cambio</button>
+        <a class="button-link secondary" href="/panel/patients/{{ appt.patient_id }}">Cancelar</a>
+      </div>
+    </form>
+    <p class="hint">El horario se vuelve a validar al confirmar. Si otra persona ocupa ese espacio mientras esta pantalla está abierta, el sistema no permitirá el choque.</p>
+  </div>
+</main>
+
+<script defer src="/static/panel-js/reschedule.js"></script>
+<script defer src="/static/panel-js/common.js"></script></body>
+</html>

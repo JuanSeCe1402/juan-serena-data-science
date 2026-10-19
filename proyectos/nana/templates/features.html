@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Capacidades · NANA{% endblock %}
+{% block content %}
+<section class="page-hero">
+  <div class="eyebrow">CAPACIDADES</div>
+  <h1>Lo que NANA hace hoy.</h1>
+  <p>El MVP está diseñado para demostrar el flujo completo de transformación sin ocultar sus límites.</p>
+</section>
+<section class="section">
+  <div class="feature-grid large">
+    <article><span>INGEST</span><h3>CSV sintético como entrada</h3><p>La demo pública procesa exclusivamente el ejemplo ficticio incluido.</p></article>
+    <article><span>PROFILE</span><h3>Perfilado inicial</h3><p>Cuenta registros, columnas, faltantes, duplicados y cardinalidad por campo.</p></article>
+    <article><span>CLEAN</span><h3>Limpieza básica</h3><p>Elimina duplicados exactos, espacios sobrantes y marcadores comunes de datos vacíos.</p></article>
+    <article><span>INFER</span><h3>Inferencia conservadora</h3><p>Convierte números sin ambigüedad y fechas ISO válidas. Conserva identificadores y valores mixtos para revisión.</p></article>
+    <article><span>SCORE</span><h3>Índice orientativo</h3><p>Combina completitud y unicidad en una lectura rápida del estado del dataset.</p></article>
+    <article><span>EXPORT</span><h3>Salidas reutilizables</h3><p>Genera CSV limpio y una base SQLite con una tabla lista para consulta.</p></article>
+  </div>
+</section>
+<section class="section limit-section">
+  <div class="eyebrow">LO QUE TODAVÍA NO ES</div>
+  <h2>Transparencia de producto.</h2>
+  <ul class="check-list">
+    <li>No reemplaza un proceso ETL empresarial completo.</li>
+    <li>No resuelve automáticamente reglas de negocio ambiguas.</li>
+    <li>La demo pública no acepta cargas ni datos sensibles reales.</li>
+    <li>Las descargas se aíslan por sesión; no incluye cuentas, gobierno de datos ni almacenamiento persistente.</li>
+  </ul>
+</section>
+{% endblock %}

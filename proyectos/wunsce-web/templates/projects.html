@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-hero">
+  <div class="eyebrow">PROYECTOS</div>
+  <h1>Herramientas para datos, decisiones y operación.</h1>
+  <p>Explora demos públicas y una implementación vertical con web profesional publicada. Cada ficha explica su función, alcance y estado; los nombres del universo WUNSCE acompañan a la herramienta.</p>
+</section>
+
+<section class="section">
+  <h2 class="sr-only">Proyectos disponibles</h2>
+  <div class="project-grid">
+    {% for project in projects %}
+    {% include "_project_card.html" %}
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

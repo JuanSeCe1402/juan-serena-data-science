@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<link rel="icon" href="/static/img/wunsce-logo-144.webp" type="image/webp">
+<meta name="robots" content="noindex,nofollow">
+<meta name="csrf-token" content="{{ csrf_token }}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ patient.name or patient.phone }} — {{ clinic_name }}</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body class="panel-page" data-demo="{{ 'true' if demo_mode else 'false' }}">
+<a class="skip-link" href="#main-content">Saltar al contenido</a>
+<div class="wunsce-return"><a href="{{ wunsce_url }}" lang="en">← Back to WUNSCE</a><a href="/case-study">Caso de estudio ESCULAPIO</a></div>
+{% if demo_mode %}<aside class="demo-banner" aria-label="Alcance de la demo"><strong>DEMO AISLADA · SOLO DATOS FICTICIOS</strong><p>Rol simulado: {{ 'doctor' if request.session.get('role') == 'doctor' else 'asistente' }}. Solo ejemplos ficticios, sin envíos externos. Caduca en 30 minutos. No introduzcas datos reales ni información clínica.</p><form method="post" action="/demo/reset"><input type="hidden" name="csrf_token" value="{{ csrf_token }}"><button type="submit" class="small-action secondary">Cerrar y eliminar mi demo</button></form></aside>{% endif %}
+<header class="top">
+  <div><h1>{{ clinic_name }}</h1><p>Perfil del paciente</p></div>
+  <nav class="top-nav" aria-label="Operación del consultorio">
+    <a class="nav-link" href="/panel">Agenda</a>
+    <a class="nav-link" href="/panel/calendar">Calendario</a>
+    <a class="nav-link active" href="/panel/patients">Pacientes</a>
+    <a class="nav-link" href="/panel/messages">Mensajes <span id="navUnread" class="nav-badge hidden"></span></a>
+    {% if request.state.user_role == 'doctor' %}<a class="nav-link" href="/panel/settings">Configuración</a>{% endif %}
+  </nav>
+</header>
+
+<main id="main-content" tabindex="-1" class="patient-detail-page">
+  {% if notice %}<div class="alert success" role="status">{{ notice }}</div>{% endif %}
+  {% if error %}<div class="alert error" role="alert" tabindex="-1">{{ error }}</div>{% endif %}
+
+  <div class="card patient-profile-card">
+    <div class="patient-profile-head">
+      <div class="patient-avatar large">{{ (patient.name or 'P')[0]|upper }}</div>
+      <div>
+        <h2>{{ patient.name or 'Paciente sin nombre' }}</h2>
+        <p>{{ patient.phone }}{% if patient.age %} · {{ patient.age }} años{% endif %}</p>
+      </div>
+      <div class="patient-profile-actions">
+        <a class="button-link secondary" href="/panel/patients/{{ patient.id }}/edit">Editar paciente</a>
+        <a class="button-link" href="/panel?patient_id={{ patient.id }}">+ Nueva cita</a>
+        <a class="button-link secondary" href="/panel/messages?phone={{ patient.phone }}">Mensajes</a>
+      </div>
+    </div>
+
+    <div class="patient-stat-grid">
+      <div><strong>{{ stats.proximas }}</strong><span>Próximas</span></div>
+      <div><strong>{{ stats.atendida }}</strong><span>Atendidas</span></div>
+      <div><strong>{{ stats.no_asistio }}</strong><span>No asistió</span></div>
+      <div><strong>{{ stats.cancelada }}</strong><span>Canceladas</span></div>
+      <div><strong>{{ stats.total }}</strong><span>Total</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Próximas citas</h2>
+    {% if upcoming %}
+      {% for a in upcoming %}
+      <div class="history-row upcoming-history">
+        <div class="history-date"><strong>{{ a.date.strftime('%d/%m/%Y') }}</strong><span>{{ a.start_time.strftime('%H:%M') }}–{{ a.end_time.strftime('%H:%M') }}</span></div>
+        <div class="history-main">
+          <strong>{{ appointment_type_labels.get(a.appointment_type or 'consulta', 'Consulta') }}</strong>
+          <span>{{ a.reason or 'Sin motivo' }}</span>
+        </div>
+        <div class="button-row compact">
+          <a class="button-link" href="/panel/appointment/{{ a.id }}/reschedule?return_to=patient">Reagendar</a>
+        </div>
+      </div>
+      {% endfor %}
+    {% else %}<p class="empty">Este paciente no tiene citas próximas.</p>{% endif %}
+  </div>
+
+  <div class="card">
+    <h2>Historial</h2>
+    {% if history %}
+      {% for a in history %}
+      <div class="history-row">
+        <div class="history-date"><strong>{{ a.date.strftime('%d/%m/%Y') }}</strong><span>{{ a.start_time.strftime('%H:%M') }}</span></div>
+        <div class="history-main">
+          <strong>{{ appointment_type_labels.get(a.appointment_type or 'consulta', 'Consulta') }}</strong>
+          <span>{{ a.reason or 'Sin motivo' }}</span>
+        </div>
+        <span class="status-pill status-{{ a.status }}">{{ a.status.replace('_',' ') }}</span>
+      </div>
+      {% endfor %}
+    {% else %}<p class="empty">Aún no hay historial.</p>{% endif %}
+  </div>
+
+
+  {% if request.state.user_role == 'doctor' %}
+  <div class="card danger-zone">
+    <h2>Zona de riesgo</h2>
+    <p class="hint">
+      Eliminar al paciente borra permanentemente sus citas, historial local de mensajes
+      y estado de conversación del bot. Esta acción no se puede deshacer.
+    </p>
+    <form method="post" action="/panel/patients/{{ patient.id }}/delete"
+          data-delete-confirm="true"><input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+      <input type="hidden" name="confirm_delete" value="">
+      <button type="submit" class="danger">Eliminar paciente</button>
+    </form>
+  </div>
+  {% endif %}
+
+</main>
+<script defer src="/static/panel-js/patient_detail.js"></script>
+<script defer src="/static/panel-js/common.js"></script></body>
+</html>

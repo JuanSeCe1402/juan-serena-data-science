@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-hero universe-hero">
+  <div class="eyebrow">EL UNIVERSO WUNSCE</div>
+  <h1>Dos principios.<br><em>Cinco historias que transforman.</em></h1>
+  <p>Wus y Wis son los principios de WUNSCE: imaginación y criterio. De esa unión nacen proyectos con identidad propia. NANA, FREY, TIKAL, DARWIN y ESCULAPIO tienen su historia, su propósito y una función concreta.</p>
+  <a class="text-link" href="#personajes">Conocer los proyectos y su lore ↓</a>
+</section>
+<section class="section universe-intro">
+  <div class="universe-emblem"><img src="{{ url_for('static', filename='img/wunsce-emblem-transparent.png') }}" alt="Punta de obsidiana con una estrella dorada en el centro, emblema de WUNSCE" width="360" height="360" decoding="async"></div>
+  <div><div class="eyebrow">EL DESEO ENCUENTRA DIRECCIÓN</div><h2>La flecha de obsidiana.</h2><p>WUNSCE evoca el deseo: imaginar algo que todavía no existe. Pero el impulso necesita criterio. De esa tensión nacen Wus, el mago, y Wis, el sabio.</p><p>La obsidiana representa conocimiento ancestral, precisión y materia convertida en herramienta. La estrella dorada es la idea elegida: una chispa comprendida que se vuelve dirección. La flecha simboliza orientación y decisión.</p></div>
+</section>
+<section id="dos-principios" class="section universe-pair">
+  <figure class="principles-journey"><img src="{{ url_for('static', filename='img/wus-wis-camino.webp') }}" alt="Wus y Wis contemplan juntos el camino entre montañas bajo el emblema dorado de WUNSCE" width="1440" height="810" loading="lazy" decoding="async"></figure>
+  <div><div class="eyebrow">LOS DOS PRINCIPIOS</div><h2>Una pregunta abre el mundo.<br>La otra le da sentido.</h2><blockquote>Wus: «¿Qué podríamos crear?»<br>Wis: «¿Qué deberíamos crear?»</blockquote><p>Wus explora; Wis observa consecuencias y costos invisibles. Sus preguntas no apagan la imaginación: le dan dirección.</p></div>
+</section>
+<section id="principios" class="section character-section" aria-labelledby="principles-title">
+  <div class="section-heading"><div class="eyebrow">LOS PRINCIPIOS DE LA EMPRESA</div><h2 id="principles-title">Wus y Wis.<br>Imaginación con criterio.</h2><p class="muted">Son las dos miradas que guían cómo pensamos, elegimos y construimos en WUNSCE.</p></div>
+  <div class="character-grid">{% for character in brand_principles %}{% include "_lore_card.html" %}{% endfor %}</div>
+</section>
+<section id="personajes" class="section character-section" aria-labelledby="characters-title">
+  <div class="section-heading"><div class="eyebrow">LOS PROYECTOS Y SU PROPIO LORE</div><h2 id="characters-title">Cinco identidades.<br>Cinco formas de transformar.</h2><p class="muted">Cada proyecto tiene una inspiración, una historia y una función. Su estado actual se indica en el portafolio.</p></div>
+  <nav class="character-index" aria-label="Índice de proyectos">{% for character in project_characters %}<a href="#{{ character.slug }}">{{ character.name }}</a>{% endfor %}</nav>
+  <div class="character-grid">{% for character in project_characters %}{% include "_lore_card.html" %}{% endfor %}</div>
+</section>
+<section class="section ecosystem-relations">
+  <div class="eyebrow">CUANDO LOS PERSONAJES SE ENCUENTRAN</div><h2>El valor está en las conexiones.</h2>
+  <div class="three-col">
+    <article><strong>NANA → DARWIN</strong><h3>De la materia al aprendizaje.</h3><p>Nana prepara y estructura la información; Darwin identifica patrones y evalúa qué puede aprender de ella.</p></article>
+    <article><strong>TIKAL → FREY</strong><h3>Del movimiento al valor.</h3><p>Tikal hace visible la operación; Frey ayuda a entender sus costos, márgenes y posibilidades de prosperidad.</p></article>
+    <article><strong>ESCULAPIO + TIKAL</strong><h3>Del orden al cuidado.</h3><p>Esculapio centra la operación en las personas; Tikal aporta organización y memoria para coordinar el trabajo diario.</p></article>
+  </div>
+  <p class="care-connection">En un consultorio, Esculapio y Tikal conectan cuidado y organización administrativa.</p>
+</section>
+<section class="section universe-revelation">
+  <div class="eyebrow light">LA REVELACIÓN</div><h2>Al final del camino,<br>un espejo.</h2>
+  <p>Wus busca a Wis para elegir el siguiente destino. No lo encuentra. En su lugar descubre un espejo: el sabio nunca había caminado separado del mago. Era la parte de sí mismo capaz de elegir.</p><p>El deseo y el criterio eran una sola voluntad.<br><strong>Esa voluntad recibe un nombre: WUNSCE.</strong></p>
+</section>
+<section class="section universe-manifesto">
+  <div class="eyebrow">EL RELATO SE VUELVE PRÁCTICA</div><h2>Comprender. Elegir. Transformar.</h2>
+  <ul><li>Entendemos antes de automatizar.</li><li>Elegimos antes de construir.</li><li>Medimos antes de afirmar.</li><li>Diseñamos para personas.</li><li>Usamos complejidad cuando aporta valor.</li><li>Tratamos datos, cultura y contexto con respeto.</li><li>Construimos sistemas capaces de evolucionar.</li></ul>
+  <p class="cultural-note">Las referencias culturales, religiosas e históricas son inspiraciones narrativas de la marca, no representaciones literales de esas tradiciones. Los personajes orientan el diseño; las funciones y los estados de cada proyecto describen lo que realmente hace.</p>
+  <a class="btn primary" href="{{ url_for('contact') }}">Hablemos de lo que quieres transformar</a>
+</section>
+{% endblock %}

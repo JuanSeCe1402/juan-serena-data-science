@@ -1,0 +1,7 @@
+registro_id, Producto ,Ciudad ficticia,fecha,total
+DEMO-001, Pieza Alfa ,Ciudad Ejemplo A,2026-01-03,1200
+DEMO-002,Pieza Beta,Ciudad Ejemplo B,2026-01-04,850
+DEMO-002,Pieza Beta,Ciudad Ejemplo B,2026-01-04,850
+DEMO-003,Pieza Gamma,Ciudad Ejemplo A,fecha pendiente,1020
+DEMO-004,,Ciudad Ejemplo C,,990
+DEMO-005,Pieza Delta,Ciudad Ejemplo B,2026-02-10,1450

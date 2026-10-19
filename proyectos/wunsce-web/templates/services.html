@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-hero">
+  <div class="eyebrow">SERVICIOS</div>
+  <h1>Menos trabajo repetitivo. Más posibilidades.</h1>
+  <p>Las líneas de servicio de WUNSCE se organizan por el valor que generan, no por la tecnología que usamos detrás.</p>
+</section>
+
+<section class="section">
+  <div class="service-grid detailed">
+    {% for service in services %}
+    <article class="service-card">
+      <div class="service-symbol" aria-hidden="true">{% if loop.index == 1 %}↗{% elif loop.index == 2 %}◈{% else %}⌘{% endif %}</div>
+      <span>{{ service.short }}</span>
+      <h2>{{ service.name }}</h2>
+      <p>{{ service.summary }}</p>
+      <ul>
+        {% for item in service['items'] %}<li>{{ item }}</li>{% endfor %}
+      </ul>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section engagement">
+  <div class="eyebrow">CÓMO TRABAJAMOS</div>
+  <h2>Implementación. Cuidado. Evolución.</h2>
+  <div class="three-col">
+    <article><strong>01</strong><h3>Implementación</h3><p>Diagnóstico, diseño, construcción, configuración y puesta en marcha.</p></article>
+    <article><strong>02</strong><h3>Cuidado</h3><p>Mantenimiento, soporte, monitoreo y ajustes menores.</p></article>
+    <article><strong>03</strong><h3>Evolución</h3><p>Nuevas funciones, integraciones y crecimiento del sistema.</p></article>
+  </div>
+</section>
+{% endblock %}

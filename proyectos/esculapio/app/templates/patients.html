@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<link rel="icon" href="/static/img/wunsce-logo-144.webp" type="image/webp">
+<meta name="robots" content="noindex,nofollow">
+<meta name="csrf-token" content="{{ csrf_token }}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pacientes — {{ clinic_name }}</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body class="panel-page" data-demo="{{ 'true' if demo_mode else 'false' }}">
+<a class="skip-link" href="#main-content">Saltar al contenido</a>
+<div class="wunsce-return"><a href="{{ wunsce_url }}" lang="en">← Back to WUNSCE</a><a href="/case-study">Caso de estudio ESCULAPIO</a></div>
+{% if demo_mode %}<aside class="demo-banner" aria-label="Alcance de la demo"><strong>DEMO AISLADA · SOLO DATOS FICTICIOS</strong><p>Rol simulado: {{ 'doctor' if request.session.get('role') == 'doctor' else 'asistente' }}. Solo ejemplos ficticios, sin envíos externos. Caduca en 30 minutos. No introduzcas datos reales ni información clínica.</p><form method="post" action="/demo/reset"><input type="hidden" name="csrf_token" value="{{ csrf_token }}"><button type="submit" class="small-action secondary">Cerrar y eliminar mi demo</button></form></aside>{% endif %}
+<header class="top">
+  <div><h1>{{ clinic_name }}</h1><p>Pacientes · {{ doctor_name }}</p></div>
+  <nav class="top-nav" aria-label="Operación del consultorio">
+    <a class="nav-link" href="/panel">Agenda</a>
+    <a class="nav-link" href="/panel/calendar">Calendario</a>
+    <a class="nav-link active" href="/panel/patients">Pacientes</a>
+    <a class="nav-link" href="/panel/messages">Mensajes <span id="navUnread" class="nav-badge hidden"></span></a>
+    {% if request.state.user_role == 'doctor' %}<a class="nav-link" href="/panel/settings">Configuración</a>{% endif %}
+  </nav>
+</header>
+
+<main id="main-content" tabindex="-1" class="patients-page">
+  {% if notice %}<div class="alert success" role="status">{{ notice }}</div>{% endif %}
+  {% if error %}<div class="alert error" role="alert" tabindex="-1">{{ error }}</div>{% endif %}
+  <div class="patients-head">
+    <div><h2>Pacientes</h2><p>Busca por nombre o número y consulta su historial de citas.</p></div>
+    <a class="button-link" href="/panel">+ Nueva cita</a>
+  </div>
+
+  <div class="card">
+    <form class="patient-search" method="get" action="/panel/patients">
+      <input aria-label="Buscar pacientes" type="text" name="q" value="{{ q }}" placeholder="Buscar por nombre o WhatsApp">
+      <button type="submit">Buscar</button>
+      {% if q %}<a class="button-link secondary" href="/panel/patients">Limpiar</a>{% endif %}
+    </form>
+  </div>
+
+  <div class="card patient-list-card">
+    {% if patients %}
+      {% for p in patients %}
+      {% set st = stats_by_patient.get(p.id, {}) %}
+      {% set next_appt = next_by_patient.get(p.id) %}
+      <a class="patient-row" href="/panel/patients/{{ p.id }}">
+        <div class="patient-avatar">{{ (p.name or 'P')[0]|upper }}</div>
+        <div class="patient-main">
+          <strong>{{ p.name or 'Sin nombre' }}</strong>
+          <span>{{ p.phone }}{% if p.age %} · {{ p.age }} años{% endif %}</span>
+        </div>
+        <div class="patient-next">
+          {% if next_appt %}
+            <small>Próxima cita</small>
+            <strong>{{ next_appt.date.strftime('%d/%m/%Y') }} · {{ next_appt.start_time.strftime('%H:%M') }}</strong>
+          {% else %}<small>Sin cita próxima</small>{% endif %}
+        </div>
+        <div class="patient-stats-mini">
+          <span>{{ st.get('atendida', 0) }} atendidas</span>
+          {% if st.get('no_asistio', 0) %}<span class="warn">⚠ {{ st.get('no_asistio', 0) }} faltas</span>{% endif %}
+        </div>
+      </a>
+      {% endfor %}
+    {% else %}
+      <p class="empty">No se encontraron pacientes.</p>
+    {% endif %}
+  </div>
+</main>
+<script defer src="/static/panel-js/patients.js"></script>
+<script defer src="/static/panel-js/common.js"></script></body>
+</html>

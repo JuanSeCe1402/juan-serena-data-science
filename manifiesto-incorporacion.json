@@ -1,0 +1,1676 @@
+[
+  {
+    "destino": "proyectos/darwin/.dockerignore",
+    "origen": ".dockerignore",
+    "sha256_origen": "5fb7f360cc0a94cb9ca77577c4afe2674cd4a7cf85d30ae3d3ab4e1b87d021f9",
+    "sha256_destino": "a23a54dcff3c894c8f2ce8883b7bfa62d2ff823ffa5b2c0d8fe8b1c970a58055"
+  },
+  {
+    "destino": "proyectos/darwin/.env.example",
+    "origen": ".env.example",
+    "sha256_origen": "d9664d4c53b0ed440663296f8c43c401861782e526b02978584afa5802bd98c1",
+    "sha256_destino": "48367dd478b8fc1827554ed302732f071fad84b23c0a544c44d4e5741aecaa17"
+  },
+  {
+    "destino": "proyectos/darwin/app.py",
+    "origen": "app.py",
+    "sha256_origen": "b9fbb60ef777afdbedd7e1082ce68bef56c80c6280a46627ab99b55c0dfc6f1a",
+    "sha256_destino": "856b27b37c90e60634ce34fa48b1f0f59241c6a8324fc0773d936cc2e37ba43a"
+  },
+  {
+    "destino": "proyectos/darwin/core.py",
+    "origen": "core.py",
+    "sha256_origen": "98b461b2deaca9afd52ee98b5aa2e44503d252bdb5a5e2843de4f524efb6a77a",
+    "sha256_destino": "df7c5d34731028a1a34844d0e760805785fc765039e0c0e6358f48a32dedd6bc"
+  },
+  {
+    "destino": "proyectos/darwin/Dockerfile",
+    "origen": "Dockerfile",
+    "sha256_origen": "08c5d1cc8703bb17a2a58abd9c7cb79d43db1b9ac0c90e706541a3fcfb616b15",
+    "sha256_destino": "a13f54bdd16393bebf6dff63f7a62270992545103fcba028fae62387b6616a13"
+  },
+  {
+    "destino": "proyectos/darwin/gunicorn.conf.py",
+    "origen": "gunicorn.conf.py",
+    "sha256_origen": "0ba4fec3cd17a0575d0cf3716f75057a84052ea161dbdf75c2e1045bf4cf2b55",
+    "sha256_destino": "8bfc27241d749badcbe795b0dc48c95925eeb9df17f90b9201f620196fa52f3d"
+  },
+  {
+    "destino": "proyectos/darwin/railway.toml",
+    "origen": "railway.toml",
+    "sha256_origen": "ae809fc778fe717ccbf2ed0640959b537b87b035972986d0b31d8b6fcfe90a16",
+    "sha256_destino": "96c35a676a31a44e263a72021924b2d8833812c9b9f0aa1b23835a2bd74b32a2"
+  },
+  {
+    "destino": "proyectos/darwin/requirements-dev.txt",
+    "origen": "requirements-dev.txt",
+    "sha256_origen": "91a516e9112ded154b4f25aeab72767a6a541d258f4443d53aa7b38108389404",
+    "sha256_destino": "1438527233ce7beb1cdf4a046b8b5d38f140bd77217ef4df17d5592989d3ec15"
+  },
+  {
+    "destino": "proyectos/darwin/requirements.txt",
+    "origen": "requirements.txt",
+    "sha256_origen": "2cd47a525a17eca070de45306f4411fc6da5a12c6a3768dae173084e7fb8efc5",
+    "sha256_destino": "9d41dfedf1d42ff84eb4527bfc39eec317c72ce44c6e1eaec0f473a9c439426f"
+  },
+  {
+    "destino": "proyectos/darwin/static/css/styles.css",
+    "origen": "styles.css",
+    "sha256_origen": "d7b9a2e4be0824eb94aa9607f9e55e4a1ce224a7d9e38ac44f465e9f397bf424",
+    "sha256_destino": "390dc7b21e0daffd240f584d4676d398020a5eb1e0bc1955b6f9aaef8239b226"
+  },
+  {
+    "destino": "proyectos/darwin/static/img/og-wunsce.png",
+    "origen": "og-wunsce.png",
+    "sha256_origen": "1551e5e55ae05a304702fa27d975503970996f8128e6139050638edc74a29198",
+    "sha256_destino": "1551e5e55ae05a304702fa27d975503970996f8128e6139050638edc74a29198"
+  },
+  {
+    "destino": "proyectos/darwin/static/img/wunsce-emblem.png",
+    "origen": "wunsce-emblem.png",
+    "sha256_origen": "c55e31b507c42ee7790e5058aa287f0fa6563fdd1db7c7f12f6244aaf81248a7",
+    "sha256_destino": "c55e31b507c42ee7790e5058aa287f0fa6563fdd1db7c7f12f6244aaf81248a7"
+  },
+  {
+    "destino": "proyectos/darwin/static/img/wunsce-logo-144.webp",
+    "origen": "wunsce-logo-144.webp",
+    "sha256_origen": "340bb1e1d5854677810ecfd1426c15cae0aaba20b69755d6f18146a2a04c391b",
+    "sha256_destino": "340bb1e1d5854677810ecfd1426c15cae0aaba20b69755d6f18146a2a04c391b"
+  },
+  {
+    "destino": "proyectos/darwin/static/js/boot.js",
+    "origen": "boot.js",
+    "sha256_origen": "5d710b88c81c68d27708a84526acc89c975fae0be93ebccbba16043ebd7a6b7c",
+    "sha256_destino": "9ab49027959472a353e2cc17fac2dcd7b5fd01da82f3989911272582f249b153"
+  },
+  {
+    "destino": "proyectos/darwin/static/js/main.js",
+    "origen": "main.js",
+    "sha256_origen": "9147582626b3fa3a44b015a2155db774ea0e37b09ec2e77dd31e7a1d24ff6c42",
+    "sha256_destino": "7358a82acfe8f45609c04e9a004166a8d5ce196e0965f1f0dd9735ce3bba6f02"
+  },
+  {
+    "destino": "proyectos/darwin/templates/app.html",
+    "origen": "app.html",
+    "sha256_origen": "5f93f2e5b653aaa4534f5e67ba86de54c85ca42122007f3aee366b0921a614e5",
+    "sha256_destino": "54bf4c4c6f93aabea9a746af00531fee2182e573e477188496325f88b2b59dc3"
+  },
+  {
+    "destino": "proyectos/darwin/templates/architecture.html",
+    "origen": "architecture.html",
+    "sha256_origen": "86fc0349c0db40fe64c059870f104af729e08e077b86cd774199ca7a832751bc",
+    "sha256_destino": "e66375644f4a8d9297f176bc854f80356a45cce5442a795c046532a5647278f4"
+  },
+  {
+    "destino": "proyectos/darwin/templates/base.html",
+    "origen": "base.html",
+    "sha256_origen": "ca0116a26ef72350e73a9aa612bcd19d97c08ef4387aba283e1320ed2d8d9c3d",
+    "sha256_destino": "31b195717f79cf06d7188f1225d5dc2450fc8b9441350c2fa6e4b04d30fa4526"
+  },
+  {
+    "destino": "proyectos/darwin/templates/case_study.html",
+    "origen": "case_study.html",
+    "sha256_origen": "ad6845ae0a3d0f115d7c824051e3c3a9ad828a8abacdfc70c589ecdaac9d13e2",
+    "sha256_destino": "4a9c7096f42f4c60c73800eb661355f52e54192f57409c58f33ea6444d7223d1"
+  },
+  {
+    "destino": "proyectos/darwin/templates/error.html",
+    "origen": "error.html",
+    "sha256_origen": "f9b75f0e6d57381d1e97e42f7cd987eee6c3b50b82ec3258a438eb699ce8cd5a",
+    "sha256_destino": "1728dc55ca39e54d4078a44233ec190934bacf4c4002414f334125bfbc657897"
+  },
+  {
+    "destino": "proyectos/darwin/templates/features.html",
+    "origen": "features.html",
+    "sha256_origen": "08b4091cbb1d341e7b868ab83b843a6f5221239f74dda2941925dfd43a7b4541",
+    "sha256_destino": "ca23aa923cedb5c5cf6292f7c34d2f32498264862dfe76a11241dbadc3393f8a"
+  },
+  {
+    "destino": "proyectos/darwin/templates/home.html",
+    "origen": "home.html",
+    "sha256_origen": "f16f658fe0020b08e9ce612faae4f32dc4da2197878ef41a7cf7934cf1eb07ac",
+    "sha256_destino": "7093cb486741c5f52b8830a8478e813bd99cee926eb219841f866ad564573b43"
+  },
+  {
+    "destino": "proyectos/darwin/templates/results.html",
+    "origen": "results.html",
+    "sha256_origen": "67fc54435c654e5ffc74b002476f88acd5b7e0be7621e45130958568ee664881",
+    "sha256_destino": "3e1cf9830e44b6e89107b46bc9945f8ea1200e63b3718fb9ca47f2e641303f46"
+  },
+  {
+    "destino": "proyectos/darwin/templates/_forms.html",
+    "origen": "_forms.html",
+    "sha256_origen": "a038708a52afa588c8921a6f0e3cab89399b9a39e37d8125a067292a41cc6506",
+    "sha256_destino": "b3cc9a81f602bfe45b0c456ede9bdc55eb84f3e88d9ac6aaa834a0d65086775b"
+  },
+  {
+    "destino": "proyectos/darwin/templates/_how_it_works.html",
+    "origen": "_how_it_works.html",
+    "sha256_origen": "1a648bd9dc41622d75805f5a5cc9e1b1a26a1ab33fae6081e0ed7702a2e18026",
+    "sha256_destino": "a3055f150dfa94e04a486a961a79e97f16a1e4093cd4222109cad023747525ad"
+  },
+  {
+    "destino": "proyectos/darwin/tests/test_app.py",
+    "origen": "test_app.py",
+    "sha256_origen": "6e452afc0d5c13ad922ac9d057e14a2f9737f4223fa0dfed6fda11131cc79d80",
+    "sha256_destino": "648bf48e3db0ce10e52f32352df42487bd00577b97474fb69ee8de901e1794b2"
+  },
+  {
+    "destino": "proyectos/darwin/tests/test_core.py",
+    "origen": "test_core.py",
+    "sha256_origen": "e74f2bf7d41830a2e9678d4560febf20fcedb9d22788c6ccd7871e7947ad9311",
+    "sha256_destino": "101e2dd45a966e010d3ea4be87990972c8d2ff60f6ea5e47f2568626509a8e54"
+  },
+  {
+    "destino": "proyectos/darwin/tests/test_deploy.py",
+    "origen": "test_deploy.py",
+    "sha256_origen": "724073e2134011d1e9994b0031c9f3f4761b854e32685c222a8bbce0e0a75883",
+    "sha256_destino": "2ab30bf00e81bbbccc21801d56c629dd5eeeda2a4c564e0935a54b63512710c6"
+  },
+  {
+    "destino": "proyectos/darwin/tests/test_public_seo.py",
+    "origen": "test_public_seo.py",
+    "sha256_origen": "7e0edebab3243b967c4e008b9c7ce13c836a8fba11f466a891b8eaec8ed354e7",
+    "sha256_destino": "0631b90fd33662a7eeaf68b0cf774feb2a8a6a10d535dfcb6477230751c2f182"
+  },
+  {
+    "destino": "proyectos/darwin/tools/verify_deploy.py",
+    "origen": "verify_deploy.py",
+    "sha256_origen": "279f4658b314b6a24dae12ee51b6195e905cdc9c9a6defe24cf30d29ceeeb0ac",
+    "sha256_destino": "fb9ea0ff49d25ecdf327af8d52e69124bed94697b985536947ba79630d76b2a8"
+  },
+  {
+    "destino": "proyectos/nana/.dockerignore",
+    "origen": ".dockerignore",
+    "sha256_origen": "5fb7f360cc0a94cb9ca77577c4afe2674cd4a7cf85d30ae3d3ab4e1b87d021f9",
+    "sha256_destino": "a23a54dcff3c894c8f2ce8883b7bfa62d2ff823ffa5b2c0d8fe8b1c970a58055"
+  },
+  {
+    "destino": "proyectos/nana/.env.example",
+    "origen": ".env.example",
+    "sha256_origen": "6e5fc99436a0c9aab2f2bfb0c1de48c419b8facf3dd89da3ae573a6d13ba2364",
+    "sha256_destino": "4615494ecf53b53de02043941efa8b42f92884724a49b65b0ca33423a1e6e722"
+  },
+  {
+    "destino": "proyectos/nana/.gitignore",
+    "origen": ".gitignore",
+    "sha256_origen": "5cf555941c04034ff0639fd741818b1b5df9de80fbec02c5ad9df8df4663140f",
+    "sha256_destino": "5cf555941c04034ff0639fd741818b1b5df9de80fbec02c5ad9df8df4663140f"
+  },
+  {
+    "destino": "proyectos/nana/app.py",
+    "origen": "app.py",
+    "sha256_origen": "7dfda9139008b045e9477767b8f24a4b1dfc7daa65ede44e118cd1d9236f52f5",
+    "sha256_destino": "5c779c6d153bb1d8af0251ad35d313d02b8867a7398597da76869de777c9124e"
+  },
+  {
+    "destino": "proyectos/nana/core.py",
+    "origen": "core.py",
+    "sha256_origen": "4bbf63f3da2d1fcd81d5dd4b3c23029735b841cb6b8f42b55fb159d83f45c263",
+    "sha256_destino": "e9f5765c833ade63ed775f5e61978965475680d52a73c62566d1a3ef4b30f143"
+  },
+  {
+    "destino": "proyectos/nana/Dockerfile",
+    "origen": "Dockerfile",
+    "sha256_origen": "348d1a1aaaa7097df5fb11c2f344d123175f32a719d4d74f7d4f5e1bfa00c5a5",
+    "sha256_destino": "beb6b5b1317df65596ad693aa51876a321d0507d545c32e30fc85f2ec159cafa"
+  },
+  {
+    "destino": "proyectos/nana/gunicorn.conf.py",
+    "origen": "gunicorn.conf.py",
+    "sha256_origen": "4c179465e1e253f596a4e390cb938b3092418e00d5d67ed397a099cd991fe459",
+    "sha256_destino": "b41a0db492959ef3bdd664d8db197aeee1dd785352b5064f050018d2c46362a1"
+  },
+  {
+    "destino": "proyectos/nana/railway.toml",
+    "origen": "railway.toml",
+    "sha256_origen": "ae809fc778fe717ccbf2ed0640959b537b87b035972986d0b31d8b6fcfe90a16",
+    "sha256_destino": "96c35a676a31a44e263a72021924b2d8833812c9b9f0aa1b23835a2bd74b32a2"
+  },
+  {
+    "destino": "proyectos/nana/requirements-dev.txt",
+    "origen": "requirements-dev.txt",
+    "sha256_origen": "5dae169a30bbdcb6f6010c8d3bddf3f1aeb919efe85a659843bded09ee311391",
+    "sha256_destino": "1438527233ce7beb1cdf4a046b8b5d38f140bd77217ef4df17d5592989d3ec15"
+  },
+  {
+    "destino": "proyectos/nana/requirements.txt",
+    "origen": "requirements.txt",
+    "sha256_origen": "7e6203382a40a1d650019cf95fc7eaec607e0d553a2bfd1128f74ff3c2bf32d1",
+    "sha256_destino": "bdb3d7d86464b1f506fda3df5aca754c67ca39beb0b02acc70ef6a7c7670e32f"
+  },
+  {
+    "destino": "proyectos/nana/demo/dirty_customers.csv",
+    "origen": "dirty_customers.csv",
+    "sha256_origen": "28df2ce87c2d155ac9e18501b3763bd629a62f8dbc8732730e995ba1f9053e97",
+    "sha256_destino": "f5e723d2745f099bb481c09ca659b01776c403e89e62a207fca777b65b16cf5c"
+  },
+  {
+    "destino": "proyectos/nana/static/css/styles.css",
+    "origen": "styles.css",
+    "sha256_origen": "1582c115080be677bf918cc6f955f571a52654212ec2b65f869ca37879e63666",
+    "sha256_destino": "0c2a8a2e296a5ae475c8709a0859b84d41f505f656367e2e263372d91d0f14cd"
+  },
+  {
+    "destino": "proyectos/nana/static/img/og-wunsce.png",
+    "origen": "og-wunsce.png",
+    "sha256_origen": "1551e5e55ae05a304702fa27d975503970996f8128e6139050638edc74a29198",
+    "sha256_destino": "1551e5e55ae05a304702fa27d975503970996f8128e6139050638edc74a29198"
+  },
+  {
+    "destino": "proyectos/nana/static/img/wunsce-emblem.png",
+    "origen": "wunsce-emblem.png",
+    "sha256_origen": "c55e31b507c42ee7790e5058aa287f0fa6563fdd1db7c7f12f6244aaf81248a7",
+    "sha256_destino": "c55e31b507c42ee7790e5058aa287f0fa6563fdd1db7c7f12f6244aaf81248a7"
+  },
+  {
+    "destino": "proyectos/nana/static/img/wunsce-logo-144.webp",
+    "origen": "wunsce-logo-144.webp",
+    "sha256_origen": "340bb1e1d5854677810ecfd1426c15cae0aaba20b69755d6f18146a2a04c391b",
+    "sha256_destino": "340bb1e1d5854677810ecfd1426c15cae0aaba20b69755d6f18146a2a04c391b"
+  },
+  {
+    "destino": "proyectos/nana/static/js/boot.js",
+    "origen": "boot.js",
+    "sha256_origen": "5d710b88c81c68d27708a84526acc89c975fae0be93ebccbba16043ebd7a6b7c",
+    "sha256_destino": "9ab49027959472a353e2cc17fac2dcd7b5fd01da82f3989911272582f249b153"
+  },
+  {
+    "destino": "proyectos/nana/static/js/main.js",
+    "origen": "main.js",
+    "sha256_origen": "f34d5820917f76d2f7968a9d08a6792f2b6360f17060361b5d4f831e3049cd11",
+    "sha256_destino": "b5b7f74707d1eb17e766d0069f33e34f64e160031f8e291b43c331c4e6fc8454"
+  },
+  {
+    "destino": "proyectos/nana/templates/app.html",
+    "origen": "app.html",
+    "sha256_origen": "be19cd80f054d5e64bb841d30461b03cb95a329efc9999df20d9d6577502375c",
+    "sha256_destino": "4fe88058003259ac19aaa3c0ebb0331e8a50f312f7d84604173d305d5becf90f"
+  },
+  {
+    "destino": "proyectos/nana/templates/architecture.html",
+    "origen": "architecture.html",
+    "sha256_origen": "3c86bbca070551a2aaa212ac2de04624796cb73b916a3619be56567b8ac097b3",
+    "sha256_destino": "3c86bbca070551a2aaa212ac2de04624796cb73b916a3619be56567b8ac097b3"
+  },
+  {
+    "destino": "proyectos/nana/templates/base.html",
+    "origen": "base.html",
+    "sha256_origen": "2bf15cbcbd9cfc55b67edcc4d3b736c0aac2133d6dc99b8742ff8f4429dfdda9",
+    "sha256_destino": "f51a2a0a494d01cadcc78263f77de7943cd6a2da0a54d86893300ca5ad9de3dc"
+  },
+  {
+    "destino": "proyectos/nana/templates/case_study.html",
+    "origen": "case_study.html",
+    "sha256_origen": "50d0a815caf257bbb990a69f94bb5dd118f73578e3be1ff0a43b5d7941661715",
+    "sha256_destino": "f1336e38884f63c0773737857ac4eac94a4eef281005ce4a32642512816b519e"
+  },
+  {
+    "destino": "proyectos/nana/templates/error.html",
+    "origen": "error.html",
+    "sha256_origen": "96385625d4bcd731de6c2ec4bce8f5cf175089a903ea929fb4f38cc62cb36fbc",
+    "sha256_destino": "9b58400e6d2138c4a18db79bd87988bf0b11722e5bb50d59f04363231e3559e2"
+  },
+  {
+    "destino": "proyectos/nana/templates/features.html",
+    "origen": "features.html",
+    "sha256_origen": "c8a11208b7b0fcac27b842d5ded3a62aadc4cec35c4c95879380ee02189817c5",
+    "sha256_destino": "28e7da8d74474756d9ba1a345450361849644b0c28798051ab93e80824cfa8eb"
+  },
+  {
+    "destino": "proyectos/nana/templates/home.html",
+    "origen": "home.html",
+    "sha256_origen": "9a7c5da4cc9641e7cb25555370d8388f87044402f9ad31b5445212d41beb89cc",
+    "sha256_destino": "96b1506964ca8e4d1fda52073b8b9b3ef64bc0269a1cd0503b85c4ec31f0be54"
+  },
+  {
+    "destino": "proyectos/nana/templates/results.html",
+    "origen": "results.html",
+    "sha256_origen": "4c37a1b87a0a6d512fcd09ca8abf2d043fcf005cb91e8c6a40f50fe566e1c62d",
+    "sha256_destino": "db73167ab12c69e515dd1a07d5f8a03714545aad9c06009ff12082bf1b51e49a"
+  },
+  {
+    "destino": "proyectos/nana/tests/test_app.py",
+    "origen": "test_app.py",
+    "sha256_origen": "19767eb1f0be90daec6cfccaeaef97e29c9ece23dda674ee4b91e21e094cfb5f",
+    "sha256_destino": "19767eb1f0be90daec6cfccaeaef97e29c9ece23dda674ee4b91e21e094cfb5f"
+  },
+  {
+    "destino": "proyectos/nana/tests/test_core.py",
+    "origen": "test_core.py",
+    "sha256_origen": "daf9044410fc63bce2655d2e41f14e36812f62a0bce4804a0d7a5e13217bdaf5",
+    "sha256_destino": "daf9044410fc63bce2655d2e41f14e36812f62a0bce4804a0d7a5e13217bdaf5"
+  },
+  {
+    "destino": "proyectos/nana/tests/test_public_demo.py",
+    "origen": "test_public_demo.py",
+    "sha256_origen": "de3f1ce813f0f8169bf16143a38cb50866125bab104c1e28ed68a76aa4153839",
+    "sha256_destino": "b521f4fb9099bb09edbaa2b9c8b5a32b283b311f63f8017f28c51d0109707285"
+  },
+  {
+    "destino": "proyectos/nana/tests/test_public_seo.py",
+    "origen": "test_public_seo.py",
+    "sha256_origen": "7e0edebab3243b967c4e008b9c7ce13c836a8fba11f466a891b8eaec8ed354e7",
+    "sha256_destino": "0631b90fd33662a7eeaf68b0cf774feb2a8a6a10d535dfcb6477230751c2f182"
+  },
+  {
+    "destino": "proyectos/nana/tests/test_security_core.py",
+    "origen": "test_security_core.py",
+    "sha256_origen": "ce46536c4010094b1bdf8f1d39d58c8fe0b06f3de29208e3d8f8b368173111a0",
+    "sha256_destino": "2bc84b295173b8f38a1fa4b75b0ab528e0218ea854da113839a8f46b72744dd9"
+  },
+  {
+    "destino": "proyectos/nana/tools/verify_deploy.py",
+    "origen": "verify_deploy.py",
+    "sha256_origen": "cfd9027f573a004a9bd1cd3efe080cedf70ab354720064be936f7a26b56f8b2d",
+    "sha256_destino": "88528bb0a9e03355a6e48fe6ed5d7658f637af392b496bd22781b2ca56759a03"
+  },
+  {
+    "destino": "proyectos/nana/docs/architecture.md",
+    "origen": "architecture.md",
+    "sha256_origen": "2a6d082422ec8a9df93a8afb2c95bd4bb53e5a905ece3aed7f0ce9d3d43e5fbe",
+    "sha256_destino": "fabfc8a40d8af04e97e5624a9a1679f21bc33457a3628a9a1727612fc4b0db9e"
+  },
+  {
+    "destino": "proyectos/frey/.dockerignore",
+    "origen": ".dockerignore",
+    "sha256_origen": "5fb7f360cc0a94cb9ca77577c4afe2674cd4a7cf85d30ae3d3ab4e1b87d021f9",
+    "sha256_destino": "a23a54dcff3c894c8f2ce8883b7bfa62d2ff823ffa5b2c0d8fe8b1c970a58055"
+  },
+  {
+    "destino": "proyectos/frey/.env.example",
+    "origen": ".env.example",
+    "sha256_origen": "9d7eafd87112f918caafee4d9d8339cc7c3f5a4845ef52586b057ee0502a3157",
+    "sha256_destino": "0add1838dc69b2c7700b06216700560066be0bbb459d80e2366a6c7406347651"
+  },
+  {
+    "destino": "proyectos/frey/app.py",
+    "origen": "app.py",
+    "sha256_origen": "93a9f6974a48d4e2989ab9211ec32097ecc3381aeae16c89ecda66bb97dc26a5",
+    "sha256_destino": "2991584fc6190a52181f7a3d3e8566ff04f9cf849b3ed15332ce79eb5d9f637f"
+  },
+  {
+    "destino": "proyectos/frey/core.py",
+    "origen": "core.py",
+    "sha256_origen": "bab1ddb144c548e0658b3d719077c72c9708f2aeb75e57ed88d7f6c3bf8a8969",
+    "sha256_destino": "fffc740fd020310c36af5f23ecb13f0bc8a69e5165fc241928f399ee89b131c7"
+  },
+  {
+    "destino": "proyectos/frey/Dockerfile",
+    "origen": "Dockerfile",
+    "sha256_origen": "f4c5ca7684b21e8c9728633ce248302935e7de323b5e34c10cbae03e1aea4085",
+    "sha256_destino": "55a082473bed17d57fd98d4b58748db8cc08125ae765745cade2ea0fcf5803a8"
+  },
+  {
+    "destino": "proyectos/frey/gunicorn.conf.py",
+    "origen": "gunicorn.conf.py",
+    "sha256_origen": "4c179465e1e253f596a4e390cb938b3092418e00d5d67ed397a099cd991fe459",
+    "sha256_destino": "b41a0db492959ef3bdd664d8db197aeee1dd785352b5064f050018d2c46362a1"
+  },
+  {
+    "destino": "proyectos/frey/pdf_export.py",
+    "origen": "pdf_export.py",
+    "sha256_origen": "5e881dd7cb170e6fa1093d018600dfff92aa74e7907968a6a9c5b4d5a746620e",
+    "sha256_destino": "58196d433eb0d6c3006cf97f91d326bc0befe4c3be1e2a30ed85fe6fc02bc1a5"
+  },
+  {
+    "destino": "proyectos/frey/railway.toml",
+    "origen": "railway.toml",
+    "sha256_origen": "ae809fc778fe717ccbf2ed0640959b537b87b035972986d0b31d8b6fcfe90a16",
+    "sha256_destino": "96c35a676a31a44e263a72021924b2d8833812c9b9f0aa1b23835a2bd74b32a2"
+  },
+  {
+    "destino": "proyectos/frey/requirements-dev.txt",
+    "origen": "requirements-dev.txt",
+    "sha256_origen": "406ccf736faabd77d96497aee3795cc1fcc633ea82a5fe923dc050fc563a3194",
+    "sha256_destino": "782d6aa29bac14b446940b8340cd0bfe5b1d11737f67b9aab7cbb44d2a470448"
+  },
+  {
+    "destino": "proyectos/frey/requirements.txt",
+    "origen": "requirements.txt",
+    "sha256_origen": "c3548da2b6b98d8ef2d5514bc957286cf55269a8bd03849ef90ccfc6bb005927",
+    "sha256_destino": "14a4109a334cfa5874a52584a8de82c4dca875fe7de94a5d1092cf6effe3eb2a"
+  },
+  {
+    "destino": "proyectos/frey/static/css/styles.css",
+    "origen": "styles.css",
+    "sha256_origen": "7062472bcebf5eac630536392cc6532cfdb6bf6afce2956342a4adf667ff674d",
+    "sha256_destino": "7bd3a435d634d75f0fbbe83e637fc489f90abd9357cb4c3d4eeaa9b12e0a8c63"
+  },
+  {
+    "destino": "proyectos/frey/static/img/og-wunsce.png",
+    "origen": "og-wunsce.png",
+    "sha256_origen": "1551e5e55ae05a304702fa27d975503970996f8128e6139050638edc74a29198",
+    "sha256_destino": "1551e5e55ae05a304702fa27d975503970996f8128e6139050638edc74a29198"
+  },
+  {
+    "destino": "proyectos/frey/static/img/wunsce-emblem.png",
+    "origen": "wunsce-emblem.png",
+    "sha256_origen": "c55e31b507c42ee7790e5058aa287f0fa6563fdd1db7c7f12f6244aaf81248a7",
+    "sha256_destino": "c55e31b507c42ee7790e5058aa287f0fa6563fdd1db7c7f12f6244aaf81248a7"
+  },
+  {
+    "destino": "proyectos/frey/static/img/wunsce-logo-144.webp",
+    "origen": "wunsce-logo-144.webp",
+    "sha256_origen": "340bb1e1d5854677810ecfd1426c15cae0aaba20b69755d6f18146a2a04c391b",
+    "sha256_destino": "340bb1e1d5854677810ecfd1426c15cae0aaba20b69755d6f18146a2a04c391b"
+  },
+  {
+    "destino": "proyectos/frey/static/js/boot.js",
+    "origen": "boot.js",
+    "sha256_origen": "5d710b88c81c68d27708a84526acc89c975fae0be93ebccbba16043ebd7a6b7c",
+    "sha256_destino": "9ab49027959472a353e2cc17fac2dcd7b5fd01da82f3989911272582f249b153"
+  },
+  {
+    "destino": "proyectos/frey/static/js/main.js",
+    "origen": "main.js",
+    "sha256_origen": "818efa5910ea84c7b3df10220430a898c2ffe243d5f9bb74910c7e91fb1d0a2d",
+    "sha256_destino": "ad424c45936904fad607afda4740eaa3604faf3353e32960908b8bfeb9d4c0b5"
+  },
+  {
+    "destino": "proyectos/frey/templates/app.html",
+    "origen": "app.html",
+    "sha256_origen": "1b80f7ee51be1310fb0948b0db919131f1225d6b0bac021eca7d42a22ab17679",
+    "sha256_destino": "d2a12434ecfad99b061cce3b9368667bbab3b5b1e8ff9bf60d14431fc538b930"
+  },
+  {
+    "destino": "proyectos/frey/templates/architecture.html",
+    "origen": "architecture.html",
+    "sha256_origen": "f12fa5409944c4bf886a90eb021a37a0cdde9e227b59822c6573573f870a7d79",
+    "sha256_destino": "7949f83122b12717001bb08a7a87294e628995edba3bc3a7140a3c05b7a154ab"
+  },
+  {
+    "destino": "proyectos/frey/templates/base.html",
+    "origen": "base.html",
+    "sha256_origen": "460932ebcce5d2921e4904296c686e1a53cf08086a1a7dc2dfe201255ea6d6bc",
+    "sha256_destino": "a9b787b4a1c1207e1468ddf336253d9414fa5d3d2acbaecff82cd4b042d73645"
+  },
+  {
+    "destino": "proyectos/frey/templates/case_study.html",
+    "origen": "case_study.html",
+    "sha256_origen": "9670d3f1785daeea4048f94c0da350cfb21c8a62db7d2655a12ae5c1f1835890",
+    "sha256_destino": "51a0add654c266cceabda670ad900b1a5fe7f3dc67f0eaf2fe5fc84226e4dbf8"
+  },
+  {
+    "destino": "proyectos/frey/templates/error.html",
+    "origen": "error.html",
+    "sha256_origen": "6b1c22ee9c5f3f2a22e28dd68e2645e8073470e6473e92dba0142edcbc98868c",
+    "sha256_destino": "9f43db4d064b333fb68e91961c3742c11d073afdb972c528cf0bc51de5055d93"
+  },
+  {
+    "destino": "proyectos/frey/templates/features.html",
+    "origen": "features.html",
+    "sha256_origen": "63e605f0ffd4fd22bfb1cf26e34718544f535d110b50cb6f0a176a93568ceb5a",
+    "sha256_destino": "9fadb02baf0c40dbdd5200538d6a284fdb8f198858aa3f6a55efd0b3c4e62ae1"
+  },
+  {
+    "destino": "proyectos/frey/templates/home.html",
+    "origen": "home.html",
+    "sha256_origen": "d61a18b150ac07a858c7d235ceff0f0adc0d8a2f4f03d8711957921483195f9e",
+    "sha256_destino": "9c00a23a9a3db170b38312e3b4b95ecdc0737215c5d059884c3dc95a2b25ebfe"
+  },
+  {
+    "destino": "proyectos/frey/templates/results.html",
+    "origen": "results.html",
+    "sha256_origen": "2c376fc0beefefa6977390ee5f97668ac4b4918639c909a183e14c72d4e8ddd9",
+    "sha256_destino": "b71e9a20cb147063ef2ce4d473d270da8770c41424fcf3bdad9045aedd86f6ee"
+  },
+  {
+    "destino": "proyectos/frey/tests/test_app.py",
+    "origen": "test_app.py",
+    "sha256_origen": "99f7b3f5e705e9e97996e12cc78a9bfc98a5fd7616634d6a341cf3ecc0573adc",
+    "sha256_destino": "b75a12bb770df983c0ab7f9dcc9462597f5ef5d98136f5c24de78488d18b290b"
+  },
+  {
+    "destino": "proyectos/frey/tests/test_calculations.py",
+    "origen": "test_calculations.py",
+    "sha256_origen": "cbf25879325235796543ea8fa99b9da83478b0c4af7531a1aeaa2291e1030fde",
+    "sha256_destino": "a7c40f219f8c5d0092200f23ffe2eb1ba22131cae628fc217e02878894b57d39"
+  },
+  {
+    "destino": "proyectos/frey/tests/test_core.py",
+    "origen": "test_core.py",
+    "sha256_origen": "45893d4376fa606f9eaee10b0bc151564852a87bba3379ad6f0797fcdf023d91",
+    "sha256_destino": "45893d4376fa606f9eaee10b0bc151564852a87bba3379ad6f0797fcdf023d91"
+  },
+  {
+    "destino": "proyectos/frey/tests/test_deploy.py",
+    "origen": "test_deploy.py",
+    "sha256_origen": "724073e2134011d1e9994b0031c9f3f4761b854e32685c222a8bbce0e0a75883",
+    "sha256_destino": "2ab30bf00e81bbbccc21801d56c629dd5eeeda2a4c564e0935a54b63512710c6"
+  },
+  {
+    "destino": "proyectos/frey/tests/test_public_seo.py",
+    "origen": "test_public_seo.py",
+    "sha256_origen": "7e0edebab3243b967c4e008b9c7ce13c836a8fba11f466a891b8eaec8ed354e7",
+    "sha256_destino": "0631b90fd33662a7eeaf68b0cf774feb2a8a6a10d535dfcb6477230751c2f182"
+  },
+  {
+    "destino": "proyectos/frey/tools/verify_deploy.py",
+    "origen": "verify_deploy.py",
+    "sha256_origen": "fe99fc1b0f1b349065da237e9b3d7faf16d56f9551805cba79c291a0d6c3d31b",
+    "sha256_destino": "8548ab78d93b9e55f2acb5ac05e00644f8d3f109d428950867b01d15a67e8d70"
+  },
+  {
+    "destino": "proyectos/tikal/.dockerignore",
+    "origen": ".dockerignore",
+    "sha256_origen": "5fb7f360cc0a94cb9ca77577c4afe2674cd4a7cf85d30ae3d3ab4e1b87d021f9",
+    "sha256_destino": "a23a54dcff3c894c8f2ce8883b7bfa62d2ff823ffa5b2c0d8fe8b1c970a58055"
+  },
+  {
+    "destino": "proyectos/tikal/.env.example",
+    "origen": ".env.example",
+    "sha256_origen": "ec0f421dde46012a0d8f660a11f923ee3acb2016e791e1630035da75d439345b",
+    "sha256_destino": "ae1a3f5c54c6a91a6c9300b0b3e18750d687893203d672a30fd70a2338864f9a"
+  },
+  {
+    "destino": "proyectos/tikal/app.py",
+    "origen": "app.py",
+    "sha256_origen": "4f848f9fd1f3556a59b17c45938e86969a3d633dbbf28bf9b40217cd878a5304",
+    "sha256_destino": "d8d0beae6fd03682696db7b942b5718e35278e64059bdc9fd1a29c2a37774d1b"
+  },
+  {
+    "destino": "proyectos/tikal/database.py",
+    "origen": "database.py",
+    "sha256_origen": "5699db957b707391e3235c3cdd40d10e6e1985640102e7903640bf1e2a921595",
+    "sha256_destino": "8af08cab821483506a40f3fed8a5c5a7a8e5fd4af5d5b6e4074431f9c1b6ad66"
+  },
+  {
+    "destino": "proyectos/tikal/Dockerfile",
+    "origen": "Dockerfile",
+    "sha256_origen": "6fe1d5c8aff1272786e26add662a83dd8e36fb0bbf50b9363ff49614aefad4fa",
+    "sha256_destino": "e3b157fb169522c48326413a93675575229323b7d81c5c9831f3443607090963"
+  },
+  {
+    "destino": "proyectos/tikal/gunicorn.conf.py",
+    "origen": "gunicorn.conf.py",
+    "sha256_origen": "4c179465e1e253f596a4e390cb938b3092418e00d5d67ed397a099cd991fe459",
+    "sha256_destino": "b41a0db492959ef3bdd664d8db197aeee1dd785352b5064f050018d2c46362a1"
+  },
+  {
+    "destino": "proyectos/tikal/railway.toml",
+    "origen": "railway.toml",
+    "sha256_origen": "ae809fc778fe717ccbf2ed0640959b537b87b035972986d0b31d8b6fcfe90a16",
+    "sha256_destino": "96c35a676a31a44e263a72021924b2d8833812c9b9f0aa1b23835a2bd74b32a2"
+  },
+  {
+    "destino": "proyectos/tikal/requirements-dev.txt",
+    "origen": "requirements-dev.txt",
+    "sha256_origen": "5dae169a30bbdcb6f6010c8d3bddf3f1aeb919efe85a659843bded09ee311391",
+    "sha256_destino": "1438527233ce7beb1cdf4a046b8b5d38f140bd77217ef4df17d5592989d3ec15"
+  },
+  {
+    "destino": "proyectos/tikal/requirements.txt",
+    "origen": "requirements.txt",
+    "sha256_origen": "eb08fad28dcdafeab31aa67303dc6ef0c93914742fa6c51dc46fbc7c71443ef9",
+    "sha256_destino": "1705419cdc205094ba46f49d70e0890f9b59fb61dd4d7f8d5443c0dd0ab518ad"
+  },
+  {
+    "destino": "proyectos/tikal/validation.py",
+    "origen": "validation.py",
+    "sha256_origen": "498bf1d22de002e1d7e706dfca29d9b7eeeddd3fd49d96992045b34034f62198",
+    "sha256_destino": "8cee26d1a6f5f1d26314939769ce3c3207d5b9f0e11027ebeb7ba64858ff0bcf"
+  },
+  {
+    "destino": "proyectos/tikal/static/css/styles.css",
+    "origen": "styles.css",
+    "sha256_origen": "281d4c0bd0b4ace9d57e6e25d8b142d8c453e745dfc81b976531235d9f4d434e",
+    "sha256_destino": "52663004abc8bd72024f017d887084fa4239e64dae8c90b2c5684c93e3f1a209"
+  },
+  {
+    "destino": "proyectos/tikal/static/img/og-wunsce.png",
+    "origen": "og-wunsce.png",
+    "sha256_origen": "1551e5e55ae05a304702fa27d975503970996f8128e6139050638edc74a29198",
+    "sha256_destino": "1551e5e55ae05a304702fa27d975503970996f8128e6139050638edc74a29198"
+  },
+  {
+    "destino": "proyectos/tikal/static/img/wunsce-emblem.png",
+    "origen": "wunsce-emblem.png",
+    "sha256_origen": "c55e31b507c42ee7790e5058aa287f0fa6563fdd1db7c7f12f6244aaf81248a7",
+    "sha256_destino": "c55e31b507c42ee7790e5058aa287f0fa6563fdd1db7c7f12f6244aaf81248a7"
+  },
+  {
+    "destino": "proyectos/tikal/static/img/wunsce-logo-144.webp",
+    "origen": "wunsce-logo-144.webp",
+    "sha256_origen": "340bb1e1d5854677810ecfd1426c15cae0aaba20b69755d6f18146a2a04c391b",
+    "sha256_destino": "340bb1e1d5854677810ecfd1426c15cae0aaba20b69755d6f18146a2a04c391b"
+  },
+  {
+    "destino": "proyectos/tikal/static/js/boot.js",
+    "origen": "boot.js",
+    "sha256_origen": "5d710b88c81c68d27708a84526acc89c975fae0be93ebccbba16043ebd7a6b7c",
+    "sha256_destino": "9ab49027959472a353e2cc17fac2dcd7b5fd01da82f3989911272582f249b153"
+  },
+  {
+    "destino": "proyectos/tikal/static/js/main.js",
+    "origen": "main.js",
+    "sha256_origen": "818efa5910ea84c7b3df10220430a898c2ffe243d5f9bb74910c7e91fb1d0a2d",
+    "sha256_destino": "ad424c45936904fad607afda4740eaa3604faf3353e32960908b8bfeb9d4c0b5"
+  },
+  {
+    "destino": "proyectos/tikal/templates/app.html",
+    "origen": "app.html",
+    "sha256_origen": "762240724f57570b243922702fd01408268ffe4fc1581a6a7425b9283de6772b",
+    "sha256_destino": "a97aae2cd45a55a89e8c9b07146b02d410fce4a5b04f4e39680b23ff37e75ecb"
+  },
+  {
+    "destino": "proyectos/tikal/templates/architecture.html",
+    "origen": "architecture.html",
+    "sha256_origen": "6e25009698e9a7fb58332b002eb8918aff5c1cdcc1574069d58d1b5eaa70ae70",
+    "sha256_destino": "3c0acba72f85fe84123eb6b5defaaba87d6f3ab721def3b49fc2760b24ea8b6d"
+  },
+  {
+    "destino": "proyectos/tikal/templates/base.html",
+    "origen": "base.html",
+    "sha256_origen": "0630c26f9163f12386fc0e09ade83156a5695c31712da430e2b2772c5b3d1014",
+    "sha256_destino": "c5832efafa9ce08d6caf0933d89fbf57cc09bed7fd21806907ecddc3f3f4fe27"
+  },
+  {
+    "destino": "proyectos/tikal/templates/case_study.html",
+    "origen": "case_study.html",
+    "sha256_origen": "5fb67c43a64b3deec1ddea27a4cb21c5db71bff6d5e20de519e1e6e1de1d06f7",
+    "sha256_destino": "8d9e1c17f02c83460b139d889c10fdf21e12de49c6edd6832ae3373de3d2f814"
+  },
+  {
+    "destino": "proyectos/tikal/templates/clients.html",
+    "origen": "clients.html",
+    "sha256_origen": "dcd9a9a36cb820c61588dc920dca26798471edd4dca70a7053456be2e35661a5",
+    "sha256_destino": "5e6cd725110092845e3a062d6bf6d6d4c5c48e74c24306912569b649c02ce69f"
+  },
+  {
+    "destino": "proyectos/tikal/templates/error.html",
+    "origen": "error.html",
+    "sha256_origen": "bf066c36a7b92100d6a0b28f902cd3d22e6e76306de896b321638e4b1106a175",
+    "sha256_destino": "118915e4b3a0a93d1ce440898bdb25e1938d3457dae7b74fea711e6ca492be75"
+  },
+  {
+    "destino": "proyectos/tikal/templates/features.html",
+    "origen": "features.html",
+    "sha256_origen": "a814feb077bd1060125d6fb446e111ea375df1c0a52fb048c9841fdb30c86c3c",
+    "sha256_destino": "4fff5bf2409c3575505438d61a543ebe550de13e72b9c26ecd2f070e377ffccc"
+  },
+  {
+    "destino": "proyectos/tikal/templates/home.html",
+    "origen": "home.html",
+    "sha256_origen": "3f7160da288865f802243d9c4bae7b33e89725ae109ebe86db62b77e312a6932",
+    "sha256_destino": "6be991638a1918cf248e01af069bf5ad872a8fa3d753a78037b1e0a2009b14a8"
+  },
+  {
+    "destino": "proyectos/tikal/templates/inventory.html",
+    "origen": "inventory.html",
+    "sha256_origen": "41b7d1f4c6d98a628a1f646c1308df9e2311b9ab22259d88fe8db798e434b278",
+    "sha256_destino": "b0f15e8e705ee3e150ca7056161819c1d79cf491213488eccb70c9175dcb80c8"
+  },
+  {
+    "destino": "proyectos/tikal/templates/orders.html",
+    "origen": "orders.html",
+    "sha256_origen": "890650ccfcbc08c76a4408469b4ed7a57240a288dd05b8e3691d70baf90828e0",
+    "sha256_destino": "a082fd3af0b7639ef8a059d2bdc2a377059fc66dd6943a9feac92ef9b7c1555c"
+  },
+  {
+    "destino": "proyectos/tikal/templates/tasks.html",
+    "origen": "tasks.html",
+    "sha256_origen": "36f636323623e0d9f221e4b5b8ec77edfc06f14bd1a401865a73a366c1e836d2",
+    "sha256_destino": "2123d7b43c2b3281115a83f788e8d43fa41e33b09f3dc27803af60e8131f16f0"
+  },
+  {
+    "destino": "proyectos/tikal/templates/_demo_nav.html",
+    "origen": "_demo_nav.html",
+    "sha256_origen": "8064e67b8885a444870212d3f789c73a611a64a1ab24dd80d4a602462752fd79",
+    "sha256_destino": "b38a8bd193036e129e4e9c32f115979deb2fe04c2386deafc9e8cbee22f758ea"
+  },
+  {
+    "destino": "proyectos/tikal/templates/_forms.html",
+    "origen": "_forms.html",
+    "sha256_origen": "a038708a52afa588c8921a6f0e3cab89399b9a39e37d8125a067292a41cc6506",
+    "sha256_destino": "b3cc9a81f602bfe45b0c456ede9bdc55eb84f3e88d9ac6aaa834a0d65086775b"
+  },
+  {
+    "destino": "proyectos/tikal/tests/test_app.py",
+    "origen": "test_app.py",
+    "sha256_origen": "51f399b10baa3b6641c2ead47c0ff6de1f354a1ffb327695ad75ddad0dab8bed",
+    "sha256_destino": "51f399b10baa3b6641c2ead47c0ff6de1f354a1ffb327695ad75ddad0dab8bed"
+  },
+  {
+    "destino": "proyectos/tikal/tests/test_deploy.py",
+    "origen": "test_deploy.py",
+    "sha256_origen": "724073e2134011d1e9994b0031c9f3f4761b854e32685c222a8bbce0e0a75883",
+    "sha256_destino": "2ab30bf00e81bbbccc21801d56c629dd5eeeda2a4c564e0935a54b63512710c6"
+  },
+  {
+    "destino": "proyectos/tikal/tests/test_public_seo.py",
+    "origen": "test_public_seo.py",
+    "sha256_origen": "7e0edebab3243b967c4e008b9c7ce13c836a8fba11f466a891b8eaec8ed354e7",
+    "sha256_destino": "0631b90fd33662a7eeaf68b0cf774feb2a8a6a10d535dfcb6477230751c2f182"
+  },
+  {
+    "destino": "proyectos/tikal/tests/test_workflow.py",
+    "origen": "test_workflow.py",
+    "sha256_origen": "432be7f70b4d4cc30c991ac27999e03648ad2028c0d78bd088faffa4d46a03e5",
+    "sha256_destino": "42114d2f80ece0f8eeff79cd4aebcb6e371be9a3c691fa8d6b43738686794ba5"
+  },
+  {
+    "destino": "proyectos/tikal/tools/verify_deploy.py",
+    "origen": "verify_deploy.py",
+    "sha256_origen": "5531f2564adfdc4d2b7d8214e241ddd09f105abc8967a687e8b1720cb8ca857d",
+    "sha256_destino": "fe003f0d1f61237dfba9d0ea6c415d351872edd7bc79a16b5abc78ae85688696"
+  },
+  {
+    "destino": "proyectos/esculapio/.dockerignore",
+    "origen": ".dockerignore",
+    "sha256_origen": "bd377395cf1edce06952b8abbbdc2a6bf4f9c5fab50658154dd7c9d0e773d7fa",
+    "sha256_destino": "6bb31892df840d5d6ae7d2f05145939880cef5ee72b43bb8b680cbfdd74afb82"
+  },
+  {
+    "destino": "proyectos/esculapio/.env.example",
+    "origen": ".env.example",
+    "sha256_origen": "a8b8c93e7fd3907cea1b0f56e75c95b6e289cc59363404f450fce4819482a024",
+    "sha256_destino": "4af8b73241fba62d2a9a7d84affbc62b33c6989a800a1e69dfbac2c712831669"
+  },
+  {
+    "destino": "proyectos/esculapio/Dockerfile",
+    "origen": "Dockerfile",
+    "sha256_origen": "12cbcba7b6375294f2f0a89899b74e348c7e37ac51765c23a5edb40fd850e1f7",
+    "sha256_destino": "41f85180d09534a0f1161bacc2073a72346d8b0d69ec08ea32e8825e4121ed67"
+  },
+  {
+    "destino": "proyectos/esculapio/gunicorn.conf.py",
+    "origen": "gunicorn.conf.py",
+    "sha256_origen": "885f83e88b4a79fbf88b02e9c17f108e97250d84a584db0337176fea1d33419d",
+    "sha256_destino": "1160b10693cb56060a990d5eb16c94ff373ae4d8b6805507201c6abff7a58253"
+  },
+  {
+    "destino": "proyectos/esculapio/railway.toml",
+    "origen": "railway.toml",
+    "sha256_origen": "ae809fc778fe717ccbf2ed0640959b537b87b035972986d0b31d8b6fcfe90a16",
+    "sha256_destino": "96c35a676a31a44e263a72021924b2d8833812c9b9f0aa1b23835a2bd74b32a2"
+  },
+  {
+    "destino": "proyectos/esculapio/requirements-dev.txt",
+    "origen": "requirements-dev.txt",
+    "sha256_origen": "93d7046463b750ea60dd6f915af730beadb030d8f6319ae68fda5ea4e59095b2",
+    "sha256_destino": "1cebf7633cbb57c745517d77edf2292e13e7476a73fa49df44d3a700f9f17ed5"
+  },
+  {
+    "destino": "proyectos/esculapio/requirements.txt",
+    "origen": "requirements.txt",
+    "sha256_origen": "161a06602673c31f485e65902511616de16e27141c3682f3aa5c7d1c698a7281",
+    "sha256_destino": "b817530d53752ea90c25580796bc51844af30e48d0a420eae39b7750366d9f94"
+  },
+  {
+    "destino": "proyectos/esculapio/app/agenda_pdf.py",
+    "origen": "agenda_pdf.py",
+    "sha256_origen": "0a16c9817de8fc3e57dbdfe6ccc43242871a983b259878c6a87354e150fb6a64",
+    "sha256_destino": "b7c0fed2c6b8d53680f7927b0e527f816aa7ecd3052adc39586ef66c605b5943"
+  },
+  {
+    "destino": "proyectos/esculapio/app/config.py",
+    "origen": "config.py",
+    "sha256_origen": "510431f934dbbfd35e1b3817386ba487b173d288b97ee2035672c31fada71729",
+    "sha256_destino": "a5ff975ea9bda987eed7b1b773e2368a032a80e056a37d0d74c362ff4a7a1a43"
+  },
+  {
+    "destino": "proyectos/esculapio/app/conversation.py",
+    "origen": "conversation.py",
+    "sha256_origen": "3e0cb117db04bc263e1d39717bf0b6ddf82942ecf269602fbecfeb1c079c8635",
+    "sha256_destino": "3e0cb117db04bc263e1d39717bf0b6ddf82942ecf269602fbecfeb1c079c8635"
+  },
+  {
+    "destino": "proyectos/esculapio/app/database.py",
+    "origen": "database.py",
+    "sha256_origen": "c9dc438c4dd0b32b5fd7cbfdc5eafbb26f0175c8a2b1b2707641b7aba9b8036b",
+    "sha256_destino": "e1a42b3a149fb38cc2c5e8b7b4113d19b76f851360e9b09e16bd316193247525"
+  },
+  {
+    "destino": "proyectos/esculapio/app/human_mode.py",
+    "origen": "human_mode.py",
+    "sha256_origen": "5daf67cbf96f2ffcab5834f5657b1d205ca7f04119ea32af6e0d287bf3c8725b",
+    "sha256_destino": "5daf67cbf96f2ffcab5834f5657b1d205ca7f04119ea32af6e0d287bf3c8725b"
+  },
+  {
+    "destino": "proyectos/esculapio/app/integrations.py",
+    "origen": "integrations.py",
+    "sha256_origen": "4be2a5ec2e2622a7237d9fc34a67c9583fcef065963ec78d86903bfe9989720a",
+    "sha256_destino": "c92aac0bfdf6a2633a37ce9187a38f4b24e9cf49412bb1e215e89435a478b77d"
+  },
+  {
+    "destino": "proyectos/esculapio/app/jobs.py",
+    "origen": "jobs.py",
+    "sha256_origen": "9b746eb843a09183b27c5337bdbfcedde0b008a580f9ed0fc31e4c1d67d5cbac",
+    "sha256_destino": "9b746eb843a09183b27c5337bdbfcedde0b008a580f9ed0fc31e4c1d67d5cbac"
+  },
+  {
+    "destino": "proyectos/esculapio/app/main.py",
+    "origen": "main.py",
+    "sha256_origen": "37563401e265e68381af605b1570290507119ca0f6b170162af6c74654c4dad5",
+    "sha256_destino": "0a8d923fc726da8ea338873a6ddad6b0738245bf70a06ec81f931e657a807e10"
+  },
+  {
+    "destino": "proyectos/esculapio/app/models.py",
+    "origen": "models.py",
+    "sha256_origen": "a7c101c0f98487c079fd6a911b148fc1b25d471034a6714bf67fc94c61c31807",
+    "sha256_destino": "70f79723c7b2f404130a0887ddec421d2b97463d9bd3d02114ef12afddd4344b"
+  },
+  {
+    "destino": "proyectos/esculapio/app/public.py",
+    "origen": "public.py",
+    "sha256_origen": "883bc7a4b4740481c2e919ff36e2771fd793a372da666a03c7e50dd7aeb0cfe6",
+    "sha256_destino": "64991f0ae1b9e1f5dfd50e8598c30b79f02cdab019960f13cec1a514d487a230"
+  },
+  {
+    "destino": "proyectos/esculapio/app/scheduler.py",
+    "origen": "scheduler.py",
+    "sha256_origen": "8702105fa40b00d5dfc10bb8b35636e3938a0a6538e0de50426c58796cb9f5a6",
+    "sha256_destino": "9dcb6f0c3b6389d1eb660d78340dd30b0aabee7f3faaf2f782e05525299e6450"
+  },
+  {
+    "destino": "proyectos/esculapio/app/security.py",
+    "origen": "security.py",
+    "sha256_origen": "2337fdc6a10c162f1febc5f0476420feb8b4639a47044f26d8e126713dd96169",
+    "sha256_destino": "44e4477f519ed10f88d5dd0b84a5c41d691c616fadd17cf4cea8bb4f6bb634b1"
+  },
+  {
+    "destino": "proyectos/esculapio/app/time_utils.py",
+    "origen": "time_utils.py",
+    "sha256_origen": "6968658132a5f7291a1db7250df63ceb713493f380c9b6295721e83a2f6459e8",
+    "sha256_destino": "6968658132a5f7291a1db7250df63ceb713493f380c9b6295721e83a2f6459e8"
+  },
+  {
+    "destino": "proyectos/esculapio/app/whatsapp_client.py",
+    "origen": "whatsapp_client.py",
+    "sha256_origen": "4b966118d2855a6ab304e62d93a245d9a4af4060f8a2e051f2e4fb253dabae05",
+    "sha256_destino": "2230446d5caba2e15661e56d0da525a94dcfbef634da7a86ba0f1c8f20b564ac"
+  },
+  {
+    "destino": "proyectos/esculapio/app/__init__.py",
+    "origen": "__init__.py",
+    "sha256_origen": "4af51dd774ae19f2ee994a09f1686384158b8dd20a1f49e1a2678137cb333a38",
+    "sha256_destino": "35a90e8be2d49e29f2ee809c593981bbfb54984591f484841f658e796887859b"
+  },
+  {
+    "destino": "proyectos/esculapio/app/static/boot.js",
+    "origen": "boot.js",
+    "sha256_origen": "5d710b88c81c68d27708a84526acc89c975fae0be93ebccbba16043ebd7a6b7c",
+    "sha256_destino": "9ab49027959472a353e2cc17fac2dcd7b5fd01da82f3989911272582f249b153"
+  },
+  {
+    "destino": "proyectos/esculapio/app/static/public.js",
+    "origen": "public.js",
+    "sha256_origen": "9147582626b3fa3a44b015a2155db774ea0e37b09ec2e77dd31e7a1d24ff6c42",
+    "sha256_destino": "7358a82acfe8f45609c04e9a004166a8d5ce196e0965f1f0dd9735ce3bba6f02"
+  },
+  {
+    "destino": "proyectos/esculapio/app/static/styles.css",
+    "origen": "styles.css",
+    "sha256_origen": "1890a47ad9f7eb4a70e9da12794b240de9ab187c50285e3e68a11b11ac612ea7",
+    "sha256_destino": "d4885907acddf3b46c9c83922905dd81837e606a00feecb016a1d596fb61a06a"
+  },
+  {
+    "destino": "proyectos/esculapio/app/static/css/public.css",
+    "origen": "public.css",
+    "sha256_origen": "f28cfb3de474be49fca2ac209e5be7c69b9849f07ea5dcd89d0c2aec9a440730",
+    "sha256_destino": "28fffb20ff9419be4e85ffb4f180a15b1e7cfc28afce54d193bb6bc6fb5fd083"
+  },
+  {
+    "destino": "proyectos/esculapio/app/static/img/og-wunsce.png",
+    "origen": "og-wunsce.png",
+    "sha256_origen": "1551e5e55ae05a304702fa27d975503970996f8128e6139050638edc74a29198",
+    "sha256_destino": "1551e5e55ae05a304702fa27d975503970996f8128e6139050638edc74a29198"
+  },
+  {
+    "destino": "proyectos/esculapio/app/static/img/wunsce-logo-144.webp",
+    "origen": "wunsce-logo-144.webp",
+    "sha256_origen": "340bb1e1d5854677810ecfd1426c15cae0aaba20b69755d6f18146a2a04c391b",
+    "sha256_destino": "340bb1e1d5854677810ecfd1426c15cae0aaba20b69755d6f18146a2a04c391b"
+  },
+  {
+    "destino": "proyectos/esculapio/app/static/panel-js/calendar.js",
+    "origen": "calendar.js",
+    "sha256_origen": "ccbe58285d170fbc2b095def5b0797af4407c549752ad3dfb9051d5863e2379b",
+    "sha256_destino": "0a88ee0cfd0e3396645021d62fd1ce3379b3c91b1189bbe23374b167edce5e26"
+  },
+  {
+    "destino": "proyectos/esculapio/app/static/panel-js/common.js",
+    "origen": "common.js",
+    "sha256_origen": "fba2d49896b02c2662816271478c3fe2629c615abfa9cfc24ef4d75f55e5a0c0",
+    "sha256_destino": "7de8ebe65aaba9fde1b019536ad4ea3e0d72d96102e36c5055df29c33f9861d7"
+  },
+  {
+    "destino": "proyectos/esculapio/app/static/panel-js/edit_patient.js",
+    "origen": "edit_patient.js",
+    "sha256_origen": "5ee4c47979105f697e2e704994d13e2a6264bda61811e63fa302d62efafc2844",
+    "sha256_destino": "947afbcad1a13a33ddf1b6f9d0b38c58a91b7779aee9dad945a76a7c51e7801b"
+  },
+  {
+    "destino": "proyectos/esculapio/app/static/panel-js/messages.js",
+    "origen": "messages.js",
+    "sha256_origen": "97981c15536a3d4a7fbd7678f5fa253d34e2b39284571e8ecf661334de7d14ca",
+    "sha256_destino": "b3dfcb5179b6cece1a29c96cecc50db65aadf399b8cebb24ed0a1c7e754594f5"
+  },
+  {
+    "destino": "proyectos/esculapio/app/static/panel-js/panel.js",
+    "origen": "panel.js",
+    "sha256_origen": "92ba2815b557ab48bd0c323cd7b51eb10cd4b4b8a69d1c3aa23734e146a88505",
+    "sha256_destino": "f45de0734d762e70a634e83a003d5db886f14cf677d628cf7bffca75704c208b"
+  },
+  {
+    "destino": "proyectos/esculapio/app/static/panel-js/patients.js",
+    "origen": "patients.js",
+    "sha256_origen": "06d016b9b83dcad092c5a6a2d4c843e174b84eda5cd132576304fb73a5ed5e94",
+    "sha256_destino": "ee506817cfdf9e37577c3dc386373d9710bdf9c5c5395bffc55994107dbd2d46"
+  },
+  {
+    "destino": "proyectos/esculapio/app/static/panel-js/patient_detail.js",
+    "origen": "patient_detail.js",
+    "sha256_origen": "585b2075ca79629f2143f325db112dc00ba2cf21a03a644835bd554d20d60622",
+    "sha256_destino": "d9e987e49770dc61177fe6cea28186d1f29ffe4baf2421e3078cd0b4452e22b9"
+  },
+  {
+    "destino": "proyectos/esculapio/app/static/panel-js/reschedule.js",
+    "origen": "reschedule.js",
+    "sha256_origen": "8b199fb0c5b15151a551f02e3dfa1b2626fce110fbf2fac85e180e06a2f29c79",
+    "sha256_destino": "5cac7f82c27e2ab76c2ae0556b0de790ee30ce1ef965f570e5154156c89dfea5"
+  },
+  {
+    "destino": "proyectos/esculapio/app/static/panel-js/settings.js",
+    "origen": "settings.js",
+    "sha256_origen": "176fded82be6887bb73194b1fcb08eb952dee302f2e5a24b79e3be51bea92dd9",
+    "sha256_destino": "92644fc79fd06877bc05162fe155f72d41d73bac1e6f040df3e180272fb9f1be"
+  },
+  {
+    "destino": "proyectos/esculapio/app/templates/architecture.html",
+    "origen": "architecture.html",
+    "sha256_origen": "e2c9a3a7a14ddce3e9ccebafb48f3bf705913e3b85710418eb188279b87cb69c",
+    "sha256_destino": "622ddac0553281acc872f2b5c7e7320ff7882b9f704d9bf38002b50b6f21ea6f"
+  },
+  {
+    "destino": "proyectos/esculapio/app/templates/calendar.html",
+    "origen": "calendar.html",
+    "sha256_origen": "99a930371c7db2d54391735b92cd2865a952b51d220aae3f09828982b5c9bc93",
+    "sha256_destino": "e632a5128c5093a3cd77ad74b24dd2eab8cbb975ca0effaa98fe816420a581d4"
+  },
+  {
+    "destino": "proyectos/esculapio/app/templates/case_study.html",
+    "origen": "case_study.html",
+    "sha256_origen": "59232c27594dd9be9ce14f472f728474b121f243c01f3b06916d4c5102468c8c",
+    "sha256_destino": "f77ae042ed095d1b6c772e3349be63937ee9746569be60ee6665d61cc4802dd7"
+  },
+  {
+    "destino": "proyectos/esculapio/app/templates/demo.html",
+    "origen": "demo.html",
+    "sha256_origen": "a62fe0ce697d0d029cb06d6ab9b081108126873225518ea3cb495fc456a2b7ad",
+    "sha256_destino": "5df66fe509fd634986d7b06deaa4c25400289a7376ce879865e08931b8c86b02"
+  },
+  {
+    "destino": "proyectos/esculapio/app/templates/edit_patient.html",
+    "origen": "edit_patient.html",
+    "sha256_origen": "59cc6bdc83adf332934a100a4ff7136b95b38bee295dbdc8ae0cdc5ae02093b9",
+    "sha256_destino": "fdea38aab84e5184cb06ad3735d17c862edf8516548846ca5a7ca5a515b5ea0e"
+  },
+  {
+    "destino": "proyectos/esculapio/app/templates/features.html",
+    "origen": "features.html",
+    "sha256_origen": "ab63bc3b049a9ac9277d93aafdcfe9edf3a9f40041aaad80f6552c912a557c09",
+    "sha256_destino": "4247e5f873891eccb4e01834b3985cb553467e0a87b68fac02c43ada729c8d4e"
+  },
+  {
+    "destino": "proyectos/esculapio/app/templates/messages.html",
+    "origen": "messages.html",
+    "sha256_origen": "16c27ae429ce90662d559403c1a4c0e6501ac4e3332c3694e4a583bc20178c27",
+    "sha256_destino": "4cc38184fe5d60fccb3ecdad43371bd0bfe63206c58ee850bac13520020a389a"
+  },
+  {
+    "destino": "proyectos/esculapio/app/templates/panel.html",
+    "origen": "panel.html",
+    "sha256_origen": "09cff7fc4fbf961880479b4ce334b04b37ead207c8a6706af611a35c82456c99",
+    "sha256_destino": "f1c6ae0cb9f7a99ea1c6bab434cdfd21f5f55dbcbd82a42de1c7657a0564be16"
+  },
+  {
+    "destino": "proyectos/esculapio/app/templates/patients.html",
+    "origen": "patients.html",
+    "sha256_origen": "f9738b16a581563573a9f66f1122914e9a2373599d74e19a1d78d7ced9fd92b5",
+    "sha256_destino": "70bb995bfb9e7c2c6e4c7388fc0e1c6cdb82ccfd05b4e24f5e68e070a30b874f"
+  },
+  {
+    "destino": "proyectos/esculapio/app/templates/patient_detail.html",
+    "origen": "patient_detail.html",
+    "sha256_origen": "439eb7105a58522ff5153a0bbff06d93717096629364cb26cbc0842e41c894cc",
+    "sha256_destino": "15efb790d5708be2db940d4d89b8fa27473a487f41dcfa3a5434f44f06edadca"
+  },
+  {
+    "destino": "proyectos/esculapio/app/templates/privacy.html",
+    "origen": "privacy.html",
+    "sha256_origen": "ff7b0cc2c4685c0f5473c2a87c6bcc55268e9c90026cb4cb19b729005e260a42",
+    "sha256_destino": "5a7528734c6bf315ec6ad735ea1339c6156e5f20175d66ab54817eda6a86b395"
+  },
+  {
+    "destino": "proyectos/esculapio/app/templates/public_base.html",
+    "origen": "public_base.html",
+    "sha256_origen": "a4cb48940984b1492fceb43d3c4cb7eb7d19e3951a105a878c9b11affe82d933",
+    "sha256_destino": "1670f78eaca00283cc19f0bd3e5acdf395b29623e8fc9f248589b8e2ec0141fe"
+  },
+  {
+    "destino": "proyectos/esculapio/app/templates/public_error.html",
+    "origen": "public_error.html",
+    "sha256_origen": "556d0a0042510d9f8b168d2fd5955eb67faa2f80ed88aa65560046c1bb28bd53",
+    "sha256_destino": "e9aca222f44d3358d64eeb4d1c87b1c6ae56e37e962c31e764076d286eb98dfe"
+  },
+  {
+    "destino": "proyectos/esculapio/app/templates/public_home.html",
+    "origen": "public_home.html",
+    "sha256_origen": "7a56ffc6bf27f4901810557237bb5b27a4d8c0bd611ba79415a3788ffea0596b",
+    "sha256_destino": "9750a5b57341d98ada61ea6d7ab38f877bf90579fcdaaf6c00a487ecfb8a1f36"
+  },
+  {
+    "destino": "proyectos/esculapio/app/templates/reschedule.html",
+    "origen": "reschedule.html",
+    "sha256_origen": "6d2f18d808739daf723b1e55d3c0382645b404882ec258606fa712966d2b668c",
+    "sha256_destino": "cf7afb7856d9dd02a51514d8a89e4d3465ae931b0b45362ed15204326043d385"
+  },
+  {
+    "destino": "proyectos/esculapio/app/templates/settings.html",
+    "origen": "settings.html",
+    "sha256_origen": "e876939293cdc38d8df542623d85c841268423198613be61a99bf3fab722d292",
+    "sha256_destino": "ea4dedf73a02dbffeffedbd33e2befd8daec4ee3414b6d185c77a6695fd0db97"
+  },
+  {
+    "destino": "proyectos/esculapio/tests/conftest.py",
+    "origen": "conftest.py",
+    "sha256_origen": "2083b6692e191571ec181387a49257507cf56b16f5d67379c4c11be629647f6d",
+    "sha256_destino": "16f23861a4291a5ed7321f4f5af853b0186cb3692a60dd4793f6d6a02a561308"
+  },
+  {
+    "destino": "proyectos/esculapio/tests/test_app.py",
+    "origen": "test_app.py",
+    "sha256_origen": "93d793c2d1bd78b3a1fbf182f413796e3bbd66fbf5e18330698895b8c6f9c2d1",
+    "sha256_destino": "138463b01940651da14930cdf775fe0fd7a5f04cf10f422022d638e378ea62d2"
+  },
+  {
+    "destino": "proyectos/esculapio/tests/test_auth.py",
+    "origen": "test_auth.py",
+    "sha256_origen": "100a7589d4af8ff8888975aaea3aaf7aa0e725198050a5aa1000a4f5f2a88ab3",
+    "sha256_destino": "9f17b264b7e9b011bc9f5e82dbe3f0e506eb66fdc9fc183962d60a8d3d0c8099"
+  },
+  {
+    "destino": "proyectos/esculapio/tests/test_deploy.py",
+    "origen": "test_deploy.py",
+    "sha256_origen": "724073e2134011d1e9994b0031c9f3f4761b854e32685c222a8bbce0e0a75883",
+    "sha256_destino": "2ab30bf00e81bbbccc21801d56c629dd5eeeda2a4c564e0935a54b63512710c6"
+  },
+  {
+    "destino": "proyectos/esculapio/tests/test_public_seo.py",
+    "origen": "test_public_seo.py",
+    "sha256_origen": "9e0c46d10f609b14f5d734571a7f4133ab4fbd359ff05ff34f15df292cfb4a06",
+    "sha256_destino": "d23baddd893929d9d29769e3d68cb7bbf2bc0110b1359d2ac739afb987b763a9"
+  },
+  {
+    "destino": "proyectos/esculapio/tests/test_services.py",
+    "origen": "test_services.py",
+    "sha256_origen": "b09df6d041a668bd95cb2affe8a3ff4cadfbd6c362616cfbd1e7063644c23ea6",
+    "sha256_destino": "0d90de1a84c32ddef8f2a8dfbd30100109238ed375380d51005663df3ef55902"
+  },
+  {
+    "destino": "proyectos/esculapio/tools/verify_deploy.py",
+    "origen": "verify_deploy.py",
+    "sha256_origen": "a0531ad4dec7f250ca5cc43b2f7bd4e0d160ec5da563c9ea8885693cc38f8574",
+    "sha256_destino": "4e3220caea4d52407b39fb9008f7ddc24a31a46f3638ed97093806e234d50122"
+  },
+  {
+    "destino": "proyectos/wunsce-web/.dockerignore",
+    "origen": ".dockerignore",
+    "sha256_origen": "b63312842fab38aebb02aad56638e5edb210f389c7ab8ab3730e647665a515a4",
+    "sha256_destino": "435dc9bf2768fc8d30f6811a4da17bc4bf60a272126f0bc3104371b94f01be5a"
+  },
+  {
+    "destino": "proyectos/wunsce-web/.env.example",
+    "origen": ".env.example",
+    "sha256_origen": "bf43c106878b79231000454ee37c11fb7054c86a2a465272030fec46cf8dc942",
+    "sha256_destino": "ce53c3ef18031c82e38f00985a6a9975fdeb018f303bdd2084cce78e9c5fd4e2"
+  },
+  {
+    "destino": "proyectos/wunsce-web/.gitignore",
+    "origen": ".gitignore",
+    "sha256_origen": "69165f8105853a51e8154e7c09ae473072340fd7d80170abc7b867a23ed2d144",
+    "sha256_destino": "a4bd43a846d39c58bcbc07ee17c2ba47f774bf82275bdd7297c2ad17e27db42b"
+  },
+  {
+    "destino": "proyectos/wunsce-web/app.py",
+    "origen": "app.py",
+    "sha256_origen": "aaeab483fd34641869b337fa8bfdd23d63422a9765c00ef0b49c4924d51a0b24",
+    "sha256_destino": "05b2695d1ecf540bc500b5c0148a0b7e4ed8b1b3e25a02fb97a1de37b99bedf9"
+  },
+  {
+    "destino": "proyectos/wunsce-web/Dockerfile",
+    "origen": "Dockerfile",
+    "sha256_origen": "914daca7725dd7ae4242d35922369065e44c44531374785f1f516bac6ce6f666",
+    "sha256_destino": "5d3714e35780fbaadfcee0c3266e50200e9cbc95d22a88ffddc275c788bc2123"
+  },
+  {
+    "destino": "proyectos/wunsce-web/gunicorn.conf.py",
+    "origen": "gunicorn.conf.py",
+    "sha256_origen": "8a3d34b4b9fae84586ee8b0c9c56ae671296a125b111c4bca6089b7d9191f4de",
+    "sha256_destino": "dacb4c6c79eeaa065b6e49ac0325fc5c28c32aa917db1a13d717f114e6989e08"
+  },
+  {
+    "destino": "proyectos/wunsce-web/lore.py",
+    "origen": "lore.py",
+    "sha256_origen": "128ef99e468709b2462b7a6ccab23b3277cf69599d961e3c7f378ea634a47f2d",
+    "sha256_destino": "b4a701197b55fe4efb60e105cc5e78c4ea6314fdbb6277f588065f04454794d5"
+  },
+  {
+    "destino": "proyectos/wunsce-web/railway.toml",
+    "origen": "railway.toml",
+    "sha256_origen": "65ac90e552e5dfe0fe10423d25115f28f739af981c895020b9d12f81d5146742",
+    "sha256_destino": "4f3d690e59a9a6b5537ea8c23df04bfbb55b68ad5e9b2211a1d6d3e62d983bb2"
+  },
+  {
+    "destino": "proyectos/wunsce-web/requirements-dev.txt",
+    "origen": "requirements-dev.txt",
+    "sha256_origen": "91a516e9112ded154b4f25aeab72767a6a541d258f4443d53aa7b38108389404",
+    "sha256_destino": "1438527233ce7beb1cdf4a046b8b5d38f140bd77217ef4df17d5592989d3ec15"
+  },
+  {
+    "destino": "proyectos/wunsce-web/requirements.txt",
+    "origen": "requirements.txt",
+    "sha256_origen": "e6cc19a65e97ad8e2d462d024c76f2646fcb6a704dc7b425904ce4fba56164ac",
+    "sha256_destino": "1705419cdc205094ba46f49d70e0890f9b59fb61dd4d7f8d5443c0dd0ab518ad"
+  },
+  {
+    "destino": "proyectos/wunsce-web/static/css/styles.css",
+    "origen": "styles.css",
+    "sha256_origen": "42e3e487d16b732ac90d762f48119ce34acff6edc4207069f6e4dc08054e4967",
+    "sha256_destino": "7466dcb7437a44952e19fb3ab130738ace884a2cccf18bc9a1279f983a706c43"
+  },
+  {
+    "destino": "proyectos/wunsce-web/static/img/apple-touch-icon.png",
+    "origen": "apple-touch-icon.png",
+    "sha256_origen": "5e4302100cf8f56f2a7223c3472ce04e53d0d2b05aa84d3c6594798085c77b2b",
+    "sha256_destino": "5e4302100cf8f56f2a7223c3472ce04e53d0d2b05aa84d3c6594798085c77b2b"
+  },
+  {
+    "destino": "proyectos/wunsce-web/static/img/arbol-conocimiento-transparente.webp",
+    "origen": "arbol-conocimiento-transparente.webp",
+    "sha256_origen": "0400ec4a3ab4d83e737f951496f5c8980d5e60cd222c884340218dbd16cc36a0",
+    "sha256_destino": "0400ec4a3ab4d83e737f951496f5c8980d5e60cd222c884340218dbd16cc36a0"
+  },
+  {
+    "destino": "proyectos/wunsce-web/static/img/deseo-eleccion-transparente.webp",
+    "origen": "deseo-eleccion-transparente.webp",
+    "sha256_origen": "662e605c2096656a89ff626ce685a5d78ac1fcb8392f9c7b023fe02794f2d16b",
+    "sha256_destino": "662e605c2096656a89ff626ce685a5d78ac1fcb8392f9c7b023fe02794f2d16b"
+  },
+  {
+    "destino": "proyectos/wunsce-web/static/img/favicon-192.png",
+    "origen": "favicon-192.png",
+    "sha256_origen": "dc8136d3076ba8e09099077602f4c8c1700850c4d6f9868b8e5d8c987b23c746",
+    "sha256_destino": "dc8136d3076ba8e09099077602f4c8c1700850c4d6f9868b8e5d8c987b23c746"
+  },
+  {
+    "destino": "proyectos/wunsce-web/static/img/favicon.ico",
+    "origen": "favicon.ico",
+    "sha256_origen": "5d7d54c4a8a52b520fbb78d9b35d292c7b844deb9104e448c1fb75f2f2953d63",
+    "sha256_destino": "5d7d54c4a8a52b520fbb78d9b35d292c7b844deb9104e448c1fb75f2f2953d63"
+  },
+  {
+    "destino": "proyectos/wunsce-web/static/img/og-wunsce.png",
+    "origen": "og-wunsce.png",
+    "sha256_origen": "1551e5e55ae05a304702fa27d975503970996f8128e6139050638edc74a29198",
+    "sha256_destino": "1551e5e55ae05a304702fa27d975503970996f8128e6139050638edc74a29198"
+  },
+  {
+    "destino": "proyectos/wunsce-web/static/img/taller-wunsce-transparente-640.webp",
+    "origen": "taller-wunsce-transparente-640.webp",
+    "sha256_origen": "5bd7921d527f79615e735ff27ae48dcd03c349be44032443a84cac42f1d3ea18",
+    "sha256_destino": "5bd7921d527f79615e735ff27ae48dcd03c349be44032443a84cac42f1d3ea18"
+  },
+  {
+    "destino": "proyectos/wunsce-web/static/img/taller-wunsce-transparente-960.webp",
+    "origen": "taller-wunsce-transparente-960.webp",
+    "sha256_origen": "79f438597768a5f34bb6f9ba4eb75408c567620fae2f30cb35d8b8145920d882",
+    "sha256_destino": "79f438597768a5f34bb6f9ba4eb75408c567620fae2f30cb35d8b8145920d882"
+  },
+  {
+    "destino": "proyectos/wunsce-web/static/img/taller-wunsce-transparente.webp",
+    "origen": "taller-wunsce-transparente.webp",
+    "sha256_origen": "f3a5067d49b5fc17fd610b392404711c317456048818eefe0656581a8f19c945",
+    "sha256_destino": "f3a5067d49b5fc17fd610b392404711c317456048818eefe0656581a8f19c945"
+  },
+  {
+    "destino": "proyectos/wunsce-web/static/img/taller-wunsce.webp",
+    "origen": "taller-wunsce.webp",
+    "sha256_origen": "5c3d42f6e9fbaea4520f24c573529d65dc10075dfabc4e19090fba89bc90ca27",
+    "sha256_destino": "5c3d42f6e9fbaea4520f24c573529d65dc10075dfabc4e19090fba89bc90ca27"
+  },
+  {
+    "destino": "proyectos/wunsce-web/static/img/universo-wunsce.webp",
+    "origen": "universo-wunsce.webp",
+    "sha256_origen": "4ae8ffe0d8aec3c9b21cf752376c2b6f6cf75df2b23f59be50cd12f04b702fe7",
+    "sha256_destino": "4ae8ffe0d8aec3c9b21cf752376c2b6f6cf75df2b23f59be50cd12f04b702fe7"
+  },
+  {
+    "destino": "proyectos/wunsce-web/static/img/wunsce-emblem-transparent.png",
+    "origen": "wunsce-emblem-transparent.png",
+    "sha256_origen": "5ec0d4e4b00824ec8aaea60753b8a2a30cab5e719400a0a749fa4d6632c5dd99",
+    "sha256_destino": "5ec0d4e4b00824ec8aaea60753b8a2a30cab5e719400a0a749fa4d6632c5dd99"
+  },
+  {
+    "destino": "proyectos/wunsce-web/static/img/wunsce-emblem.png",
+    "origen": "wunsce-emblem.png",
+    "sha256_origen": "c55e31b507c42ee7790e5058aa287f0fa6563fdd1db7c7f12f6244aaf81248a7",
+    "sha256_destino": "c55e31b507c42ee7790e5058aa287f0fa6563fdd1db7c7f12f6244aaf81248a7"
+  },
+  {
+    "destino": "proyectos/wunsce-web/static/img/wunsce-logo-144.webp",
+    "origen": "wunsce-logo-144.webp",
+    "sha256_origen": "340bb1e1d5854677810ecfd1426c15cae0aaba20b69755d6f18146a2a04c391b",
+    "sha256_destino": "340bb1e1d5854677810ecfd1426c15cae0aaba20b69755d6f18146a2a04c391b"
+  },
+  {
+    "destino": "proyectos/wunsce-web/static/img/wus-wis-camino-640.webp",
+    "origen": "wus-wis-camino-640.webp",
+    "sha256_origen": "08dea68148f07a16842a26915816d73ab9f0799afeb7c7d6fffbd267fb40ffe1",
+    "sha256_destino": "08dea68148f07a16842a26915816d73ab9f0799afeb7c7d6fffbd267fb40ffe1"
+  },
+  {
+    "destino": "proyectos/wunsce-web/static/img/wus-wis-camino-960.webp",
+    "origen": "wus-wis-camino-960.webp",
+    "sha256_origen": "3965f388503090c2cb6f2499394d77d436f258447f904de5248b6e44905b34a7",
+    "sha256_destino": "3965f388503090c2cb6f2499394d77d436f258447f904de5248b6e44905b34a7"
+  },
+  {
+    "destino": "proyectos/wunsce-web/static/img/wus-wis-camino.webp",
+    "origen": "wus-wis-camino.webp",
+    "sha256_origen": "fceba38e42737024d35411ddb29141bdc3217915ab1246e6fa00f243ca18ae90",
+    "sha256_destino": "fceba38e42737024d35411ddb29141bdc3217915ab1246e6fa00f243ca18ae90"
+  },
+  {
+    "destino": "proyectos/wunsce-web/static/img/wus-wis.webp",
+    "origen": "wus-wis.webp",
+    "sha256_origen": "8df546fb0fc03c378e2be4f728eb191d535421410e9245df1a64fb32d94ccf21",
+    "sha256_destino": "8df546fb0fc03c378e2be4f728eb191d535421410e9245df1a64fb32d94ccf21"
+  },
+  {
+    "destino": "proyectos/wunsce-web/static/img/characters/darwin.webp",
+    "origen": "darwin.webp",
+    "sha256_origen": "b8947c3067d34c7ccd5b9d4983f86c3ca62931027ebc9fb53e927150d1f35a85",
+    "sha256_destino": "b8947c3067d34c7ccd5b9d4983f86c3ca62931027ebc9fb53e927150d1f35a85"
+  },
+  {
+    "destino": "proyectos/wunsce-web/static/img/characters/esculapio.webp",
+    "origen": "esculapio.webp",
+    "sha256_origen": "18d397ef081600c2b11f255e55d4bec488522063cfb80a4d49cb08058d81e07f",
+    "sha256_destino": "18d397ef081600c2b11f255e55d4bec488522063cfb80a4d49cb08058d81e07f"
+  },
+  {
+    "destino": "proyectos/wunsce-web/static/img/characters/frey.webp",
+    "origen": "frey.webp",
+    "sha256_origen": "6e3cad9146c49e15290aef971b59c3eaf1b81a7205d9ef1c89df583ae1d932b4",
+    "sha256_destino": "6e3cad9146c49e15290aef971b59c3eaf1b81a7205d9ef1c89df583ae1d932b4"
+  },
+  {
+    "destino": "proyectos/wunsce-web/static/img/characters/nana.webp",
+    "origen": "nana.webp",
+    "sha256_origen": "66b8948a4b98e1d803b0b496711c339a776e02741baebb02f9bd8bfe6edbf46f",
+    "sha256_destino": "66b8948a4b98e1d803b0b496711c339a776e02741baebb02f9bd8bfe6edbf46f"
+  },
+  {
+    "destino": "proyectos/wunsce-web/static/img/characters/tikal.webp",
+    "origen": "tikal.webp",
+    "sha256_origen": "74ff7961ddafdc5a0ccf96588b45b55b6c26fc9cbfe2d0981cfedb3a5be36b07",
+    "sha256_destino": "74ff7961ddafdc5a0ccf96588b45b55b6c26fc9cbfe2d0981cfedb3a5be36b07"
+  },
+  {
+    "destino": "proyectos/wunsce-web/static/img/characters/wis.webp",
+    "origen": "wis.webp",
+    "sha256_origen": "42f28108fdf9c8dad8e5793c20a4c9ef8621be7188ba4f9dd75d40830c76188e",
+    "sha256_destino": "42f28108fdf9c8dad8e5793c20a4c9ef8621be7188ba4f9dd75d40830c76188e"
+  },
+  {
+    "destino": "proyectos/wunsce-web/static/img/characters/wus.webp",
+    "origen": "wus.webp",
+    "sha256_origen": "3b9393579d9fdf868249b1da595b295217ab3029d115ac85fe33f456d18f190c",
+    "sha256_destino": "3b9393579d9fdf868249b1da595b295217ab3029d115ac85fe33f456d18f190c"
+  },
+  {
+    "destino": "proyectos/wunsce-web/static/img/emblems/darwin-320.webp",
+    "origen": "darwin-320.webp",
+    "sha256_origen": "5c109419315fc4585a79766bfdab01dbc1749c4caceac610b3cb45eae0e6ab60",
+    "sha256_destino": "5c109419315fc4585a79766bfdab01dbc1749c4caceac610b3cb45eae0e6ab60"
+  },
+  {
+    "destino": "proyectos/wunsce-web/static/img/emblems/darwin.webp",
+    "origen": "darwin.webp",
+    "sha256_origen": "273a3f846f113ced58482ce684effed893481e1ab2ae1477859be22ff8be1495",
+    "sha256_destino": "273a3f846f113ced58482ce684effed893481e1ab2ae1477859be22ff8be1495"
+  },
+  {
+    "destino": "proyectos/wunsce-web/static/img/emblems/esculapio-320.webp",
+    "origen": "esculapio-320.webp",
+    "sha256_origen": "70e530fc246e70f07b89cd2cd3a2aea67072bfd8d059a0f0e6b067cafeb2c2fc",
+    "sha256_destino": "70e530fc246e70f07b89cd2cd3a2aea67072bfd8d059a0f0e6b067cafeb2c2fc"
+  },
+  {
+    "destino": "proyectos/wunsce-web/static/img/emblems/esculapio.webp",
+    "origen": "esculapio.webp",
+    "sha256_origen": "738eb0bee5a41ae31eb6bc7ff9fa1fda8499a3a720af1b249a47ea1696dec8a3",
+    "sha256_destino": "738eb0bee5a41ae31eb6bc7ff9fa1fda8499a3a720af1b249a47ea1696dec8a3"
+  },
+  {
+    "destino": "proyectos/wunsce-web/static/img/emblems/frey-320.webp",
+    "origen": "frey-320.webp",
+    "sha256_origen": "d100954916fcccfe4e8e8f9323a1e76ddba9f4802b5a8e1085ddd99a3bda12af",
+    "sha256_destino": "d100954916fcccfe4e8e8f9323a1e76ddba9f4802b5a8e1085ddd99a3bda12af"
+  },
+  {
+    "destino": "proyectos/wunsce-web/static/img/emblems/frey.webp",
+    "origen": "frey.webp",
+    "sha256_origen": "b9c94502cfcbf9320bcd69a6945f96f02e86322ec50def211948fc6129dcaf45",
+    "sha256_destino": "b9c94502cfcbf9320bcd69a6945f96f02e86322ec50def211948fc6129dcaf45"
+  },
+  {
+    "destino": "proyectos/wunsce-web/static/img/emblems/nana-320.webp",
+    "origen": "nana-320.webp",
+    "sha256_origen": "f2cd434c0f0610463baaba1cb30d586173e92ca85f23678e573d6fa8a3f8ba47",
+    "sha256_destino": "f2cd434c0f0610463baaba1cb30d586173e92ca85f23678e573d6fa8a3f8ba47"
+  },
+  {
+    "destino": "proyectos/wunsce-web/static/img/emblems/nana.webp",
+    "origen": "nana.webp",
+    "sha256_origen": "3016c8bbf33dbd724e36e96e2163b7b7423d3060615c2115ed112fa0cffe514f",
+    "sha256_destino": "3016c8bbf33dbd724e36e96e2163b7b7423d3060615c2115ed112fa0cffe514f"
+  },
+  {
+    "destino": "proyectos/wunsce-web/static/img/emblems/tikal-320.webp",
+    "origen": "tikal-320.webp",
+    "sha256_origen": "512a8c67add635a98754de0b492ab89261ad1cbf8934eec4bddc4a82afd94e38",
+    "sha256_destino": "512a8c67add635a98754de0b492ab89261ad1cbf8934eec4bddc4a82afd94e38"
+  },
+  {
+    "destino": "proyectos/wunsce-web/static/img/emblems/tikal.webp",
+    "origen": "tikal.webp",
+    "sha256_origen": "60e6c6b98bd1e396db99e4ca44a1faa9bb96cb0856a9fc8b27643f0b7a537e8b",
+    "sha256_destino": "60e6c6b98bd1e396db99e4ca44a1faa9bb96cb0856a9fc8b27643f0b7a537e8b"
+  },
+  {
+    "destino": "proyectos/wunsce-web/static/img/emblems/wis.webp",
+    "origen": "wis.webp",
+    "sha256_origen": "f570408d8589a69628f328d43bc289e2eb27ec7e601f272808cd71d96590c864",
+    "sha256_destino": "f570408d8589a69628f328d43bc289e2eb27ec7e601f272808cd71d96590c864"
+  },
+  {
+    "destino": "proyectos/wunsce-web/static/img/emblems/wus.webp",
+    "origen": "wus.webp",
+    "sha256_origen": "fd61c03938a2a53a58232536b214797222be7033901138f0ab96989db4035117",
+    "sha256_destino": "fd61c03938a2a53a58232536b214797222be7033901138f0ab96989db4035117"
+  },
+  {
+    "destino": "proyectos/wunsce-web/static/js/main.js",
+    "origen": "main.js",
+    "sha256_origen": "97e4faf15f3894a651fcc59caba54a21615977d08e3cb707976e263fddd40ecf",
+    "sha256_destino": "8a14e42aa3fc00051b68f01b1348fdd3d0e8bd1394c0712a2b6901ee5159e8b5"
+  },
+  {
+    "destino": "proyectos/wunsce-web/templates/404.html",
+    "origen": "404.html",
+    "sha256_origen": "5e01fe9b67a8d27d9fa948cec37ce99d48cbba34a68b0ba5861d50371e04aa39",
+    "sha256_destino": "d20ee4cf582e6ab07c61eca2760a621ac06e027d33e613a4b8d8c040a18939a2"
+  },
+  {
+    "destino": "proyectos/wunsce-web/templates/about.html",
+    "origen": "about.html",
+    "sha256_origen": "16cbefba895861462a9a33557fe25ad3a7f634417cea2f6b4dded35c4a146313",
+    "sha256_destino": "cb9f95b9d3601840a88dd77535d971592b3c93f4c678c71d7b9b79cbabce22f9"
+  },
+  {
+    "destino": "proyectos/wunsce-web/templates/base.html",
+    "origen": "base.html",
+    "sha256_origen": "b4bc9966409d669c89b0ff450dd2f552959466b59ee727db317a159747b1aa09",
+    "sha256_destino": "31bb743e756be415276460363edd925c5bc626904e7f033894124456736d00c5"
+  },
+  {
+    "destino": "proyectos/wunsce-web/templates/contact.html",
+    "origen": "contact.html",
+    "sha256_origen": "77fc911050bee82b9d0a69ff959d71b937b1bf7db5be8a3d012ee5853cf101db",
+    "sha256_destino": "75492196ed48e9bb4362d34b9bd7b02f37d6302d2c92c5c8822c10c412e958fb"
+  },
+  {
+    "destino": "proyectos/wunsce-web/templates/home.html",
+    "origen": "home.html",
+    "sha256_origen": "41f4c251ba83c5413879e856f02a5fce6672788fa4b383ac0e9f9fa0226ad051",
+    "sha256_destino": "6d615d3c25c95b43f53820571cdc1240f27ea88377027a079c88e05b1d583898"
+  },
+  {
+    "destino": "proyectos/wunsce-web/templates/projects.html",
+    "origen": "projects.html",
+    "sha256_origen": "efd461c691405b849c7c2f057c038339633a372d094231c66b3bf919e668542a",
+    "sha256_destino": "02094eee41709eb8ddb2c86def848703c34d0235b526d12934c93fd326d9f8dc"
+  },
+  {
+    "destino": "proyectos/wunsce-web/templates/project_detail.html",
+    "origen": "project_detail.html",
+    "sha256_origen": "c0312548a90e2ead02f77fd8d217b2aad92f72f4b6c30ed65135ba276ce7457d",
+    "sha256_destino": "e060c8f0d6a981f046fdb77a68ef71117d90518c74ec01c4f174bf0bd922e6c7"
+  },
+  {
+    "destino": "proyectos/wunsce-web/templates/services.html",
+    "origen": "services.html",
+    "sha256_origen": "e0ce54bf6fc6eccd9353304316e709df848ae19c7adf22f73a1ee8485f2363f0",
+    "sha256_destino": "0d4bf38ec30dc334e09fe1c27d9f7fd094fc7786d92197a7be64b92a69174a2f"
+  },
+  {
+    "destino": "proyectos/wunsce-web/templates/sitemap.xml",
+    "origen": "sitemap.xml",
+    "sha256_origen": "9a8cb3e7e9d9eb9ade63b9efde3ccd1ed4b98acd8cd650e48638bbb65952704c",
+    "sha256_destino": "266a0c0e285e6d7e17ca77adbdacdf5bb2da8a33989f4207a7db2dea4be735c4"
+  },
+  {
+    "destino": "proyectos/wunsce-web/templates/universe.html",
+    "origen": "universe.html",
+    "sha256_origen": "f6bd1dd764cd99edb47ef823e3cab5000555a84bbc0c853266d83e42e3632d50",
+    "sha256_destino": "8d4e39b564f0dce9761a9f72d5ecc0b233cdad520fd9a03b6cf5404beccdf6d2"
+  },
+  {
+    "destino": "proyectos/wunsce-web/templates/_ecosystem.html",
+    "origen": "_ecosystem.html",
+    "sha256_origen": "4b487adf87da05c829ea9db89b07748f20dffc550c77d95a9a2c94a95f00656a",
+    "sha256_destino": "4b487adf87da05c829ea9db89b07748f20dffc550c77d95a9a2c94a95f00656a"
+  },
+  {
+    "destino": "proyectos/wunsce-web/templates/_featured_project.html",
+    "origen": "_featured_project.html",
+    "sha256_origen": "06165b9653c2666ca8a7cfe97919ac0e472023936c3787939cb35b59cc38dbbc",
+    "sha256_destino": "06165b9653c2666ca8a7cfe97919ac0e472023936c3787939cb35b59cc38dbbc"
+  },
+  {
+    "destino": "proyectos/wunsce-web/templates/_lore_card.html",
+    "origen": "_lore_card.html",
+    "sha256_origen": "84c1150bac07ae58f32703de0252689718bf20bffac2255cc21cfe96753d9230",
+    "sha256_destino": "7713c74d1e26a16f759df6f6228bd8cdb0be665258b64e84ba6c2568655e753c"
+  },
+  {
+    "destino": "proyectos/wunsce-web/templates/_principle_portraits.html",
+    "origen": "_principle_portraits.html",
+    "sha256_origen": "d09996112ee2d1dfd078df2d8ced5e4f0249940aefddb548094cf665ca5c2fca",
+    "sha256_destino": "bf2d8ab1fd4e7f7d6b7f59566afec9e0377bb42a85d6ae199b8f7d473a4905c1"
+  },
+  {
+    "destino": "proyectos/wunsce-web/templates/_project_art.html",
+    "origen": "_project_art.html",
+    "sha256_origen": "75bfc26d32bec7b28a0ca660b37bef5ca24785f1120a08ac2fa4e93e49e9600f",
+    "sha256_destino": "9f800e5a57a0c4e52dc49defadba24b29e0afb0c1dc2092603dd247d2818c3f9"
+  },
+  {
+    "destino": "proyectos/wunsce-web/templates/_project_card.html",
+    "origen": "_project_card.html",
+    "sha256_origen": "12d84eb9c6beb54c366f89d2973cb50597e897945e8fe295749c7e2d423594e8",
+    "sha256_destino": "12d84eb9c6beb54c366f89d2973cb50597e897945e8fe295749c7e2d423594e8"
+  },
+  {
+    "destino": "proyectos/wunsce-web/tests/test_app.py",
+    "origen": "test_app.py",
+    "sha256_origen": "134193f7280ec6fa6a01a3dc323df0ce09544755109b7805c41b023facd3c98b",
+    "sha256_destino": "795477c3d89536041f1ce1e613658e84f766f7cc97c6eb9c4279cff75b98546f"
+  },
+  {
+    "destino": "proyectos/wunsce-web/tests/test_contact_launch.py",
+    "origen": "test_contact_launch.py",
+    "sha256_origen": "02b17a34ef7001791dad71d93b6e870afc8265a051d8c5c764f595895a0b11a5",
+    "sha256_destino": "02b17a34ef7001791dad71d93b6e870afc8265a051d8c5c764f595895a0b11a5"
+  },
+  {
+    "destino": "proyectos/wunsce-web/tests/test_deploy.py",
+    "origen": "test_deploy.py",
+    "sha256_origen": "e4ba2c5df9f88a8f3079e1d40193132df87bfd1ee6bbd5bd2b3731915cf2ab35",
+    "sha256_destino": "dc4e0dff7727ec5dc095aa27a1519c2f8fc593ec85cbc7fc2c0e5a8793e7f0db"
+  },
+  {
+    "destino": "proyectos/wunsce-web/tests/test_ecosystem.py",
+    "origen": "test_ecosystem.py",
+    "sha256_origen": "616f1047fd69ac4197e48e53cf341fa55a3d1837b6f96d67163d6112f679294c",
+    "sha256_destino": "616f1047fd69ac4197e48e53cf341fa55a3d1837b6f96d67163d6112f679294c"
+  },
+  {
+    "destino": "proyectos/wunsce-web/tests/test_featured.py",
+    "origen": "test_featured.py",
+    "sha256_origen": "cd99805df39218694169c65cd03d49063b39980ffbeb6d225e2dedc35aeaa00f",
+    "sha256_destino": "4fae5a861b488570df7078331426446524f5f523dae702b889b1967abe3cc8a7"
+  },
+  {
+    "destino": "proyectos/wunsce-web/tests/test_seo.py",
+    "origen": "test_seo.py",
+    "sha256_origen": "f036da8bf1539ebeee606ffd5cbb9ed2785f5b21fc90c444b343b26a66d2cea2",
+    "sha256_destino": "6b70c2b62e0324f5f207c94f752c1bc410283bc3f3363276446d59fd0a4eb18d"
+  },
+  {
+    "destino": "proyectos/wunsce-web/tests/test_universe.py",
+    "origen": "test_universe.py",
+    "sha256_origen": "9660ae3e3c7aefb7be12df11200c6043de4fecc6cf03cb4fa79b6281f2f0f703",
+    "sha256_destino": "489a22083a700cc430f2a9b11c9f1d58a83ba284bc10bd57f0cd30e456a996f0"
+  },
+  {
+    "destino": "proyectos/wunsce-web/tools/verify_deploy.py",
+    "origen": "verify_deploy.py",
+    "sha256_origen": "48b4817b920c1ecbe1cf44c45a328257bc0193d21bc0e16f33e2dc260fe55321",
+    "sha256_destino": "73e34a1fcaa43996085af56ee01a63af64c0d640b4c25edd35e0fd43289e8c7d"
+  },
+  {
+    "destino": "proyectos/wunsce-web/docs/architecture.md",
+    "origen": "architecture.md",
+    "sha256_origen": "ed5a1a62bae11ad26f46af8b4358ea0990d3b67218476a201f3e16b50cf9842e",
+    "sha256_destino": "ed5a1a62bae11ad26f46af8b4358ea0990d3b67218476a201f3e16b50cf9842e"
+  },
+  {
+    "destino": "proyectos/fundamentos-programacion/archivo/quicksort.py",
+    "origen": "Uso de Quicksort.py",
+    "sha256_origen": "eefb60d422154a7f71ddce68c9d77be1c2581213f9995e7c60b890c4b0491f7b",
+    "sha256_destino": "c53d87ac915f83d5d089742eab718f77be7ec584aafe7196df9fea07a3f5d4e6"
+  },
+  {
+    "destino": "proyectos/fundamentos-programacion/archivo/heapsort.py",
+    "origen": "Array numpy.py",
+    "sha256_origen": "d8e247c2b5e2e0f7a93f6ad48c5c7c7f285dae74307ef2d4cc051cd267882c3b",
+    "sha256_destino": "6fd543d208169d387d54ef12ad7a778caf230b3f1de39fc049093e42552204f3"
+  },
+  {
+    "destino": "proyectos/fundamentos-programacion/archivo/automata_dfa.py",
+    "origen": "5.py",
+    "sha256_origen": "81fdf3e613820e23f349f0ebaedfde886176a7d2427165d4cb1d5b72a6d56162",
+    "sha256_destino": "4ae161058f2d4470c81d31763a566ab01d9671473d85b007497e4e0186d7eb4d"
+  },
+  {
+    "destino": "proyectos/fundamentos-programacion/archivo/validacion_regex.py",
+    "origen": "6.py",
+    "sha256_origen": "7d9e953ea544ba7795b8797994f6eb30e9b5fdc0dc3374f763503c251f372c98",
+    "sha256_destino": "22cb1f425d7cd4842d7326d62be87d6dd490a64518d7666fa67a438ca1af0bf7"
+  },
+  {
+    "destino": "proyectos/fundamentos-programacion/archivo/newton_raphson.py",
+    "origen": "import sympy as sp.py",
+    "sha256_origen": "7ed39135aba351d69da37be88bc2b7214556cab2991abaac74e8aab1f28defa1",
+    "sha256_destino": "4187245b8e76adf9ce0409e74121149eb0b95feda923210355b211409b48a1c9"
+  },
+  {
+    "destino": "proyectos/simulaciones-visuales/archivo/cuerpos_celestes.py",
+    "origen": "moreeee.py",
+    "sha256_origen": "330f2b33429ba30ee62b7a5d5d11309be31118cb080f0168b8f0d8346e4cc322",
+    "sha256_destino": "9565dc24c1520b67ae4ade249d19e94883879afe3bd09814eb9b645d80ed9ff5"
+  },
+  {
+    "destino": "proyectos/simulaciones-visuales/archivo/orbitas_turtle.py",
+    "origen": "v2.py",
+    "sha256_origen": "62328f7bdbf29bb63a75f736eafc7a8bd81d7f8593e5cef7f12af17ee064a4b4",
+    "sha256_destino": "3d6e41cc6b48a0ba13176da1dac8353a90bd655246839242a4f760578212a916"
+  },
+  {
+    "destino": "proyectos/simulaciones-visuales/archivo/atomo_pygame.py",
+    "origen": "sasasdsa.py",
+    "sha256_origen": "60cc2f0e7cc66b91709f03f6af5a5c148b48b0a5a7f9525c5234de5895dbdeb2",
+    "sha256_destino": "ea37014013779258ef48dca4501de99724cea8db1a2c49af0395c08536e45edc"
+  },
+  {
+    "destino": "proyectos/simulaciones-visuales/archivo/lineas_hidrogeno.py",
+    "origen": "idrogen.py",
+    "sha256_origen": "2fe18865db6816c953799d6c559d174ee43afebab88415489e0f3650e7f6943c",
+    "sha256_destino": "d5d1c626e27354332a1f41bf268dc346137d17dd352b8d70264e8ddb7c3aee30"
+  },
+  {
+    "destino": "proyectos/simulaciones-visuales/archivo/grafica_3d.py",
+    "origen": "xdddd.py",
+    "sha256_origen": "60a55a54f6d13f750f907d630f397660e7a1e5ae3a7105b5ea171e0f884ddc6f",
+    "sha256_destino": "83c1ded88cfd20f2928791de8c12261d7c95cb30d2870e4bbcf903d5d7c64077"
+  },
+  {
+    "destino": "proyectos/orden-magnitud/archivo/estimaciones.py",
+    "origen": "Aplicaciones de orden de magnitud.py",
+    "sha256_origen": "a5c4d4b4da0ae5c85c0ffbe4c6d8125874e0e039f4636d48bb5687f444b68ee9",
+    "sha256_destino": "292075865f9513d4f71454048b20cab80f8184fff2029399e27a21b9169073d4"
+  },
+  {
+    "destino": "proyectos/bioimpedancia/reproducible/modelo_temporal.py",
+    "origen": "Dataset.py",
+    "sha256_origen": "7d5c0dbf84a7a6a85e6b5c0483a3ded9b44aedb5bf49ba03036a0b414b65c8ad",
+    "sha256_destino": "65439f2ec8a953ed9273de17194e246cf7be5b22216ead1fd53f86dcc27e819f"
+  },
+  {
+    "destino": "proyectos/bioimpedancia/reproducible/modelo_multiescala.py",
+    "origen": "Simulacion.py",
+    "sha256_origen": "7bda892a42ab0b0067dc0502a9f1a235ba560956607c963b38ac39ac000dcbe1",
+    "sha256_destino": "222def6a45c4908b398c2dfc3f09341956a909e1f00463cca2e9f4b3c18c5c66"
+  },
+  {
+    "destino": "proyectos/metodos-numericos/archivo/interpolacion_original.py.txt",
+    "origen": "PIA.py",
+    "sha256_origen": "73ff86b63fba813e7ba7686ecbb2577b3f19794d0b3b8bb395025110b3073ab2",
+    "sha256_destino": "4e87b2a2203ddf1f8d2e9504f8d5726ae3cd49a82d682feab09485157bcee3b9"
+  },
+  {
+    "destino": "proyectos/metodos-numericos/fortran/epidemia_logistica.f95",
+    "origen": "1.f95",
+    "sha256_origen": "18422705b5ac36f8f113594dfdcaa207476e691fd1022f14d8cdced0c63bf305",
+    "sha256_destino": "c37d0fb1eeb8a4fc8c1b49a29cda3ce14b76dd41e7e02f1719884ba6402d8887"
+  },
+  {
+    "destino": "proyectos/metodos-numericos/fortran/contaminantes.f95",
+    "origen": "2.f95",
+    "sha256_origen": "03d597fc97a659acb61ac70e4ae388b839cff7a88566dc28df697be7bf2bc86b",
+    "sha256_destino": "dd6e41d251cae48e94e3705f897a67f51319f66f76a3a74c58fdebcc8d34b787"
+  },
+  {
+    "destino": "proyectos/metodos-numericos/fortran/salmuera.f95",
+    "origen": "3.f95",
+    "sha256_origen": "56c499ff2190e431b265b2b446cdf21b74cf8d082d40f2982332ed32029b4f90",
+    "sha256_destino": "6dcb6bb0814330fd24ed8826766ee18c99075d6d16f9e84f0471d5ee8aeee222"
+  },
+  {
+    "destino": "proyectos/almacenamiento-hidrogeno/archivo/simulacion.py",
+    "origen": "main.py",
+    "sha256_origen": "212ca166fdd7d16bfff6bb428fe9ad45ae2cd20b48c19c5303903b0d5d7a251b",
+    "sha256_destino": "6bbf0fdda4ff056cceca37b3090f5efea2c3128a01f915ce5d6a402d1aa6712f"
+  },
+  {
+    "destino": "proyectos/bioimpedancia/reproducible/bionet.py",
+    "origen": "Red neuronal.py",
+    "sha256_origen": "167864fe7e152afa2733bcd123a0b13d0856ba0010b107470b16049385440a66",
+    "sha256_destino": "4703d6f1cab8642e8b405a2c75e0571dbd22ff5dbe7851a05e9b474fe5c59583"
+  }
+]

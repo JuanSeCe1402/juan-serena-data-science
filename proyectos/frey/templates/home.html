@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Costo total, margen y precio sugerido · FREY{% endblock %}
+{% block content %}
+<section class="hero">
+  <div>
+    <div class="eyebrow">FREY · COSTOS Y PRECIOS · DEMO DE I+D</div>
+    <h1>¿Cuánto cuesta tu lote y a qué precio venderlo?</h1>
+    <p>Suma materiales, trabajo, uso de máquina, energía e indirectos. FREY incluye la merma y muestra costo total, costo unitario, margen objetivo, precio sugerido y utilidad bruta estimada.</p>
+    <div class="actions"><a class="btn primary" href="{{ url_for('product_app') }}">Calcular con un ejemplo</a><a class="btn ghost" href="{{ url_for('features') }}">Entender el cálculo</a></div>
+    <p class="demo-note">Demo pública con valores hipotéticos, sin datos de clientes. Los importes son estimaciones antes de impuestos y descuentos.</p>
+  </div>
+  <div class="product-card" aria-labelledby="example-title">
+    <p class="eyebrow">EJEMPLO CALCULADO · MXN</p><h2 id="example-title">Un lote ficticio de {{ example_result.quantity }} piezas</h2>
+    <div class="metric-mini">
+      <div><span>Costo total del lote</span><strong>${{ example_result.total_cost|money }}</strong></div>
+      <div><span>Costo por unidad</span><strong>${{ example_result.unit_cost|money }}</strong></div>
+      <div><span>Margen objetivo</span><strong>{{ example_result.margin }}%</strong></div>
+      <div><span>Precio del lote</span><strong>${{ example_result.suggested_price|money }}</strong></div>
+      <div><span>Utilidad bruta estimada</span><strong>${{ example_result.profit|money }}</strong></div>
+    </div>
+    <p>Ejemplo reproducible, no un resultado comercial. Merma del {{ example_result.waste_percent }} % sobre el costo base.</p>
+    <a class="text-link" href="{{ url_for('product_app',example='lote') }}">Ver y editar este ejemplo →</a>
+  </div>
+</section>
+<section class="section"><div class="eyebrow">DEL COSTO A LA DECISIÓN</div><h2>Tres preguntas antes de fijar un precio.</h2><div class="feature-grid"><article><h3>¿Incluí todos los costos?</h3><p>Introduce importes del lote completo. Incluye en indirectos los gastos que decidas asignar a ese trabajo.</p></article><article><h3>¿Qué margen busco?</h3><p>El margen es la parte del precio de venta que queda después del costo. No equivale a sumar ese porcentaje al costo.</p></article><article><h3>¿Qué utilidad estima?</h3><p>Compara escenarios para ver la diferencia entre precio y costo. El cálculo depende de los datos que introduzcas.</p></article></div></section>
+<section class="section lore-note"><div class="eyebrow">EL CUSTODIO DE LA PROSPERIDAD</div><h2>El criterio detrás de FREY.</h2><p>La balanza de FREY representa una idea de WUNSCE: hacer visibles los costos para elegir con criterio y cuidar el valor del trabajo.</p><a class="text-link" href="{{ wunsce_url }}/universo#frey">Conocer el lore de FREY →</a></section>
+{% endblock %}

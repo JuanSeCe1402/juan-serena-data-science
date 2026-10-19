@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Demo pública con datos sintéticos · NANA{% endblock %}
+{% block content %}
+<section class="page-hero compact">
+  <div class="eyebrow">DEMO PÚBLICA · DATOS SINTÉTICOS</div>
+  <h1>De un CSV desordenado a datos estructurados.</h1>
+  <p>Prueba el flujo completo con seis registros ficticios de productos. El ejemplo incluye un duplicado, campos vacíos y una fecha pendiente de revisión.</p>
+</section>
+<section class="section upload-section">
+  <form class="upload-card" method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <input type="hidden" name="source" value="sample">
+    <h2>Ejecuta el ejemplo de NANA</h2>
+    <p>No necesitas registrarte ni subir información. Esta demo pública no admite archivos propios.</p>
+    <button class="btn primary" type="submit">Procesar ejemplo sintético</button>
+    <a class="btn ghost" href="{{ url_for('sample') }}">Descargar CSV de ejemplo</a>
+    <p class="demo-notice">Usamos únicamente datos ficticios. Los resultados duran hasta 30 minutos y solo se descargan desde esta sesión. La demo puede reiniciarse y borrar sus archivos.</p>
+    <p>Comprobarás encabezados normalizados, duplicados y valores faltantes; podrás descargar CSV y SQLite. Las fechas ambiguas se conservan para revisión.</p>
+  </form>
+</section>
+{% endblock %}

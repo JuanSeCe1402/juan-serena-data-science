@@ -1,0 +1,23 @@
+<section id="ecosistema" class="section ecosystem" aria-labelledby="ecosystem-title">
+  <div class="section-heading">
+    <div class="eyebrow">CAPACIDADES QUE SE COMPLEMENTAN</div>
+    <h2 id="ecosystem-title" lang="en">WUNSCE Ecosystem</h2>
+    <p>De la información dispersa a decisiones y operaciones más claras. Cada proyecto resuelve una parte del trabajo; puedes explorar el que corresponde a tu necesidad.</p>
+  </div>
+  <ol class="ecosystem-map" aria-label="Papel de cada proyecto en el ecosistema">
+    {% for project in projects %}
+    <li class="ecosystem-node{% if project.slug == 'esculapio' %} ecosystem-vertical{% endif %}">
+      <span class="ecosystem-step" aria-hidden="true">{{ '%02d'|format(loop.index) }}</span>
+      <h3>{{ project.ecosystem_action }}</h3>
+      <p class="ecosystem-brand">{{ project.name }}{% if project.slug == 'esculapio' %} · IMPLEMENTACIÓN VERTICAL{% endif %}</p>
+      <p>{{ project.ecosystem_summary }}</p>
+      <a class="text-link" href="{{ url_for('project_detail', slug=project.slug) }}">Conocer {{ project.name }} <span aria-hidden="true">→</span></a>
+    </li>
+    {% endfor %}
+  </ol>
+  <div class="ecosystem-context">
+    <h3>Un ejemplo sencillo</h3>
+    <p>Un negocio puede necesitar ordenar sus archivos con NANA, explorar patrones con DARWIN, coordinar pedidos en TIKAL y evaluar precios con FREY. ESCULAPIO muestra cómo se concreta una solución digital en un consultorio.</p>
+    <p class="muted">Este mapa explica cómo se complementan sus funciones. Las demos son independientes: no comparten datos ni se conectan automáticamente entre sí. Cualquier integración requiere definir el flujo y construirla según el proyecto.</p>
+  </div>
+</section>

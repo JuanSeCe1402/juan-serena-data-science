@@ -1,0 +1,4 @@
+{% macro field(id,label,value='',hint='',type='text',required=true,minimum=none,maximum=none,maxlength=100,inputmode=none) %}
+<div class="field"><label for="{{ id }}">{{ label }}</label><input id="{{ id }}" name="{{ id }}" type="{{ type }}" value="{{ value }}" maxlength="{{ maxlength }}"{% if required %} required{% endif %}{% if minimum is not none %} min="{{ minimum }}" step="1"{% endif %}{% if maximum is not none %} max="{{ maximum }}"{% endif %}{% if inputmode %} inputmode="{{ inputmode }}"{% endif %}{% if hint %} aria-describedby="{{ id }}-help"{% endif %}>{% if hint %}<small id="{{ id }}-help">{{ hint }}</small>{% endif %}</div>
+{% endmacro %}
+{% macro error_message(error) %}{% if error %}<div class="form-error" role="alert" tabindex="-1" data-error><h2>Revisa los datos</h2><p>{{ error }}</p></div>{% endif %}{% endmacro %}

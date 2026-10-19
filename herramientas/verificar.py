@@ -16,11 +16,14 @@ def cargar(slug, filename):
 
 
 def main():
-    pyfiles = list(ROOT.rglob('*.py'))
+    excluded = {'.git', '.venv', 'venv', '__pycache__', '.pytest_cache'}
+    pyfiles = [p for p in ROOT.rglob('*.py') if not excluded.intersection(p.relative_to(ROOT).parts)]
     for p in pyfiles:
         ast.parse(p.read_text(encoding='utf-8'), filename=str(p.relative_to(ROOT)))
     for p in ROOT.rglob('*.md'):
-        for link in re.findall(r'\]\(([^)]+)\)', p.read_text()):
+        if excluded.intersection(p.relative_to(ROOT).parts):
+            continue
+        for link in re.findall(r'\]\(([^)]+)\)', p.read_text(encoding='utf-8')):
             if not re.match(r'\w+://', link) and not link.startswith('#'):
                 assert (p.parent / link.split('#')[0]).exists(), (p, link)
     bike = cargar('movilidad-urbana', 'analizar.py')
