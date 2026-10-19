@@ -1,5 +1,7 @@
 # Procesamiento de espectros ópticos
 
+**[Probar la aplicación web](https://juan-serena-data-lab.blithe-tang-9862.chatgpt.site/#espectros)** · [Código de la versión web](../../demos-web/README.md)
+
 Herramienta de lectura de CSV instrumentales con metadatos y pares numéricos. Resume cada señal y ofrece un caso de prueba sintético.
 
 **Área:** Señales y datos científicos · **Estado:** Herramienta CLI con demo sintética

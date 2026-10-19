@@ -12,3 +12,7 @@ jobs:
           python-version: '3.11'
       - run: python herramientas/verificar.py
       - run: python herramientas/comprobar_publicacion.py
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node demos-web/test.mjs

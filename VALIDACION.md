@@ -42,3 +42,9 @@ Las herramientas CLI de movilidad, espectros, convergencia y STIX solo requieren
 No se ejecutaron las interfaces históricas Tkinter, Pygame u OpenGL; no se compiló Fortran ni se validó la simulación de hidrógeno. No se compilaron el manuscrito ni sus figuras. No se verificaron calibraciones, despliegues nuevos, Docker, Gunicorn en Linux, servicios externos o mejoras comerciales. Un chequeo de sintaxis no acredita que esos prototipos funcionen correctamente.
 
 El modelo multiescala de la tesis y el generador temporal son exploraciones distintas. Las afirmaciones físicas originales y unidades siguen pendientes de revisión, aunque la separación estadística se haya mejorado.
+
+## Demos web
+
+Las cuatro aplicaciones web están en `demos-web/dist`. Ejecuta `node demos-web/test.mjs` para comprobar el parser CSV con comillas y saltos de línea, fechas inválidas, limpieza de espectros, deduplicación STIX y fórmulas de recargo/margen/impuesto. Se verificaron en el navegador las cuatro rutas con sus ejemplos y el recálculo de cotización al cambiar el peso. La carga de archivos utiliza las mismas funciones puras, con límites de tamaño y mensajes de error.
+
+Los prototipos originales permanecen documentados por separado. La cotización no es una factura; el máximo espectral no es una identificación física; los patrones STIX no son un diagnóstico de seguridad.

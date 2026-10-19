@@ -1,5 +1,7 @@
 # Análisis de indicadores STIX
 
+**[Probar la aplicación web](https://juan-serena-data-lab.blithe-tang-9862.chatgpt.site/#stix)** · [Código de la versión web](../../demos-web/README.md)
+
 Herramienta para contar tipos de objetos, deduplicar indicadores y resumir patrones de colecciones STIX aportadas por el usuario.
 
 **Área:** Ciberseguridad y análisis de datos · **Estado:** Herramienta CLI con demo sintética

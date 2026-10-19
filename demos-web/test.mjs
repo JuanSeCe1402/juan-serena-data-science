@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import {csvRows,mobility,spectra,stix,quote,bikeDemo,spectrumDemo,stixDemo} from './dist/core.mjs';
+assert.deepEqual([...csvRows('a,b\r\n"un,valor","dos"\n')],[['a','b'],['un,valor','dos']]);
+assert.deepEqual([...csvRows('a,b\n"a\nb","x""y"')],[['a','b'],['a\nb','x"y']]);
+assert.throws(()=>[...csvRows('"no cerrado')]);assert.throws(()=>[...csvRows('"a"b,c')]);
+const m=mobility(bikeDemo());assert.equal(m.valid,240);assert.equal(m.rejected,0);assert.equal(m.hours.reduce((a,b)=>a+b),240);assert.equal(m.uniqueStations,5);
+assert.throws(()=>mobility('a,b\n1,2'));
+const bad=mobility('Start Time,Trip Duration\n2025-01-01 08:00:00,60\n2025-02-30 08:00:00,10\n2025-01-01 08:00:00,-1\n2025-01-01 08:00:00,NaN\n2025-01-01 08:00:00,\n2025-01-01 24:00:00,6');assert.equal(bad.valid,1);assert.equal(bad.rejected,5);assert.equal(bad.averageSeconds,60);
+const s=spectra(spectrumDemo());assert.equal(s.count,301);assert.ok(Math.abs(s.peak[0]-1552)<.1);
+assert.deepEqual(spectra('header;value\n2;4\n1;3').peak,[2,4]);assert.throws(()=>spectra('NaN,1\n2,Infinity'));
+assert.equal(spectra('3,-1\n2,-4\n1,-5').peak[0],3);
+const st=stix([stixDemo()]);assert.equal(st.total,8);assert.equal(st.indicators,5);assert.equal(st.repeatedPatterns,1);assert.equal(st.missingPattern,1);assert.equal(st.uniquePatterns,3);
+assert.equal(stix([stixDemo(),stixDemo()]).uniqueIds,5);assert.throws(()=>stix([{objects:null}]));assert.throws(()=>stix([{objects:[null]}]));
+const v={grams:125,hours:4.5,priceKg:300,watts:120,kwh:3.2,hourly:8,extra:5,percent:35,tax:16,mode:'markup'};
+const q=quote(v);assert.ok(Math.abs(q.base-80.228)<1e-8);assert.ok(Math.abs(q.total-125.637048)<1e-8);assert.ok(Math.abs(q.actualMargin-35/135*100)<1e-8);
+assert.ok(Math.abs(quote({...v,mode:'margin'}).actualMargin-35)<1e-8);assert.throws(()=>quote({...v,mode:'margin',percent:100}));assert.throws(()=>quote({...v,grams:-1}));assert.throws(()=>quote({...v,grams:NaN}));assert.throws(()=>quote({...v,mode:'bad'}));
+console.log('OK: 4 demos; parser CSV, fechas, datos inválidos, deduplicación STIX, fórmulas de costo/recargo/margen/impuesto.');
