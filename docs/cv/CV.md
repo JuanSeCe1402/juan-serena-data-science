@@ -28,11 +28,6 @@ Investigador estudiante en la UANL. Participación en el Laboratorio Nacional de
 
 Modelado atómico y simulaciones científicas en terminal utilizando Kumiai y Miztli; análisis probabilístico de nubes y condiciones atmosféricas; simulación de configuraciones ópticas y prototipado 3D de piezas para laboratorio.
 
-## Formación académica
-
-Licenciatura en Física, UANL | 2021-2026. Facultad de Ciencias Físico Matemáticas. Egresado; título en trámite.
-
-Intercambio académico, Universidad de Viena | 2024. Proyecto académico de base de datos SQL para análisis oncológico.
 
 ## Idiomas y participación
 
