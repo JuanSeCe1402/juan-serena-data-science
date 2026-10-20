@@ -8,7 +8,7 @@ Contacto profesional: <secejuan1402@gmail.com>
 
 ## Perfil
 
-Físico egresado de la UANL, con título en trámite. Trabajo con análisis de datos, programación científica y aplicaciones Python. Mi portafolio incluye limpieza de datos, evaluación de modelos y desarrollo backend, con código, pruebas y límites documentados.
+Trabajo con análisis de datos, programación científica y aplicaciones Python. Mi portafolio incluye limpieza de datos, evaluación de modelos y desarrollo backend, con código, pruebas y límites documentados.
 
 ## Herramientas
 
