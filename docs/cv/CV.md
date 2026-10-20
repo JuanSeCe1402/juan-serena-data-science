@@ -1,40 +1,33 @@
 # Juan Manuel Serena Ceceña
 
-**Ciencia de datos y desarrollo Python**
+**Data Analyst · Junior Data Scientist · Python & Machine Learning**
 
-[Descargar CV en PDF](Juan-Serena-CV.pdf) · [LinkedIn](https://www.linkedin.com/in/juan-manuel-serena-cece%C3%B1a-503b98197/) · [Portafolio](https://github.com/JuanSeCe1402/juan-serena-data-science) · [Laboratorio](https://juan-serena-data-lab-production.up.railway.app/)
+## Descargar CV / Download résumé
 
-Contacto profesional: <secejuan1402@gmail.com>
+| Idioma / Language | PDF |
+|---|---|
+| Español | **[CV en español](CV_Juan_Serena_Data_Science_ES.pdf)** |
+| English | **[English résumé](CV_Juan_Serena_Data_Science_EN.pdf)** |
 
-## Perfil
+Ambas versiones tienen una página y enlaces a los proyectos. Actualizadas el 20 de octubre de 2026.
 
-Trabajo con análisis de datos, programación científica y aplicaciones Python. Mi portafolio incluye limpieza de datos, evaluación de modelos y desarrollo backend, con código, pruebas y límites documentados.
+Both versions are one page long and include project links. Updated October 20, 2026.
 
-## Herramientas
+## Perfil profesional
 
-Python, SQL, pandas, NumPy, scikit-learn, TensorFlow y PyTorch. Flask, FastAPI, SQLite, MySQL, Git, Bash, HTML/CSS y LaTeX.
+Perfil orientado a análisis de datos y ciencia de datos, con formación en Física y experiencia práctica en Python, SQL y aprendizaje automático. Trabajo con énfasis en reproducibilidad, calidad de datos y comunicación rigurosa de resultados.
 
-## Proyectos de portafolio
+## Professional summary
 
-DARWIN. Predicción de recompra con datos públicos de UCI Online Retail II. Historial de 180 días y horizonte de 30 días; selección en validación y prueba temporal sobre 2,772 clientes. Average precision de 0.608 frente a 0.428 del ranking por recencia en un único corte histórico. Incluye fuente, licencia y reproducción del experimento.
+Data Analyst / Junior Data Scientist candidate with a physics background and hands-on work in Python, SQL and machine learning. Focused on reproducibility, data quality and careful interpretation of model results.
 
-NANA. Limpieza y perfilado de CSV con Python y pandas. Normalización de encabezados, detección de duplicados y exportación a CSV/SQLite, conservando los casos ambiguos para revisión.
+## Proyectos / Projects
 
-ESCULAPIO. Aplicación administrativa con FastAPI y SQLAlchemy: agenda, roles y transición a atención humana. Pruebas de concurrencia y demo con datos ficticios.
+- [DARWIN: recompra con datos públicos y evaluación temporal](../../proyectos/darwin/datos-publicos/README.md)
+- [NANA: limpieza y perfilado de CSV](../../proyectos/nana/README.md)
+- [Bioimpedancia: simulación e inferencia de parámetros](../../proyectos/bioimpedancia/README.md)
+- [ESCULAPIO: agenda y aplicación administrativa](../../proyectos/esculapio/README.md)
 
-## Experiencia en investigación
+[Portafolio / Portfolio](../../README.md) · [LinkedIn](https://www.linkedin.com/in/juan-manuel-serena-cece%C3%B1a-503b98197/) · [Laboratorio / Interactive lab](https://juan-serena-data-lab-production.up.railway.app/)
 
-Investigador estudiante en la UANL. Participación en el Laboratorio Nacional de Clima Espacial, el Laboratorio de Nanomateriales, el Observatorio Astronómico Tlapiani y el Laboratorio de Fotónica.
-
-Modelado atómico y simulaciones científicas en terminal utilizando Kumiai y Miztli; análisis probabilístico de nubes y condiciones atmosféricas; simulación de configuraciones ópticas y prototipado 3D de piezas para laboratorio.
-
-
-## Idiomas y participación
-
-Español nativo, inglés avanzado y francés intermedio (DELF B1).
-
-Vicepresidente de la Asociación de Estudiantes de Física, UANL | 2022-2023. Coordinación de conferencias y actividades de vinculación.
-
-## Código y evidencia
-
-[DARWIN con datos públicos](https://github.com/JuanSeCe1402/juan-serena-data-science/tree/main/proyectos/darwin/datos-publicos) · [NANA](https://github.com/JuanSeCe1402/juan-serena-data-science/tree/main/proyectos/nana) · [ESCULAPIO](https://github.com/JuanSeCe1402/juan-serena-data-science/tree/main/proyectos/esculapio)
+Contacto profesional / Professional contact: <secejuan1402@gmail.com>

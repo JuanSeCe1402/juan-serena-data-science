@@ -10,7 +10,7 @@ Construyo aplicaciones en Python para preparar datos, evaluar modelos y organiza
 
 [Explorar los proyectos](#proyectos-destacados) · [Catálogo completo](CATALOGO.md) · [Perfil de GitHub](https://github.com/JuanSeCe1402)
 
-**[CV y trayectoria](docs/cv/CV.md) · [Descargar CV en PDF](docs/cv/Juan-Serena-CV.pdf) · [LinkedIn](https://www.linkedin.com/in/juan-manuel-serena-cece%C3%B1a-503b98197/)**
+**[CV y trayectoria](docs/cv/CV.md) · [CV en español](docs/cv/CV_Juan_Serena_Data_Science_ES.pdf) · [English résumé](docs/cv/CV_Juan_Serena_Data_Science_EN.pdf) · [LinkedIn](https://www.linkedin.com/in/juan-manuel-serena-cece%C3%B1a-503b98197/)**
 
 [![Pruebas de aplicaciones](https://github.com/JuanSeCe1402/juan-serena-data-science/actions/workflows/aplicaciones.yml/badge.svg)](https://github.com/JuanSeCe1402/juan-serena-data-science/actions/workflows/aplicaciones.yml)
 [![Verificación del portafolio](https://github.com/JuanSeCe1402/juan-serena-data-science/actions/workflows/verificar.yml/badge.svg)](https://github.com/JuanSeCe1402/juan-serena-data-science/actions/workflows/verificar.yml)
