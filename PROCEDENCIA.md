@@ -2,7 +2,7 @@
 
 ## CV público
 
-El titular proporcionó y autorizó publicar las nuevas versiones de su CV en español e inglés el 20 de octubre de 2026. Están disponibles en el [índice bilingüe](docs/cv/CV.md). Se conservó el diseño y el contenido proporcionados, con la corrección del teléfono confirmada por el titular. Ambas páginas se revisaron visualmente y se comprobó que la edición preservara el resto del texto y sus enlaces. `Juan-Serena-CV.pdf` conserva la ruta anterior como copia de la nueva versión en español. Los originales y el Word no se incorporan. La revisión, corrección e integración tuvieron asistencia de Codex.
+El titular proporcionó y autorizó publicar las nuevas versiones de su CV en español e inglés el 20 de octubre de 2026. Están disponibles en el [índice bilingüe](docs/cv/CV.md). Se conservó el diseño y el contenido proporcionados, con la corrección del teléfono y la aclaración en inglés de que la titulación está en trámite, confirmadas por el titular. Ambas páginas se revisaron visualmente y se comprobó que la edición preservara el resto del texto y sus enlaces. `Juan-Serena-CV.pdf` conserva la ruta anterior como copia de la nueva versión en español. Los originales y el Word no se incorporan. La revisión, corrección e integración tuvieron asistencia de Codex.
 
 ## Datos públicos de DARWIN
 
